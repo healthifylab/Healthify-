@@ -1,4 +1,4 @@
-// Search.jsx – GD Labs Healthians-style
+// Search.jsx – Shared Search for Tests/Profiles (linked with Booking)
 import React, { useState } from 'react';
 import './Home.css';
 
@@ -17,48 +17,37 @@ const allTests = [
   { name: 'Diabetes Profile', mrp: '900', offer: '720', desc: 'FBS, PPBS, HbA1c & more.', tat: 'Same Day' },
   { name: 'Calcium Test', mrp: '200', offer: '160', desc: 'Blood calcium level.', tat: 'Same Day' },
   { name: 'Uric Acid Test', mrp: '150', offer: '120', desc: 'Detect gout or kidney issues.', tat: 'Same Day' },
-  { name: 'CRP (C-Reactive Protein)', mrp: '350', offer: '280', desc: 'Inflammation indicator.', tat: 'Same Day' },
+  { name: 'CRP (C-Reactive Protein)', mrp: '350', offer: '280', desc: 'Inflammation indicator.', tat: 'Same Day' }
 ];
 
-const Search = () => {
+const Search = ({ onAdd }) => {
   const [query, setQuery] = useState('');
-
-  const filtered = allTests.filter(t =>
-    t.name.toLowerCase().includes(query.toLowerCase())
-  );
+  const filtered = allTests.filter((t) => t.name.toLowerCase().includes(query.toLowerCase()));
 
   return (
     <div className="home-container">
-      <h2 style={{ textAlign: 'center', marginTop: '20px', color: '#0077cc' }}>
-        Search Tests & Profiles
-      </h2>
-
+      <h2 style={{ textAlign: 'center', marginTop: '20px', color: '#0077cc' }}>Search Tests & Profiles</h2>
       <div className="search-bar">
         <input
           type="text"
           placeholder="Search for tests or profiles..."
           value={query}
-          onChange={e => setQuery(e.target.value)}
+          onChange={(e) => setQuery(e.target.value)}
         />
       </div>
 
       <div className="promo-cards">
-        {filtered.length === 0 && (
-          <p style={{ textAlign: 'center' }}>No results found.</p>
-        )}
+        {filtered.length === 0 && <p>No results found.</p>}
         {filtered.map((t, i) => (
           <div key={i} className="card">
             <h3>{t.name}</h3>
             <p>
-              <span style={{ textDecoration: 'line-through', color: 'red' }}>
-                ₹{t.mrp}
-              </span>{' '}
-              <span style={{ color: 'green', fontWeight: 'bold' }}>
-                ₹{t.offer}
-              </span>
+              <span style={{ textDecoration: 'line-through', color: 'red' }}>₹{t.mrp}</span>{' '}
+              <span style={{ color: 'green', fontWeight: 'bold' }}>₹{t.offer}</span>
             </p>
-            <p style={{ fontSize: '0.9rem', marginTop: '8px' }}>{t.desc}</p>
+            <p style={{ fontSize: '0.9rem' }}>{t.desc}</p>
             <p style={{ fontSize: '0.8rem', color: '#666' }}>TAT: {t.tat}</p>
+            {onAdd && <button onClick={() => onAdd(t.name)}>Add</button>}
           </div>
         ))}
       </div>
@@ -66,4 +55,5 @@ const Search = () => {
   );
 };
 
+export { allTests };
 export default Search;
