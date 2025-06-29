@@ -1,4 +1,4 @@
-// Booking.jsx – Booking with Firebase + EmailJS + Add from Search
+// Booking.jsx – with Search & Cart Visual for Tests and Profiles
 import React, { useState } from 'react';
 import './Home.css';
 import { db } from './firebase';
@@ -11,6 +11,8 @@ const Booking = () => {
     name: '', age: '', sex: '', mobile: '', address: '', pincode: '', date: '', time: '',
     tests: '', profiles: ''
   });
+  const [testCart, setTestCart] = useState([]);
+  const [profileCart, setProfileCart] = useState([]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,21 +24,16 @@ const Booking = () => {
     try {
       await addDoc(collection(db, "bookings"), {
         ...formData,
+        tests: testCart.join(', '),
+        profiles: profileCart.join(', '),
         status: 'Pending',
         createdAt: Timestamp.now()
       });
 
       emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
-        name: formData.name,
-        age: formData.age,
-        sex: formData.sex,
-        mobile: formData.mobile,
-        address: formData.address,
-        pincode: formData.pincode,
-        date: formData.date,
-        time: formData.time,
-        tests: formData.tests,
-        profiles: formData.profiles
+        ...formData,
+        tests: testCart.join(', '),
+        profiles: profileCart.join(', ')
       }, 'dJE_JHAoNTxxzTxiT');
 
       alert("Booking Confirmed!");
@@ -47,10 +44,15 @@ const Booking = () => {
   };
 
   const handleAddTest = (testName) => {
-    setFormData(prev => ({
-      ...prev,
-      tests: prev.tests ? `${prev.tests}, ${testName}` : testName
-    }));
+    if (!testCart.includes(testName)) {
+      setTestCart([...testCart, testName]);
+    }
+  };
+
+  const handleAddProfile = (profileName) => {
+    if (!profileCart.includes(profileName)) {
+      setProfileCart([...profileCart, profileName]);
+    }
   };
 
   return (
@@ -70,14 +72,26 @@ const Booking = () => {
         <input type="date" name="date" required onChange={handleChange} />
         <input type="time" name="time" required onChange={handleChange} />
 
-        <textarea name="tests" placeholder="Select Blood Tests (CBC, LFT...)" value={formData.tests} onChange={handleChange}></textarea>
-        <textarea name="profiles" placeholder="Select Test Profiles (Full Body, Vitamin...)" value={formData.profiles} onChange={handleChange}></textarea>
+        <textarea name="profiles" placeholder="Manually type profiles if any..." value={formData.profiles} onChange={handleChange}></textarea>
 
         <button type="submit">Confirm Booking</button>
       </form>
 
+      <div className="cart-section">
+        <h3>🧪 Selected Tests</h3>
+        <ul>
+          {testCart.map((item, i) => <li key={i}>{item}</li>)}
+        </ul>
+
+        <h3>📋 Selected Profiles</h3>
+        <ul>
+          {profileCart.map((item, i) => <li key={i}>{item}</li>)}
+        </ul>
+      </div>
+
       <div style={{ marginTop: '30px' }}>
         <Search onAdd={handleAddTest} />
+        <Search onAdd={handleAddProfile} />
       </div>
     </div>
   );
