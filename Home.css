@@ -1,0 +1,100 @@
+/* Home.css – Styling for Home.jsx */
+
+.home-container {
+  font-family: Arial, sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+.hero {
+  background: linear-gradient(to right, #e6f4ff, #d9f2ec);
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.hero-text h1 {
+  font-size: 2.5rem;
+  color: #0077cc;
+  margin-bottom: 10px;
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.hero-text button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.search-bar {
+  margin: 30px auto;
+  text-align: center;
+}
+
+.search-bar input {
+  width: 80%;
+  max-width: 500px;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+}
+
+.promo-cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 40px 20px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.card img {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-weight: bold;
+  color: #333;
+}
+
+.why-healthify {
+  background-color: #f7f7f7;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.why-healthify h2 {
+  color: #0077cc;
+  margin-bottom: 20px;
+}
+
+.why-healthify ul {
+  list-style: none;
+  padding: 0;
+}
+
+.why-healthify li {
+  margin: 10px 0;
+  font-size: 1.1rem;
+  color: #333;
+}
