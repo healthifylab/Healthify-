@@ -1,10 +1,11 @@
-// Booking.jsx – with Search & Cart Visual for Tests and Profiles
+// Booking.jsx – Updated with SearchTests and SearchProfiles
 import React, { useState } from 'react';
 import './Home.css';
 import { db } from './firebase';
 import { collection, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 import emailjs from '@emailjs/browser';
-import Search, { allTests } from './Search';
+import SearchTests from './SearchTests';
+import SearchProfiles from './SearchProfiles';
 
 const Booking = () => {
   const [formData, setFormData] = useState({
@@ -90,8 +91,8 @@ const Booking = () => {
       </div>
 
       <div style={{ marginTop: '30px' }}>
-        <Search onAdd={handleAddTest} />
-        <Search onAdd={handleAddProfile} />
+        <SearchTests onAdd={handleAddTest} />
+        <SearchProfiles onAdd={handleAddProfile} />
       </div>
     </div>
   );
