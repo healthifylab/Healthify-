@@ -1,6 +1,9 @@
-// Booking.jsx – Simple Healthians-style Booking Page
+// Booking.jsx – Booking Page with Firebase + EmailJS (with full data)
 import React, { useState } from 'react';
 import './Home.css';
+import { db } from './firebase';
+import { collection, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+import emailjs from '@emailjs/browser';
 
 const Booking = () => {
   const [formData, setFormData] = useState({
@@ -12,10 +15,35 @@ const Booking = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Booking Submitted Successfully!");
-    // Add Firebase or EmailJS logic here
+
+    try {
+      await addDoc(collection(db, "bookings"), {
+        ...formData,
+        status: 'Pending',
+        createdAt: Timestamp.now()
+      });
+
+      // EmailJS sending full data
+      emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
+        name: formData.name,
+        age: formData.age,
+        sex: formData.sex,
+        mobile: formData.mobile,
+        address: formData.address,
+        pincode: formData.pincode,
+        date: formData.date,
+        time: formData.time,
+        tests: formData.tests,
+        profiles: formData.profiles
+      }, 'dJE_JHAoNTxxzTxiT');
+
+      alert("Booking Confirmed!");
+    } catch (err) {
+      console.error("Error saving booking:", err);
+      alert("Failed to book. Try again.");
+    }
   };
 
   return (
