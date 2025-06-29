@@ -1,9 +1,10 @@
-// Booking.jsx – Booking Page with Firebase + EmailJS (with full data)
+// Booking.jsx – Booking with Firebase + EmailJS + Add from Search
 import React, { useState } from 'react';
 import './Home.css';
 import { db } from './firebase';
 import { collection, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 import emailjs from '@emailjs/browser';
+import Search, { allTests } from './Search';
 
 const Booking = () => {
   const [formData, setFormData] = useState({
@@ -25,7 +26,6 @@ const Booking = () => {
         createdAt: Timestamp.now()
       });
 
-      // EmailJS sending full data
       emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
         name: formData.name,
         age: formData.age,
@@ -46,6 +46,13 @@ const Booking = () => {
     }
   };
 
+  const handleAddTest = (testName) => {
+    setFormData(prev => ({
+      ...prev,
+      tests: prev.tests ? `${prev.tests}, ${testName}` : testName
+    }));
+  };
+
   return (
     <div className="home-container">
       <h2 style={{ textAlign: 'center', marginTop: '20px', color: '#0077cc' }}>Book a Test</h2>
@@ -63,11 +70,15 @@ const Booking = () => {
         <input type="date" name="date" required onChange={handleChange} />
         <input type="time" name="time" required onChange={handleChange} />
 
-        <textarea name="tests" placeholder="Select Blood Tests (CBC, LFT...)" onChange={handleChange}></textarea>
-        <textarea name="profiles" placeholder="Select Test Profiles (Full Body, Vitamin...)" onChange={handleChange}></textarea>
+        <textarea name="tests" placeholder="Select Blood Tests (CBC, LFT...)" value={formData.tests} onChange={handleChange}></textarea>
+        <textarea name="profiles" placeholder="Select Test Profiles (Full Body, Vitamin...)" value={formData.profiles} onChange={handleChange}></textarea>
 
         <button type="submit">Confirm Booking</button>
       </form>
+
+      <div style={{ marginTop: '30px' }}>
+        <Search onAdd={handleAddTest} />
+      </div>
     </div>
   );
 };
