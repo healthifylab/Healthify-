@@ -140,4 +140,24 @@ html {
     transform: translateY(0);
   }
 }
+.thank-you-page {
+  padding: 30px;
+  max-width: 600px;
+  margin: auto;
+  background: #e6f9ff;
+  text-align: center;
+  border-radius: 8px;
+}
+.thank-you-page h2 {
+  color: #0077cc;
+}
+.thank-you-page button {
+  margin: 10px;
+  padding: 10px 15px;
+  background: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+}
+
 
