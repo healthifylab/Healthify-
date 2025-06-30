@@ -1,26 +1,12 @@
-import React from "react";
-
-const Contact = () => {
-  return (
-    <div className="contact-page">
-      <h2>Contact Us</h2>
-      <p>📞 Mobile: 91 9503832889</p>
-      <p>✉️ Email: report@healthifylab.com</p>
-      <p>📍 Healthify, Navi Mumbai, Thane, Mumbai</p>
-
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          alert("Thanks for contacting us!");
-        }}
-      >
-        <input type="text" placeholder="Your Name" required />
-        <input type="email" placeholder="Your Email" required />
-        <textarea placeholder="Your Message" required />
-        <button type="submit">Send Message</button>
-      </form>
-    </div>
-  );
-};
-
-export default Contact;
+<div className="contact-details">
+  <h2>📞 Contact Healthify Lab</h2>
+  <p title="Click to copy phone">
+    📱 +91 9503832889
+    <button onClick={() => navigator.clipboard.writeText('+919503832889')}>📋</button>
+  </p>
+  <p title="Click to copy email">
+    ✉️ report@healthifylab.com
+    <button onClick={() => navigator.clipboard.writeText('report@healthifylab.com')}>📋</button>
+  </p>
+  <p>💬 WhatsApp: <a href="https://wa.me/919503832889" target="_blank" rel="noopener noreferrer">Chat with Us</a></p>
+</div>
