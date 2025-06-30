@@ -35,6 +35,16 @@ const ThankYou = () => {
         <>
           <h4>Selected Profiles:</h4>
           <ul>
+            <h4>Selected Profiles:</h4>
+<ul>
+  {booking.profiles?.map((profile, i) => (
+    <li key={i} title="Click to copy">
+      {profile}
+      <button onClick={() => navigator.clipboard.writeText(profile)}>📋</button>
+    </li>
+  ))}
+</ul>
+
             <h4>Selected Tests:</h4>
 <ul>
   {booking.tests?.map((test, i) => (
