@@ -117,11 +117,33 @@ Profiles: ${booking.profiles?.join(", ") || "-"}`;
         <button onClick={() => navigate("/booking")}>📋 Book Another Test</button>
         <button onClick={downloadReceipt}>📄 Download Receipt</button>
         <a
-          href={`https://wa.me/919503832889?text=${encodeURIComponent(whatsappMessage)}`}
+          
+          href={const blob = doc.output("blob");
+
+const formData = new FormData();
+formData.append("file", blob, "Healthify_Receipt.pdf");
+formData.append("service_id", "service_z3ac4pk");
+formData.append("template_id", "template_5v6t6ku");
+formData.append("user_id", "dJE_JHAoNTxxzTxiT");
+
+// Add variables
+formData.append("user_email", booking.email || "report@healthifylab.com");
+formData.append("user_name", booking.name || "Guest");
+formData.append("reference_id", reference);
+formData.append("message", "Your Healthify Lab receipt is attached.");
+
+fetch("https://api.emailjs.com/api/v1.0/email/send-form", {
+  method: "POST",
+  body: formData,
+})
+  .then(() => alert("✅ Receipt sent via Email."))
+  .catch(() => alert("❌ Failed to send Email"));
+https://wa.me/919503832889?text=${encodeURIComponent(whatsappMessage)}`}
           target="_blank"
           rel="noopener noreferrer"
         >
-          <button>💬 Confirm on WhatsApp</button>
+          <button>
+            💬 Confirm on WhatsApp</button>
         </a>
       </div>
     </div>
