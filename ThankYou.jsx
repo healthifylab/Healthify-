@@ -25,6 +25,12 @@ const downloadReceipt = async () => {
         doc.text(`- ${profile}`, 30, y + 10 + i * 8);
       });
     }
+y += 40;
+doc.setFontSize(12);
+doc.text("हेल्थिफाय लैब – बुकिंग रसीद", 20, y);
+doc.text("धन्यवाद! आपकी जांच बुक कर ली गई है।", 20, y + 10);
+doc.text("Healthify लॅब – तपासणी पावती", 20, y + 25);
+doc.text("धन्यवाद! तुमची तपासणी यशस्वीरित्या बुक झाली आहे.", 20, y + 35);
 
     doc.save("Healthify_Receipt.pdf");
   };
