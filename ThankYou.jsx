@@ -35,3 +35,13 @@ doc.text("धन्यवाद! तुमची तपासणी यशस्
     doc.save("Healthify_Receipt.pdf");
   };
 };
+<a
+  href={`https://wa.me/919503832889?text=${encodeURIComponent(
+    `Hello Healthify Lab,\n\nI have successfully booked a test.\nName: ${booking.name || ""}\nTests: ${booking.tests?.join(", ") || "-"}\nProfiles: ${booking.profiles?.join(", ") || "-"}`
+  )}`}
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <button>💬 Confirm on WhatsApp</button>
+</a>
+
