@@ -71,6 +71,9 @@ const Home = () => {
   </div>
 </section>
 
+<section className="why-choose fade-in">
+<section className="faq fade-in">
+<section className="testimonials fade-in">
 
       <footer>
         <footer className="site-footer">
