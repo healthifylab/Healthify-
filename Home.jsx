@@ -89,10 +89,15 @@ const Home = () => {
 </footer>
 noreferrer"
       >
-        💬 WhatsApp
-      </a>
-    </div>
-  );
+        <a
+  href="https://wa.me/919503832889"
+  className="whatsapp-float"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  💬 WhatsApp
+</a>
+
 };
         </div>
   <p className="footer-bottom">© 2025 Healthify Lab | All Rights Reserved</p>
