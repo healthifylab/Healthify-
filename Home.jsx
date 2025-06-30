@@ -69,6 +69,7 @@ const Home = () => {
 
       <footer>
         <footer className="site-footer">
+  <div c<footer className="site-footer">
   <div className="footer-top">
     <div>
       <strong>Quick Links</strong>
@@ -81,13 +82,19 @@ const Home = () => {
     </div>
     <div>
       <strong>Contact</strong>
-      <p>📞 +91 9503832889</p>
-      <p>✉️ report@healthifylab.com</p>
+      <p title="Click to copy">
+        📞 +91 9503832889
+        <button onClick={() => navigator.clipboard.writeText('+919503832889')}>📋</button>
+      </p>
+      <p title="Click to copy">
+        ✉️ report@healthifylab.com
+        <button onClick={() => navigator.clipboard.writeText('report@healthifylab.com')}>📋</button>
+      </p>
     </div>
   </div>
   <p className="footer-bottom">© 2025 Healthify Lab | All Rights Reserved</p>
 </footer>
-noreferrer"
+
       >
         <a
   href="https://wa.me/919503832889"
