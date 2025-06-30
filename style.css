@@ -48,3 +48,34 @@
   border-radius: 8px;
   box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
+/* ===== Contact and About Page Styling ===== */
+.contact-page, .about-page {
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.contact-page form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-page input,
+.contact-page textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.contact-page button {
+  padding: 10px;
+  background: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
