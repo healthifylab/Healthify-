@@ -100,3 +100,28 @@
   margin-top: 10px;
   color: #444;
 }
+.site-footer {
+  background: #f0f0f0;
+  padding: 20px;
+  color: #333;
+}
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.footer-top ul {
+  list-style: none;
+  padding: 0;
+}
+.footer-top a {
+  color: #0077cc;
+  text-decoration: none;
+}
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #777;
+}
