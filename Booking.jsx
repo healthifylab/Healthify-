@@ -62,7 +62,21 @@ const Booking = () => {
   return (
     <div className="booking-form">
       <h2>🧪 Book a Test with Healthify</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
+  name: name,
+  phone: phone,
+  email: email,
+  address: address,
+  tests: testCart.join(', '),
+  profiles: profileCart.join(', '),
+}, 'dJE_JHAoNTxxzTxiT')
+.then(() => {
+  alert("Booking successful! Confirmation sent.");
+})
+.catch((error) => {
+  console.error("Email failed", error);
+});
+}>
         <input name="name" placeholder="Full Name" value={form.name} onChange={handleChange} required />
         <input name="age" placeholder="Age" value={form.age} onChange={handleChange} required />
         <select name="sex" value={form.sex} onChange={handleChange} required>
