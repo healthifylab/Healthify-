@@ -1,3 +1,6 @@
+const reference = booking?.reference || `HL-${Date.now().toString().slice(-6)}`;
+const timestamp = new Date().toLocaleString("en-IN");
+
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import jsPDF from "jspdf";
