@@ -78,6 +78,9 @@ Profiles: ${booking.profiles?.join(", ") || "-"}`;
   return (
     <div className="thank-you-page">
       <h2>✅ Booking Confirmed!</h2>
+      <p><strong>Reference ID:</strong> {reference}</p>
+<p><strong>Date & Time:</strong> {timestamp}</p>
+
       <p>Thank you, <strong>{booking.name || 'Guest'}</strong>.</p>
       <p>We’ve received your booking details.</p>
 
