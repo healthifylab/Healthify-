@@ -76,7 +76,7 @@ const Home = () => {
 <section className="testimonials fade-in">
 
       <footer>
-        <footer className="site-footer">
+        <footer <footer className="site-footer">
   <div className="footer-top">
     <div>
       <strong>Quick Links</strong>
@@ -89,9 +89,13 @@ const Home = () => {
     </div>
     <div>
       <strong>Contact</strong>
-      <p>📞 91 9503832889</p>
-      <p>✉️ report@healthifylab.com</p>
+      <p>📞 +91 9503832889</p>
+      <p>✉️ report@healthifylabb.com</p>
     </div>
+  </div>
+  <p className="footer-bottom">© 2025 Healthify Lab | All Rights Reserved</p>
+</footer>
+
   
 
         href="https://wa.me/919503832889"
