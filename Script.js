@@ -2,7 +2,7 @@
 import { saveBooking } from './firebase.js';
 
 window.onload = function () {
-  emailjs.init("YOUR_USER_ID"); // Replace with your actual EmailJS user ID
+  emailjs.init("E4ASdX9FG6gKnzEYF"); // Your actual EmailJS user ID
 
   const form = document.getElementById("bookingForm");
   const successDiv = document.getElementById("successMessage");
@@ -14,7 +14,7 @@ window.onload = function () {
     const data = {};
     formData.forEach((value, key) => {
       if (data[key]) {
-        data[key] += `, ${value}`; // handle multiple values
+        data[key] += `, ${value}`;
       } else {
         data[key] = value;
       }
@@ -30,7 +30,7 @@ window.onload = function () {
       });
 
     // Send Email via EmailJS
-    emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", data)
+    emailjs.send("service_mh0mc3m", "template_yxxr7kc", data)
       .then(() => {
         console.log("Email sent");
         form.reset();
@@ -41,7 +41,7 @@ window.onload = function () {
       });
   });
 
-  // Amount Calculation (Basic example)
+  // Amount Calculation
   const testSelect = document.getElementById("testSelect");
   const profileSelect = document.getElementById("profileSelect");
   const summary = document.getElementById("summary");
