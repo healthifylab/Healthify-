@@ -139,6 +139,32 @@ html {
     opacity: 1;
     transform: translateY(0);
   }
+  .site-footer button {
+  margin-left: 8px;
+  cursor: pointer;
+  background: #e6f2ff;
+  border: 1px solid #0077cc;
+  color: #0077cc;
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-size: 14px;
+}
+.site-footer p[title] {
+  position: relative;
+}
+.site-footer p[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  top: -24px;
+  left: 0;
+  background: #0077cc;
+  color: #fff;
+  padding: 3px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
 }
 .thank-you-page {
   padding: 30px;
