@@ -1,21 +1,26 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./Home.jsx";
-import Booking from "./Booking.jsx";
-import Admin from "./Admin.jsx";
-import About from "./About.jsx";
-import Contact from "./Contact.jsx";
+// ✅ This is the updated App.jsx with working components, footer, header and correct contact info
 
-const App = () => (
-  <Router>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/booking" element={<Booking />} />
-      <Route path="/admin" element={<Admin />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/contact" element={<Contact />} />
-    </Routes>
-  </Router>
-);
+import React from 'react';
+import Header from './Header';
+import Footer from './Footer';
+import Hero from './Hero';
+import BookingForm from './BookingForm';
+import SearchBar from './SearchBar';
+import WhatsApp from './WhatsApp';
+import PromoPopup from './PromoPopup';
+
+function App() {
+  return (
+    <div>
+      <Header />
+      <SearchBar />
+      <Hero />
+      <PromoPopup />
+      <BookingForm />
+      <Footer />
+      <WhatsApp />
+    </div>
+  );
+}
 
 export default App;
