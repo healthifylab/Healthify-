@@ -4,7 +4,7 @@ const Contact = () => {
   return (
     <div className="contact-page">
       <h2>Contact Us</h2>
-      <p>📞 Mobile: 91 9593832889</p>
+      <p>📞 Mobile: 91 9503832889</p>
       <p>✉️ Email: report@healthifylab.com</p>
       <p>📍 Healthify, Navi Mumbai, Thane, Mumbai</p>
 
