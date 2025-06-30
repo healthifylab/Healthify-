@@ -53,6 +53,25 @@ const Home = () => {
         </div>
       </section>
 
+      <section className="testimonials">
+  <h2>What Our Customers Say</h2>
+  <div className="testimonial-cards">
+    <div className="testimonial">
+      <p>"Excellent home collection service and fast reports!"</p>
+      <strong>- Priya S., Pune</strong>
+    </div>
+    <div className="testimonial">
+      <p>"Affordable pricing and accurate results. Thank you Healthify!"</p>
+      <strong>- Rahul M., Mumbai</strong>
+    </div>
+    <div className="testimonial">
+      <p>"Best lab experience ever. Hassle-free and reliable."</p>
+      <strong>- Neha R., Delhi</strong>
+    </div>
+  </div>
+</section>
+
+
       <footer>
         <p>📞 Contact: 9876543210 | ✉️ Email: support@healthifylab.in</p>
       </footer>
