@@ -1,0 +1,1 @@
+export const tests = [{ name: 'CBC', price: 399, mrp: 499 }];

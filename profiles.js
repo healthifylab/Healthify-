@@ -1,0 +1,1 @@
+export const profiles = [{ name: 'Healthify Full Body Checkup', price: 999, mrp: 1299 }];
