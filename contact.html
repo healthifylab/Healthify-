@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Healthify Lab</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+  <script src="email-enquiry.js" defer></script>
+</head>
+<body>
+  <div class="contact-container">
+    <h2>📩 Contact Us</h2>
+    <p>For any queries, reach out to us using the form below.</p>
+
+    <form id="contactForm">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="query" rows="4" placeholder="Your Query" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+
+    <div id="msg" class="msg"></div>
+
+    <p><strong>Email:</strong> report@healthifylab.com</p>
+    <p><strong>Phone:</strong> +91 9503832889</p>
+  </div>
+</body>
+</html>
