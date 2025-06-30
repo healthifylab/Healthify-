@@ -2,7 +2,7 @@
 import { saveBooking } from './firebase.js';
 
 window.onload = function () {
-  emailjs.init("E4ASdX9FG6gKnzEYF"); // Your actual EmailJS user ID
+  emailjs.init("E4ASdX9FG6gKnzEYF"); // User ID from your EmailJS dashboard
 
   const form = document.getElementById("bookingForm");
   const successDiv = document.getElementById("successMessage");
@@ -30,15 +30,24 @@ window.onload = function () {
       });
 
     // Send Email via EmailJS
-    emailjs.send("service_mh0mc3m", "template_yxxr7kc", data)
-      .then(() => {
-        console.log("Email sent");
-        form.reset();
-        successDiv.style.display = "block";
-      })
-      .catch((err) => {
-        console.error("EmailJS Error:", err);
-      });
+    emailjs.send("service_mh0mc3m", "template_yxxr7kc", {
+      name: data.name,
+      email: data.email,
+      mobile: data.mobile,
+      address: data.address,
+      appointment: data.appointment,
+      tests: data.tests,
+      profiles: data.profiles,
+      message: `Booking from Healthify site`
+    })
+    .then(() => {
+      console.log("Email sent via EmailJS");
+      form.reset();
+      successDiv.style.display = "block";
+    })
+    .catch((err) => {
+      console.error("EmailJS Error:", err);
+    });
   });
 
   // Amount Calculation
