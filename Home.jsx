@@ -53,23 +53,15 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="testimonials">
+      <section className="testimonials fade-in">
   <h2>What Our Customers Say</h2>
-  <div className="testimonial-cards">
-    <div className="testimonial">
-      <p>"Excellent home collection service and fast reports!"</p>
-      <strong>- Priya S., Pune</strong>
-    </div>
-    <div className="testimonial">
-      <p>"Affordable pricing and accurate results. Thank you Healthify!"</p>
-      <strong>- Rahul M., Mumbai</strong>
-    </div>
-    <div className="testimonial">
-      <p>"Best lab experience ever. Hassle-free and reliable."</p>
-      <strong>- Neha R., Delhi</strong>
-    </div>
+  <div className="testimonial-slider">
+    <div className="testimonial-card">🧬 "Very smooth home collection!"<br /><strong>– Priya S.</strong></div>
+    <div className="testimonial-card">🩺 "Reliable, fast & professional!"<br /><strong>– Rahul M.</strong></div>
+    <div className="testimonial-card">💉 "Affordable and accurate reports!"<br /><strong>– Neha R.</strong></div>
   </div>
 </section>
+
 
 <section className="why-choose fade-in">
 <section className="faq fade-in">
