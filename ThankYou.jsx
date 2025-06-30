@@ -1,0 +1,39 @@
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
+const ThankYou = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const booking = location.state || {};
+
+  return (
+    <div className="thank-you-page">
+      <h2>✅ Booking Confirmed!</h2>
+      <p>Thank you, <strong>{booking.name || 'Guest'}</strong>.</p>
+      <p>We’ve received your booking details.</p>
+
+      {booking.tests && (
+        <>
+          <h4>Selected Tests:</h4>
+          <ul>
+            {booking.tests.map((test, i) => <li key={i}>{test}</li>)}
+          </ul>
+        </>
+      )}
+
+      {booking.profiles && (
+        <>
+          <h4>Selected Profiles:</h4>
+          <ul>
+            {booking.profiles.map((profile, i) => <li key={i}>{profile}</li>)}
+          </ul>
+        </>
+      )}
+
+      <button onClick={() => navigate("/")}>🏠 Go to Home</button>
+      <button onClick={() => navigate("/booking")}>📋 Book Another Test</button>
+    </div>
+  );
+};
+
+export default ThankYou;
