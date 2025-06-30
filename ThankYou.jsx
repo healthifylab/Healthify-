@@ -1,3 +1,13 @@
+useEffect(() => {
+  if (window.gtag) {
+    window.gtag('event', 'conversion', {
+      send_to: 'G-3SFGZXHXT9',
+      value: 1.0,
+      currency: 'INR'
+    });
+  }
+}, []);
+
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
