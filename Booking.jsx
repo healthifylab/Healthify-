@@ -1,3 +1,5 @@
+import emailjs from '@emailjs/browser';
+
 import React, { useState } from "react";
 import SearchTests from "./SearchTests.jsx";
 import SearchProfiles from "./SearchProfiles.jsx";
