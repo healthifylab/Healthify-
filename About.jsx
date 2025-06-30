@@ -1,3 +1,7 @@
+import ThankYou from "./ThankYou.jsx";
+...
+<Route path="/thankyou" element={<ThankYou />} />
+
 import React from "react";
 
 const About = () => {
