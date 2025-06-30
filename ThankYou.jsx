@@ -25,7 +25,14 @@ const ThankYou = () => {
     const img = new Image();
     img.src = "/logo.png"; // Ensure logo.png is in public folder
 
-    img.onload = () => {
+    img.onload = (doc.addImage(img, "PNG", 75, 10, 60, 20);
+doc.setFontSize(16);
+doc.text("Healthify Lab – Booking Receipt", 20, 40);
+doc.setFontSize(12);
+doc.text(`Booking ID: ${reference}`, 20, 50);
+doc.text(`Date: ${timestamp}`, 20, 60);
+doc.text(`Name: ${booking.name || "Guest"}`, 20, 70);
+) => {
       doc.addImage(img, "PNG", 75, 10, 60, 20); // Centered logo
       doc.setFontSize(16);
       doc.text("Healthify Lab – Booking Receipt", 20, 40);
