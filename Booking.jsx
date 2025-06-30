@@ -77,6 +77,12 @@ const Booking = () => {
   console.error("Email failed", error);
 });
 }>
+        import { useNavigate } from "react-router-dom";
+...
+const navigate = useNavigate();
+
+
+export default Booking;
         <input name="name" placeholder="Full Name" value={form.name} onChange={handleChange} required />
         <input name="age" placeholder="Age" value={form.age} onChange={handleChange} required />
         <select name="sex" value={form.sex} onChange={handleChange} required>
@@ -110,4 +116,3 @@ const Booking = () => {
   );
 };
 
-export default Booking;
