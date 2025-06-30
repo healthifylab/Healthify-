@@ -4,17 +4,29 @@ const Home = () => {
   return (
     <div className="home">
       <header className="hero">
+        <img src="/logo.png" alt="Healthify Logo" className="logo" />
         <h1>Welcome to Healthify Lab</h1>
         <p>Home Sample Collection | Accurate Reports | Fast Turnaround</p>
         <button onClick={() => window.location.href='/booking'}>Book a Test</button>
       </header>
 
-      <section className="promo">
-        <h2>Promotional Offers</h2>
-        <div className="cards">
-          <div className="card">Full Body Checkup @ ₹499</div>
-          <div className="card">Thyroid Panel @ ₹399</div>
-          <div className="card">Diabetes Screening @ ₹299</div>
+      <nav className="menu">
+        <input type="checkbox" id="menu-toggle" />
+        <label htmlFor="menu-toggle" className="menu-icon">☰</label>
+        <div className="menu-items">
+          <a href="/">Home</a>
+          <a href="/about">About</a>
+          <a href="/contact">Contact Us</a>
+          <a href="/booking">Booking</a>
+        </div>
+      </nav>
+
+      <section className="promo-swiper">
+        <h2>Promotions</h2>
+        <div className="swiper">
+          <div className="slide">🩺 Full Body Checkup @ ₹499</div>
+          <div className="slide">🧬 Thyroid Panel @ ₹399</div>
+          <div className="slide">🩸 Vitamin Profile @ ₹699</div>
         </div>
       </section>
 
