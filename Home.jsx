@@ -4,7 +4,7 @@ const Home = () => {
   return (
     <div className="home">
       <header className="hero">
-        <img src="/logo.png" alt="Healthify Logo" className="logo" />
+        <img src=/"logo.png" alt="Healthify Logo" className="logo" />
         <h1>Welcome to Healthify Lab</h1>
         <p>Home Sample Collection | Accurate Reports | Fast Turnaround</p>
         <button onClick={() => window.location.href='/booking'}>Book a Test</button>
@@ -110,4 +110,4 @@ const Home = () => {
   <p className="footer-bottom">© 2025 Healthify Lab | All Rights Reserved</p>
 </footer>
 
-export default Home;
+export  Home;
