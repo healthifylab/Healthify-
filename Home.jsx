@@ -73,11 +73,25 @@ const Home = () => {
 
 
       <footer>
-        <p>📞 Contact: 9876543210 | ✉️ Email: support@healthifylab.in</p>
-      </footer>
+        <footer className="site-footer">
+  <div className="footer-top">
+    <div>
+      <strong>Quick Links</strong>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/booking">Book a Test</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+    </div>
+    <div>
+      <strong>Contact</strong>
+      <p>📞 91 9503832889</p>
+      <p>✉️ report@healthifylab.com</p>
+    </div>
+  
 
-      <a
-        href="https://wa.me/919876543210"
+        href="https://wa.me/919503832889"
         className="whatsapp-float"
         target="_blank"
         rel="noopener noreferrer"
@@ -87,5 +101,8 @@ const Home = () => {
     </div>
   );
 };
+        </div>
+  <p className="footer-bottom">© 2025 Healthify Lab | All Rights Reserved</p>
+</footer>
 
 export default Home;
