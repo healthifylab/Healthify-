@@ -80,25 +80,24 @@
 }
 
 .testimonials {
-  padding: 30px 20px;
-  background: #eef7ff;
-}
-.testimonial-cards {
+ .testimonial-slider {
   display: flex;
-  flex-direction: column;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
   gap: 15px;
+  padding: 10px;
 }
-.testimonial {
+.testimonial-card {
+  min-width: 250px;
   background: #fff;
   padding: 15px;
   border-left: 5px solid #0077cc;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
   border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  scroll-snap-align: start;
+  flex-shrink: 0;
 }
-.testimonial strong {
-  display: block;
-  margin-top: 10px;
-  color: #444;
+
 }
 .site-footer {
   background: #f0f0f0;
