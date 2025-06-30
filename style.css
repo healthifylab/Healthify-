@@ -1,158 +1,50 @@
-.logo {
-  height: 80px;
-  margin-bottom: 10px;
-}
-.menu {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-}
-.menu-icon {
-  font-size: 26px;
-  cursor: pointer;
-  background: #0077cc;
-  color: white;
-  padding: 10px;
-  border-radius: 6px;
-}
-.menu-items {
-  display: none;
-  flex-direction: column;
-  background: #ffffff;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-  position: absolute;
-  right: 0;
-  margin-top: 5px;
-}
-#menu-toggle:checked ~ .menu-items {
-  display: flex;
-}
-.menu-items a {
-  padding: 10px;
-  text-decoration: none;
-  color: #333;
-  border-bottom: 1px solid #eee;
-}
-.promo-swiper {
-  padding: 20px;
-}
-.swiper {
-  display: flex;
-  overflow-x: auto;
-  gap: 10px;
-}
-.slide {
-  min-width: 250px;
-  background: #fff;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-}
-/* ===== Contact and About Page Styling ===== */
-.contact-page, .about-page {
-  padding: 20px;
-  max-width: 600px;
+/* ===== Thank You Page Styles ===== */
+.thank-you-page {
+  padding: 30px;
+  max-width: 700px;
   margin: auto;
-  background: #fff;
+  background: #e6f9ff;
+  text-align: center;
+  border-radius: 8px;
   box-shadow: 0 0 10px rgba(0,0,0,0.05);
 }
-
-.contact-page form {
+.thank-you-page h2 {
+  color: #0077cc;
+}
+.thank-you-page h4 {
+  margin-top: 20px;
+}
+.thank-you-page ul {
+  list-style-type: none;
+  padding: 0;
+}
+.thank-you-page li {
+  margin: 5px 0;
+  background: #ffffff;
+  padding: 8px 10px;
+  border-radius: 6px;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
 }
-
-.contact-page input,
-.contact-page textarea {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.contact-page button {
-  padding: 10px;
+.thank-you-page button {
+  margin: 10px 6px;
+  padding: 10px 16px;
   background: #0077cc;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
+  font-weight: bold;
   cursor: pointer;
 }
-
-.testimonials {
- .testimonial-slider {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  gap: 15px;
-  padding: 10px;
-}
-.testimonial-card {
-  min-width: 250px;
-  background: #fff;
-  padding: 15px;
-  border-left: 5px solid #0077cc;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  scroll-snap-align: start;
-  flex-shrink: 0;
+.thank-you-page button:hover {
+  background: #005fa3;
 }
 
-}
-.site-footer {
-  background: #f0f0f0;
-  padding: 20px;
-  color: #333;
-}
-.footer-top {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-.footer-top ul {
-  list-style: none;
-  padding: 0;
-}
-.footer-top a {
-  color: #0077cc;
-  text-decoration: none;
-}
-.footer-bottom {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 14px;
-  color: #777;
-}
-html {
-  scroll-behavior: smooth;
-}
-.fade-in {
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 1s ease forwards;
-  animation-delay: 0.2s;
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .site-footer button {
-  margin-left: 8px;
-  cursor: pointer;
-  background: #e6f2ff;
-  border: 1px solid #0077cc;
-  color: #0077cc;
-  border-radius: 4px;
-  padding: 2px 5px;
-  font-size: 14px;
-}
-.site-footer p[title] {
-  position: relative;
-}
-.site-footer p[title]:hover::after {
+/* ===== Tooltip & Copy Button Styles ===== */
+.thank-you-page li[title]:hover::after,
+.site-footer p[title]:hover::after,
+.contact-details p[title]:hover::after {
   content: attr(title);
   position: absolute;
   top: -24px;
@@ -163,27 +55,18 @@ html {
   font-size: 12px;
   border-radius: 4px;
   white-space: nowrap;
+  z-index: 10;
 }
 
-}
-.thank-you-page {
-  padding: 30px;
-  max-width: 600px;
-  margin: auto;
-  background: #e6f9ff;
-  text-align: center;
-  border-radius: 8px;
-}
-.thank-you-page h2 {
+.site-footer button,
+.contact-details button,
+.thank-you-page li button {
+  margin-left: 8px;
+  cursor: pointer;
+  background: #e6f2ff;
+  border: 1px solid #0077cc;
   color: #0077cc;
+  border-radius: 4px;
+  padding: 3px 6px;
+  font-size: 14px;
 }
-.thank-you-page button {
-  margin: 10px;
-  padding: 10px 15px;
-  background: #0077cc;
-  color: white;
-  border: none;
-  border-radius: 6px;
-}
-
-
