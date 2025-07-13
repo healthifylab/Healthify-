@@ -1,0 +1,482 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    background-color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+    margin-left: 40px;
+}
+
+nav a {
+    color: #333;
+    text-decoration: none;
+    margin-left: 15px;
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: #007bff;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #e9ecef;
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+}
+
+.hero h1 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Search Section */
+.search-section {
+    padding: 20px 0;
+    text-align: center;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+#searchResults {
+    margin-top: 10px;
+}
+
+/* Promo Popup */
+.promo-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    text-align: center;
+}
+
+.promo-popup.active {
+    display: block;
+}
+
+.promo-btn {
+    padding: 10px 20px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.close-btn {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.close-btn:hover {
+    background-color: #c82333;
+}
+
+.book-now-btn {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.book-now-btn:hover {
+    background-color: #218838;
+}
+
+/* Cards Section */
+.cards-section {
+    padding: 20px 0;
+}
+
+.section-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.cards-container {
+    overflow: hidden;
+}
+
+.swiper-container {
+    width: 100%;
+    padding: 10px 0;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+}
+
+.promo-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.promo-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.promo-card h3 {
+    font-size: 1.1rem;
+    margin: 10px 0;
+}
+
+.promo-card p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.swiper-pagination {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background-color: #007bff;
+    opacity: 0.5;
+}
+
+.swiper-pagination-bullet-active {
+    opacity: 1;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+    padding: 20px 0;
+    text-align: center;
+}
+
+.testimonials-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.testimonial-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+.testimonial-card img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.testimonial-card p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.testimonial-card h4 {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Why Choose Section */
+.why-choose {
+    padding: 20px 0;
+    text-align: center;
+    background-color: #e9ecef;
+}
+
+.why-choose h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.why-choose p {
+    font-size: 0.9rem;
+    margin: 5px 0;
+}
+
+/* FAQ Section */
+.faq-section {
+    padding: 20px 0;
+}
+
+.faq-container {
+    margin-top: 10px;
+}
+
+.faq-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.faq-question {
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.faq-answer {
+    display: none;
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* Social Links */
+.social-links {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.social-links a {
+    color: #333;
+    margin: 0 10px;
+    font-size: 1.2rem;
+}
+
+.social-links a:hover {
+    color: #007bff;
+}
+
+/* Floating Buttons */
+.call-back-float, .whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.call-back-float a {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.call-back-float a:hover {
+    background-color: #c82333;
+}
+
+.whatsapp-float a {
+    background-color: #25D366;
+    color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.whatsapp-float a:hover {
+    background-color: #1da851;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #333;
+    color: #fff;
+}
+
+.footer-content a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-content a:hover {
+    text-decoration: underline;
+}
+
+/* Booking Form Styles */
+.booking-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.form-group textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+#bookingMessage {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.success {
+    color: #28a745;
+}
+
+.error {
+    color: #dc3545;
+}
+
+.selected-items {
+    margin-top: 10px;
+}
+
+.selected-tag {
+    display: inline-block;
+    background-color: #e0e0e0;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.selected-tag button {
+    margin-left: 5px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.item-details, .profile-details {
+    margin-left: 20px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.included-tests {
+    list-style-type: disc;
+    margin-top: 5px;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    .container {
+        max-width: 750px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .promo-card {
+        width: 80%;
+    }
+
+    .testimonials-container {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .form-group {
+        display: flex;
+        align-items: center;
+    }
+
+    .form-group label {
+        flex: 0 0 150px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        flex: 1;
+    }
+}
