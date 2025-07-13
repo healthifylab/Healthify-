@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Test - Healthifylive Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Firebase SDK v10.14.1 -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js"></script>
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="/public/logo.png" alt="Healthifylive Lab Logo" class="logo-img">
+            <nav>
+                <a href="/index.html">Home</a>
+                <a href="/booking.html">Book Test</a>
+                <a href="/contact.html">Contact</a>
+            </nav>
+        </div>
+        <main>
+            <h1>📋 Book Your Test 😊</h1>
+            <p>Select a test or profile to book your appointment. <i class="fas fa-syringe"></i></p>
+            <div class="booking-form">
+                <form id="bookingForm">
+                    <div class="form-group">
+                        <label for="name">Full Name <i class="fas fa-user"></i></label>
+                        <input type="text" id="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number <i class="fas fa-phone"></i></label>
+                        <input type="tel" id="phone" placeholder="Enter your phone (XXXXXXXXXX)" value="+91" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age <i class="fas fa-birthday-cake"></i></label>
+                        <input type="number" id="age" placeholder="Enter your age" min="1" max="120" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sex">Sex <i class="fas fa-venus-mars"></i></label>
+                        <select id="sex" required>
+                            <option value="" disabled selected>Select sex</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address with Landmark <i class="fas fa-map-marker-alt"></i></label>
+                        <textarea id="address" placeholder="Enter your address with landmark" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="pincode">Pincode <i class="fas fa-mail-bulk"></i></label>
+                        <input type="text" id="pincode" placeholder="Enter your pincode (e.g., 400001)" pattern="[0-9]{6}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="test">Select Test(s) <i class="fas fa-vial"></i></label>
+                        <input type="text" id="testSearch" placeholder="Search tests..." class="search-input">
+                        <select id="test" multiple>
+                            <option value="" disabled>Select test(s)</option>
+                        </select>
+                        <div id="selectedTests" class="selected-items"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="profile">Select Profile(s) <i class="fas fa-file-alt"></i></label>
+                        <input type="text" id="profileSearch" placeholder="Search profiles..." class="search-input">
+                        <select id="profile" multiple>
+                            <option value="" disabled>Select profile(s)</option>
+                        </select>
+                        <div id="selectedProfiles" class="selected-items"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Appointment Date <i class="fas fa-calendar"></i></label>
+                        <input type="date" id="date" min="2025-07-06" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="time">Appointment Time <i class="fas fa-clock"></i></label>
+                        <input type="time" id="time" required>
+                    </div>
+                    <button type="submit" class="btn">Book Now <i class="fas fa-check"></i></button>
+                </form>
+                <p id="bookingMessage"></p>
+            </div>
+            <div id="testList"></div>
+        </main>
+        <footer>
+            <p>Healthifylive © 2025 | Contact: +91 9503832889 <i class="fas fa-phone"></i> | Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a></p>
+            <div class="social-media">
+                <a href="https://x.com/healthify_lab" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://instagram.com/healthifylab" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://facebook.com/healthify" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            </div>
+        </footer>
+        <a href="https://wa.me/919503832889" class="whatsapp-float">
+            <div style="display: inline-block !important; padding: 8px !important; background-color: #25D366 !important; color: #fff !important; border-radius: 50% !important; font-size: 24px !important; text-align: center !important; width: 40px !important; height: 40px !important; right-margin: 20px; line-height: 24px !important; transition: none !important;"><i class="fab fa-whatsapp"></i></div>
+        </a>
+    </div>
+    <script type="module" src="/scripts/lead-submission.js"></script>
+    <script type="module" src="/scripts/Drawer.js"></script>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+        import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
+            authDomain: "healthify-lab.firebaseapp.com",
+            projectId: "healthify-lab",
+            storageBucket: "healthify-lab.firebasestorage.app",
+            messagingSenderId: "297003315332",
+            appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // EmailJS Initialization
+        emailjs.init('dJE_JHAoNTxxzTxiT');
+
+        // Store selected items
+        let selectedTests = new Set();
+        let selectedProfiles = new Set();
+
+        // Fetch and populate tests
+        async function loadTests() {
+            try {
+                const response = await fetch('/public/tests.json');
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                const tests = await response.json();
+                console.log('Tests data:', tests); // Debug: Log the fetched data
+                const select = document.getElementById('test');
+                select.innerHTML = '<option value="" disabled>Select test(s)</option>';
+                tests.forEach(test => {
+                    const option = document.createElement('option');
+                    option.value = test.Test_Name.toLowerCase().replace(/\s/g, '-');
+                    option.textContent = `${test.Test_Name} (₹${test.Healthify_Offer_Price})`;
+                    select.appendChild(option);
+                });
+                setupSearch('test', 'testSearch', selectedTests);
+            } catch (error) {
+                console.error('Error loading tests:', error);
+                document.getElementById('test').innerHTML = '<option value="" disabled>Error loading tests. Check console (Status: ' + (error.message || 'Unknown') + ').</option>';
+            }
+        }
+
+        // Fetch and populate profiles
+        async function loadProfiles() {
+            try {
+                const response = await fetch('/public/profiles.json');
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                const profiles = await response.json();
+                console.log('Profiles data:', profiles); // Debug: Log the fetched data
+                const select = document.getElementById('profile');
+                select.innerHTML = '<option value="" disabled>Select profile(s)</option>';
+                profiles.forEach(profile => {
+                    const option = document.createElement('option');
+                    option.value = profile.Test_Name.toLowerCase().replace(/\s/g, '-');
+                    option.textContent = `${profile.Test_Name} (₹${profile.Healthify_Offer_Price})`;
+                    select.appendChild(option);
+                });
+                setupSearch('profile', 'profileSearch', selectedProfiles);
+            } catch (error) {
+                console.error('Error loading profiles:', error);
+                document.getElementById('profile').innerHTML = '<option value="" disabled>Error loading profiles. Check console (Status: ' + (error.message || 'Unknown') + ').</option>';
+            }
+        }
+
+        // Setup search and selection functionality
+        function setupSearch(selectId, searchId, selectedSet) {
+            const select = document.getElementById(selectId);
+            const searchInput = document.getElementById(searchId);
+            const selectedDiv = document.getElementById(selectId === 'test' ? 'selectedTests' : 'selectedProfiles');
+
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                Array.from(select.options).forEach(option => {
+                    if (option.value === '' || option.value === 'disabled') return;
+                    option.style.display = option.textContent.toLowerCase().includes(searchTerm) && !selectedSet.has(option.value) ? 'block' : 'none';
+                });
+            });
+
+            select.addEventListener('change', () => {
+                const selectedOptions = Array.from(select.selectedOptions).filter(option => option.value && !selectedSet.has(option.value));
+                selectedOptions.forEach(option => {
+                    selectedSet.add(option.value);
+                    option.style.display = 'none'; // Hide after selection
+                });
+                updateSelectedItems();
+                searchInput.value = ''; // Clear search after selection
+            });
+
+            function updateSelectedItems() {
+                selectedDiv.innerHTML = Array.from(selectedSet).map(item => `
+                    <span class="selected-tag">${item.replace('-', ' ')}
+                        <button type="button" onclick="removeSelection('${selectId}', '${item}')">×</button>
+                    </span>
+                `).join('');
+                // Reset select to default
+                select.value = '';
+            }
+
+            window.removeSelection = (selectId, item) => {
+                const select = document.getElementById(selectId);
+                const set = selectId === 'test' ? selectedTests : selectedProfiles;
+                set.delete(item);
+                const option = Array.from(select.options).find(o => o.value === item);
+                if (option) option.style.display = 'block';
+                updateSelectedItems();
+            };
+        }
+
+        // Handle booking form submission
+        document.getElementById('bookingForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const age = document.getElementById('age').value;
+            const sex = document.getElementById('sex').value;
+            const address = document.getElementById('address').value;
+            const pincode = document.getElementById('pincode').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const submissionStatus = document.getElementById('bookingMessage');
+
+            if (!name || !phone.match(/^\+91[0-9]{10}$/) || !age || !sex || !address || !pincode.match(/[0-9]{6}/) || (selectedTests.size === 0 && selectedProfiles.size === 0)) {
+                submissionStatus.className = "error";
+                submissionStatus.textContent = "❌ Please enter a valid name, mobile number (+91 followed by 10 digits), age, sex, address, pincode, and select at least one test or profile.";
+                return;
+            }
+
+            submissionStatus.textContent = "📞 Submitting your request...";
+            try {
+                await addDoc(collection(db, "bookings"), {
+                    name: name,
+                    phone: phone,
+                    age: age,
+                    sex: sex,
+                    address: address,
+                    pincode: pincode,
+                    tests: selectedTests.size > 0 ? Array.from(selectedTests) : null,
+                    profiles: selectedProfiles.size > 0 ? Array.from(selectedProfiles) : null,
+                    date: date,
+                    time: time,
+                    timestamp: new Date().toISOString(),
+                    status: "New Booking"
+                });
+                // Send email via EmailJS
+                const message = `New booking: ${selectedTests.size > 0 ? Array.from(selectedTests).join(', ') : ''}${selectedTests.size > 0 && selectedProfiles.size > 0 ? ' and ' : ''}${selectedProfiles.size > 0 ? Array.from(selectedProfiles).join(', ') : ''} on ${date} at ${time} by ${name} (Phone: ${phone}, Age: ${age}, Sex: ${sex}, Address: ${address}, Pincode: ${pincode})`;
+                emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
+                    to_name: name,
+                    to_email: 'report@healthifylab.com',
+                    message: message
+                }).then(() => {
+                    console.log('Email sent successfully');
+                    submissionStatus.className = "success";
+                    submissionStatus.textContent = "✅ Request submitted! We’ll call you soon.";
+                    selectedTests.clear();
+                    selectedProfiles.clear();
+                    document.getElementById('selectedTests').innerHTML = '';
+                    document.getElementById('selectedProfiles').innerHTML = '';
+                    document.getElementById('test').innerHTML = '<option value="" disabled>Select test(s)</option>' + Array.from(document.getElementById('test').options).filter(o => o.style.display !== 'none').map(o => o.outerHTML).join('');
+                    document.getElementById('profile').innerHTML = '<option value="" disabled>Select profile(s)</option>' + Array.from(document.getElementById('profile').options).filter(o => o.style.display !== 'none').map(o => o.outerHTML).join('');
+                    document.getElementById('bookingForm').reset();
+                }).catch((error) => {
+                    console.error('EmailJS error:', error);
+                    submissionStatus.className = "error";
+                    submissionStatus.textContent = "❌ Booking saved, but email failed to send.";
+                });
+            } catch (error) {
+                console.error('Error submitting booking:', error);
+                submissionStatus.className = "error";
+                submissionStatus.textContent = `❌ Failed to submit: ${error.message}. Try again or contact support.`;
+            }
+        });
+
+        // Load tests and profiles on page load
+        window.onload = () => {
+            loadTests();
+            loadProfiles();
+        };
+    </script>
+</body>
+</html>
