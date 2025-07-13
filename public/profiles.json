@@ -1,0 +1,252 @@
+[
+    {
+        "Test_Name": "Healthify Vital Check",
+        "Category": "Health Checkup Profiles",
+        "Sample_Type": "Blood, Serum",
+        "Description": "Essential screening for routine health monitoring of key parameters.",
+        "Tests_Included": "CBC, Blood Sugar Fasting, Lipid Profile",
+        "MRP": 600,
+        "Healthify_Offer_Price": 480,
+        "TAT": "24 hours"
+    },
+    {
+        "Test_Name": "Healthify Core Wellness",
+        "Category": "Health Checkup Profiles",
+        "Sample_Type": "Blood, Serum",
+        "Description": "Comprehensive screening for major organ systems and metabolic health.",
+        "Tests_Included": "CBC, Lipid Profile, Kidney Profile, Diabetes Screening, CBP",
+        "MRP": 1199,
+        "Healthify_Offer_Price": 959.2,
+        "TAT": "24–48 hours"
+    },
+    {
+        "Test_Name": "Healthify Diabetes Care",
+        "Category": "Health Checkup Profiles",
+        "Sample_Type": "Blood, Serum",
+        "Description": "Targeted screening for diabetes management and related complications.",
+        "Tests_Included": "HbA1c, Blood Sugar Fasting, Lipid Profile",
+        "MRP": 1000,
+        "Healthify_Offer_Price": 800,
+        "TAT": "24 hours"
+    },
+    {
+        "Test_Name": "Healthify Heart Guard",
+        "Category": "Health Checkup Profiles",
+        "Sample_Type": "Blood, Serum",
+        "Description": "Assesses cardiovascular health through key biomarkers.",
+        "Tests_Included": "Lipid Profile, CRP, ECG",
+        "MRP": 1500,
+        "Healthify_Offer_Price": 1200,
+        "TAT": "24–48 hours"
+    },
+    {
+        "Test_Name": "Healthify Thyroid Balance",
+        "Category": "Health Checkup Profiles",
+        "Sample_Type": "Serum",
+        "Description": "Evaluates thyroid function for hormonal balance and metabolism.",
+        "Tests_Included": "T3, T4, TSH",
+        "MRP": 800,
+        "Healthify_Offer_Price": 400,
+        "TAT": "24 hours"
+    },
+    {
+        "Test_Name": "Healthify Comprehensive Wellness",
+        "Category": "Health Checkup Profiles",
+        "Sample_Type": "Blood, Serum, Urine",
+        "Description": "Holistic health assessment for early detection of diseases across organ systems.",
+        "Tests_Included": "CBC, Lipid Profile, Kidney Profile, Liver Profile, Thyroid Screening, Complete Urine Examination",
+        "MRP": 2500,
+        "Healthify_Offer_Price": 2000,
+        "TAT": "24–48 hours"
+    },
+    {
+        "Test_Name": "Healthify Women’s Wellness",
+        "Category": "Health Checkup Profiles",
+        "Sample_Type": "Blood, Serum",
+        "Description": "Tailored screening for women’s health, focusing on hormonal and reproductive health.",
+        "Tests_Included": "CBC, Thyroid Profile, CA-125, Hormone Panel (FSH, LH)",
+        "MRP": 2000,
+        "Healthify_Offer_Price": 1600,
+        "TAT": "24–48 hours"
+    },
+    {
+        "Test_Name": "Healthify Senior Care",
+        "Category": "Health Checkup Profiles",
+        "Sample_Type": "Blood, Serum",
+        "Description": "Comprehensive health screening for seniors to monitor age-related conditions.",
+        "Tests_Included": "CBC, Lipid Profile, Kidney Profile, Blood Sugar, PSA (for men)",
+        "MRP": 3000,
+        "Healthify_Offer_Price": 2400,
+        "TAT": "24–48 hours"
+    },
+    {
+        "Test_Name": "Healthify Anemia Shield",
+        "Category": "Health Checkup Profiles",
+        "Sample_Type": "Blood, Serum",
+        "Description": "Screens for anemia causes through blood and iron parameters.",
+        "Tests_Included": "CBC, Iron Studies, Vitamin B12, Ferritin",
+        "MRP": 1500,
+        "Healthify_Offer_Price": 1200,
+        "TAT": "24–48 hours"
+    },
+    {
+        "Test_Name": "Healthify Arthritis Care",
+        "Category": "Health Checkup Profiles",
+        "Sample_Type": "Serum",
+        "Description": "Screens for arthritis and autoimmune conditions affecting joints.",
+        "Tests_Included": "Anti-CCP, Rheumatoid Factor, CRP, ESR",
+        "MRP": 1800,
+        "Healthify_Offer_Price": 1440,
+        "TAT": "24–48 hours"
+    },
+    {
+        "Test_Name": "Healthify PCOD Harmony",
+        "Category": "Health Checkup Profiles",
+        "Sample_Type": "Blood, Serum",
+        "Description": "Evaluates polycystic ovary syndrome through hormonal and metabolic markers.",
+        "Tests_Included": "FSH, LH, Prolactin, Testosterone, Insulin",
+        "MRP": 2500,
+        "Healthify_Offer_Price": 2000,
+        "TAT": "24–48 hours"
+    },
+    {
+        "Test_Name": "Healthify Vitamin Boost",
+        "Category": "Health Checkup Profiles",
+        "Sample_Type": "Serum",
+        "Description": "Assesses essential vitamin levels for overall health and immunity.",
+        "Tests_Included": "Vitamin D, Vitamin B12",
+        "MRP": 2000,
+        "Healthify_Offer_Price": 1400,
+        "TAT": "48 hours"
+    },
+    {
+        "Test_Name": "Healthify Basic Wellness",
+        "Category": "Health Checkup Profiles",
+        "Sample_Type": "Blood, Serum",
+        "Description": "Entry-level screening for general health monitoring.",
+        "Tests_Included": "CBC, Blood Sugar, Lipid Profile, Kidney Profile",
+        "MRP": 999,
+        "Healthify_Offer_Price": 699,
+        "TAT": "24 hours"
+    },
+    {
+        "Test_Name": "Healthify Active Lifestyle",
+        "Category": "Health Checkup Profiles",
+        "Sample_Type": "Blood, Serum",
+        "Description": "Health screening for active individuals to monitor fitness and recovery.",
+        "Tests_Included": "CBC, Lipid Profile, Creatine Kinase, Vitamin D",
+        "MRP": 1800,
+        "Healthify_Offer_Price": 1440,
+        "TAT": "24–48 hours"
+    },
+    {
+        "Test_Name": "Healthify Prenatal Care",
+        "Category": "Health Checkup Profiles",
+        "Sample_Type": "Blood, Serum",
+        "Description": "Comprehensive screening for pregnant women to monitor maternal and fetal health.",
+        "Tests_Included": "CBC, Blood Sugar, Thyroid Profile, NIPT",
+        "MRP": 10000,
+        "Healthify_Offer_Price": 8000,
+        "TAT": "5–7 days"
+    },
+    {
+        "Test_Name": "Healthify Cardiac Advance",
+        "Category": "Health Checkup Profiles",
+        "Sample_Type": "Blood, Serum",
+        "Description": "Advanced screening for cardiovascular health and risk assessment.",
+        "Tests_Included": "Lipid Profile, CRP, Homocysteine, Troponin I, CPK-MB",
+        "MRP": 3500,
+        "Healthify_Offer_Price": 2800,
+        "TAT": "24–48 hours"
+    },
+    {
+        "Test_Name": "Healthify Liver Health",
+        "Category": "Health Checkup Profiles",
+        "Sample_Type": "Blood, Serum",
+        "Description": "Evaluates liver function and detects liver-related disorders.",
+        "Tests_Included": "LFT, Bilirubin, Hepatitis B (HBsAg), Hepatitis C (Anti-HCV)",
+        "MRP": 2000,
+        "Healthify_Offer_Price": 1600,
+        "TAT": "24–48 hours"
+    },
+    {
+        "Test_Name": "Healthify Kidney Care Maximum",
+        "Category": "Health Checkup Profiles",
+        "Sample_Type": "Blood, Serum, Urine",
+        "Description": "Comprehensive screening for kidney function and urinary health.",
+        "Tests_Included": "KFT, Serum Creatinine, Uric Acid, Complete Urine Examination",
+        "MRP": 1500,
+        "Healthify_Offer_Price": 1200,
+        "TAT": "24–48 hours"
+    },
+    {
+        "Test_Name": "Healthify Allergy Screen",
+        "Category": "Health Checkup Profiles",
+        "Sample_Type": "Serum",
+        "Description": "Identifies allergic sensitivities and inflammation markers.",
+        "Tests_Included": "Allergy Test (IgE), Absolute Eosinophil Count, CRP",
+        "MRP": 1500,
+        "Healthify_Offer_Price": 1200,
+        "TAT": "48 hours"
+    },
+    {
+        "Test_Name": "Healthify Cancer Screen",
+        "Category": "Health Checkup Profiles",
+        "Sample_Type": "Serum",
+        "Description": "Screens for common cancers using tumor markers.",
+        "Tests_Included": "CA-125, CEA, CA 19-9, PSA (for men)",
+        "MRP": 4000,
+        "Healthify_Offer_Price": 3200,
+        "TAT": "48 hours"
+    },
+    {
+        "Test_Name": "Healthify Metabolic Balance",
+        "Category": "Health Checkup Profiles",
+        "Sample_Type": "Blood, Serum",
+        "Description": "Evaluates metabolic health and diabetes risk factors.",
+        "Tests_Included": "HbA1c, Blood Sugar Fasting, Insulin, Lipid Profile",
+        "MRP": 2000,
+        "Healthify_Offer_Price": 1600,
+        "TAT": "24–48 hours"
+    },
+    {
+        "Test_Name": "Healthify Bone Health",
+        "Category": "Health Checkup Profiles",
+        "Sample_Type": "Serum",
+        "Description": "Assesses bone health and calcium metabolism.",
+        "Tests_Included": "Vitamin D, Calcium, Alkaline Phosphatase",
+        "MRP": 1800,
+        "Healthify_Offer_Price": 1440,
+        "TAT": "24–48 hours"
+    },
+    {
+        "Test_Name": "Healthify Fertility Check",
+        "Category": "Health Checkup Profiles",
+        "Sample_Type": "Serum",
+        "Description": "Evaluates reproductive health for fertility planning.",
+        "Tests_Included": "AMH, FSH, LH, Prolactin, Testosterone",
+        "MRP": 3000,
+        "Healthify_Offer_Price": 2400,
+        "TAT": "48 hours"
+    },
+    {
+        "Test_Name": "Healthify Executive Wellness",
+        "Category": "Health Checkup Profiles",
+        "Sample_Type": "Blood, Serum, Urine",
+        "Description": "Premium screening for professionals to monitor overall health.",
+        "Tests_Included": "CBC, Lipid Profile, KFT, LFT, Thyroid Profile, Vitamin D, CUE- COMPLETE urine Examination",
+        "MRP": 5000,
+        "Healthify_Offer_Price": 1799,
+        "TAT": "24–48 hours"
+    },
+    {
+        "Test_Name": "Healthify Immunity Boost",
+        "Category": "Health Checkup Profiles",
+        "Sample_Type": "Blood, Serum",
+        "Description": "Assesses immune system health and nutritional status.",
+        "Tests_Included": "Vitamin D, Vitamin B12, Iron Studies, CBC",
+        "MRP": 2500,
+        "Healthify_Offer_Price": 1600,
+        "TAT": "24–48 hours"
+    }
+]
