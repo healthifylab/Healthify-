@@ -2,157 +2,149 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Healthify Lab - Home</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="public/logo.png" type="image/png" />
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      position: sticky;
-      top: 0;
-      background: #fff;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      z-index: 1000;
-    }
-    .hero {
-      background: url('https://www.dropbox.com/scl/fi/ouc2g33tcm8x8zkvz4ks6/logohd.jpg?rlkey=vgy681vu0y3d8mpt61fmz75tf&st=q03v22s6&raw=1') center/cover no-repeat;
-      color: #fff;
-      padding: 80px 20px;
-      text-align: center;
-    }
-    .section {
-      padding: 40px 20px;
-    }
-    .carousel {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-    }
-    .carousel div {
-      scroll-snap-align: start;
-      flex: 0 0 auto;
-      width: 300px;
-      margin-right: 20px;
-      background: #f5f5f5;
-      border-radius: 10px;
-      padding: 20px;
-    }
-    .footer {
-      background: #222;
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-    }
-    .search {
-      margin: 20px 0;
-    }
-    .search input {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-    }
-    .btn-primary {
-      background: #28a745;
-      color: #fff;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-  </style>
+  <script type="module" src="firebase.js"></script>
 </head>
 <body>
-  <header>
-    <div><img src="https://www.dropbox.com/scl/fi/t9jkh90q0parw9qils9dp/logo-healthify.png?rlkey=kelrsw3eih09t8w4sr22kzqyn&st=q4kac8gi&raw=1" alt="Healthify" width="130"></div>
-    <nav>
-      <a href="#about">About</a> |
-      <a href="#faq">FAQ</a> |
-      <a href="booking.html">Book a Test</a>
+  <!-- Header -->
+  <header class="header fixed">
+    <div class="logo">
+      <img src="public/logo.png" alt="Healthify Logo" />
+      <span>Healthify Lab</span>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="booking.html">Book Test</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQs</a>
+      <a href="#contact">Contact</a>
     </nav>
+    <div class="cart-icon">
+      🛒 <span id="cart-count">0</span>
+    </div>
   </header>
 
+  <!-- Hero Section -->
   <section class="hero">
-    <h1>Welcome to Healthify Lab</h1>
-    <p>Your trusted partner in preventive healthcare</p>
-    <button class="btn-primary" onclick="location.href='booking.html'">Book Now</button>
+    <h1>Your Health, Right at Your Doorstep 🏠</h1>
+    <p>Home Sample Collection • Accurate Reports • Trusted by Families</p>
+    <button onclick="location.href='booking.html'">Book Now</button>
   </section>
 
-  <section class="section">
-    <h2>🔬 Why Healthify?</h2>
-    <div class="carousel">
-      <div>💉 Hassle-free sample collection at home</div>
-      <div>🧪 Advanced diagnostics & accurate reports</div>
-      <div>🚚 Fast turnaround</div>
-      <div>📍 Convenient location</div>
-      <div>✅ 💙 Happy Customers</div>
-      <div>📞 Book your test today!</div>
+  <!-- Promo Cards -->
+  <section class="promos swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">💉 Hassle-free sample collection at home</div>
+      <div class="swiper-slide">🧪 Advanced diagnostics & accurate reports</div>
+      <div class="swiper-slide">🚚 Fast turnaround</div>
+      <div class="swiper-slide">📍 Convenient location</div>
+      <div class="swiper-slide">✅ 💙 Happy Customers</div>
     </div>
   </section>
 
-  <section class="section" id="about">
-    <h2>About Us</h2>
-    <p>We are on a mission to simplify diagnostics. Home sample collection, fast reports, and trusted service — all at your fingertips.</p>
+  <!-- Search Tests & Profiles -->
+  <section class="search-section">
+    <input type="text" id="searchInput" placeholder="Search Tests or Profiles..." />
+    <ul id="searchResults"></ul>
   </section>
 
-  <section class="section search">
-    <h2>Search Tests or Profiles</h2>
-    <input type="text" id="searchBar" placeholder="Search...">
-    <div id="searchResults"></div>
+  <!-- About Section -->
+  <section id="about">
+    <h2>Why Choose Healthify?</h2>
+    <p>🔬 Your trusted partner in preventive healthcare. Book with confidence and convenience.</p>
   </section>
 
-  <section class="section" id="faq">
-    <h2>FAQs</h2>
-    <p><strong>Q:</strong> How do I book a test?<br><strong>A:</strong> Just click on 'Book a Test' and fill the form!</p>
-    <p><strong>Q:</strong> Will someone collect the sample from my home?<br><strong>A:</strong> Yes, home collection is available.</p>
-    <p><strong>Q:</strong> When will I get my report?<br><strong>A:</strong> Within 24-48 hours in most cases.</p>
-  </section>
-
-  <section class="section">
-    <h2>Testimonials</h2>
-    <div class="carousel">
-      <div>"Very professional. Got reports on time."<br>– Priya S.</div>
-      <div>"Convenient and affordable."<br>– Rohit K.</div>
-      <div>"Best for senior citizens. Highly recommend."<br>– Sneha M.</div>
+  <!-- FAQ Section -->
+  <section id="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <h3>How do I book a test?</h3>
+      <p>Go to "Book Test" → Fill details → Choose tests/profiles → Submit.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Is home collection free?</h3>
+      <p>Yes, within serviceable areas. No extra charge for doorstep collection.</p>
     </div>
   </section>
 
-  <footer class="footer">
-    <p>📞 +91 9503832889 | 📧 report@healthifylab.com</p>
-    <p>
-      <a href="https://x.com/healthify_lab" target="_blank">Twitter</a> |
-      <a href="https://instagram.com/healthifylab" target="_blank">Instagram</a> |
-      <a href="https://facebook.com/healthify" target="_blank">Facebook</a>
-    </p>
-    <p>&copy; 2025 Healthify Lab. All rights reserved.</p>
+  <!-- Testimonials -->
+  <section class="testimonials swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <img src="public/user1.jpg" alt="User" />
+        <p>"Quick and convenient. Loved the home collection!"</p>
+        <span>— Priya, Pune</span>
+      </div>
+      <div class="swiper-slide">
+        <img src="public/user2.jpg" alt="User" />
+        <p>"Affordable pricing and accurate results."</p>
+        <span>— Ramesh, Mumbai</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-contact">
+      <p>📞 +91 9503832889</p>
+      <p>📧 report@healthifylab.com</p>
+      <div class="socials">
+        <a href="https://x.com/healthify_lab">X</a>
+        <a href="https://instagram.com/healthifylab">Instagram</a>
+        <a href="https://facebook.com/healthify">Facebook</a>
+      </div>
+    </div>
   </footer>
 
+  <!-- Scripts -->
   <script>
-    let tests = [], profiles = [];
-    const searchInput = document.getElementById('searchBar');
-    const searchResults = document.getElementById('searchResults');
+    // Load and search tests/profiles
+    let combinedItems = [];
 
-    fetch('tests.json').then(r => r.json()).then(data => tests = data);
-    fetch('profiles.json').then(r => r.json()).then(data => profiles = data);
+    async function loadData() {
+      const testsRes = await fetch("data/tests.json");
+      const profilesRes = await fetch("data/profiles.json");
+      const tests = await testsRes.json();
+      const profiles = await profilesRes.json();
+      combinedItems = [...tests, ...profiles];
+    }
 
-    searchInput.addEventListener('input', () => {
-      const val = searchInput.value.toLowerCase();
-      const testMatches = tests.filter(t => t.name.toLowerCase().includes(val));
-      const profileMatches = profiles.filter(p => p.name.toLowerCase().includes(val));
+    function filterSearch(query) {
+      const results = combinedItems.filter(item =>
+        item.name.toLowerCase().includes(query.toLowerCase())
+      );
+      const ul = document.getElementById("searchResults");
+      ul.innerHTML = "";
+      results.slice(0, 10).forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.name} - ₹${item.offerPrice}`;
+        ul.appendChild(li);
+      });
+    }
 
-      searchResults.innerHTML = [...testMatches, ...profileMatches]
-        .map(item => `<p>${item.name}</p>`)
-        .join('') || '<p>No results</p>';
+    document.getElementById("searchInput").addEventListener("input", e => {
+      filterSearch(e.target.value);
+    });
+
+    window.onload = loadData;
+  </script>
+
+  <!-- SwiperJS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+  <script>
+    new Swiper('.swiper-container', {
+      loop: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      slidesPerView: 1,
+      spaceBetween: 10,
     });
   </script>
 </body>
