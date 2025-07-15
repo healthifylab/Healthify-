@@ -3,162 +3,170 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Healthify Booking</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; background: #f2f2f2; }
-    h1 { color: #2b6777; }
-    form { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-    input, select, textarea { width: 100%; margin: 8px 0; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
-    button { background: #2b6777; color: #fff; border: none; padding: 10px 20px; margin-top: 10px; border-radius: 5px; cursor: pointer; }
-    button:hover { background: #225560; }
-    .success { color: green; margin-top: 10px; }
-  </style>
+  <title>Book a Test | Healthify Lab</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="firebase.js"></script>
 </head>
 <body>
+  <header class="header fixed">
+    <div class="logo">
+      <img src="public/logo.png" alt="Healthify Logo" />
+      <span>Healthify Lab</span>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="booking.html" class="active">Book Test</a>
+    </nav>
+  </header>
 
-<h1>🧪 Book Your Test – Healthify Lab</h1>
+  <section class="booking-form">
+    <h2>📋 Book Your Test</h2>
 
-<form id="bookingForm">
-  <input type="text" id="name" placeholder="Full Name" required />
-  <input type="tel" id="mobile" placeholder="Mobile Number" required />
-  <input type="email" id="email" placeholder="Email Address" required />
-  <input type="text" id="address" placeholder="Full Address" required />
-  <input type="text" id="pincode" placeholder="Pincode" required />
-  <input type="text" id="landmark" placeholder="Landmark (Optional)" />
+    <form id="bookingForm">
+      <label>Name:
+        <input type="text" name="name" required />
+      </label>
 
-  <label>Select Tests:</label>
-  <select id="tests" multiple></select>
+      <label>Mobile:
+        <input type="tel" name="mobile" required />
+      </label>
 
-  <label>Select Profiles:</label>
-  <select id="profiles" multiple></select>
+      <label>Email:
+        <input type="email" name="email" required />
+      </label>
 
-  <input type="date" id="preferredDate" required />
-  <button type="submit">Submit Booking</button>
-  <p id="msg" class="success"></p>
-</form>
+      <label>Preferred Date:
+        <input type="date" name="preferredDate" required />
+      </label>
 
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+      <label>Address:
+        <textarea name="address" required></textarea>
+      </label>
 
-<!-- EmailJS -->
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+      <label>Pincode:
+        <input type="text" name="pincode" required />
+      </label>
 
-<script>
-  // ✅ Firebase Config
-  const firebaseConfig = {
-    apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
-    authDomain: "healthify-lab.firebaseapp.com",
-    projectId: "healthify-lab",
-    storageBucket: "healthify-lab.appspot.com",
-    messagingSenderId: "297003315332",
-    appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1"
-  };
+      <label>Landmark:
+        <input type="text" name="landmark" />
+      </label>
 
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
+      <label>Select Tests:
+        <select id="testSelect" multiple></select>
+      </label>
 
-  emailjs.init("dJE_JHAoNTxxzTxiT");
+      <label>Select Profiles:
+        <select id="profileSelect" multiple></select>
+      </label>
 
-  // ✅ FULL Tests and Profiles
-  const testsData = [
-    { name: "CBC", price: "199" },
-    { name: "Blood Sugar Fasting", price: "149" },
-    { name: "Blood Sugar PP", price: "149" },
-    { name: "Thyroid Profile (T3 T4 TSH)", price: "299" },
-    { name: "Vitamin D", price: "699" },
-    { name: "Vitamin B12", price: "599" },
-    { name: "Lipid Profile", price: "349" },
-    { name: "Liver Function Test (LFT)", price: "399" },
-    { name: "Kidney Function Test (KFT)", price: "399" },
-    { name: "HbA1c", price: "399" },
-    { name: "Urine Routine", price: "149" },
-    { name: "Iron Studies", price: "699" },
-    { name: "Serum Calcium", price: "199" },
-    { name: "HIV Test", price: "499" },
-    { name: "Hepatitis B", price: "499" },
-    { name: "Hepatitis C", price: "499" }
-  ];
+      <button type="submit">📨 Submit Booking</button>
+    </form>
 
-  const profilesData = [
-    { name: "Healthify Full Body Profile - Basic", price: "699" },
-    { name: "Healthify Full Body Profile - Advance", price: "1199" },
-    { name: "Healthify Senior Citizen Profile", price: "999" },
-    { name: "Healthify Diabetic Profile", price: "799" },
-    { name: "Healthify Thyroid Profile", price: "399" },
-    { name: "Healthify Vitamin Package", price: "999" }
-  ];
+    <div id="cartSummary">
+      <h3>🛒 Your Cart</h3>
+      <ul id="cartList"></ul>
+      <p><strong>Total: ₹<span id="totalPrice">0</span></strong></p>
+    </div>
+  </section>
 
-  // Populate dropdowns
-  const testSelect = document.getElementById('tests');
-  const profileSelect = document.getElementById('profiles');
-  testsData.forEach(test => {
-    const opt = document.createElement("option");
-    opt.value = test.name;
-    opt.textContent = `${test.name} – ₹${test.price}`;
-    testSelect.appendChild(opt);
-  });
-  profilesData.forEach(profile => {
-    const opt = document.createElement("option");
-    opt.value = profile.name;
-    opt.textContent = `${profile.name} – ₹${profile.price}`;
-    profileSelect.appendChild(opt);
-  });
-    // ✅ Form submission
-  document.getElementById("bookingForm").addEventListener("submit", async function(e) {
-    e.preventDefault();
-    const name = document.getElementById("name").value;
-    const mobile = document.getElementById("mobile").value;
-    const email = document.getElementById("email").value;
-    const address = document.getElementById("address").value;
-    const pincode = document.getElementById("pincode").value;
-    const landmark = document.getElementById("landmark").value;
-    const preferredDate = document.getElementById("preferredDate").value;
+  <script>
+    let tests = [], profiles = [];
 
-    const selectedTests = Array.from(document.getElementById("tests").selectedOptions).map(opt => opt.value);
-    const selectedProfiles = Array.from(document.getElementById("profiles").selectedOptions).map(opt => opt.value);
+    async function loadOptions() {
+      const testRes = await fetch("data/tests.json");
+      const profileRes = await fetch("data/profiles.json");
+      tests = await testRes.json();
+      profiles = await profileRes.json();
 
-    const bookingDetails = {
-      name,
-      mobile,
-      email,
-      address,
-      pincode,
-      landmark,
-      preferredDate,
-      tests: selectedTests,
-      profiles: selectedProfiles,
-      timestamp: new Date()
-    };
+      const testSelect = document.getElementById("testSelect");
+      const profileSelect = document.getElementById("profileSelect");
 
-    try {
-      // ✅ Save to Firebase
-      await db.collection("bookings").add(bookingDetails);
-
-      // ✅ EmailJS send
-      await emailjs.send("service_z3ac4pk", "template_5v6t6ku", {
-        name,
-        mobile,
-        email,
-        address,
-        pincode,
-        landmark,
-        preferredDate,
-        tests: selectedTests.join(", "),
-        profiles: selectedProfiles.join(", ")
+      tests.forEach(test => {
+        const opt = document.createElement("option");
+        opt.value = test.name;
+        opt.textContent = `${test.name} (₹${test.offerPrice})`;
+        testSelect.appendChild(opt);
       });
 
-      // ✅ WhatsApp Alert via URL (manual redirect)
-      const whatsappText = `🧪 *Healthify Booking Confirmed*%0AName: ${name}%0AMobile: ${mobile}%0AEmail: ${email}%0ATests: ${selectedTests.join(", ")}%0AProfiles: ${selectedProfiles.join(", ")}%0ADate: ${preferredDate}%0AAddress: ${address}, ${landmark}, ${pincode}`;
-      window.open(`https://wa.me/919503832889?text=${whatsappText}`, '_blank');
-
-      document.getElementById("msg").textContent = "✅ Booking submitted successfully!";
-      document.getElementById("bookingForm").reset();
-    } catch (error) {
-      console.error("Booking failed", error);
-      alert("⚠️ Something went wrong. Please try again.");
+      profiles.forEach(profile => {
+        const opt = document.createElement("option");
+        opt.value = profile.name;
+        opt.textContent = `${profile.name} (₹${profile.offerPrice})`;
+        profileSelect.appendChild(opt);
+      });
     }
-  });
-</script>
+
+    function updateCart() {
+      const selectedTests = Array.from(document.getElementById("testSelect").selectedOptions).map(opt => opt.value);
+      const selectedProfiles = Array.from(document.getElementById("profileSelect").selectedOptions).map(opt => opt.value);
+
+      const cartList = document.getElementById("cartList");
+      const totalSpan = document.getElementById("totalPrice");
+      cartList.innerHTML = "";
+      let total = 0;
+
+      selectedTests.forEach(testName => {
+        const test = tests.find(t => t.name === testName);
+        if (test) {
+          const li = document.createElement("li");
+          li.textContent = `🧪 ${test.name} - ₹${test.offerPrice}`;
+          cartList.appendChild(li);
+          total += test.offerPrice;
+        }
+      });
+
+      selectedProfiles.forEach(profileName => {
+        const profile = profiles.find(p => p.name === profileName);
+        if (profile) {
+          const li = document.createElement("li");
+          li.textContent = `📦 ${profile.name} - ₹${profile.offerPrice}`;
+          cartList.appendChild(li);
+          total += profile.offerPrice;
+        }
+      });
+
+      totalSpan.textContent = total;
+    }
+
+    document.getElementById("testSelect").addEventListener("change", updateCart);
+    document.getElementById("profileSelect").addEventListener("change", updateCart);
+
+    document.getElementById("bookingForm").addEventListener("submit", async e => {
+      e.preventDefault();
+
+      const form = e.target;
+      const data = {
+        name: form.name.value,
+        mobile: form.mobile.value,
+        email: form.email.value,
+        preferredDate: form.preferredDate.value,
+        address: form.address.value,
+        pincode: form.pincode.value,
+        landmark: form.landmark.value,
+        tests: Array.from(document.getElementById("testSelect").selectedOptions).map(opt => opt.value),
+        profiles: Array.from(document.getElementById("profileSelect").selectedOptions).map(opt => opt.value),
+        timestamp: new Date().toISOString(),
+      };
+
+      // Save to Firebase (assumes firebase.js initializes Firestore)
+      const db = window.firestore;
+      await db.collection("bookings").add(data);
+
+      // Send EmailJS confirmation
+      emailjs.send("service_z3ac4pk", "template_5v6t6ku", data, "dJE_JHAoNTxxzTxiT");
+
+      alert("✅ Booking Submitted! You'll receive confirmation shortly.");
+      form.reset();
+      document.getElementById("cartList").innerHTML = "";
+      document.getElementById("totalPrice").textContent = "0";
+    });
+
+    loadOptions();
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+  <script>
+    emailjs.init("dJE_JHAoNTxxzTxiT");
+  </script>
 </body>
 </html>
