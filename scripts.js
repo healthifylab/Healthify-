@@ -16,7 +16,7 @@ let selectedProfiles = new Set();
 let testDetails = {};
 let profileDetails = {};
 
-// Load Tests
+// Load Tests (Inspired by GD Franchise disciplines)
 async function loadTests() {
     const response = await fetch('tests.json');
     const tests = await response.json();
@@ -33,7 +33,7 @@ async function loadTests() {
     setupSearch('test', 'testSearch', selectedTests);
 }
 
-// Load Profiles
+// Load Profiles (Inspired by GD Franchise wellness profiles)
 async function loadProfiles() {
     const response = await fetch('profiles.json');
     const profiles = await response.json();
@@ -45,7 +45,7 @@ async function loadProfiles() {
         option.value = value;
         option.textContent = `${profile.Test_Name} (₹${profile.Healthify_Offer_Price})`;
         select.appendChild(option);
-        profileDetails[value] = { name: profile.Test_Name, offerPrice: profile.Healthify_Offer_Price, description: profile.Description };
+        profileDetails[value] = { name: profile.Test_Name, offerPrice: profile.Healthify_Offer_Price, description: profile.Description, tests: profile.Tests_Included.split(', ') };
     });
     setupSearch('profile', 'profileSearch', selectedProfiles);
 }
@@ -93,6 +93,7 @@ document.getElementById('bookingForm').addEventListener('submit', async (event) 
     const gender = document.getElementById('gender').value;
     const address = document.getElementById('address').value;
     const pincode = document.getElementById('pincode').value;
+    const location = document.getElementById('location').value;
     const date = document.getElementById('date').value;
     const time = document.getElementById('time').value;
     const bookingMessage = document.getElementById('bookingMessage');
@@ -105,25 +106,28 @@ document.getElementById('bookingForm').addEventListener('submit', async (event) 
 
     bookingMessage.textContent = "Submitting your request...";
     try {
-        await addDoc(collection(db, "bookings"), {
-            name, phone, age, gender, address, pincode,
+        const docRef = await addDoc(collection(db, "bookings"), {
+            name, phone, age, gender, address, pincode, location,
             tests: Array.from(selectedTests),
             profiles: Array.from(selectedProfiles),
             date, time,
             timestamp: new Date().toISOString(),
             status: "New Booking"
         });
+        const testsList = selectedTests.size > 0 ? Array.from(selectedTests).map(t => testDetails[t].name).join(', ') : 'None';
+        const profilesList = selectedProfiles.size > 0 ? Array.from(selectedProfiles).map(p => profileDetails[p].name).join(', ') : 'None';
         const message = `
-New Booking:
-Tests/Profiles:  ${Array.from(selectedTests).map(t => testDetails[t].name).join(', ') || 'None'} ${selectedTests.size && selectedProfiles.size ? 'and' : ''} ${Array.from(selectedProfiles).map(p => profileDetails[p].name).join(', ') || 'None'}
-Date:           ${date}
-Time:           ${time}
-Name:           ${name}
-Phone:          +91${phone}
-Age:            ${age}
-Gender:         ${gender}
-Address:        ${address}
-Pincode:        ${pincode}
+New Booking Details
+Tests/Profiles:  ${testsList.padEnd(40, ' ')}
+Date:           ${date.padEnd(40, ' ')}
+Time:           ${time.padEnd(40, ' ')}
+Location:       ${location.padEnd(40, ' ')}
+Name:           ${name.padEnd(40, ' ')}
+Phone:          +91${phone.padEnd(40, ' ')}
+Age:            ${age.padEnd(40, ' ')}
+Gender:         ${gender.padEnd(40, ' ')}
+Address:        ${address.padEnd(40, ' ')}
+Pincode:        ${pincode.padEnd(40, ' ')}
         `.trim();
         await emailjs.send('service_z3ac4pk', 'template_5v6t6ku', { to_name: name, to_email: 'report@healthifylab.com', message });
         bookingMessage.textContent = "Booking submitted! We’ll call you soon.";
@@ -142,8 +146,19 @@ Pincode:        ${pincode}
 // Load Dashboard
 function loadDashboard() {
     const bookingHistory = document.getElementById('bookingHistory');
-    // Simulate fetching bookings (replace with real query for authenticated user)
-    bookingHistory.innerHTML = "<p>Booking 1: 2025-07-15, 17:00 - CBC</p><p>Booking 2: 2025-07-14, 16:00 - Lipid Profile</p>";
+    // Placeholder for authenticated user data (replace with real query)
+    getDocs(collection(db, "bookings")).then((querySnapshot) => {
+        bookingHistory.innerHTML = '';
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            bookingHistory.innerHTML += `<div class="booking">
+                <p>Date: ${data.date}</p>
+                <p>Time: ${data.time}</p>
+                <p>Tests: ${data.tests ? data.tests.map(t => testDetails[t]?.name).join(', ') : 'None'}</p>
+                <p>Profiles: ${data.profiles ? data.profiles.map(p => profileDetails[p]?.name).join(', ') : 'None'}</p>
+            </div>`;
+        });
+    });
 }
 
 window.onload = () => {
