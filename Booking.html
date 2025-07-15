@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Healthify Booking</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f2f2f2; }
+    h1 { color: #2b6777; }
+    form { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    input, select, textarea { width: 100%; margin: 8px 0; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+    button { background: #2b6777; color: #fff; border: none; padding: 10px 20px; margin-top: 10px; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #225560; }
+    .success { color: green; margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+<h1>🧪 Book Your Test – Healthify Lab</h1>
+
+<form id="bookingForm">
+  <input type="text" id="name" placeholder="Full Name" required />
+  <input type="tel" id="mobile" placeholder="Mobile Number" required />
+  <input type="email" id="email" placeholder="Email Address" required />
+  <input type="text" id="address" placeholder="Full Address" required />
+  <input type="text" id="pincode" placeholder="Pincode" required />
+  <input type="text" id="landmark" placeholder="Landmark (Optional)" />
+
+  <label>Select Tests:</label>
+  <select id="tests" multiple></select>
+
+  <label>Select Profiles:</label>
+  <select id="profiles" multiple></select>
+
+  <input type="date" id="preferredDate" required />
+  <button type="submit">Submit Booking</button>
+  <p id="msg" class="success"></p>
+</form>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+  // ✅ Firebase Config
+  const firebaseConfig = {
+    apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
+    authDomain: "healthify-lab.firebaseapp.com",
+    projectId: "healthify-lab",
+    storageBucket: "healthify-lab.appspot.com",
+    messagingSenderId: "297003315332",
+    appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  emailjs.init("dJE_JHAoNTxxzTxiT");
+
+  // ✅ FULL Tests and Profiles
+  const testsData = [
+    { name: "CBC", price: "199" },
+    { name: "Blood Sugar Fasting", price: "149" },
+    { name: "Blood Sugar PP", price: "149" },
+    { name: "Thyroid Profile (T3 T4 TSH)", price: "299" },
+    { name: "Vitamin D", price: "699" },
+    { name: "Vitamin B12", price: "599" },
+    { name: "Lipid Profile", price: "349" },
+    { name: "Liver Function Test (LFT)", price: "399" },
+    { name: "Kidney Function Test (KFT)", price: "399" },
+    { name: "HbA1c", price: "399" },
+    { name: "Urine Routine", price: "149" },
+    { name: "Iron Studies", price: "699" },
+    { name: "Serum Calcium", price: "199" },
+    { name: "HIV Test", price: "499" },
+    { name: "Hepatitis B", price: "499" },
+    { name: "Hepatitis C", price: "499" }
+  ];
+
+  const profilesData = [
+    { name: "Healthify Full Body Profile - Basic", price: "699" },
+    { name: "Healthify Full Body Profile - Advance", price: "1199" },
+    { name: "Healthify Senior Citizen Profile", price: "999" },
+    { name: "Healthify Diabetic Profile", price: "799" },
+    { name: "Healthify Thyroid Profile", price: "399" },
+    { name: "Healthify Vitamin Package", price: "999" }
+  ];
+
+  // Populate dropdowns
+  const testSelect = document.getElementById('tests');
+  const profileSelect = document.getElementById('profiles');
+  testsData.forEach(test => {
+    const opt = document.createElement("option");
+    opt.value = test.name;
+    opt.textContent = `${test.name} – ₹${test.price}`;
+    testSelect.appendChild(opt);
+  });
+  profilesData.forEach(profile => {
+    const opt = document.createElement("option");
+    opt.value = profile.name;
+    opt.textContent = `${profile.name} – ₹${profile.price}`;
+    profileSelect.appendChild(opt);
+  });
+    // ✅ Form submission
+  document.getElementById("bookingForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const name = document.getElementById("name").value;
+    const mobile = document.getElementById("mobile").value;
+    const email = document.getElementById("email").value;
+    const address = document.getElementById("address").value;
+    const pincode = document.getElementById("pincode").value;
+    const landmark = document.getElementById("landmark").value;
+    const preferredDate = document.getElementById("preferredDate").value;
+
+    const selectedTests = Array.from(document.getElementById("tests").selectedOptions).map(opt => opt.value);
+    const selectedProfiles = Array.from(document.getElementById("profiles").selectedOptions).map(opt => opt.value);
+
+    const bookingDetails = {
+      name,
+      mobile,
+      email,
+      address,
+      pincode,
+      landmark,
+      preferredDate,
+      tests: selectedTests,
+      profiles: selectedProfiles,
+      timestamp: new Date()
+    };
+
+    try {
+      // ✅ Save to Firebase
+      await db.collection("bookings").add(bookingDetails);
+
+      // ✅ EmailJS send
+      await emailjs.send("service_z3ac4pk", "template_5v6t6ku", {
+        name,
+        mobile,
+        email,
+        address,
+        pincode,
+        landmark,
+        preferredDate,
+        tests: selectedTests.join(", "),
+        profiles: selectedProfiles.join(", ")
+      });
+
+      // ✅ WhatsApp Alert via URL (manual redirect)
+      const whatsappText = `🧪 *Healthify Booking Confirmed*%0AName: ${name}%0AMobile: ${mobile}%0AEmail: ${email}%0ATests: ${selectedTests.join(", ")}%0AProfiles: ${selectedProfiles.join(", ")}%0ADate: ${preferredDate}%0AAddress: ${address}, ${landmark}, ${pincode}`;
+      window.open(`https://wa.me/919503832889?text=${whatsappText}`, '_blank');
+
+      document.getElementById("msg").textContent = "✅ Booking submitted successfully!";
+      document.getElementById("bookingForm").reset();
+    } catch (error) {
+      console.error("Booking failed", error);
+      alert("⚠️ Something went wrong. Please try again.");
+    }
+  });
+</script>
+</body>
+</html>
