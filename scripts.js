@@ -41,9 +41,10 @@ async function loadProfiles() {
     select.innerHTML = '<option value="" disabled>Select profile(s)</option>';
     profiles.forEach(profile => {
         const value = profile.Test_Name.toLowerCase().replace(/\s/g, '-');
+        const imageName = `healthify-${value.toLowerCase().replace(/[^a-z0-9]/g, '-')}.jpg`;
         const option = document.createElement('option');
         option.value = value;
-        option.textContent = `${profile.Test_Name} (₹${profile.Healthify_Offer_Price})`;
+        option.innerHTML = `<img src="public/${imageName}" class="option-icon"> ${profile.Test_Name} (₹${profile.Healthify_Offer_Price})`;
         select.appendChild(option);
         profileDetails[value] = { name: profile.Test_Name, offerPrice: profile.Healthify_Offer_Price, description: profile.Description, tests: profile.Tests_Included.split(', ') };
     });
@@ -146,7 +147,6 @@ Pincode:        ${pincode.padEnd(40, ' ')}
 // Load Dashboard
 function loadDashboard() {
     const bookingHistory = document.getElementById('bookingHistory');
-    // Placeholder for authenticated user data (replace with real query)
     getDocs(collection(db, "bookings")).then((querySnapshot) => {
         bookingHistory.innerHTML = '';
         querySnapshot.forEach((doc) => {
