@@ -58,10 +58,13 @@
     <div id="cartSummary">
       <h3>🛒 Your Cart</h3>
       <ul id="cartList"></ul>
-      <p><strong>Total: ₹<span id="totalPrice">0</span></strong></p>
+      <p>
+        <strong>Total Offer Price: ₹<span id="totalPrice">0</span></strong><br/>
+        <strong>Total MRP: ₹<span id="totalMRP">0</span></strong><br/>
+        <strong>You Save: ₹<span id="totalSaving">0</span> (<span id="totalDiscount">0</span>%)</strong>
+      </p>
     </div>
 
-    <!-- Debug log output visible on page -->
     <section style="background:#fee;padding:10px;margin-top:20px;border:1px solid #f00;">
       <h3>Debug Log</h3>
       <pre id="logOutput" style="white-space:pre-wrap;"></pre>
@@ -108,13 +111,13 @@
       tests.forEach(t => {
         const o = document.createElement("option");
         o.value = t.name;
-        o.text  = `${t.name} (₹${t.offerPrice})`;
+        o.text  = `${t.name} (Offer: ₹${t.offerPrice}, MRP: ₹${t.mrp})`;
         tSel.appendChild(o);
       });
       profiles.forEach(p => {
         const o = document.createElement("option");
         o.value = p.name;
-        o.text  = `${p.name} (₹${p.offerPrice})`;
+        o.text  = `${p.name} (Offer: ₹${p.offerPrice}, MRP: ₹${p.mrp})`;
         pSel.appendChild(o);
       });
 
@@ -125,25 +128,39 @@
       const tSel = document.getElementById("testSelect");
       const pSel = document.getElementById("profileSelect");
       const cartList = document.getElementById("cartList");
-      let total = 0;
+      let totalOffer = 0, totalMRP = 0;
       cartList.innerHTML = "";
 
       Array.from(tSel.selectedOptions).forEach(opt => {
         const t = tests.find(x => x.name === opt.value);
         if (t) {
-          cartList.innerHTML += `<li>🧪 ${t.name} - ₹${t.offerPrice}</li>`;
-          total += t.offerPrice;
+          const saving = t.mrp - t.offerPrice;
+          const discount = Math.round((saving / t.mrp) * 100);
+          cartList.innerHTML += `<li>🧪 ${t.name} — MRP: ₹${t.mrp}, Offer: ₹${t.offerPrice}, Save: ${discount}%</li>`;
+          totalOffer += t.offerPrice;
+          totalMRP   += t.mrp;
         }
       });
       Array.from(pSel.selectedOptions).forEach(opt => {
         const p = profiles.find(x => x.name === opt.value);
         if (p) {
-          cartList.innerHTML += `<li>📦 ${p.name} - ₹${p.offerPrice}</li>`;
-          total += p.offerPrice;
+          const saving = p.mrp - p.offerPrice;
+          const discount = Math.round((saving / p.mrp) * 100);
+          cartList.innerHTML += `<li>📦 ${p.name} — MRP: ₹${p.mrp}, Offer: ₹${p.offerPrice}, Save: ${discount}%</li>`;
+          totalOffer += p.offerPrice;
+          totalMRP   += p.mrp;
         }
       });
 
-      document.getElementById("totalPrice").textContent = total;
+      const totalSaving = totalMRP - totalOffer;
+      const totalDiscount = totalMRP
+        ? Math.round((totalSaving / totalMRP) * 100)
+        : 0;
+
+      document.getElementById("totalPrice").textContent     = totalOffer;
+      document.getElementById("totalMRP").textContent       = totalMRP;
+      document.getElementById("totalSaving").textContent    = totalSaving;
+      document.getElementById("totalDiscount").textContent  = totalDiscount;
     }
 
     document.getElementById("testSelect").addEventListener("change", updateCart);
