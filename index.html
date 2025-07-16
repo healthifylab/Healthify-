@@ -6,8 +6,9 @@
   <title>Healthify Lab - Home</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="public/logo.png" type="image/png" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script type="module" src="firebase.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
-  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 </head>
 <body>
   <!-- Header -->
@@ -23,67 +24,83 @@
       <a href="#faq">FAQs</a>
       <a href="#contact">Contact</a>
     </nav>
-    <div class="cart-icon">🛒 <span id="cart-count">0</span></div>
+    <div class="cart-icon">
+      🛒 <span id="cart-count">0</span>
+    </div>
   </header>
 
-  <!-- Hero Banner -->
+  <!-- Hero Section -->
   <section class="hero">
-    <img src="public/hero-banner.jpg" alt="Healthify Hero" class="hero-img"/>
-    <div class="hero-text">
-      <h1>Your Health, Right at Your Doorstep 🏠</h1>
-      <p>Home Sample Collection • Accurate Reports • Trusted by Families</p>
-      <button onclick="location.href='booking.html'">Book Now</button>
-    </div>
+    <h1>Your Health, Right at Your Doorstep 🏠</h1>
+    <p>Home Sample Collection • Accurate Reports • Trusted by Families</p>
+    <button onclick="location.href='booking.html'">Book Now</button>
   </section>
 
-  <!-- Swipable Promo Cards -->
-  <section class="promo-section">
-    <h2>💡 Popular Healthify Profiles</h2>
-    <div class="swiper-container promo-swiper">
+  <!-- Promo Image Cards -->
+  <section class="profile-promos">
+    <h2 style="text-align:center;margin-top:20px;">🏥 Popular Healthify Profiles</h2>
+    <div class="swiper promoSwiper">
       <div class="swiper-wrapper">
-        <!-- Repeat these for each profile -->
+        <!-- Slides -->
         <div class="swiper-slide">
-          <a href="booking.html?profile=Healthify Anemia Shield">
-            <img src="public/healthify-anemia-shield.jpg" alt="Anemia Shield" />
-          </a>
+          <img src="public/healthify-thyroid-balance.jpg" alt="Thyroid Balance" onclick="goToBooking('Healthify Thyroid Balance')"/>
         </div>
         <div class="swiper-slide">
-          <a href="booking.html?profile=Healthify Arthritis Care">
-            <img src="public/healthify-arthritis-care.jpg" alt="Arthritis Care" />
-          </a>
+          <img src="public/healthify-diabetes-care.jpg" alt="Diabetes Care" onclick="goToBooking('Healthify Diabetes Care')"/>
         </div>
         <div class="swiper-slide">
-          <a href="booking.html?profile=Healthify Basic Wellness">
-            <img src="public/healthify-basic-wellness.jpg" alt="Basic Wellness" />
-          </a>
+          <img src="public/healthify-womens-wellness.jpg" alt="Women's Wellness" onclick="goToBooking('Healthify Women\'s Wellness')"/>
         </div>
         <div class="swiper-slide">
-          <a href="booking.html?profile=Healthify Diabetes Care">
-            <img src="public/healthify-diabetes-care.jpg" alt="Diabetes Care" />
-          </a>
+          <img src="public/healthify-senior-care.jpg" alt="Senior Care" onclick="goToBooking('Healthify Senior Care')"/>
         </div>
         <div class="swiper-slide">
-          <a href="booking.html?profile=Healthify Thyroid Balance">
-            <img src="public/healthify-thyroid-balance.jpg" alt="Thyroid Balance" />
-          </a>
+          <img src="public/healthify-anemia-shield.jpg" alt="Anemia Shield" onclick="goToBooking('Healthify Anemia Shield')"/>
         </div>
         <div class="swiper-slide">
-          <a href="booking.html?profile=Healthify Women’s Wellness">
-            <img src="public/healthify-womens-wellness.jpg" alt="Women's Wellness" />
-          </a>
+          <img src="public/healthify-cardiac-adance.jpg" alt="Cardiac Advance" onclick="goToBooking('Healthify Cardiac Advance')"/>
         </div>
-        <!-- Add more slides if needed -->
+        <div class="swiper-slide">
+          <img src="public/healthify-pcod-harmony.jpg" alt="PCOD Harmony" onclick="goToBooking('Healthify PCOD Harmony')"/>
+        </div>
+        <div class="swiper-slide">
+          <img src="public/healthify-vitamin-boost.jpg" alt="Vitamin Boost" onclick="goToBooking('Healthify Vitamin Boost')"/>
+        </div>
+        <div class="swiper-slide">
+          <img src="public/healthify-core-wellness.jpg" alt="Core Wellness" onclick="goToBooking('Healthify Core Wellness')"/>
+        </div>
+        <div class="swiper-slide">
+          <img src="public/healthify-basic-wellness.jpg" alt="Basic Wellness" onclick="goToBooking('Healthify Basic Wellness')"/>
+        </div>
+        <div class="swiper-slide">
+          <img src="public/healthify-comprehensive-wellness.jpg" alt="Comprehensive Wellness" onclick="goToBooking('Healthify Comprehensive Wellness')"/>
+        </div>
+        <div class="swiper-slide">
+          <img src="public/healthify-heart-guard.jpg" alt="Heart Guard" onclick="goToBooking('Healthify Heart Guard')"/>
+        </div>
+        <div class="swiper-slide">
+          <img src="public/healthify-vital-check.jpg" alt="Vital Check" onclick="goToBooking('Healthify Vital Check')"/>
+        </div>
+        <div class="swiper-slide">
+          <img src="public/healthify-arthritis-care.jpg" alt="Arthritis Care" onclick="goToBooking('Healthify Arthritis Care')"/>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- About -->
+  <!-- Search Tests & Profiles -->
+  <section class="search-section">
+    <input type="text" id="searchInput" placeholder="Search Tests or Profiles..." />
+    <ul id="searchResults"></ul>
+  </section>
+
+  <!-- About Section -->
   <section id="about">
     <h2>Why Choose Healthify?</h2>
     <p>🔬 Your trusted partner in preventive healthcare. Book with confidence and convenience.</p>
   </section>
 
-  <!-- FAQ -->
+  <!-- FAQ Section -->
   <section id="faq">
     <h2>Frequently Asked Questions</h2>
     <div class="faq-item">
@@ -118,16 +135,55 @@
       <p>📞 +91 9503832889</p>
       <p>📧 report@healthifylab.com</p>
       <div class="socials">
-        <a href="#"><img src="public/x-icon.png" alt="X" /></a>
-        <a href="#"><img src="public/instagram-icon.png" alt="Instagram" /></a>
-        <a href="#"><img src="public/facebook-icon.png" alt="Facebook" /></a>
+        <a href="https://x.com/healthify_lab"><img src="public/x-icon.png" alt="X" /></a>
+        <a href="https://instagram.com/healthifylab"><img src="public/instagram-icon.png" alt="Instagram" /></a>
+        <a href="https://facebook.com/healthify"><img src="public/facebook-icon.png" alt="Facebook" /></a>
       </div>
     </div>
   </footer>
 
-  <!-- Swiper Init -->
+  <!-- Scripts -->
   <script>
-    new Swiper('.promo-swiper', {
+    // Redirect from promo
+    function goToBooking(profileName) {
+      const encoded = encodeURIComponent(profileName);
+      location.href = `booking.html?profile=${encoded}`;
+    }
+
+    // Load and search tests/profiles
+    let combinedItems = [];
+
+    async function loadData() {
+      const testsRes = await fetch("data/tests.json");
+      const profilesRes = await fetch("data/profiles.json");
+      const tests = await testsRes.json();
+      const profiles = await profilesRes.json();
+      combinedItems = [...tests, ...profiles];
+    }
+
+    function filterSearch(query) {
+      const results = combinedItems.filter(item =>
+        item.name.toLowerCase().includes(query.toLowerCase())
+      );
+      const ul = document.getElementById("searchResults");
+      ul.innerHTML = "";
+      results.slice(0, 10).forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.name} - ₹${item.offerPrice}`;
+        ul.appendChild(li);
+      });
+    }
+
+    document.getElementById("searchInput").addEventListener("input", e => {
+      filterSearch(e.target.value);
+    });
+
+    window.onload = loadData;
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+  <script>
+    new Swiper(".promoSwiper", {
       loop: true,
       autoplay: {
         delay: 1000,
@@ -136,8 +192,7 @@
       slidesPerView: 1,
       spaceBetween: 10,
     });
-
-    new Swiper('.testimonials', {
+    new Swiper(".testimonials.swiper-container", {
       loop: true,
       autoplay: {
         delay: 3000,
