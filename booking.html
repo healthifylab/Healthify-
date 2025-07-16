@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Book a Test | Healthify Lab</title>
   <link rel="stylesheet" href="style.css" />
   <script type="module" src="firebase.js"></script>
@@ -28,7 +28,7 @@
       <label>Mobile:
         <input type="tel" name="mobile" required />
       </label>
-      <label>Email (optional):
+      <label>Email:
         <input type="email" name="email" />
       </label>
       <label>Preferred Date:
@@ -72,11 +72,6 @@
 
     let tests = [], profiles = [];
 
-    function getURLParam(name) {
-      const url = new URL(window.location.href);
-      return url.searchParams.get(name);
-    }
-
     async function loadOptions() {
       try {
         const [testRes, profileRes] = await Promise.all([
@@ -86,7 +81,7 @@
         tests = await testRes.json();
         profiles = await profileRes.json();
       } catch (err) {
-        alert("Error loading test data.");
+        alert("❌ Error loading test data. Check your files.");
         return;
       }
 
@@ -98,38 +93,26 @@
       tests.forEach(t => {
         const o = document.createElement("option");
         o.value = t.name;
-        o.text  = `${t.name} (Offer: ₹${t.offerPrice}, MRP: ₹${t.mrp})`;
+        o.text  = `${t.name} (₹${t.offerPrice})`;
         tSel.appendChild(o);
       });
       profiles.forEach(p => {
         const o = document.createElement("option");
         o.value = p.name;
-        o.text  = `${p.name} (Offer: ₹${p.offerPrice}, MRP: ₹${p.mrp})`;
+        o.text  = `${p.name} (₹${p.offerPrice})`;
         pSel.appendChild(o);
       });
 
-      // Auto-select from URL params
-      const profileParam = getURLParam("profile");
-      const testParam = getURLParam("test");
-
-      if (profileParam) {
-        for (let opt of pSel.options) {
-          if (opt.value.toLowerCase() === profileParam.toLowerCase()) {
-            opt.selected = true;
-            break;
-          }
+      // Handle auto-selection from URL
+      const params = new URLSearchParams(location.search);
+      const profileFromURL = params.get("profile");
+      if (profileFromURL) {
+        const match = [...pSel.options].find(opt => opt.value === profileFromURL);
+        if (match) {
+          match.selected = true;
+          updateCart();
         }
       }
-      if (testParam) {
-        for (let opt of tSel.options) {
-          if (opt.value.toLowerCase() === testParam.toLowerCase()) {
-            opt.selected = true;
-            break;
-          }
-        }
-      }
-
-      updateCart();
     }
 
     function updateCart() {
@@ -180,7 +163,7 @@
       const data = {
         name:          f.name.value,
         mobile:        f.mobile.value,
-        email:         f.email.value || 'N/A',
+        email:         f.email.value,
         preferredDate: f.preferredDate.value,
         address:       f.address.value,
         pincode:       f.pincode.value,
@@ -197,7 +180,7 @@
         f.reset();
         updateCart();
       } catch (err) {
-        alert("❌ Failed to submit booking. Try again later.");
+        alert("❌ Failed to submit booking. Try again.");
       }
     });
 
