@@ -6,8 +6,8 @@
   <title>Healthify Lab - Home</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="public/logo.png" type="image/png" />
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  <script type="module" src="firebase.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 </head>
 <body>
   <!-- Header -->
@@ -23,42 +23,67 @@
       <a href="#faq">FAQs</a>
       <a href="#contact">Contact</a>
     </nav>
-    <div class="cart-icon">
-      🛒 <span id="cart-count">0</span>
-    </div>
+    <div class="cart-icon">🛒 <span id="cart-count">0</span></div>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Hero Banner -->
   <section class="hero">
-    <h1>Your Health, Right at Your Doorstep 🏠</h1>
-    <p>Home Sample Collection • Accurate Reports • Trusted by Families</p>
-    <button onclick="location.href='booking.html'">Book Now</button>
-  </section>
-
-  <!-- Promo Cards -->
-  <section class="promos swiper-container">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide">💉 Hassle-free sample collection at home</div>
-      <div class="swiper-slide">🧪 Advanced diagnostics & accurate reports</div>
-      <div class="swiper-slide">🚚 Fast turnaround</div>
-      <div class="swiper-slide">📍 Convenient location</div>
-      <div class="swiper-slide">✅ 💙 Happy Customers</div>
+    <img src="public/hero-banner.jpg" alt="Healthify Hero" class="hero-img"/>
+    <div class="hero-text">
+      <h1>Your Health, Right at Your Doorstep 🏠</h1>
+      <p>Home Sample Collection • Accurate Reports • Trusted by Families</p>
+      <button onclick="location.href='booking.html'">Book Now</button>
     </div>
   </section>
 
-  <!-- Search Tests & Profiles -->
-  <section class="search-section">
-    <input type="text" id="searchInput" placeholder="Search Tests or Profiles..." />
-    <ul id="searchResults"></ul>
+  <!-- Swipable Promo Cards -->
+  <section class="promo-section">
+    <h2>💡 Popular Healthify Profiles</h2>
+    <div class="swiper-container promo-swiper">
+      <div class="swiper-wrapper">
+        <!-- Repeat these for each profile -->
+        <div class="swiper-slide">
+          <a href="booking.html?profile=Healthify Anemia Shield">
+            <img src="public/healthify-anemia-shield.jpg" alt="Anemia Shield" />
+          </a>
+        </div>
+        <div class="swiper-slide">
+          <a href="booking.html?profile=Healthify Arthritis Care">
+            <img src="public/healthify-arthritis-care.jpg" alt="Arthritis Care" />
+          </a>
+        </div>
+        <div class="swiper-slide">
+          <a href="booking.html?profile=Healthify Basic Wellness">
+            <img src="public/healthify-basic-wellness.jpg" alt="Basic Wellness" />
+          </a>
+        </div>
+        <div class="swiper-slide">
+          <a href="booking.html?profile=Healthify Diabetes Care">
+            <img src="public/healthify-diabetes-care.jpg" alt="Diabetes Care" />
+          </a>
+        </div>
+        <div class="swiper-slide">
+          <a href="booking.html?profile=Healthify Thyroid Balance">
+            <img src="public/healthify-thyroid-balance.jpg" alt="Thyroid Balance" />
+          </a>
+        </div>
+        <div class="swiper-slide">
+          <a href="booking.html?profile=Healthify Women’s Wellness">
+            <img src="public/healthify-womens-wellness.jpg" alt="Women's Wellness" />
+          </a>
+        </div>
+        <!-- Add more slides if needed -->
+      </div>
+    </div>
   </section>
 
-  <!-- About Section -->
+  <!-- About -->
   <section id="about">
     <h2>Why Choose Healthify?</h2>
     <p>🔬 Your trusted partner in preventive healthcare. Book with confidence and convenience.</p>
   </section>
 
-  <!-- FAQ Section -->
+  <!-- FAQ -->
   <section id="faq">
     <h2>Frequently Asked Questions</h2>
     <div class="faq-item">
@@ -93,58 +118,33 @@
       <p>📞 +91 9503832889</p>
       <p>📧 report@healthifylab.com</p>
       <div class="socials">
-        <a href="https://x.com/healthify_lab">X</a>
-        <a href="https://instagram.com/healthifylab">Instagram</a>
-        <a href="https://facebook.com/healthify">Facebook</a>
+        <a href="#"><img src="public/x-icon.png" alt="X" /></a>
+        <a href="#"><img src="public/instagram-icon.png" alt="Instagram" /></a>
+        <a href="#"><img src="public/facebook-icon.png" alt="Facebook" /></a>
       </div>
     </div>
   </footer>
 
-  <!-- Scripts -->
+  <!-- Swiper Init -->
   <script>
-    // Load and search tests/profiles
-    let combinedItems = [];
-
-    async function loadData() {
-      const testsRes = await fetch("data/tests.json");
-      const profilesRes = await fetch("data/profiles.json");
-      const tests = await testsRes.json();
-      const profiles = await profilesRes.json();
-      combinedItems = [...tests, ...profiles];
-    }
-
-    function filterSearch(query) {
-      const results = combinedItems.filter(item =>
-        item.name.toLowerCase().includes(query.toLowerCase())
-      );
-      const ul = document.getElementById("searchResults");
-      ul.innerHTML = "";
-      results.slice(0, 10).forEach(item => {
-        const li = document.createElement("li");
-        li.textContent = `${item.name} - ₹${item.offerPrice}`;
-        ul.appendChild(li);
-      });
-    }
-
-    document.getElementById("searchInput").addEventListener("input", e => {
-      filterSearch(e.target.value);
-    });
-
-    window.onload = loadData;
-  </script>
-
-  <!-- SwiperJS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
-  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-  <script>
-    new Swiper('.swiper-container', {
+    new Swiper('.promo-swiper', {
       loop: true,
       autoplay: {
-        delay: 2500,
+        delay: 1000,
         disableOnInteraction: false,
       },
       slidesPerView: 1,
       spaceBetween: 10,
+    });
+
+    new Swiper('.testimonials', {
+      loop: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+      slidesPerView: 1,
+      spaceBetween: 20,
     });
   </script>
 </body>
