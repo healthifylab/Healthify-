@@ -1,22 +1,195 @@
-// firebase.js
-import firebase from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js";
-import "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book a Test | Healthify Lab</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header fixed">
+    <div class="logo">
+      <img src="public/logo.png" alt="Healthify Logo" />
+      <span>Healthify Lab</span>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="booking.html" class="active">Book Test</a>
+    </nav>
+  </header>
 
-// Your Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
-  authDomain: "healthify-lab.firebaseapp.com",
-  projectId: "healthify-lab",
-  storageBucket: "healthify-lab.firebasestorage.app",
-  messagingSenderId: "297003315332",
-  appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1"
-};
+  <section class="booking-form">
+    <h2>📋 Book Your Test</h2>
+    <form id="bookingForm">
+      <label>Name:
+        <input type="text" name="name" required />
+      </label>
+      <label>Mobile:
+        <input type="tel" name="mobile" required />
+      </label>
+      <label>Email (optional):
+        <input type="email" name="email" />
+      </label>
+      <label>Preferred Date:
+        <input type="date" name="preferredDate" required />
+      </label>
+      <label>Address:
+        <textarea name="address" required></textarea>
+      </label>
+      <label>Pincode:
+        <input type="text" name="pincode" required />
+      </label>
+      <label>Landmark:
+        <input type="text" name="landmark" />
+      </label>
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+      <label>Select Tests:
+        <select id="testSelect" name="testSelect" multiple size="5"></select>
+      </label>
 
-// Initialize Firestore (compat for v8 API)
-const db = firebase.firestore();
+      <label>Select Profiles:
+        <select id="profileSelect" name="profileSelect" multiple size="5"></select>
+      </label>
 
-// Expose to window for booking.html
-window.firestore = db;
+      <button type="submit">📨 Submit Booking</button>
+    </form>
+
+    <div id="cartSummary">
+      <h3>🛒 Your Cart</h3>
+      <ul id="cartList"></ul>
+      <p>
+        <strong>Total Offer Price: ₹<span id="totalPrice">0</span></strong><br/>
+        <strong>Total MRP: ₹<span id="totalMRP">0</span></strong><br/>
+        <strong>You Save: ₹<span id="totalSaving">0</span> (<span id="totalDiscount">0</span>%)</strong>
+      </p>
+    </div>
+  </section>
+
+  <script type="module">
+    // Firebase and EmailJS setup
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+    import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+    import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
+      authDomain: "healthify-lab.firebaseapp.com",
+      projectId: "healthify-lab",
+      storageBucket: "healthify-lab.firebasestorage.app",
+      messagingSenderId: "297003315332",
+      appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    emailjs.init('dJE_JHAoNTxxzTxiT');
+
+    let tests = [], profiles = [];
+
+    async function loadOptions() {
+      try {
+        const [testRes, profileRes] = await Promise.all([
+          fetch('/data/tests.json'),
+          fetch('/data/profiles.json')
+        ]);
+        if (!testRes.ok || !profileRes.ok) throw new Error('Data load failed');
+        tests = await testRes.json();
+        profiles = await profileRes.json();
+      } catch (err) {
+        alert('Error loading test data.');
+        console.error(err);
+        return;
+      }
+
+      const tSel = document.getElementById('testSelect');
+      const pSel = document.getElementById('profileSelect');
+      tSel.innerHTML = '';
+      pSel.innerHTML = '';
+
+      tests.forEach(t => {
+        const o = document.createElement('option');
+        o.value = t.name;
+        o.text = `${t.name} (Offer: ₹${t.offerPrice}, MRP: ₹${t.mrp})`;
+        tSel.appendChild(o);
+      });
+      profiles.forEach(p => {
+        const o = document.createElement('option');
+        o.value = p.name;
+        o.text = `${p.name} (Offer: ₹${p.offerPrice}, MRP: ₹${p.mrp})`;
+        pSel.appendChild(o);
+      });
+
+      updateCart();
+    }
+
+    function updateCart() {
+      const tSel = document.getElementById('testSelect');
+      const pSel = document.getElementById('profileSelect');
+      const cartList = document.getElementById('cartList');
+      let totalOffer = 0, totalMRP = 0;
+      cartList.innerHTML = '';
+
+      Array.from(tSel.selectedOptions).forEach(opt => {
+        const t = tests.find(x => x.name === opt.value);
+        if (t) {
+          const save = t.mrp - t.offerPrice;
+          const disc = Math.round((save / t.mrp) * 100);
+          cartList.innerHTML += `<li>🧪 ${t.name} — MRP: ₹${t.mrp}, Offer: ₹${t.offerPrice}, Save: ${disc}%</li>`;
+          totalOffer += t.offerPrice;
+          totalMRP += t.mrp;
+        }
+      });
+      Array.from(pSel.selectedOptions).forEach(opt => {
+        const p = profiles.find(x => x.name === opt.value);
+        if (p) {
+          const save = p.mrp - p.offerPrice;
+          const disc = Math.round((save / p.mrp) * 100);
+          cartList.innerHTML += `<li>📦 ${p.name} — MRP: ₹${p.mrp}, Offer: ₹${p.offerPrice}, Save: ${disc}%</li>`;
+          totalOffer += p.offerPrice;
+          totalMRP += p.mrp;
+        }
+      });
+
+      const totalSave = totalMRP - totalOffer;
+      const totalDisc = totalMRP ? Math.round((totalSave / totalMRP) * 100) : 0;
+      document.getElementById('totalPrice').textContent = totalOffer;
+      document.getElementById('totalMRP').textContent = totalMRP;
+      document.getElementById('totalSaving').textContent = totalSave;
+      document.getElementById('totalDiscount').textContent = totalDisc;
+    }
+
+    document.getElementById('testSelect').addEventListener('change', updateCart);
+    document.getElementById('profileSelect').addEventListener('change', updateCart);
+
+    document.getElementById('bookingForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const f = e.target;
+      const data = {
+        name: f.name.value,
+        mobile: f.mobile.value,
+        email: f.email.value || null,
+        preferredDate: f.preferredDate.value,
+        address: f.address.value,
+        pincode: f.pincode.value,
+        landmark: f.landmark.value,
+        tests: Array.from(f.testSelect.selectedOptions).map(o => o.value),
+        profiles: Array.from(f.profileSelect.selectedOptions).map(o => o.value),
+        timestamp: new Date().toISOString()
+      };
+
+      try {
+        await addDoc(collection(db, 'bookings'), data);
+        if (data.email) await emailjs.send('service_z3ac4pk', 'template_5v6t6ku', data);
+        alert('✅ Booking submitted! We\'ll be in touch.');
+        f.reset(); updateCart();
+      } catch (err) {
+        console.error(err);
+        alert('Failed to submit booking: ' + err.message);
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', loadOptions);
+  </script>
+</body>
+</html>
