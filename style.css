@@ -1,105 +1,205 @@
-/* style.css */
-
-body {
-  font-family: "Segoe UI", sans-serif;
+/* Reset & Base */
+* {
   margin: 0;
   padding: 0;
-  background: #f9f9f9;
-  color: #222;
+  box-sizing: border-box;
 }
 
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f9f9f9;
+  color: #333;
+  padding-top: 70px;
+}
+
+/* Header */
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #0066cc;
-  color: white;
-  padding: 12px 24px;
-  position: sticky;
+  position: fixed;
   top: 0;
+  width: 100%;
+  background: #fff;
+  padding: 10px 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .logo img {
-  height: 32px;
-  vertical-align: middle;
-  margin-right: 8px;
-}
-.logo span {
-  font-weight: bold;
-  font-size: 20px;
+  height: 40px;
 }
 
 .nav-links a {
-  margin-left: 20px;
-  color: white;
+  margin-left: 15px;
   text-decoration: none;
+  color: #333;
   font-weight: 500;
 }
+
 .nav-links a.active {
-  border-bottom: 2px solid #fff;
+  color: #0077cc;
 }
 
-.booking-form {
-  max-width: 700px;
-  margin: 90px auto 40px;
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+.cart-icon {
+  font-size: 18px;
+  font-weight: bold;
 }
 
-.booking-form h2 {
+/* Hero Section */
+.hero {
+  position: relative;
   text-align: center;
-  margin-bottom: 25px;
-  color: #0066cc;
+  margin-bottom: 20px;
 }
 
-.booking-form label {
-  display: block;
-  margin-bottom: 15px;
-}
-
-.booking-form input,
-.booking-form select,
-.booking-form textarea {
+.hero-img {
   width: 100%;
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  margin-top: 5px;
-}
-
-.booking-form button {
-  background: #0066cc;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  font-size: 16px;
+  height: 220px;
+  object-fit: cover;
   border-radius: 8px;
-  cursor: pointer;
-  width: 100%;
-  margin-top: 20px;
 }
 
-#cartSummary {
-  margin-top: 30px;
-  padding: 20px;
-  background: #eef6ff;
+.hero-text {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  background: rgba(255,255,255,0.8);
+  padding: 15px 20px;
   border-radius: 10px;
-}
-#cartSummary h3 {
-  margin-bottom: 15px;
-  color: #004b99;
+  max-width: 90%;
 }
 
-#cartList {
-  list-style: none;
-  padding-left: 0;
+.hero-text h1 {
+  font-size: 22px;
   margin-bottom: 10px;
 }
 
-#cartList li {
-  padding: 6px 0;
-  border-bottom: 1px dashed #aaa;
+.hero-text p {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.hero-text button {
+  padding: 8px 16px;
+  background: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+/* Promo Swiper */
+.promo-section {
+  padding: 20px;
+}
+
+.promo-section h2 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.promo-swiper .swiper-slide {
+  text-align: center;
+}
+
+.promo-swiper img {
+  width: 90%;
+  max-height: 180px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* About & FAQ */
+#about, #faq {
+  padding: 20px;
+  background: #fff;
+  margin: 15px;
+  border-radius: 10px;
+}
+
+#about h2,
+#faq h2 {
+  margin-bottom: 10px;
+}
+
+.faq-item {
+  margin-top: 10px;
+}
+
+.faq-item h3 {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+/* Testimonials */
+.testimonials {
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+  max-width: 95%;
+  border-radius: 10px;
+}
+
+.testimonials .swiper-slide {
+  text-align: center;
+}
+
+.testimonials img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  object-fit: cover;
+}
+
+.testimonials p {
+  font-style: italic;
+  margin-bottom: 5px;
+}
+
+.testimonials span {
+  font-weight: bold;
+}
+
+/* Footer */
+footer {
+  background: #0077cc;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+.footer-contact p {
+  margin: 5px 0;
+}
+
+.footer-contact .socials img {
+  height: 24px;
+  margin: 0 5px;
+  vertical-align: middle;
+}
+
+/* Mobile Adjustments */
+@media screen and (max-width: 600px) {
+  .hero-text h1 {
+    font-size: 18px;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    margin-left: 10px;
+  }
+
+  .promo-swiper img {
+    height: 150px;
+  }
 }
