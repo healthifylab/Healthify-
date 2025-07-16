@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Book a Test | Healthify Lab</title>
   <link rel="stylesheet" href="style.css" />
   <script type="module" src="firebase.js"></script>
@@ -28,8 +28,8 @@
       <label>Mobile:
         <input type="tel" name="mobile" required />
       </label>
-      <label>Email (optional):
-        <input type="email" name="email" />
+      <label>Email:
+        <input type="email" name="email" placeholder="(Optional)" />
       </label>
       <label>Preferred Date:
         <input type="date" name="preferredDate" required />
@@ -64,6 +64,11 @@
         <strong>You Save: ₹<span id="totalSaving">0</span> (<span id="totalDiscount">0</span>%)</strong>
       </p>
     </div>
+
+    <section style="background:#fee;padding:10px;margin-top:20px;border:1px solid #f00;">
+      <h3>Debug Log</h3>
+      <pre id="logOutput" style="white-space:pre-wrap;font-size:12px;"></pre>
+    </section>
   </section>
 
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
@@ -72,17 +77,26 @@
 
     let tests = [], profiles = [];
 
+    function log(msg) {
+      console.log("[DEBUG]", msg);
+      const out = document.getElementById('logOutput');
+      out.textContent += msg + '\n';
+    }
+
     async function loadOptions() {
       try {
+        log('Fetching test/profile data...');
         const [testRes, profileRes] = await Promise.all([
           fetch("/data/tests.json"),
           fetch("/data/profiles.json")
         ]);
-        if (!testRes.ok || !profileRes.ok) throw new Error("Data load failed");
+        log(`tests.json: ${testRes.status}, profiles.json: ${profileRes.status}`);
         tests = await testRes.json();
         profiles = await profileRes.json();
+        log(`Loaded ${tests.length} tests and ${profiles.length} profiles`);
       } catch (err) {
-        alert("Error loading test data");
+        log('❌ Failed loading data: ' + err.message);
+        alert("Failed to load test data.");
         return;
       }
 
@@ -94,13 +108,14 @@
       tests.forEach(t => {
         const o = document.createElement("option");
         o.value = t.name;
-        o.text  = `${t.name} (₹${t.offerPrice})`;
+        o.text  = `${t.name} (₹${t.offerPrice} / MRP ₹${t.mrp})`;
         tSel.appendChild(o);
       });
+
       profiles.forEach(p => {
         const o = document.createElement("option");
         o.value = p.name;
-        o.text  = `${p.name} (₹${p.offerPrice})`;
+        o.text  = `${p.name} (₹${p.offerPrice} / MRP ₹${p.mrp})`;
         pSel.appendChild(o);
       });
 
@@ -119,17 +134,18 @@
         if (t) {
           const saving = t.mrp - t.offerPrice;
           const discount = Math.round((saving / t.mrp) * 100);
-          cartList.innerHTML += `<li>🧪 ${t.name} — MRP: ₹${t.mrp}, Offer: ₹${t.offerPrice}, Save: ${discount}%</li>`;
+          cartList.innerHTML += `<li>🧪 ${t.name} — ₹${t.offerPrice} <span style="color:#888;">(MRP ₹${t.mrp}, Save ${discount}%)</span></li>`;
           totalOffer += t.offerPrice;
           totalMRP   += t.mrp;
         }
       });
+
       Array.from(pSel.selectedOptions).forEach(opt => {
         const p = profiles.find(x => x.name === opt.value);
         if (p) {
           const saving = p.mrp - p.offerPrice;
           const discount = Math.round((saving / p.mrp) * 100);
-          cartList.innerHTML += `<li>📦 ${p.name} — MRP: ₹${p.mrp}, Offer: ₹${p.offerPrice}, Save: ${discount}%</li>`;
+          cartList.innerHTML += `<li>📦 ${p.name} — ₹${p.offerPrice} <span style="color:#888;">(MRP ₹${p.mrp}, Save ${discount}%)</span></li>`;
           totalOffer += p.offerPrice;
           totalMRP   += p.mrp;
         }
@@ -151,27 +167,30 @@
       e.preventDefault();
       const f = e.target;
       const data = {
-        name: f.name.value,
-        mobile: f.mobile.value,
-        email: f.email.value || "(not provided)",
+        name:          f.name.value,
+        mobile:        f.mobile.value,
+        email:         f.email.value || "Not Provided",
         preferredDate: f.preferredDate.value,
-        address: f.address.value,
-        pincode: f.pincode.value,
-        landmark: f.landmark.value,
-        tests: Array.from(f.testSelect.selectedOptions).map(o => o.value),
-        profiles: Array.from(f.profileSelect.selectedOptions).map(o => o.value),
-        timestamp: new Date().toISOString()
+        address:       f.address.value,
+        pincode:       f.pincode.value,
+        landmark:      f.landmark.value,
+        tests:         Array.from(f.testSelect.selectedOptions).map(o => o.value),
+        profiles:      Array.from(f.profileSelect.selectedOptions).map(o => o.value),
+        timestamp:     new Date().toISOString()
       };
 
       try {
-        if (!window.firestore) throw new Error("Firestore not available");
-        await window.firestore.collection("bookings").add(data);
+        log("⏳ Submitting booking...");
+        await window.firestore.addBooking(data);
+        log("✅ Saved to Firestore");
         await emailjs.send("service_z3ac4pk", "template_5v6t6ku", data);
-        alert("✅ Booking submitted! We'll be in touch.");
+        log("📧 Email sent via EmailJS");
+        alert("✅ Booking submitted successfully!");
         f.reset();
         updateCart();
       } catch (err) {
-        alert("❌ Failed to submit booking. Please try again later.");
+        log("❌ Booking failed: " + err.message);
+        alert("❌ Failed to submit booking. Please try again.");
       }
     });
 
