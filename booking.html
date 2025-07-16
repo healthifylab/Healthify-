@@ -45,10 +45,11 @@
       </label>
 
       <label>Select Tests:
-        <select id="testSelect" multiple></select>
+        <select id="testSelect" name="testSelect" multiple size="5"></select>
       </label>
+
       <label>Select Profiles:
-        <select id="profileSelect" multiple></select>
+        <select id="profileSelect" name="profileSelect" multiple size="5"></select>
       </label>
 
       <button type="submit">📨 Submit Booking</button>
@@ -73,53 +74,63 @@
           fetch("/data/tests.json"),
           fetch("/data/profiles.json")
         ]);
-        tests = await testRes.json();
+        if (!testRes.ok || !profileRes.ok) {
+          throw new Error("Fetch failed: " + testRes.status + "/" + profileRes.status);
+        }
+        tests    = await testRes.json();
         profiles = await profileRes.json();
       } catch (err) {
-        console.error("Failed to load data:", err);
+        console.error("Failed to load tests/profiles:", err);
+        alert("Error loading test data. Check console.");
         return;
       }
 
-      const testSelect    = document.getElementById("testSelect");
-      const profileSelect = document.getElementById("profileSelect");
-      testSelect.innerHTML = "";
-      profileSelect.innerHTML = "";
+      // populate selects
+      const tSel = document.getElementById("testSelect");
+      const pSel = document.getElementById("profileSelect");
+      tSel.innerHTML = "";
+      pSel.innerHTML = "";
 
-      tests.forEach(test => {
-        const opt = document.createElement("option");
-        opt.value       = test.name;
-        opt.textContent = `${test.name} (₹${test.offerPrice})`;
-        testSelect.appendChild(opt);
+      tests.forEach(t => {
+        const o = document.createElement("option");
+        o.value = t.name;
+        o.text  = `${t.name} (₹${t.offerPrice})`;
+        tSel.appendChild(o);
       });
-      profiles.forEach(profile => {
-        const opt = document.createElement("option");
-        opt.value       = profile.name;
-        opt.textContent = `${profile.name} (₹${profile.offerPrice})`;
-        profileSelect.appendChild(opt);
+      profiles.forEach(p => {
+        const o = document.createElement("option");
+        o.value = p.name;
+        o.text  = `${p.name} (₹${p.offerPrice})`;
+        pSel.appendChild(o);
       });
+
+      // initial cart update
+      updateCart();
     }
 
     function updateCart() {
-      const selectedTests    = Array.from(document.getElementById("testSelect").selectedOptions).map(o => o.value);
-      const selectedProfiles = Array.from(document.getElementById("profileSelect").selectedOptions).map(o => o.value);
-      const cartList   = document.getElementById("cartList");
-      const totalPrice = document.getElementById("totalPrice");
-
-      cartList.innerHTML = "";
+      const tSel = document.getElementById("testSelect");
+      const pSel = document.getElementById("profileSelect");
+      const cartList = document.getElementById("cartList");
       let total = 0;
+      cartList.innerHTML = "";
 
-      selectedTests.forEach(name => {
-        const t = tests.find(x => x.name === name);
-        cartList.innerHTML += `<li>🧪 ${t.name} - ₹${t.offerPrice}</li>`;
-        total += t.offerPrice;
+      Array.from(tSel.selectedOptions).forEach(opt => {
+        const t = tests.find(x => x.name === opt.value);
+        if (t) {
+          cartList.innerHTML += `<li>🧪 ${t.name} - ₹${t.offerPrice}</li>`;
+          total += t.offerPrice;
+        }
       });
-      selectedProfiles.forEach(name => {
-        const p = profiles.find(x => x.name === name);
-        cartList.innerHTML += `<li>📦 ${p.name} - ₹${p.offerPrice}</li>`;
-        total += p.offerPrice;
+      Array.from(pSel.selectedOptions).forEach(opt => {
+        const p = profiles.find(x => x.name === opt.value);
+        if (p) {
+          cartList.innerHTML += `<li>📦 ${p.name} - ₹${p.offerPrice}</li>`;
+          total += p.offerPrice;
+        }
       });
 
-      totalPrice.textContent = total;
+      document.getElementById("totalPrice").textContent = total;
     }
 
     document.getElementById("testSelect").addEventListener("change", updateCart);
@@ -127,29 +138,30 @@
 
     document.getElementById("bookingForm").addEventListener("submit", async e => {
       e.preventDefault();
-      const form = e.target;
+      const f = e.target;
       const data = {
-        name:          form.name.value,
-        mobile:        form.mobile.value,
-        email:         form.email.value,
-        preferredDate: form.preferredDate.value,
-        address:       form.address.value,
-        pincode:       form.pincode.value,
-        landmark:      form.landmark.value,
-        tests:         Array.from(form["testSelect"].selectedOptions).map(o => o.value),
-        profiles:      Array.from(form["profileSelect"].selectedOptions).map(o => o.value),
+        name:          f.name.value,
+        mobile:        f.mobile.value,
+        email:         f.email.value,
+        preferredDate: f.preferredDate.value,
+        address:       f.address.value,
+        pincode:       f.pincode.value,
+        landmark:      f.landmark.value,
+        tests:         Array.from(f.testSelect.selectedOptions).map(o => o.value),
+        profiles:      Array.from(f.profileSelect.selectedOptions).map(o => o.value),
         timestamp:     new Date().toISOString()
       };
 
-      // Firestore
-      await window.firestore.collection("bookings").add(data);
-
-      // EmailJS
-      emailjs.send("service_z3ac4pk","template_5v6t6ku", data);
-
-      alert("✅ Booking submitted! We'll be in touch.");
-      form.reset();
-      updateCart();
+      try {
+        await window.firestore.collection("bookings").add(data);
+        await emailjs.send("service_z3ac4pk","template_5v6t6ku", data);
+        alert("✅ Booking submitted!");
+        f.reset();
+        updateCart();
+      } catch (err) {
+        console.error("Submit error:", err);
+        alert("Failed to submit booking.");
+      }
     });
 
     window.addEventListener("DOMContentLoaded", loadOptions);
