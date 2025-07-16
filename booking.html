@@ -28,8 +28,8 @@
       <label>Mobile:
         <input type="tel" name="mobile" required />
       </label>
-      <label>Email:
-        <input type="email" name="email" required />
+      <label>Email (optional):
+        <input type="email" name="email" />
       </label>
       <label>Preferred Date:
         <input type="date" name="preferredDate" required />
@@ -153,7 +153,7 @@
       const data = {
         name:          f.name.value,
         mobile:        f.mobile.value,
-        email:         f.email.value,
+        email:         f.email.value || null,
         preferredDate: f.preferredDate.value,
         address:       f.address.value,
         pincode:       f.pincode.value,
@@ -165,12 +165,14 @@
 
       try {
         await window.firestore.collection("bookings").add(data);
-        await emailjs.send("service_z3ac4pk", "template_5v6t6ku", data);
+        if (data.email) {
+          await emailjs.send("service_z3ac4pk", "template_5v6t6ku", data);
+        }
         alert("✅ Booking submitted! We'll be in touch.");
         f.reset();
         updateCart();
-      } catch {
-        alert("Failed to submit booking.");
+      } catch (err) {
+        alert("Failed to submit booking: " + err.message);
       }
     });
 
