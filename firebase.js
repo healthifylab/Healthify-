@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Book a Test | Healthify Lab</title>
   <link rel="stylesheet" href="style.css" />
+  <script type="module" src="firebase.js"></script>
 </head>
 <body>
   <header class="header fixed">
@@ -27,7 +28,7 @@
       <label>Mobile:
         <input type="tel" name="mobile" required />
       </label>
-      <label>Email (optional):
+      <label>Email:
         <input type="email" name="email" />
       </label>
       <label>Preferred Date:
@@ -65,58 +66,43 @@
     </div>
   </section>
 
-  <script type="module">
-    // Firebase and EmailJS setup
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
-    import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
-    import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
-
-    // Firebase config
-    const firebaseConfig = {
-      apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
-      authDomain: "healthify-lab.firebaseapp.com",
-      projectId: "healthify-lab",
-      storageBucket: "healthify-lab.firebasestorage.app",
-      messagingSenderId: "297003315332",
-      appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    emailjs.init('dJE_JHAoNTxxzTxiT');
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+  <script>
+    emailjs.init("dJE_JHAoNTxxzTxiT");
 
     let tests = [], profiles = [];
 
     async function loadOptions() {
       try {
         const [testRes, profileRes] = await Promise.all([
-          fetch('/data/tests.json'),
-          fetch('/data/profiles.json')
+          fetch("/data/tests.json"),
+          fetch("/data/profiles.json")
         ]);
-        if (!testRes.ok || !profileRes.ok) throw new Error('Data load failed');
+        if (!testRes.ok || !profileRes.ok) {
+          throw new Error("Fetch error");
+        }
         tests = await testRes.json();
         profiles = await profileRes.json();
       } catch (err) {
-        alert('Error loading test data.');
-        console.error(err);
+        alert("Error loading test data.");
         return;
       }
 
-      const tSel = document.getElementById('testSelect');
-      const pSel = document.getElementById('profileSelect');
-      tSel.innerHTML = '';
-      pSel.innerHTML = '';
+      const tSel = document.getElementById("testSelect");
+      const pSel = document.getElementById("profileSelect");
+      tSel.innerHTML = "";
+      pSel.innerHTML = "";
 
       tests.forEach(t => {
-        const o = document.createElement('option');
+        const o = document.createElement("option");
         o.value = t.name;
-        o.text = `${t.name} (Offer: ₹${t.offerPrice}, MRP: ₹${t.mrp})`;
+        o.text  = `${t.name} (₹${t.offerPrice})`;
         tSel.appendChild(o);
       });
       profiles.forEach(p => {
-        const o = document.createElement('option');
+        const o = document.createElement("option");
         o.value = p.name;
-        o.text = `${p.name} (Offer: ₹${p.offerPrice}, MRP: ₹${p.mrp})`;
+        o.text  = `${p.name} (₹${p.offerPrice})`;
         pSel.appendChild(o);
       });
 
@@ -124,72 +110,74 @@
     }
 
     function updateCart() {
-      const tSel = document.getElementById('testSelect');
-      const pSel = document.getElementById('profileSelect');
-      const cartList = document.getElementById('cartList');
+      const tSel = document.getElementById("testSelect");
+      const pSel = document.getElementById("profileSelect");
+      const cartList = document.getElementById("cartList");
       let totalOffer = 0, totalMRP = 0;
-      cartList.innerHTML = '';
+      cartList.innerHTML = "";
 
       Array.from(tSel.selectedOptions).forEach(opt => {
         const t = tests.find(x => x.name === opt.value);
         if (t) {
-          const save = t.mrp - t.offerPrice;
-          const disc = Math.round((save / t.mrp) * 100);
-          cartList.innerHTML += `<li>🧪 ${t.name} — MRP: ₹${t.mrp}, Offer: ₹${t.offerPrice}, Save: ${disc}%</li>`;
+          const saving = t.mrp - t.offerPrice;
+          const discount = Math.round((saving / t.mrp) * 100);
+          cartList.innerHTML += `<li>🧪 ${t.name} — MRP: ₹${t.mrp}, Offer: ₹${t.offerPrice}, Save: ${discount}%</li>`;
           totalOffer += t.offerPrice;
-          totalMRP += t.mrp;
+          totalMRP   += t.mrp;
         }
       });
       Array.from(pSel.selectedOptions).forEach(opt => {
         const p = profiles.find(x => x.name === opt.value);
         if (p) {
-          const save = p.mrp - p.offerPrice;
-          const disc = Math.round((save / p.mrp) * 100);
-          cartList.innerHTML += `<li>📦 ${p.name} — MRP: ₹${p.mrp}, Offer: ₹${p.offerPrice}, Save: ${disc}%</li>`;
+          const saving = p.mrp - p.offerPrice;
+          const discount = Math.round((saving / p.mrp) * 100);
+          cartList.innerHTML += `<li>📦 ${p.name} — MRP: ₹${p.mrp}, Offer: ₹${p.offerPrice}, Save: ${discount}%</li>`;
           totalOffer += p.offerPrice;
-          totalMRP += p.mrp;
+          totalMRP   += p.mrp;
         }
       });
 
-      const totalSave = totalMRP - totalOffer;
-      const totalDisc = totalMRP ? Math.round((totalSave / totalMRP) * 100) : 0;
-      document.getElementById('totalPrice').textContent = totalOffer;
-      document.getElementById('totalMRP').textContent = totalMRP;
-      document.getElementById('totalSaving').textContent = totalSave;
-      document.getElementById('totalDiscount').textContent = totalDisc;
+      const totalSaving = totalMRP - totalOffer;
+      const totalDiscount = totalMRP ? Math.round((totalSaving / totalMRP) * 100) : 0;
+
+      document.getElementById("totalPrice").textContent     = totalOffer;
+      document.getElementById("totalMRP").textContent       = totalMRP;
+      document.getElementById("totalSaving").textContent    = totalSaving;
+      document.getElementById("totalDiscount").textContent  = totalDiscount;
     }
 
-    document.getElementById('testSelect').addEventListener('change', updateCart);
-    document.getElementById('profileSelect').addEventListener('change', updateCart);
+    document.getElementById("testSelect").addEventListener("change", updateCart);
+    document.getElementById("profileSelect").addEventListener("change", updateCart);
 
-    document.getElementById('bookingForm').addEventListener('submit', async e => {
+    document.getElementById("bookingForm").addEventListener("submit", async e => {
       e.preventDefault();
       const f = e.target;
       const data = {
-        name: f.name.value,
-        mobile: f.mobile.value,
-        email: f.email.value || null,
+        name:          f.name.value,
+        mobile:        f.mobile.value,
+        email:         f.email.value || "-",
         preferredDate: f.preferredDate.value,
-        address: f.address.value,
-        pincode: f.pincode.value,
-        landmark: f.landmark.value,
-        tests: Array.from(f.testSelect.selectedOptions).map(o => o.value),
-        profiles: Array.from(f.profileSelect.selectedOptions).map(o => o.value),
-        timestamp: new Date().toISOString()
+        address:       f.address.value,
+        pincode:       f.pincode.value,
+        landmark:      f.landmark.value,
+        tests:         Array.from(f.testSelect.selectedOptions).map(o => o.value),
+        profiles:      Array.from(f.profileSelect.selectedOptions).map(o => o.value),
+        timestamp:     new Date().toISOString()
       };
 
       try {
-        await addDoc(collection(db, 'bookings'), data);
-        if (data.email) await emailjs.send('service_z3ac4pk', 'template_5v6t6ku', data);
-        alert('✅ Booking submitted! We\'ll be in touch.');
-        f.reset(); updateCart();
+        if (!window.firestore) throw new Error("Firestore not initialized");
+        await window.firestore.collection("bookings").add(data);
+        await emailjs.send("service_z3ac4pk","template_5v6t6ku", data);
+        alert("✅ Booking submitted!");
+        f.reset();
+        updateCart();
       } catch (err) {
-        console.error(err);
-        alert('Failed to submit booking: ' + err.message);
+        alert("❌ Failed to submit booking: " + err.message);
       }
     });
 
-    window.addEventListener('DOMContentLoaded', loadOptions);
+    window.addEventListener("DOMContentLoaded", loadOptions);
   </script>
 </body>
 </html>
