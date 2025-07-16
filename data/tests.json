@@ -134,4 +134,5 @@
   {"name":"Bone Marrow Aspiration","description":"Evaluates blood cell production.","mrp":2000,"offerPrice":1399,"tat":"72 Hours","parameters":15},
   {"name":"Flow Cytometry","description":"Analyzes cell populations in blood or bone marrow.","mrp":3000,"offerPrice":1999,"tat":"72 Hours","parameters":20},
   {"name":"Immunohistochemistry (IHC)","description":"Stains tissue to identify cell types.","mrp":1500,"offerPrice":999,"tat":"48 Hours","parameters":10},
-  {"name":"Fluorescence In Situ Hybridization (FISH)","description":"Detects genetic abnormalities.","mrp":2500,"offerPrice"
+  {"name":"Fluorescence In Situ Hybridization (FISH)","description":"Detects genetic abnormalities.","mrp":2500,"offerPrice"}
+]
