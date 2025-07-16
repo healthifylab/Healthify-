@@ -2,198 +2,162 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Book a Test | Healthify Lab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Healthify Lab - Home</title>
   <link rel="stylesheet" href="style.css" />
-  <script type="module" src="firebase.js"></script>
+  <link rel="icon" href="public/logo.png" type="image/png" />
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script type="module" src="firebase.js"></script>
+  <script src="lang.js" defer></script>
 </head>
 <body>
+  <!-- Header -->
   <header class="header fixed">
     <div class="logo">
       <img src="public/logo.png" alt="Healthify Logo" />
-      <span>Healthify Lab</span>
+      <span data-lang="labName">Healthify Lab</span>
     </div>
     <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="booking.html" class="active">Book Test</a>
+      <a href="index.html" data-lang="home">Home</a>
+      <a href="booking.html" data-lang="book">Book Test</a>
+      <a href="#about" data-lang="about">About</a>
+      <a href="#faq" data-lang="faq">FAQs</a>
+      <a href="#contact" data-lang="contact">Contact</a>
+      <a href="dashboard.html" data-lang="dashboard">Dashboard</a>
     </nav>
+    <select id="langSelect">
+      <option value="en">English</option>
+      <option value="hi">हिंदी</option>
+      <option value="mr">मराठी</option>
+    </select>
+    <div class="cart-icon">
+      🛒 <span id="cart-count">0</span>
+    </div>
   </header>
 
-  <section class="booking-form">
-    <h2>📋 Book Your Test</h2>
-    <form id="bookingForm">
-      <label>Name:
-        <input type="text" name="name" required />
-      </label>
-      <label>Mobile:
-        <input type="tel" name="mobile" required />
-      </label>
-      <label>Email:
-        <input type="email" name="email" />
-      </label>
-      <label>Preferred Date:
-        <input type="date" name="preferredDate" required />
-      </label>
-      <label>Address:
-        <textarea name="address" required></textarea>
-      </label>
-      <label>Pincode:
-        <input type="text" name="pincode" required />
-      </label>
-      <label>Landmark:
-        <input type="text" name="landmark" />
-      </label>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1 data-lang="heroTitle">Your Health, Right at Your Doorstep 🏠</h1>
+    <p data-lang="heroSub">Home Sample Collection • Accurate Reports • Trusted by Families</p>
+    <button onclick="location.href='booking.html'" data-lang="bookNow">Book Now</button>
+  </section>
 
-      <label>Select Tests:
-        <select id="testSelect" name="testSelect" multiple size="5"></select>
-      </label>
-
-      <label>Select Profiles:
-        <select id="profileSelect" name="profileSelect" multiple size="5"></select>
-      </label>
-
-      <div id="selectionDescription"></div>
-
-      <button type="submit">📨 Submit Booking</button>
-    </form>
-
-    <div id="cartSummary">
-      <h3>🛒 Your Cart</h3>
-      <ul id="cartList"></ul>
-      <p>
-        <strong>Total Offer Price: ₹<span id="totalPrice">0</span></strong><br/>
-        <strong>Total MRP: ₹<span id="totalMRP">0</span></strong><br/>
-        <strong>You Save: ₹<span id="totalSaving">0</span> (<span id="totalDiscount">0</span>%)</strong>
-      </p>
+  <!-- Promo Cards -->
+  <section class="promos swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">💉 Hassle-free sample collection at home</div>
+      <div class="swiper-slide">🧪 Advanced diagnostics & accurate reports</div>
+      <div class="swiper-slide">🚚 Fast turnaround</div>
+      <div class="swiper-slide">📍 Convenient location</div>
+      <div class="swiper-slide">✅ 💙 Happy Customers</div>
     </div>
   </section>
 
-  <a
-    href="https://wa.me/919503832889?text=Welcome%20to%20Healthify.%20Book%20your%20test%20now!"
-    class="whatsapp-float"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Chat on WhatsApp"
-  >
+  <!-- Search Tests & Profiles -->
+  <section class="search-section">
+    <input type="text" id="searchInput" placeholder="Search Tests or Profiles..." />
+    <ul id="searchResults"></ul>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2 data-lang="whyChoose">Why Choose Healthify?</h2>
+    <p data-lang="whyDesc">🔬 Your trusted partner in preventive healthcare. Book with confidence and convenience.</p>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq">
+    <h2 data-lang="faqHeader">Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <h3 data-lang="faq1">How do I book a test?</h3>
+      <p data-lang="faq1ans">Go to "Book Test" → Fill details → Choose tests/profiles → Submit.</p>
+    </div>
+    <div class="faq-item">
+      <h3 data-lang="faq2">Is home collection free?</h3>
+      <p data-lang="faq2ans">Yes, within serviceable areas. No extra charge for doorstep collection.</p>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <img src="public/user1.jpg" alt="User" />
+        <p>"Quick and convenient. Loved the home collection!"</p>
+        <span>— Priya, Pune</span>
+      </div>
+      <div class="swiper-slide">
+        <img src="public/user2.jpg" alt="User" />
+        <p>"Affordable pricing and accurate results."</p>
+        <span>— Ramesh, Mumbai</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <div class="footer-contact">
+      <p>📞 +91 9503832889</p>
+      <p>📧 report@healthifylab.com</p>
+      <div class="socials">
+        <a href="https://x.com/healthify_lab"><img src="public/x-icon.png" /></a>
+        <a href="https://instagram.com/healthifylab"><img src="public/instagram-icon.png" /></a>
+        <a href="https://facebook.com/healthify"><img src="public/facebook-icon.png" /></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/919503832889?text=Welcome%20to%20Healthify.%20Book%20your%20test%20now" 
+     class="floating-whatsapp" target="_blank">
     <i class="fab fa-whatsapp"></i>
   </a>
 
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+  <!-- Scripts -->
   <script>
-    emailjs.init("dJE_JHAoNTxxzTxiT");
-
-    let tests = [], profiles = [];
-
-    async function loadOptions() {
-      try {
-        const [testRes, profileRes] = await Promise.all([
-          fetch("/data/tests.json"),
-          fetch("/data/profiles.json")
-        ]);
-        if (!testRes.ok || !profileRes.ok) {
-          throw new Error(`Fetch error: tests ${testRes.status}, profiles ${profileRes.status}`);
-        }
-        tests = await testRes.json();
-        profiles = await profileRes.json();
-      } catch (err) {
-        alert("Error loading test data. Please try again later.");
-        return;
-      }
-
-      const tSel = document.getElementById("testSelect");
-      const pSel = document.getElementById("profileSelect");
-      tSel.innerHTML = "";
-      pSel.innerHTML = "";
-
-      tests.forEach(t => {
-        const o = document.createElement("option");
-        o.value = t.name;
-        o.text  = `${t.name} (₹${t.offerPrice})`;
-        tSel.appendChild(o);
-      });
-      profiles.forEach(p => {
-        const o = document.createElement("option");
-        o.value = p.name;
-        o.text  = `${p.name} (₹${p.offerPrice})`;
-        pSel.appendChild(o);
-      });
-
-      updateCart();
+    let combinedItems = [];
+    async function loadData() {
+      const testsRes = await fetch("data/tests.json");
+      const profilesRes = await fetch("data/profiles.json");
+      const tests = await testsRes.json();
+      const profiles = await profilesRes.json();
+      combinedItems = [...tests, ...profiles];
     }
 
-    function updateCart() {
-      const tSel = document.getElementById("testSelect");
-      const pSel = document.getElementById("profileSelect");
-      const cartList = document.getElementById("cartList");
-      const selectionDesc = document.getElementById("selectionDescription");
-      let totalOffer = 0, totalMRP = 0;
-      cartList.innerHTML = "";
-      selectionDesc.innerHTML = "";
-
-      Array.from(tSel.selectedOptions).forEach(opt => {
-        const t = tests.find(x => x.name === opt.value);
-        if (t) {
-          const saving = t.mrp - t.offerPrice;
-          const discount = Math.round((saving / t.mrp) * 100);
-          cartList.innerHTML += `<li>🧪 ${t.name} — MRP: ₹${t.mrp}, Offer: ₹${t.offerPrice}, Save: ${discount}%</li>`;
-          selectionDesc.innerHTML += `<p><strong>${t.name}</strong>: ${t.description || 'No description available.'}</p>`;
-          totalOffer += t.offerPrice;
-          totalMRP   += t.mrp;
-        }
+    function filterSearch(query) {
+      const results = combinedItems.filter(item =>
+        item.name.toLowerCase().includes(query.toLowerCase())
+      );
+      const ul = document.getElementById("searchResults");
+      ul.innerHTML = "";
+      results.slice(0, 10).forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.name} - ₹${item.offerPrice}`;
+        li.onclick = () => window.location.href = `booking.html?preselect=${encodeURIComponent(item.name)}`;
+        ul.appendChild(li);
       });
-      Array.from(pSel.selectedOptions).forEach(opt => {
-        const p = profiles.find(x => x.name === opt.value);
-        if (p) {
-          const saving = p.mrp - p.offerPrice;
-          const discount = Math.round((saving / p.mrp) * 100);
-          cartList.innerHTML += `<li>📦 ${p.name} — MRP: ₹${p.mrp}, Offer: ₹${p.offerPrice}, Save: ${discount}%</li>`;
-          selectionDesc.innerHTML += `<p><strong>${p.name}</strong>: Includes ${p.tests?.join(', ') || 'tests'}</p>`;
-          totalOffer += p.offerPrice;
-          totalMRP   += p.mrp;
-        }
-      });
-
-      const totalSaving = totalMRP - totalOffer;
-      const totalDiscount = totalMRP ? Math.round((totalSaving / totalMRP) * 100) : 0;
-      document.getElementById("totalPrice").textContent = totalOffer;
-      document.getElementById("totalMRP").textContent = totalMRP;
-      document.getElementById("totalSaving").textContent = totalSaving;
-      document.getElementById("totalDiscount").textContent = totalDiscount;
     }
 
-    document.getElementById("testSelect").addEventListener("change", updateCart);
-    document.getElementById("profileSelect").addEventListener("change", updateCart);
-
-    document.getElementById("bookingForm").addEventListener("submit", async e => {
-      e.preventDefault();
-      const f = e.target;
-      const data = {
-        name: f.name.value,
-        mobile: f.mobile.value,
-        email: f.email.value,
-        preferredDate: f.preferredDate.value,
-        address: f.address.value,
-        pincode: f.pincode.value,
-        landmark: f.landmark.value,
-        tests: Array.from(f.testSelect.selectedOptions).map(o => o.value),
-        profiles: Array.from(f.profileSelect.selectedOptions).map(o => o.value),
-        timestamp: new Date().toISOString()
-      };
-
-      try {
-        await window.firestore.collection("bookings").add(data);
-        await emailjs.send("service_z3ac4pk", "template_5v6t6ku", data);
-        alert("✅ Booking submitted! We'll be in touch.");
-        f.reset();
-        updateCart();
-      } catch (err) {
-        alert("❌ Failed to submit booking. Please try again later.");
-        console.error("Booking error:", err);
-      }
+    document.getElementById("searchInput").addEventListener("input", e => {
+      filterSearch(e.target.value);
     });
 
-    window.addEventListener("DOMContentLoaded", loadOptions);
+    window.onload = loadData;
+  </script>
+
+  <!-- SwiperJS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+  <script>
+    new Swiper('.swiper-container', {
+      loop: true,
+      autoplay: {
+        delay: 1500,
+        disableOnInteraction: false,
+      },
+      slidesPerView: 1,
+      spaceBetween: 10,
+    });
   </script>
 </body>
 </html>
