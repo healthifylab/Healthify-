@@ -64,11 +64,6 @@
         <strong>You Save: ₹<span id="totalSaving">0</span> (<span id="totalDiscount">0</span>%)</strong>
       </p>
     </div>
-
-    <section style="background:#fee;padding:10px;margin-top:20px;border:1px solid #f00;">
-      <h3>Debug Log</h3>
-      <pre id="logOutput" style="white-space:pre-wrap;"></pre>
-    </section>
   </section>
 
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
@@ -77,29 +72,17 @@
 
     let tests = [], profiles = [];
 
-    function log(msg) {
-      console.log(msg);
-      const out = document.getElementById('logOutput');
-      out.textContent += msg + '\n';
-    }
-
     async function loadOptions() {
       try {
-        log('Fetching /data/tests.json and /data/profiles.json');
         const [testRes, profileRes] = await Promise.all([
           fetch("/data/tests.json"),
           fetch("/data/profiles.json")
         ]);
-        log(`tests.json status: ${testRes.status}, profiles.json status: ${profileRes.status}`);
-        if (!testRes.ok || !profileRes.ok) {
-          throw new Error(`Fetch error: tests ${testRes.status}, profiles ${profileRes.status}`);
-        }
+        if (!testRes.ok || !profileRes.ok) throw new Error();
         tests = await testRes.json();
         profiles = await profileRes.json();
-        log(`Loaded ${tests.length} tests and ${profiles.length} profiles`);
-      } catch (err) {
-        log('Error loading tests/profiles: ' + err.message);
-        alert("Error loading test data; check debug log below.");
+      } catch {
+        alert("Error loading test data.");
         return;
       }
 
@@ -153,14 +136,12 @@
       });
 
       const totalSaving = totalMRP - totalOffer;
-      const totalDiscount = totalMRP
-        ? Math.round((totalSaving / totalMRP) * 100)
-        : 0;
+      const totalDiscount = totalMRP ? Math.round((totalSaving / totalMRP) * 100) : 0;
 
-      document.getElementById("totalPrice").textContent     = totalOffer;
-      document.getElementById("totalMRP").textContent       = totalMRP;
-      document.getElementById("totalSaving").textContent    = totalSaving;
-      document.getElementById("totalDiscount").textContent  = totalDiscount;
+      document.getElementById("totalPrice").textContent    = totalOffer;
+      document.getElementById("totalMRP").textContent      = totalMRP;
+      document.getElementById("totalSaving").textContent   = totalSaving;
+      document.getElementById("totalDiscount").textContent = totalDiscount;
     }
 
     document.getElementById("testSelect").addEventListener("change", updateCart);
@@ -183,17 +164,13 @@
       };
 
       try {
-        log('Submitting booking: ' + JSON.stringify(data));
         await window.firestore.collection("bookings").add(data);
-        log('Saved to Firestore');
-        await emailjs.send("service_z3ac4pk","template_5v6t6ku", data);
-        log('EmailJS sent');
+        await emailjs.send("service_z3ac4pk", "template_5v6t6ku", data);
         alert("✅ Booking submitted! We'll be in touch.");
         f.reset();
         updateCart();
-      } catch (err) {
-        log('Submit error: ' + err.message);
-        alert("Failed to submit booking; see debug log.");
+      } catch {
+        alert("Failed to submit booking.");
       }
     });
 
