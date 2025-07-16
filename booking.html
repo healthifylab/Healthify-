@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Book a Test | Healthify Lab</title>
   <link rel="stylesheet" href="style.css" />
   <script type="module" src="firebase.js"></script>
@@ -60,6 +60,12 @@
       <ul id="cartList"></ul>
       <p><strong>Total: ₹<span id="totalPrice">0</span></strong></p>
     </div>
+
+    <!-- Debug log output visible on page -->
+    <section style="background:#fee;padding:10px;margin-top:20px;border:1px solid #f00;">
+      <h3>Debug Log</h3>
+      <pre id="logOutput" style="white-space:pre-wrap;"></pre>
+    </section>
   </section>
 
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
@@ -68,24 +74,32 @@
 
     let tests = [], profiles = [];
 
+    function log(msg) {
+      console.log(msg);
+      const out = document.getElementById('logOutput');
+      out.textContent += msg + '\n';
+    }
+
     async function loadOptions() {
       try {
+        log('Fetching /data/tests.json and /data/profiles.json');
         const [testRes, profileRes] = await Promise.all([
           fetch("/data/tests.json"),
           fetch("/data/profiles.json")
         ]);
+        log(`tests.json status: ${testRes.status}, profiles.json status: ${profileRes.status}`);
         if (!testRes.ok || !profileRes.ok) {
-          throw new Error("Fetch failed: " + testRes.status + "/" + profileRes.status);
+          throw new Error(`Fetch error: tests ${testRes.status}, profiles ${profileRes.status}`);
         }
-        tests    = await testRes.json();
+        tests = await testRes.json();
         profiles = await profileRes.json();
+        log(`Loaded ${tests.length} tests and ${profiles.length} profiles`);
       } catch (err) {
-        console.error("Failed to load tests/profiles:", err);
-        alert("Error loading test data. Check console.");
+        log('Error loading tests/profiles: ' + err.message);
+        alert("Error loading test data; check debug log below.");
         return;
       }
 
-      // populate selects
       const tSel = document.getElementById("testSelect");
       const pSel = document.getElementById("profileSelect");
       tSel.innerHTML = "";
@@ -104,7 +118,6 @@
         pSel.appendChild(o);
       });
 
-      // initial cart update
       updateCart();
     }
 
@@ -153,14 +166,17 @@
       };
 
       try {
+        log('Submitting booking: ' + JSON.stringify(data));
         await window.firestore.collection("bookings").add(data);
+        log('Saved to Firestore');
         await emailjs.send("service_z3ac4pk","template_5v6t6ku", data);
-        alert("✅ Booking submitted!");
+        log('EmailJS sent');
+        alert("✅ Booking submitted! We'll be in touch.");
         f.reset();
         updateCart();
       } catch (err) {
-        console.error("Submit error:", err);
-        alert("Failed to submit booking.");
+        log('Submit error: ' + err.message);
+        alert("Failed to submit booking; see debug log.");
       }
     });
 
