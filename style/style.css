@@ -1,135 +1,76 @@
-/* Reset and Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-}
-
-/* Hero Section */
-.hero {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    overflow: hidden;
-}
-
-.hero-video-container {
-    position: relative;
-    width: 100%;
-    padding-top: 56.25%; /* 16:9 Aspect Ratio */
-}
-
-.hero-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.hero-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: white;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-    z-index: 1;
-}
-
-.hero-content h1 {
-    font-size: clamp(1.5rem, 5vw, 3rem);
-}
-
-.hero-content p {
-    font-size: clamp(1rem, 2.5vw, 1.5rem);
-    margin: 10px 0;
-}
-
-.cta-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-.cta-button:hover {
-    background-color: #0056b3;
-}
-
-/* Swipable Cards */
-.promo-profiles, .featured-profiles {
-    padding: 40px 20px;
-    text-align: center;
-}
-
-.swiper {
-    width: 100%;
-    padding: 20px 0;
-}
-
-.swiper-slide {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.card {
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 300px;
-    text-align: left;
-}
-
-/* Search Section */
-.search-section {
-    padding: 40px 20px;
-    text-align: center;
-}
-
-#searchInput {
-    padding: 10px;
-    width: 100%;
-    max-width: 500px;
-    margin-bottom: 20px;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .hero-content h1 {
-        font-size: 1.5rem;
-    }
-    .hero-content p {
-        font-size: 1rem;
-    }
-    .hero-video-container {
-        padding-top: 75%; /* Adjusted for mobile */
-    }
-    .card {
-        max-width: 250px;
-    }
-    .swiper {
-        padding: 10px 0;
+// search.js
+async function fetchTests() {
+    try {
+        const response = await fetch('/public/tests.json');
+        if (!response.ok) throw new Error('Network response was not ok');
+        return await response.json();
+    } catch (error) {
+        document.getElementById('errorMessage').innerText = 'Error fetching tests: ' + error;
+        document.getElementById('errorMessage').style.display = 'block';
+        return [];
     }
 }
 
-@media (min-width: 1024px) {
-    .hero-content h1 {
-        font-size: 3rem;
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    const summaryCard = document.getElementById('summaryCard');
+    const selectedTests = document.getElementById('selectedTests');
+    const bookNowBtn = document.getElementById('bookNowBtn');
+
+    let tests = [];
+    let selected = [];
+
+    fetchTests().then(data => {
+        tests = data;
+        populateSearchResults('');
+    });
+
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase();
+        populateSearchResults(query);
+    });
+
+    function populateSearchResults(query) {
+        searchResults.innerHTML = '';
+        const filteredTests = tests.filter(test =>
+            test.Test_Name.toLowerCase().includes(query) ||
+            test.Description.toLowerCase().includes(query)
+        );
+        filteredTests.forEach(test => {
+            const div = document.createElement('div');
+            div.innerHTML = `<input type="checkbox" id="test-${test.Test_Name.replace(/\s+/g, '-').toLowerCase()}" 
+                data-name="${test.Test_Name}" data-price="${test.Healthify_Offer_Price}">
+                <label for="test-${test.Test_Name.replace(/\s+/g, '-').toLowerCase()}">${test.Test_Name} - ₹${test.Healthify_Offer_Price}</label>`;
+            searchResults.appendChild(div);
+        });
+
+        document.querySelectorAll('#searchResults input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                const testName = checkbox.getAttribute('data-name');
+                if (checkbox.checked) {
+                    selected.push({ name: testName, price: parseFloat(checkbox.getAttribute('data-price')) });
+                } else {
+                    selected = selected.filter(t => t.name !== testName);
+                }
+                updateSummary();
+            });
+        });
     }
-    .hero-content p {
-        font-size: 1.5rem;
+
+    function updateSummary() {
+        selectedTests.innerHTML = '';
+        const total = selected.reduce((sum, t) => sum + t.price, 0);
+        selected.forEach(test => {
+            const li = document.createElement('li');
+            li.textContent = `${test.name} - ₹${test.price}`;
+            selectedTests.appendChild(li);
+        });
+        if (selected.length > 0) {
+            summaryCard.style.display = 'block';
+            bookNowBtn.href = `?test=${selected.map(t => t.name.replace(/\s+/g, '-').toLowerCase()).join(',')}&total=${total}`;
+        } else {
+            summaryCard.style.display = 'none';
+        }
     }
-}
+});
