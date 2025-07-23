@@ -1,8 +1,26 @@
 // scripts/ai-features.js
 document.addEventListener('DOMContentLoaded', () => {
     // Load test and profile data
-    const tests = fetch('/public/tests.json').then(res => res.json());
-    const profiles = fetch('/public/profiles.json').then(res => res.json());
+    let tests = [];
+    let profiles = [];
+    Promise.all([
+        fetch('/public/tests.json').then(res => res.json()),
+        fetch('/public/profiles.json').then(res => res.json())
+    ]).then(([testData, profileData]) => {
+        tests = testData.map(test => ({
+            name: test.Test_Name,
+            offerPrice: test.Healthify_Offer_Price,
+            mrp: test.MRP || test.Healthify_Offer_Price * 1.5,
+            description: test.Description || 'No description available'
+        }));
+        profiles = profileData.map(profile => ({
+            name: profile.Test_Name,
+            offerPrice: profile.Healthify_Offer_Price,
+            mrp: profile.MRP || 0,
+            description: profile.Description || 'No description available',
+            tests: profile.Tests || [] // Assuming profiles include a Tests array
+        }));
+    }).catch(error => console.error('Error loading data:', error));
 
     // AI Symptom Checker
     const symptomInput = document.getElementById('symptomInput');
@@ -19,10 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             const possibleTests = [];
             if (symptoms.includes('fever') || symptoms.includes('cough')) {
-                possibleTests.push('Complete Blood Count (CBC)', 'RT-PCR for COVID-19');
+                possibleTests.push(...tests.filter(t => ['Complete Blood Count (CBC)', 'RT-PCR for COVID-19'].includes(t.name)).map(t => `${t.name} (₹${t.offerPrice})`));
             }
             if (symptoms.includes('fatigue') || symptoms.includes('weakness')) {
-                possibleTests.push('Healthify Anemia Shield', 'Vitamin D (25-OH)');
+                possibleTests.push(...tests.filter(t => ['Healthify Anemia Shield', 'Vitamin D (25-OH)'].includes(t.name)).map(t => `${t.name} (₹${t.offerPrice})`));
             }
             if (possibleTests.length) {
                 symptomResult.innerHTML = `<p class="success">✅ Possible tests: ${possibleTests.join(', ')}. Consult a doctor for confirmation.</p>`;
@@ -48,14 +66,18 @@ document.addEventListener('DOMContentLoaded', () => {
         healthPrediction.innerHTML = '<p>📊 Calculating health risks...</p>';
         setTimeout(() => {
             let prediction = 'Your health looks good based on age and gender.';
+            let recommendedTests = [];
             if (age > 50) {
-                prediction = 'Consider a Healthify Senior Care or Healthify Cardiac Advance due to age-related risks.';
+                prediction = 'Consider a senior health check due to age-related risks.';
+                recommendedTests = tests.filter(t => ['Healthify Senior Care', 'Healthify Cardiac Advance'].includes(t.name)).map(t => `${t.name} (₹${t.offerPrice})`);
             } else if (age > 30 && gender === 'female') {
-                prediction = 'Consider Healthify Women’s Wellness for hormonal health.';
+                prediction = 'Consider a women’s health check for hormonal health.';
+                recommendedTests = tests.filter(t => ['Healthify Women’s Wellness'].includes(t.name)).map(t => `${t.name} (₹${t.offerPrice})`);
             } else if (age > 30 && gender === 'male') {
-                prediction = 'Consider Healthify Heart Guard for cardiovascular health.';
+                prediction = 'Consider a cardiovascular health check.';
+                recommendedTests = tests.filter(t => ['Healthify Heart Guard'].includes(t.name)).map(t => `${t.name} (₹${t.offerPrice})`);
             }
-            healthPrediction.innerHTML = `<p class="success">✅ ${prediction} Consult a doctor for a detailed checkup.</p>`;
+            healthPrediction.innerHTML = `<p class="success">✅ ${prediction} ${recommendedTests.length ? `Recommended: ${recommendedTests.join(', ')}.` : ''} Consult a doctor for a detailed checkup.</p>`;
         }, 1000); // Simulated AI processing delay
     });
 
@@ -65,13 +87,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     refreshRecommendationBtn?.addEventListener('click', () => {
         aiAppRecommendation.innerHTML = '<p>🔄 Generating recommendations...</p>';
-        setTimeout(async () => {
-            const testData = await tests;
-            const profileData = await profiles;
-            const recommended = [...testData, ...profileData]
-                .filter(item => ['Healthify Vital Check', 'Healthify Diabetes Care', 'Healthify Thyroid Balance'].includes(item.Test_Name))
-                .map(item => `${item.Test_Name} (Offer: ₹${item.Healthify_Offer_Price})`);
-            aiAppRecommendation.innerHTML = `<p class="success">✅ Recommended tests for your area: ${recommended.join(', ')}. Download the app for more!</p>`;
+        setTimeout(() => {
+            const recommended = [...tests, ...profiles]
+                .filter(item => ['Healthify Vital Check', 'Healthify Diabetes Care', 'Healthify Thyroid Balance'].includes(item.name))
+                .map(item => `${item.name} (Offer: ₹${item.offerPrice})`);
+            aiAppRecommendation.innerHTML = `<p class="success">✅ Recommended tests/profiles for your area: ${recommended.join(', ')}. Download the app for more!</p>`;
         }, 1000); // Simulated AI processing delay
     });
 
@@ -90,11 +110,13 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             let response = 'Sorry, I couldn’t understand your query. Please try again or contact support.';
             if (query.includes('test') || query.includes('package')) {
-                response = 'You can book tests like Healthify Vital Check or Healthify Comprehensive Wellness. Visit /booking.html for details.';
+                const testOptions = tests.map(t => `${t.name} (₹${t.offerPrice})`).slice(0, 3);
+                response = `You can book tests like ${testOptions.join(', ')}. Visit /booking.html for details.`;
             } else if (query.includes('report') || query.includes('result')) {
                 response = 'Check your reports via the app or contact us at report@healthifylab.com.';
             } else if (query.includes('price')) {
-                response = 'Prices vary by test. Download the app or visit /booking.html for offers.';
+                const priceExamples = tests.map(t => `${t.name}: ₹${t.offerPrice}`).slice(0, 3);
+                response = `Prices vary by test. Examples: ${priceExamples.join(', ')}. Download the app or visit /booking.html for offers.`;
             }
             chatResponse.innerHTML = `<p class="success">🤖 ${response}</p>`;
             chatInput.value = '';
