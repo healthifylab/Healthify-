@@ -1,132 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="manifest" href="/public/manifest.json">
-    <meta name="theme-color" content="#4CAF50">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Healthify Lab - Home</title>
-    <meta name="description" content="Healthify Lab offers affordable blood tests in Mumbai, Navi Mumbai, and Thane. Book online, get reports, and stay healthy!">
-    <meta name="keywords" content="Healthify Lab, blood test Mumbai, health checkup, diagnostic center">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/styles/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R0R3RYERZW"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-R0R3RYERZW');
-    </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Healthify Lab</title>
+  <link rel="stylesheet" href="styles/style.css" />
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <button id="openDrawer" aria-label="Open Menu">☰</button>
-            <img src="/public/logo.png" alt="Healthify Lab Logo" class="logo-img" loading="lazy">
-            <div id="drawer" class="drawer">
-                <div class="drawer-header">
-                    <h3>Menu</h3>
-                    <button id="closeDrawer" class="close-drawer" aria-label="Close Menu">×</button>
-                </div>
-                <ul>
-                    <li><a href="/index.html">Home</a></li>
-                    <li><a href="/booking.html">Book Test</a></li>
-                    <li><a href="/contact.html">Contact</a></li>
-                    <li><a href="/call-back.html">Call Me Back</a></li>
-                    <li><a href="/cart.html">My Cart</a></li>
-                </ul>
-            </div>
-        </div>
-        <main>
-            <section class="hero">
-                <video autoplay muted loop playsinline class="hero-video" poster="/public/test-placeholder.jpg">
-                    <source src="/public/hero-video.mp4" type="video/mp4">
-                </video>
-                <div class="hero-content">
-                    <h1>Healthify Lab <i class="fas fa-heartbeat"></i></h1>
-                    <p>Affordable Blood Tests in Mumbai, Navi Mumbai & Thane</p>
-                    <a href="/booking.html" class="btn">Book Now <i class="fas fa-stethoscope"></i></a>
-                </div>
-            </section>
-            <section class="features">
-                <h2>Why Choose Us?</h2>
-                <div class="feature-cards">
-                    <div class="feature-card">
-                        <img src="/public/testimonial1.jpg" alt="Affordable Pricing" loading="lazy">
-                        <h3>Affordable Pricing</h3>
-                        <p>Up to 50% off on health packages.</p>
-                    </div>
-                    <div class="feature-card">
-                        <img src="/public/testimonial2.jpg" alt="Fast Reports" loading="lazy">
-                        <h3>Fast Reports</h3>
-                        <p>Get results in 24-48 hours.</p>
-                    </div>
-                    <div class="feature-card">
-                        <img src="/public/test-placeholder.jpg" alt="Home Collection" loading="lazy">
-                        <h3>Home Collection</h3>
-                        <p>Book a sample collection at your doorstep.</p>
-                    </div>
-                </div>
-            </section>
-            <section class="testimonials">
-                <h2>What Our Clients Say</h2>
-                <div class="testimonial-slider">
-                    <div class="testimonial">
-                        <p>"Great service and quick reports!" - Priya S.</p>
-                    </div>
-                    <div class="testimonial">
-                        <p>"Affordable and reliable testing." - Amit K.</p>
-                    </div>
-                </div>
-            </section>
-            <!-- AI Symptom Checker Section -->
-            <section class="ai-symptom-checker">
-                <h2>AI Symptom Checker <i class="fas fa-user-md"></i></h2>
-                <p>Get personalized health insights instantly.</p>
-                <textarea id="symptomInput" placeholder="Describe your symptoms (e.g., fever, cough, fatigue)..." rows="4"></textarea>
-                <button id="checkSymptoms" class="btn">Check Symptoms <i class="fas fa-check"></i></button>
-                <div id="symptomResult" class="result-box"></div>
-            </section>
-            <!-- AI Health Prediction Section -->
-            <section class="ai-health-prediction">
-                <h2>AI Health Prediction <i class="fas fa-chart-line"></i></h2>
-                <p>Predict your health risks based on your profile.</p>
-                <div>
-                    <label for="age">Age:</label><input type="number" id="age" min="1" max="120" required>
-                    <label for="gender">Gender:</label>
-                    <select id="gender">
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
-                    </select>
-                    <button id="predictHealth" class="btn">Predict Health <i class="fas fa-heartbeat"></i></button>
-                </div>
-                <div id="healthPrediction" class="result-box"></div>
-            </section>
-        </main>
-        <div class="social-links">
-            <a href="https://x.com/healthify_lab"><i class="fab fa-x-twitter"></i></a>
-            <a href="https://instagram.com/healthifylab"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.facebook.com/share/1Axkp5jB81/?mibextid=qi2Omg"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://threads.net/healthifylab" target="_blank" aria-label="Threads"><i class="fab fa-threads"></i></a>
-        </div>
+
+  <header class="hero">
+    <img src="public/logo.png" alt="Healthify Lab" class="logo" />
+    <h1>Accurate • Reliable • Healthify</h1>
+  </header>
+
+  <section class="search">
+    <input type="text" placeholder="Search test or profile..." />
+  </section>
+
+  <section class="features">
+    <div class="feature">
+      <h3>Home Sample Collection</h3>
+      <p>Easy and reliable collection from your doorstep.</p>
     </div>
-    <div class="whatsapp-float">
-        <a href="https://wa.me/919503832889" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <div class="feature">
+      <h3>Certified Lab Reports</h3>
+      <p>Reports reviewed by medical professionals.</p>
     </div>
-    <footer class="footer">
-        <div class="footer-content">
-            <p>Contact Us: <br>
-               +91 9503832889 / +91 99676 40104 <br>
-               <a href="https://wa.me/919503832889" target="_blank">WhatsApp: 9503832889</a> <br>
-               Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a>
-            </p>
-            <p>All rights reserved @healthify 2025</p>
-        </div>
-    </footer>
-    <script defer src="/scripts/drawer.js"></script>
-    <script defer src="/scripts/pwa-register.js"></script>
-    <script defer src="/scripts/ai-features.js"></script> <!-- New AI Features Script -->
+    <div class="feature">
+      <h3>Affordable Packages</h3>
+      <p>Exclusive offers on complete health checkups.</p>
+    </div>
+  </section>
+
+  <!-- Featured Promo Cards -->
+  <section class="slider-section">
+    <h2>Featured Promo Profiles</h2>
+    <div id="featured-carousel" class="carousel"></div>
+  </section>
+
+  <!-- Profile Promo Cards -->
+  <section class="slider-section">
+    <h2>Popular Health Profiles</h2>
+    <div id="profile-carousel" class="carousel"></div>
+  </section>
+
+  <section class="testimonials">
+    <h2>Trusted by Thousands</h2>
+    <p>Real feedback from our satisfied patients across India.</p>
+  </section>
+
+  <section class="ai-section">
+    <h2>Smart AI Assistant</h2>
+    <p>Try our AI-powered assistant for report explanation and profile suggestions.</p>
+    <a href="/ai" class="btn">Try Now</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Healthify Lab. All rights reserved.</p>
+  </footer>
+
+  <!-- Embedded JavaScript -->
+  <script>
+    async function loadProfiles() {
+      try {
+        const response = await fetch('data/profiles.json');
+        const profiles = await response.json();
+
+        const featured = profiles.slice(0, 13);
+        const others = profiles.slice(13, 25);
+
+        const featuredContainer = document.getElementById("featured-carousel");
+        const profileContainer = document.getElementById("profile-carousel");
+
+        const createCard = (profile) => {
+          const card = document.createElement("div");
+          card.className = "card";
+
+          const img = document.createElement("img");
+          img.src = `public/${profile.image || profile.id || 'default'}.jpg`;
+          img.alt = profile.name;
+
+          const title = document.createElement("h3");
+          title.textContent = profile.name;
+
+          card.appendChild(img);
+          card.appendChild(title);
+          return card;
+        };
+
+        featured.forEach(p => featuredContainer.appendChild(createCard(p)));
+        others.forEach(p => profileContainer.appendChild(createCard(p)));
+
+        // Auto-scroll every second
+        setInterval(() => {
+          featuredContainer.scrollLeft += 170;
+          if (featuredContainer.scrollLeft + featuredContainer.clientWidth >= featuredContainer.scrollWidth) {
+            featuredContainer.scrollLeft = 0;
+          }
+        }, 1000);
+
+        setInterval(() => {
+          profileContainer.scrollLeft += 170;
+          if (profileContainer.scrollLeft + profileContainer.clientWidth >= profileContainer.scrollWidth) {
+            profileContainer.scrollLeft = 0;
+          }
+        }, 1000);
+
+      } catch (e) {
+        console.error("Failed to load profiles.json", e);
+      }
+    }
+
+    loadProfiles();
+  </script>
+
 </body>
 </html>
