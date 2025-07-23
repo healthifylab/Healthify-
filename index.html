@@ -169,7 +169,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-pagination"></div>
+                    <!-- Pagination hidden by CSS -->
                 </div>
             </div>
             <h2 class="section-title"> <i class="fas fa-star"></i></h2>
@@ -274,7 +274,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-pagination"></div>
+                    <!-- Pagination hidden by CSS -->
                 </div>
             </div>
         </section>
@@ -342,13 +342,13 @@
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="/scripts/drawer.js"></script>
     <script>
-        // Initialize Swiper
+        // Initialize Swiper with Autoplay
         const promoSwiper = new Swiper('.promo-swiper', {
             slidesPerView: 1,
             spaceBetween: 10,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
+            autoplay: {
+                delay: 1000, // 1 second interval
+                disableOnInteraction: false,
             },
             breakpoints: {
                 640: { slidesPerView: 2 },
@@ -360,9 +360,9 @@
         const featuredSwiper = new Swiper('.featured-swiper', {
             slidesPerView: 1,
             spaceBetween: 10,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
+            autoplay: {
+                delay: 1000, // 1 second interval
+                disableOnInteraction: false,
             },
             breakpoints: {
                 640: { slidesPerView: 2 },
