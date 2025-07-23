@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="manifest" href="/public/manifest.json">
+<meta name="theme-color" content="#4CAF50">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Healthifylive Lab</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -14,28 +19,116 @@
             <img src="/public/logo.png" alt="Healthifylive Lab Logo" class="logo-img">
             <nav>
                 <a href="/index.html">Home</a>
-                <a href="/contact.html">Contact</a>
                 <a href="/booking.html">Book Test</a>
+                <a href="/contact.html">Contact</a>
             </nav>
         </div>
         <main>
-            <h1>Contact Us</h1>
-            <p>Phone: +91 9503832889</p>
-            <p>Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a></p>
+            <h1>📞 Get in Touch 😊</h1>
+            <p>Reach out to us for support or inquiries. <i class="fas fa-headset"></i></p>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Full Name <i class="fas fa-user"></i></label>
+                        <input type="text" id="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email <i class="fas fa-at"></i></label>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message <i class="fas fa-comment"></i></label>
+                        <textarea id="message" placeholder="Your message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message <i class="fas fa-check"></i></button>
+                </form>
+                <p id="contactMessage"></p>
+            </div>
+            <div class="contact-info">
+                <p>Contact: +91 9503832889 <i class="fas fa-phone"></i></p>
+                <p>Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a> <i class="fas fa-envelope"></i></p>
+                <p>Address: Mumbai, Navi Mumbai, Thane <i class="fas fa-map-marker-alt"></i></p>
+            </div>
+            <!-- AI Chat Support Section -->
+            <section class="ai-chat-support">
+                <h2>AI Chat Support <i class="fas fa-robot"></i></h2>
+                <p>Get instant answers to your health queries.</p>
+                <input type="text" id="chatInput" placeholder="Ask a health question..." style="width: 100%; padding: 10px; margin-bottom: 10px;">
+                <button id="sendChat" class="btn">Send <i class="fas fa-paper-plane"></i></button>
+                <div id="chatResponse" class="result-box"></div>
+            </section>
         </main>
         <footer>
             <p>Healthifylive © 2025 | Contact: +91 9503832889 <i class="fas fa-phone"></i> | Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a></p>
             <div class="social-media">
-                <a href="https://x.com/healthify_lab" target="_blank"><i class="fab fa-x-twitter"></i></a>
-                <a href="https://instagram.com/healthifylab" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://facebook.com/healthify" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/healthifylive" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://instagram.com/healthifylive" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://facebook.com/healthifylive" target="_blank"><i class="fab fa-facebook-f"></i></a>
                 <a href="https://threads.net/healthifylab" target="_blank" aria-label="Threads"><i class="fab fa-threads"></i></a>
             </div>
         </footer>
-        <a href="https://wa.me/919503832889" class="whatsapp-float">
-            <div><i class="fab fa-whatsapp"></i></div>
-        </a>
     </div>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+        import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
+            authDomain: "healthify-lab.firebaseapp.com",
+            projectId: "healthify-lab",
+            storageBucket: "healthify-lab.firebasestorage.app",
+            messagingSenderId: "297003315332",
+            appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        emailjs.init('dJE_JHAoNTxxzTxiT');
+
+        document.getElementById('contactForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            const contactMessage = document.getElementById('contactMessage');
+
+            if (!name || !email || !message) {
+                contactMessage.className = "error";
+                contactMessage.textContent = "❌ Please fill all fields.";
+                return;
+            }
+
+            contactMessage.textContent = "📞 Submitting your message...";
+            try {
+                await addDoc(collection(db, "contacts"), {
+                    name: name,
+                    email: email,
+                    message: message,
+                    timestamp: new Date().toISOString(),
+                    status: "New Inquiry"
+                });
+                emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
+                    to_name: name,
+                    to_email: 'report@healthifylab.com',
+                    message: `New inquiry from ${name}: ${message}\nEmail: ${email}`
+                }).then(() => {
+                    contactMessage.className = "success";
+                    contactMessage.textContent = "✅ Message sent! We’ll get back to you soon.";
+                    document.getElementById('contactForm').reset();
+                }).catch((error) => {
+                    console.error('EmailJS error:', error);
+                    contactMessage.className = "error";
+                    contactMessage.textContent = "❌ Message saved, but email failed to send.";
+                });
+            } catch (error) {
+                console.error('Error submitting contact:', error);
+                contactMessage.className = "error";
+                contactMessage.textContent = `❌ Failed to submit: ${error.message}. Try again or contact support.`;
+            }
+        });
+    </script>
     <script src="/scripts/pwa-register.js"></script>
+    <script defer src="/scripts/ai-features.js"></script> <!-- New AI Features Script -->
 </body>
 </html>
