@@ -29,6 +29,8 @@
                     <span></span>
                     <span></span>
                 </div>
+                <!-- Floating AI Button (Top Right) -->
+                <a href="/ai.html" class="btn" style="position: absolute; top: 10px; right: 10px; padding: 5px 10px; font-size: 0.9rem;">AI Assistant <i class="fas fa-robot"></i></a>
             </nav>
         </div>
         <div class="hero">
@@ -47,8 +49,6 @@
     <input type="text" id="searchInput" placeholder="Search tests or profiles..." class="search-input">
     <div id="searchResults"></div>
     <button id="bookNowBtn">Book Now</button>
-    <!-- Added AI Popup Button -->
-    <a href="/ai.html" class="btn" style="margin-top: 10px;">AI Assistant <i class="fas fa-robot"></i></a>
 </div>
         <div class="promo-popup" id="promoPopup">
             <h3>Home blood sample collection in Mumbai, Navi Mumbai, and Thane <i class="fas fa-map-marker-alt"></i></h3>
@@ -333,7 +333,7 @@
         </a>
         <button class="app-download-float" onclick="document.getElementById('appPopup').style.display='block'">Download App</button>
         <div id="appPopup">
-            <button class="close-btn" onclick="document.getElementById('appPopup').style.display='none'">&times;</button>
+            <button class="close-btn" onclick="document.getElementById('appPopup').style.display='none'">×</button>
             <img src="/public/app-qr-code.png" alt="App QR Code">
             <p>Scan to download the Healthify App!</p>
             <a href="/app.html">Get It Now</a>
