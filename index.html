@@ -1,40 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="manifest" href="/public/manifest.json">
+    <meta name="theme-color" content="#4CAF50">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Healthifylive Lab</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <title>Healthify Lab - Home</title>
+    <meta name="description" content="Healthify Lab offers affordable blood tests in Mumbai, Navi Mumbai, and Thane. Book online, get reports, and stay healthy!">
+    <meta name="keywords" content="Healthify Lab, blood test Mumbai, health checkup, diagnostic center">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R0R3RYERZW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-R0R3RYERZW');
+    </script>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <img src="/public/logo.png" alt="Healthifylive Lab Logo" class="logo-img">
-            <nav>
-                <a href="/index.html">Home</a>
-                <a href="/contact.html">Contact</a>
-                <a href="/booking.html">Book Test</a>
-            </nav>
+            <button id="openDrawer" aria-label="Open Menu">☰</button>
+            <img src="/public/logo.png" alt="Healthify Lab Logo" class="logo-img" loading="lazy">
+            <div id="drawer" class="drawer">
+                <div class="drawer-header">
+                    <h3>Menu</h3>
+                    <button id="closeDrawer" class="close-drawer" aria-label="Close Menu">×</button>
+                </div>
+                <ul>
+                    <li><a href="/index.html">Home</a></li>
+                    <li><a href="/booking.html">Book Test</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                    <li><a href="/call-back.html">Call Me Back</a></li>
+                    <li><a href="/cart.html">My Cart</a></li>
+                </ul>
+            </div>
         </div>
         <main>
-            <h1>Welcome to Healthifylive Lab</h1>
-            <p>Your trusted partner for health diagnostics. Book your test today!</p>
+            <section class="hero">
+                <video autoplay muted loop playsinline class="hero-video" poster="/public/test-placeholder.jpg">
+                    <source src="/public/hero-video.mp4" type="video/mp4">
+                </video>
+                <div class="hero-content">
+                    <h1>Healthify Lab <i class="fas fa-heartbeat"></i></h1>
+                    <p>Affordable Blood Tests in Mumbai, Navi Mumbai & Thane</p>
+                    <a href="/booking.html" class="btn">Book Now <i class="fas fa-stethoscope"></i></a>
+                </div>
+            </section>
+            <section class="features">
+                <h2>Why Choose Us?</h2>
+                <div class="feature-cards">
+                    <div class="feature-card">
+                        <img src="/public/testimonial1.jpg" alt="Affordable Pricing" loading="lazy">
+                        <h3>Affordable Pricing</h3>
+                        <p>Up to 50% off on health packages.</p>
+                    </div>
+                    <div class="feature-card">
+                        <img src="/public/testimonial2.jpg" alt="Fast Reports" loading="lazy">
+                        <h3>Fast Reports</h3>
+                        <p>Get results in 24-48 hours.</p>
+                    </div>
+                    <div class="feature-card">
+                        <img src="/public/test-placeholder.jpg" alt="Home Collection" loading="lazy">
+                        <h3>Home Collection</h3>
+                        <p>Book a sample collection at your doorstep.</p>
+                    </div>
+                </div>
+            </section>
+            <section class="testimonials">
+                <h2>What Our Clients Say</h2>
+                <div class="testimonial-slider">
+                    <div class="testimonial">
+                        <p>"Great service and quick reports!" - Priya S.</p>
+                    </div>
+                    <div class="testimonial">
+                        <p>"Affordable and reliable testing." - Amit K.</p>
+                    </div>
+                </div>
+            </section>
+            <!-- AI Symptom Checker Section -->
+            <section class="ai-symptom-checker">
+                <h2>AI Symptom Checker <i class="fas fa-user-md"></i></h2>
+                <p>Get personalized health insights instantly.</p>
+                <textarea id="symptomInput" placeholder="Describe your symptoms (e.g., fever, cough, fatigue)..." rows="4"></textarea>
+                <button id="checkSymptoms" class="btn">Check Symptoms <i class="fas fa-check"></i></button>
+                <div id="symptomResult" class="result-box"></div>
+            </section>
+            <!-- AI Health Prediction Section -->
+            <section class="ai-health-prediction">
+                <h2>AI Health Prediction <i class="fas fa-chart-line"></i></h2>
+                <p>Predict your health risks based on your profile.</p>
+                <div>
+                    <label for="age">Age:</label><input type="number" id="age" min="1" max="120" required>
+                    <label for="gender">Gender:</label>
+                    <select id="gender">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <button id="predictHealth" class="btn">Predict Health <i class="fas fa-heartbeat"></i></button>
+                </div>
+                <div id="healthPrediction" class="result-box"></div>
+            </section>
         </main>
-        <footer>
-            <p>Healthifylive © 2025 | Contact: +91 9503832889 <i class="fas fa-phone"></i> | Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a></p>
-            <div class="social-media">
-                <a href="https://x.com/healthify_lab" target="_blank"><i class="fab fa-x-twitter"></i></a>
-                <a href="https://instagram.com/healthifylab" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://facebook.com/healthify" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://threads.net/healthifylab" target="_blank" aria-label="Threads"><i class="fab fa-threads"></i></a>
-            </div>
-        </footer>
-        <a href="https://wa.me/919503832889" class="whatsapp-float">
-            <div><i class="fab fa-whatsapp"></i></div>
-        </a>
+        <div class="social-links">
+            <a href="https://x.com/healthify_lab"><i class="fab fa-x-twitter"></i></a>
+            <a href="https://instagram.com/healthifylab"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/share/1Axkp5jB81/?mibextid=qi2Omg"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://threads.net/healthifylab" target="_blank" aria-label="Threads"><i class="fab fa-threads"></i></a>
+        </div>
     </div>
-    <script src="/scripts/pwa-register.js"></script>
+    <div class="whatsapp-float">
+        <a href="https://wa.me/919503832889" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Contact Us: <br>
+               +91 9503832889 / +91 99676 40104 <br>
+               <a href="https://wa.me/919503832889" target="_blank">WhatsApp: 9503832889</a> <br>
+               Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a>
+            </p>
+            <p>All rights reserved @healthify 2025</p>
+        </div>
+    </footer>
+    <script defer src="/scripts/drawer.js"></script>
+    <script defer src="/scripts/pwa-register.js"></script>
+    <script defer src="/scripts/ai-features.js"></script> <!-- New AI Features Script -->
 </body>
 </html>
