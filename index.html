@@ -34,33 +34,29 @@
             </nav>
         </div>
         <div class="hero">
-            <img class="hero-banner" >
-                <source <img src="/public/hero-banner.jpg" alt="Healthify hero-banner" class="hero-banner-img">
-                <a href="/booking.html"><button class="book-now-btn">Book Now <i class="fas fa-check"></i></button></a>
-            </image>
+            <img class="hero-banner">
+            <source><img src="/public/hero-banner.jpg" alt="Healthify hero-banner" class="hero-banner-img"></source>
+            <a href="/booking.html"><button class="book-now-btn">Book Now <i class="fas fa-check"></i></button></a>
             <h1>Welcome to Healthify <i class="fas fa-heartbeat"></i></h1>
-            
-           </p> <a href="/app.html" class="btn">Download App<i class="fas fa-Download"></i></a></p>
-    
-        <p> 100% Safe, Scanned by VirusTotal, </p>
-    </div>
+            <p><a href="/app.html" class="btn">Download App <i class="fas fa-download"></i></a></p>
+            <p>100% Safe, Scanned by VirusTotal</p>
+        </div>
         <div class="search-section">
-    <h2>Find Tests & Profiles <i class="fas fa-search"></i></h2>
-    <input type="text" id="searchInput" placeholder="Search tests or profiles..." class="search-input">
-    <div id="searchResults"></div>
-    <button id="bookNowBtn">Book Now</button>
-</div>
+            <h2>Find Tests & Profiles <i class="fas fa-search"></i></h2>
+            <input type="text" id="searchInput" placeholder="Search tests or profiles..." class="search-input">
+            <div id="searchResults"></div>
+            <button id="bookNowBtn">Book Now</button>
+        </div>
         <div class="promo-popup" id="promoPopup">
             <h3>Home blood sample collection in Mumbai, Navi Mumbai, and Thane <i class="fas fa-map-marker-alt"></i></h3>
-            <p id="promoText"> 📅 Book Online • Same-Day Collection
-📃 Digital Reports Delivered Fast  !</p>
+            <p id="promoText">📅 Book Online • Same-Day Collection<br>📃 Digital Reports Delivered Fast!</p>
             <button class="promo-btn close-btn" onclick="closePopup()" style="position: absolute; top: 10px; right: 10px; padding: 5px 10px; font-size: 0.8rem;">×</button>
             <a href="/booking.html"><button class="promo-btn book-now-btn">Book Now <i class="fas fa-check"></i></button></a>
         </div>
         <!-- Swipeable Cards Section (Combined Promo and Featured) -->
         <section class="cards-section">
             <div class="cards-container">
-                <h2 class="section-title"> <i class="fas fa-gift"></i></h2>
+                <h2 class="section-title"><i class="fas fa-gift"></i> Promo Offers</h2>
                 <div class="swiper-container promo-swiper">
                     <div class="swiper-wrapper">
                         <!-- First 13 profiles in promo swiper -->
@@ -172,7 +168,7 @@
                     <!-- Pagination hidden by CSS -->
                 </div>
             </div>
-            <h2 class="section-title"> <i class="fas fa-star"></i></h2>
+            <h2 class="section-title"><i class="fas fa-star"></i> Featured Packages</h2>
             <div class="cards-container">
                 <div class="swiper-container featured-swiper">
                     <div class="swiper-wrapper">
@@ -313,6 +309,10 @@
                     <div class="faq-question" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'block' ? 'none' : 'block';">What areas do you serve?</div>
                     <div class="faq-answer">We serve Mumbai, Navi Mumbai, and Thane with home collection.</div>
                 </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'block' ? 'none' : 'block';">How long does it take to get results?</div>
+                    <div class="faq-answer">Results are typically delivered within 24-48 hours via email or the app.</div>
+                </div>
             </div>
         </section>
         <!-- Social Links -->
@@ -341,6 +341,7 @@
     </div>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="/scripts/drawer.js"></script>
+    <script src="/scripts/search.js"></script>
     <script>
         // Initialize Swiper with Autoplay
         const promoSwiper = new Swiper('.promo-swiper', {
@@ -380,16 +381,8 @@
             document.getElementById('promoPopup').classList.remove('active');
         }
 
-        // Search functionality (placeholder)
-        document.getElementById('searchInput').addEventListener('input', function() {
-            const results = document.getElementById('searchResults');
-            results.style.display = this.value ? 'block' : 'none';
-            // Add search logic here (e.g., fetch from /public/tests.json or /public/profiles.json)
-        });
-
-        document.getElementById('bookNowBtn').addEventListener('click', function() {
-            window.location.href = '/booking.html';
-        });
+        // Additional script (optional placeholder)
+        // This can be removed if all functionality is in search.js
     </script>
 </body>
 </html>
