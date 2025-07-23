@@ -214,20 +214,9 @@ nav a:hover {
     color: #666;
 }
 
-.swiper-pagination {
-    text-align: center;
-    margin-top: 10px;
-}
-
-.swiper-pagination-bullet {
-    width: 10px;
-    height: 10px;
-    background-color: #007bff;
-    opacity: 0.5;
-}
-
-.swiper-pagination-bullet-active {
-    opacity: 1;
+/* Hide Pagination Dots */
+.promo-swiper .swiper-pagination, .featured-swiper .swiper-pagination {
+    display: none;
 }
 
 /* Testimonials Section */
