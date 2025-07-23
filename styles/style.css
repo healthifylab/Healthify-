@@ -93,9 +93,8 @@ nav a:hover {
 .btn:hover {
     background-color: #20B2AA;
 }
-}
 
-.btn:hover a{
+.btn:hover a {
     background-color: #20B2AA;
 }
 
@@ -116,6 +115,25 @@ nav a:hover {
 
 #searchResults {
     margin-top: 10px;
+}
+
+/* Search Result Styles */
+.result-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 0.9rem;
+}
+
+.result-item .strike {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.result-item em {
+    color: #666;
 }
 
 /* Promo Popup */
@@ -577,7 +595,7 @@ nav a:hover {
         font-size: 1.2rem;
     }
 
-    .searchResults {
+    #searchResults {
         max-width: 800px;
     }
 
