@@ -224,78 +224,6 @@
         .error {
             color: red;
         }
-        #recommendations {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-            display: none;
-        }
-        #recommendationList li {
-            margin: 5px 0;
-        }
-        #recommendationList button {
-            padding: 2px 5px;
-            background-color: #2962ff;
-            color: white;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-        #chatbot {
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            width: 300px;
-            height: 400px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            display: none;
-            flex-direction: column;
-        }
-        #chatbot-header {
-            background-color: #40E0D0;
-            padding: 10px;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        #chatbot-messages {
-            flex-grow: 1;
-            padding: 10px;
-            overflow-y: auto;
-        }
-        #chatbot-input {
-            padding: 10px;
-            border-top: 1px solid #ccc;
-        }
-        #chatbot-input input {
-            width: 80%;
-            padding: 5px;
-        }
-        #chatbot-input button {
-            padding: 5px 10px;
-            background-color: #2962ff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .chat-message {
-            margin: 5px 0;
-            padding: 5px;
-            border-radius: 5px;
-        }
-        .user-message {
-            background-color: #e0e0e0;
-            text-align: right;
-        }
-        .bot-message {
-            background-color: #f0f0f0;
-            text-align: left;
-        }
         @media (max-width: 768px) {
             .header {
                 flex-direction: column;
@@ -306,10 +234,6 @@
             }
             .form-group {
                 padding: 10px;
-            }
-            #chatbot {
-                width: 90%;
-                left: 5%;
             }
         }
     </style>
@@ -378,10 +302,6 @@
                         <input type="time" id="time" required>
                     </div>
                     <div id="summaryCard"></div>
-                    <div id="recommendations">
-                        <h3>AI Recommended Tests/Profiles</h3>
-                        <ul id="recommendationList"></ul>
-                    </div>
                     <div class="form-group">
                         <button type="submit" class="btn">Book Now <i class="fas fa-check"></i></button>
                     </div>
@@ -402,15 +322,8 @@
         <a href="https://wa.me/919503832889" class="whatsapp-float">
             <div><i class="fab fa-whatsapp"></i></div>
         </a>
-        <div id="chatbot">
-            <div id="chatbot-header" onclick="toggleChatbot()">AI Chatbot <span style="float: right;">×</span></div>
-            <div id="chatbot-messages"></div>
-            <div id="chatbot-input">
-                <input type="text" id="chatbot-input-field" placeholder="Type your message...">
-                <button onclick="sendMessage()">Send</button>
-            </div>
-        </div>
     </div>
+    <script type="module" src="/scripts/lead-submission.js"></script>
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
         import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
@@ -459,26 +372,39 @@
                 <div class="summary-item"><strong>Discounted Amount:</strong> <span class="discounted-amount">₹${totalOffer.toFixed(2)}</span></div>
                 <div class="summary-item"><strong>Saved with Healthify:</strong> <span class="saved-amount">₹${savings.toFixed(2)}</span> (<span class="discounted-amount">${savingsPercentage}% off</span>)</div>
             `;
-            recommendTests();
         }
 
         // Update selected items function
-        function updateSelectedItems(type) {
+        function updateSelectedItems(type, selectId) {
             const selectedDiv = type === 'test' ? document.getElementById('selectedTests') : document.getElementById('selectedProfiles');
             const selectedSet = type === 'test' ? selectedTests : selectedProfiles;
-            const details = type === 'test' ? testDetails : profileDetails;
             selectedDiv.innerHTML = '';
             selectedSet.forEach(item => {
-                const detail = details[item];
-                selectedDiv.innerHTML += `
-                    <span class="selected-tag">${detail.name} (MRP: <s><span class="total-amount">₹${detail.mrp || detail.offerPrice * 1.5}</span></s>, Offer: <span class="discounted-amount">₹${detail.offerPrice}</span>)
-                        <button type="button" onclick="removeSelection('${type}', '${item}')">×</button>
-                    </span>
-                    <div class="${type === 'test' ? 'item-details' : 'profile-details'}">
-                        <p><strong>Description:</strong> ${detail.description}</p>
-                        ${type === 'profile' ? `<p class="included-tests"><strong>Tests Included:</strong> ${detail.tests.join(', ')}</p>` : ''}
-                    </div>
-                `;
+                if (type === 'test') {
+                    const test = testDetails[item];
+                    selectedDiv.innerHTML += `
+                        <span class="selected-tag">${test.name} (MRP: <s><span class="total-amount">₹${test.mrp || test.offerPrice * 1.5}</span></s>, Offer: <span class="discounted-amount">₹${test.offerPrice}</span>)
+                            <button type="button" onclick="removeSelection('${type}', '${item}')">×</button>
+                        </span>
+                        <div class="item-details">
+                            <p><strong>Description:</strong> ${test.description}</p>
+                        </div>
+                    `;
+                } else if (type === 'profile') {
+                    const profile = profileDetails[item];
+                    selectedDiv.innerHTML += `
+                        <span class="selected-tag">${profile.name} (MRP: <s><span class="total-amount">₹${profile.mrp}</span></s>, Offer: <span class="discounted-amount">₹${profile.offerPrice}</span>)
+                            <button type="button" onclick="removeSelection('${type}', '${item}')">×</button>
+                        </span>
+                        <div class="profile-details">
+                            <p><strong>Description:</strong> ${profile.description}</p>
+                            <ul class="included-tests">
+                                <strong>Tests Included:</strong>
+                                ${profile.tests.map(test => `<li>${test}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `;
+                }
             });
             updateSummaryCard();
         }
@@ -494,6 +420,14 @@
                 resultsDiv.style.display = 'block';
                 tests.forEach(test => {
                     const value = test.Test_Name.toLowerCase().replace(/\s/g, '-');
+                    const item = document.createElement('div');
+                    item.className = 'search-result';
+                    item.innerHTML = `
+                        <strong>${test.Test_Name}</strong> (₹${test.Healthify_Offer_Price})
+                        <button onclick="addSelection('test', '${value}')">Add</button>
+                    `;
+                    item.addEventListener('click', () => addSelection('test', value));
+                    resultsDiv.appendChild(item);
                     testDetails[value] = {
                         name: test.Test_Name,
                         mrp: test.MRP || test.Healthify_Offer_Price * 1.5,
@@ -519,6 +453,14 @@
                 resultsDiv.style.display = 'block';
                 profiles.forEach(profile => {
                     const value = profile.Test_Name.toLowerCase().replace(/\s/g, '-');
+                    const item = document.createElement('div');
+                    item.className = 'search-result';
+                    item.innerHTML = `
+                        <strong>${profile.Test_Name}</strong> (₹${profile.Healthify_Offer_Price})
+                        <button onclick="addSelection('profile', '${value}')">Add</button>
+                    `;
+                    item.addEventListener('click', () => addSelection('profile', value));
+                    resultsDiv.appendChild(item);
                     profileDetails[value] = {
                         name: profile.Test_Name,
                         mrp: profile.MRP,
@@ -542,8 +484,8 @@
                     }
                 });
                 // Update UI for all pre-selected items
-                updateSelectedItems('test');
-                updateSelectedItems('profile');
+                updateSelectedItems('test', 'test');
+                updateSelectedItems('profile', 'profile');
                 setupSearch('profile', 'profileSearch', 'profileResults');
             } catch (error) {
                 console.error('Error loading profiles:', error);
@@ -555,24 +497,13 @@
         function setupSearch(type, searchId, resultsId) {
             const searchInput = document.getElementById(searchId);
             const resultsDiv = document.getElementById(resultsId);
-            const details = type === 'test' ? testDetails : profileDetails;
-            const selectedSet = type === 'test' ? selectedTests : selectedProfiles;
 
             searchInput.addEventListener('input', () => {
                 const searchTerm = searchInput.value.toLowerCase();
-                resultsDiv.innerHTML = '';
-                Object.keys(details).filter(key => !selectedSet.has(key))
-                    .filter(key => details[key].name.toLowerCase().includes(searchTerm))
-                    .forEach(key => {
-                        const item = document.createElement('div');
-                        item.className = 'search-result';
-                        item.innerHTML = `
-                            <strong>${details[key].name}</strong> (₹${details[key].offerPrice})
-                            <button onclick="addSelection('${type}', '${key}')">Add</button>
-                        `;
-                        item.addEventListener('click', () => addSelection(type, key));
-                        resultsDiv.appendChild(item);
-                    });
+                Array.from(resultsDiv.children).forEach(item => {
+                    const text = item.textContent.toLowerCase();
+                    item.style.display = text.includes(searchTerm) && !((type === 'test' ? selectedTests : selectedProfiles).has(item.dataset.value)) ? 'block' : 'none';
+                });
                 resultsDiv.style.display = searchTerm.length >= 2 ? 'block' : 'none';
             });
 
@@ -585,16 +516,16 @@
             const set = type === 'test' ? selectedTests : selectedProfiles;
             if (!set.has(item)) {
                 set.add(item);
-                updateSelectedItems(type);
-                document.getElementById(type === 'test' ? 'testSearch' : 'profileSearch').value = '';
+                updateSelectedItems(type, type === 'test' ? 'test' : 'profile');
                 document.getElementById(type === 'test' ? 'testResults' : 'profileResults').style.display = 'none';
+                document.getElementById(type === 'test' ? 'testSearch' : 'profileSearch').value = '';
             }
         };
 
         window.removeSelection = (type, item) => {
             const set = type === 'test' ? selectedTests : selectedProfiles;
             set.delete(item);
-            updateSelectedItems(type);
+            updateSelectedItems(type, type === 'test' ? 'test' : 'profile');
         };
 
         // Handle booking form submission
@@ -663,106 +594,6 @@
         window.showLoginForm = () => {
             alert('Login functionality not implemented yet.');
         };
-
-        // AI Recommendation System
-        function recommendTests() {
-            const recommendationsDiv = document.getElementById('recommendations');
-            const recommendationList = document.getElementById('recommendationList');
-            const age = parseInt(document.getElementById('age').value) || 0;
-            const gender = document.getElementById('gender').value;
-            const selectedTestNames = new Set(Array.from(selectedTests).map(test => testDetails[test].name));
-            const selectedProfileNames = new Set(Array.from(selectedProfiles).map(profile => profileDetails[profile].name));
-            let recommendations = [];
-
-            // Rule-based recommendations
-            if (age > 50) {
-                if (!selectedTestNames.has('Lipid Profile') && !selectedProfileNames.has('Healthify Heart Guard')) {
-                    recommendations.push('Lipid Profile');
-                }
-                if (!selectedTestNames.has('Prostate-Specific Antigen (PSA)') && gender === 'male') {
-                    recommendations.push('Prostate-Specific Antigen (PSA)');
-                }
-                if (!selectedTestNames.has('CA-125') && gender === 'female') {
-                    recommendations.push('CA-125');
-                }
-            }
-            if (age < 30 && !selectedTestNames.has('Vitamin D (25-OH)')) {
-                recommendations.push('Vitamin D (25-OH)');
-            }
-            if (gender === 'female' && !selectedProfileNames.has('Healthify Women’s Wellness')) {
-                recommendations.push('Healthify Women’s Wellness');
-            }
-            if (selectedTestNames.has('HbA1c') && !selectedTestNames.has('C-Peptide Test')) {
-                recommendations.push('C-Peptide Test');
-            }
-
-            // Filter out already selected items
-            recommendations = recommendations.filter(item => !selectedTestNames.has(item) && !selectedProfileNames.has(item));
-
-            if (recommendations.length > 0) {
-                recommendationList.innerHTML = recommendations.map(item => `<li>${item} <button onclick="addRecommended('${item}')">Add</button></li>`).join('');
-                recommendationsDiv.style.display = 'block';
-            } else {
-                recommendationsDiv.style.display = 'none';
-            }
-        }
-
-        window.addRecommended = (item) => {
-            const testKey = Object.keys(testDetails).find(key => testDetails[key].name === item);
-            if (testKey && !selectedTests.has(testKey)) {
-                selectedTests.add(testKey);
-                updateSelectedItems('test');
-            }
-            const profileKey = Object.keys(profileDetails).find(key => profileDetails[key].name === item);
-            if (profileKey && !selectedProfiles.has(profileKey)) {
-                selectedProfiles.add(profileKey);
-                updateSelectedItems('profile');
-            }
-            recommendTests();
-        };
-
-        // Watch for age and gender changes to trigger recommendations
-        ['age', 'gender'].forEach(id => {
-            document.getElementById(id).addEventListener('change', recommendTests);
-        });
-
-        // AI Chatbot
-        function toggleChatbot() {
-            const chatbot = document.getElementById('chatbot');
-            chatbot.style.display = chatbot.style.display === 'none' ? 'flex' : 'none';
-        }
-
-        function addMessage(message, isUser = false) {
-            const messagesDiv = document.getElementById('chatbot-messages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `chat-message ${isUser ? 'user-message' : 'bot-message'}`;
-            messageDiv.textContent = message;
-            messagesDiv.appendChild(messageDiv);
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
-        }
-
-        function sendMessage() {
-            const input = document.getElementById('chatbot-input-field');
-            const message = input.value.trim();
-            if (message) {
-                addMessage(message, true);
-                input.value = '';
-
-                // Simple AI response logic
-                let response = '';
-                if (message.toLowerCase().includes('book')) {
-                    response = 'To book a test, please fill out the form above and select your tests or profiles. Need help choosing? Let me know your age or symptoms!';
-                } else if (message.toLowerCase().includes('help')) {
-                    response = 'I can assist with booking queries. Ask about tests, profiles, or say "book" to start!';
-                } else if (message.toLowerCase().includes('age') || message.toLowerCase().includes('symptom')) {
-                    response = 'Based on your input, I recommend checking your age and gender in the form for personalized test suggestions. Try selecting a test like "Lipid Profile" or ask more!';
-                } else {
-                    response = 'Sorry, I didn’t understand. Try asking "How to book?" or "Help" for assistance.';
-                }
-
-                setTimeout(() => addMessage(response, false), 500);
-            }
-        }
     </script>
     <script src="/scripts/pwa-register.js"></script>
 </body>
