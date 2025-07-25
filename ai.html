@@ -24,7 +24,7 @@
             <!-- Symptom Checker -->
             <div class="form-group">
                 <label for="symptomInput">Enter Symptoms <i class="fas fa-notes-medical"></i></label>
-                <textarea id="symptomInput" placeholder="e.g., fever, cough, fatigue, chest pain (include details)" rows="4" aria-required="true"></textarea>
+                <textarea id="symptomInput" placeholder="e.g., fever, cough, fatigue (details help)" rows="3" aria-required="true"></textarea>
                 <button id="checkSymptoms" class="btn" style="margin-top: 10px;">Analyze Symptoms</button>
                 <div id="symptomResult" class="result-box"></div>
             </div>
@@ -32,14 +32,14 @@
             <!-- Health Prediction & Risk Assessment -->
             <div class="form-group">
                 <label>Health Prediction & Risk Assessment <i class="fas fa-chart-line"></i></label>
-                <input type="number" id="age" placeholder="Enter your age (1-120)" min="1" max="120" aria-required="true" style="margin-top: 10px;">
+                <input type="number" id="age" placeholder="Age (1-120)" min="1" max="120" aria-required="true" style="margin-top: 10px;">
                 <select id="gender" aria-required="true" style="margin-top: 10px;">
-                    <option value="" disabled selected>Select gender</option>
+                    <option value="" disabled selected>Gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                     <option value="other">Other</option>
                 </select>
-                <input type="text" id="medicalHistory" placeholder="Enter medical history (e.g., diabetes, hypertension)" style="margin-top: 10px;">
+                <input type="text" id="medicalHistory" placeholder="Medical history (e.g., diabetes)" style="margin-top: 10px;">
                 <button id="predictHealth" class="btn" style="margin-top: 10px;">Get Prediction</button>
                 <div id="healthPrediction" class="result-box"></div>
             </div>
@@ -55,8 +55,8 @@
             <!-- App Recommendation with Location -->
             <div class="form-group">
                 <label>App Recommendations <i class="fas fa-mobile-alt"></i></label>
-                <p>Get personalized test recommendations based on your location (e.g., Mumbai, Navi Mumbai, Thane).</p>
-                <input type="text" id="locationInput" placeholder="Enter your city (e.g., Mumbai)" style="margin-top: 10px;">
+                <p>Personalized tests based on your city (e.g., Mumbai).</p>
+                <input type="text" id="locationInput" placeholder="Enter city" style="margin-top: 10px;">
                 <button id="refreshRecommendation" class="btn" style="margin-top: 10px;">Get Recommendations</button>
                 <div id="aiAppRecommendation" class="result-box"></div>
             </div>
@@ -64,7 +64,7 @@
             <!-- Chat Support with Voice -->
             <div class="form-group">
                 <label for="chatInput">Ask a Question <i class="fas fa-comments"></i></label>
-                <input type="text" id="chatInput" placeholder="e.g., test prices, what is high cholesterol?" aria-required="true">
+                <input type="text" id="chatInput" placeholder="e.g., test prices, cholesterol" aria-required="true">
                 <button id="sendChat" class="btn" style="margin-top: 10px;">Send</button>
                 <button id="voiceChat" class="btn" style="margin-top: 10px;">Speak (Beta)</button>
                 <div id="chatResponse" class="result-box"></div>
@@ -73,7 +73,7 @@
         <footer class="footer">
             <div class="footer-content">
                 <p>Healthifylive © 2025 | <a href="/contact.html">Contact Us</a> | <a href="/privacy.html">Privacy Policy</a></p>
-                <p><small>Disclaimer: HealthiBot provides insights for informational purposes only. Consult a doctor for medical advice.</small></p>
+                <p><small>Disclaimer: HealthiBot provides insights only. Consult a doctor.</small></p>
             </footer>
     </div>
     <script type="module" src="/scripts/ai-features.js"></script>
