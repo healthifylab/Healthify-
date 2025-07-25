@@ -1,14 +1,19 @@
 // scripts/ai-features.js
 document.addEventListener('DOMContentLoaded', () => {
-    // Fetch test and profile data as fallback
     async function getData() {
-        const [testsResponse, profilesResponse] = await Promise.all([
-            fetch('/public/tests.json').catch(() => ({ json: () => Promise.resolve([]) })),
-            fetch('/public/profiles.json').catch(() => ({ json: () => Promise.resolve([]) }))
-        ]);
-        const tests = await testsResponse.json();
-        const profiles = await profilesResponse.json();
-        return { tests, profiles };
+        try {
+            const [testsResponse, profilesResponse] = await Promise.all([
+                fetch('/public/tests.json'),
+                fetch('/public/profiles.json')
+            ]);
+            const tests = await testsResponse.json();
+            const profiles = await profilesResponse.json();
+            console.log('Data loaded:', { tests, profiles });
+            return { tests, profiles };
+        } catch (error) {
+            console.error('Data fetch error:', error);
+            return { tests: [], profiles: [] };
+        }
     }
 
     // Hardcoded maximum data
@@ -75,9 +80,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const recommendedTests = matchedSymptoms.length
             ? matchedSymptoms.flatMap(s => symptomMap[s]).filter(test => allTests.some(t => t.Test_Name === test))
             : [];
-        document.getElementById('symptomResult').innerHTML = recommendedTests.length
-            ? `<p class="success">✅ Suggested tests: ${recommendedTests.join(', ')}. Consult a doctor.</p>`
-            : `<p class="info">ℹ️ No specific tests matched. Consult a doctor or try more details.</p>`;
+        setTimeout(() => {
+            document.getElementById('symptomResult').innerHTML = recommendedTests.length
+                ? `<p class="success">✅ Suggested tests: ${recommendedTests.join(', ')}. Consult a doctor.</p>`
+                : `<p class="info">ℹ️ No specific tests matched. Consult a doctor or try more details.</p>`;
+        }, 1500);
     });
 
     // Health Prediction & Risk Assessment
@@ -99,7 +106,9 @@ document.addEventListener('DOMContentLoaded', () => {
             prediction += ` ${healthPredictionMap[matchedHistory]} Tests: ${recommendedTests.filter(t => allTests.some(at => at.Test_Name === t)).join(', ')}.`;
         }
         if (age > 50) prediction += ' Consider Senior Health Checkup.';
-        document.getElementById('healthPrediction').innerHTML = `<p class="success">✅ ${prediction} Consult a doctor.</p>`;
+        setTimeout(() => {
+            document.getElementById('healthPrediction').innerHTML = `<p class="success">✅ ${prediction} Consult a doctor.</p>`;
+        }, 1500);
     });
 
     // Result Upload & Analysis
@@ -113,14 +122,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const file = fileInput.files[0];
         const reader = new FileReader();
         reader.onload = async () => {
-            const text = reader.result.toLowerCase(); // Simplified text extraction
+            const text = reader.result.toLowerCase();
             const { tests, profiles } = await getData();
             const allTests = [...tests, ...profiles.map(p => ({ Test_Name: p.Profile_Name, ...p }))];
             let response = 'ℹ️ No specific issues detected. ';
             if (text.includes('cholesterol') && allTests.some(t => t.Test_Name === 'Lipid Profile')) response = '✅ High cholesterol detected. Suggest Lipid Profile. ';
             else if (text.includes('glucose') && allTests.some(t => t.Test_Name === 'Diabetes Care')) response = '✅ High glucose detected. Suggest Diabetes Care. ';
             else if (text.includes('thyroid') && allTests.some(t => t.Test_Name === 'Thyroid Profile')) response = '✅ Thyroid issue detected. Suggest Thyroid Profile. ';
-            document.getElementById('resultAnalysis').innerHTML = `<p>${response} Consult a doctor.</p>`;
+            setTimeout(() => {
+                document.getElementById('resultAnalysis').innerHTML = `<p>${response} Consult a doctor.</p>`;
+            }, 1500);
         };
         reader.readAsText(file);
     });
@@ -136,9 +147,11 @@ document.addEventListener('DOMContentLoaded', () => {
             recommendations = recommendations.concat(['Heart Guard', 'Thyroid Balance']);
         }
         const availableRecs = recommendations.filter(r => allTests.some(t => t.Test_Name === r));
-        document.getElementById('aiAppRecommendation').innerHTML = availableRecs.length
-            ? `<p class="success">✅ Recommended tests for ${location || 'your area'}: ${availableRecs.join(', ')}. Download app!</p>`
-            : `<p class="info">ℹ️ No specific recommendations. Try a city or consult a doctor.</p>`;
+        setTimeout(() => {
+            document.getElementById('aiAppRecommendation').innerHTML = availableRecs.length
+                ? `<p class="success">✅ Recommended tests for ${location || 'your area'}: ${availableRecs.join(', ')}. Download app!</p>`
+                : `<p class="info">ℹ️ No specific recommendations. Try a city or consult a doctor.</p>`;
+        }, 1500);
     });
 
     // Chat Support with Voice
