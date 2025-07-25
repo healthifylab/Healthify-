@@ -75,7 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         document.getElementById('symptomResult').innerHTML = '<p>🤖 Analyzing...</p>';
         const { tests, profiles } = await getData();
-        const allTests = [...tests, ...profiles.map(p => ({ Test_Name: p.Profile_Name, ...p }))];
+        const allTests = [...tests, ...profiles.map(p => ({ Test_Name: p.Profile_Name, ...p })) || []];
+        console.log('Input symptoms:', symptoms, 'Available tests:', allTests);
         const matchedSymptoms = Object.keys(symptomMap).filter(s => symptoms.includes(s));
         const recommendedTests = matchedSymptoms.length
             ? matchedSymptoms.flatMap(s => symptomMap[s]).filter(test => allTests.some(t => t.Test_Name === test))
@@ -83,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             document.getElementById('symptomResult').innerHTML = recommendedTests.length
                 ? `<p class="success">✅ Suggested tests: ${recommendedTests.join(', ')}. Consult a doctor.</p>`
-                : `<p class="info">ℹ️ No specific tests matched. Consult a doctor or try more details.</p>`;
+                : `<p class="info">ℹ️ No specific tests matched. Consult a doctor or try more details (e.g., "fever" or "cough").</p>`;
         }, 1500);
     });
 
@@ -98,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         document.getElementById('healthPrediction').innerHTML = '<p>🤖 Assessing...</p>';
         const { tests, profiles } = await getData();
-        const allTests = [...tests, ...profiles.map(p => ({ Test_Name: p.Profile_Name, ...p }))];
+        const allTests = [...tests, ...profiles.map(p => ({ Test_Name: p.Profile_Name, ...p })) || []];
         let prediction = `For a ${age}-year-old ${gender}, general health looks good.`;
         const matchedHistory = Object.keys(healthPredictionMap).find(h => history.includes(h));
         if (matchedHistory) {
@@ -124,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
         reader.onload = async () => {
             const text = reader.result.toLowerCase();
             const { tests, profiles } = await getData();
-            const allTests = [...tests, ...profiles.map(p => ({ Test_Name: p.Profile_Name, ...p }))];
+            const allTests = [...tests, ...profiles.map(p => ({ Test_Name: p.Profile_Name, ...p })) || []];
             let response = 'ℹ️ No specific issues detected. ';
             if (text.includes('cholesterol') && allTests.some(t => t.Test_Name === 'Lipid Profile')) response = '✅ High cholesterol detected. Suggest Lipid Profile. ';
             else if (text.includes('glucose') && allTests.some(t => t.Test_Name === 'Diabetes Care')) response = '✅ High glucose detected. Suggest Diabetes Care. ';
@@ -141,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const location = document.getElementById('locationInput').value.toLowerCase();
         document.getElementById('aiAppRecommendation').innerHTML = '<p>🤖 Fetching...</p>';
         const { tests, profiles } = await getData();
-        const allTests = [...tests, ...profiles.map(p => ({ Test_Name: p.Profile_Name, ...p }))];
+        const allTests = [...tests, ...profiles.map(p => ({ Test_Name: p.Profile_Name, ...p })) || []];
         let recommendations = ['Vital Check', 'Diabetes Care'];
         if (location.includes('mumbai') || location.includes('navi mumbai') || location.includes('thane')) {
             recommendations = recommendations.concat(['Heart Guard', 'Thyroid Balance']);
@@ -172,4 +173,4 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('voiceChat').addEventListener('click', () => {
         document.getElementById('chatResponse').innerHTML = '<p class="info">🎙️ Voice in beta. Use text for now.</p>';
     });
-});
+  });
