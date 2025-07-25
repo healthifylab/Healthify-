@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Healthify AI Assistant</title>
+    <title>HealthiBot - AI Assistant</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -18,44 +18,45 @@
             </nav>
         </div>
         <main>
-            <h1>AI Assistant <i class="fas fa-robot"></i></h1>
+            <h1>HealthiBot - AI Assistant <i class="fas fa-robot"></i></h1>
             <p>Get personalized health insights with our AI tools!</p>
 
             <!-- Symptom Checker -->
             <div class="form-group">
                 <label for="symptomInput">Enter Symptoms <i class="fas fa-notes-medical"></i></label>
-                <input type="text" id="symptomInput" placeholder="e.g., fever, cough, fatigue">
+                <input type="text" id="symptomInput" placeholder="e.g., fever, cough, fatigue" aria-required="true">
                 <button id="checkSymptoms" class="btn" style="margin-top: 10px;">Check Symptoms</button>
-                <div id="symptomResult"></div>
+                <div id="symptomResult" class="result-box"></div>
             </div>
 
             <!-- Health Prediction -->
             <div class="form-group">
                 <label>Health Prediction <i class="fas fa-chart-line"></i></label>
-                <input type="number" id="age" placeholder="Enter your age (1-120)" min="1" max="120" style="margin-top: 10px;">
-                <select id="gender" style="margin-top: 10px;">
+                <input type="number" id="age" placeholder="Enter your age (1-120)" min="1" max="120" aria-required="true" style="margin-top: 10px;">
+                <select id="gender" aria-required="true" style="margin-top: 10px;">
                     <option value="" disabled selected>Select gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                     <option value="other">Other</option>
                 </select>
                 <button id="predictHealth" class="btn" style="margin-top: 10px;">Predict Health</button>
-                <div id="healthPrediction"></div>
+                <div id="healthPrediction" class="result-box"></div>
             </div>
 
             <!-- App Recommendation -->
             <div class="form-group">
                 <label>App Recommendations <i class="fas fa-mobile-alt"></i></label>
+                <p>Get personalized test recommendations based on your location (e.g., Mumbai, Navi Mumbai, Thane).</p>
                 <button id="refreshRecommendation" class="btn" style="margin-top: 10px;">Get Recommendations</button>
-                <div id="aiAppRecommendation"></div>
+                <div id="aiAppRecommendation" class="result-box"></div>
             </div>
 
             <!-- Chat Support -->
             <div class="form-group">
                 <label for="chatInput">Ask a Question <i class="fas fa-comments"></i></label>
-                <input type="text" id="chatInput" placeholder="e.g., test prices, report status">
+                <input type="text" id="chatInput" placeholder="e.g., test prices, report status" aria-required="true">
                 <button id="sendChat" class="btn" style="margin-top: 10px;">Send</button>
-                <div id="chatResponse"></div>
+                <div id="chatResponse" class="result-box"></div>
             </div>
         </main>
         <footer class="footer">
