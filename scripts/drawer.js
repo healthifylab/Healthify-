@@ -1,24 +1,30 @@
 document.addEventListener('DOMContentLoaded', () => {
     const drawer = document.getElementById('drawer');
     const menuToggle = document.querySelector('.menu-toggle');
-    const closeDrawer = drawer.querySelector('.close-drawer');
+    const closeDrawer = document.getElementById('closeDrawer');
 
-    if (!menuToggle || !drawer || !closeDrawer) return;
+    if (!menuToggle || !drawer || !closeDrawer) {
+        console.error('Drawer elements missing:', { menuToggle, drawer, closeDrawer });
+        return;
+    }
 
-    // Toggle drawer when menu-toggle is clicked
-    menuToggle.onclick = () => drawer.classList.toggle('open');
+    menuToggle.onclick = () => {
+        drawer.classList.toggle('open');
+        menuToggle.setAttribute('aria-expanded', drawer.classList.contains('open'));
+    };
 
-    // Close drawer when close button is clicked
-    closeDrawer.onclick = () => drawer.classList.remove('open');
+    closeDrawer.onclick = () => {
+        drawer.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+    };
 
-    // Close drawer when clicking outside
     document.addEventListener('click', (event) => {
-        if (drawer.classList.contains('open') && !drawer.contains(event.target) && event.target !== menuToggle) {
+        if (drawer.classList.contains('open') && !drawer.contains(event.target) && !menuToggle.contains(event.target)) {
             drawer.classList.remove('open');
+            menuToggle.setAttribute('aria-expanded', 'false');
         }
     });
 
-    // Keyboard accessibility
     menuToggle.setAttribute('aria-label', 'Open menu');
     menuToggle.setAttribute('aria-expanded', 'false');
     closeDrawer.setAttribute('aria-label', 'Close menu');
