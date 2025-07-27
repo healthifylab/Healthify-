@@ -1,0 +1,34 @@
+document.addEventListener('DOMContentLoaded', async () => {
+    const form = document.getElementById('custom-package-form');
+    if (!form) return;
+
+    // Load tests from tests.json
+    try {
+        const response = await fetch('/public/tests.json');
+        if (!response.ok) throw new Error('Failed to fetch tests');
+        const tests = await response.json();
+        const formGroup = form.querySelector('.form-group');
+        formGroup.innerHTML = tests.slice(0, 5).map(test => `
+            <label><input type="checkbox" name="tests" value="${test.Test_Name.replace(/ /g, '-').toLowerCase()}" data-price="${test.Healthify_Offer_Price}">
+                ${test.Test_Name} (₹${test.Healthify_Offer_Price})
+            </label>
+        `).join('');
+    } catch (error) {
+        console.error('Error loading tests:', error);
+        form.querySelector('.form-group').innerHTML = '<p class="error">❌ Failed to load tests.</p>';
+    }
+
+    form.addEventListener('change', () => {
+        const checkboxes = document.querySelectorAll('input[name="tests"]');
+        let total = 0;
+        const selectedTests = [];
+        checkboxes.forEach(cb => {
+            if (cb.checked) {
+                total += parseInt(cb.dataset.price);
+                selectedTests.push(cb.value);
+            }
+        });
+        document.getElementById('total-price').textContent = `₹${total}`;
+        sessionStorage.setItem('customTests', JSON.stringify(selectedTests));
+    });
+});
