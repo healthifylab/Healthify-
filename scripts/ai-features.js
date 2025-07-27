@@ -1,137 +1,107 @@
 // scripts/ai-features.js
-document.addEventListener('DOMContentLoaded', () => {
-    async function getData() {
-        try {
-            const [testsResponse, profilesResponse] = await Promise.all([
-                fetch('/public/tests.json'),
-                fetch('/public/profiles.json')
-            ]);
-            const tests = await testsResponse.json();
-            const profiles = await profilesResponse.json();
-            console.log('Data loaded:', { tests, profiles });
-            return { tests, profiles };
-        } catch (error) {
-            console.error('Data fetch error:', error);
-            return { tests: [], profiles: [] };
-        }
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
+    authDomain: "healthify-lab.firebaseapp.com",
+    projectId: "healthify-lab",
+    storageBucket: "healthify-lab.firebasestorage.app",
+    messagingSenderId: "297003315332",
+    appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+async function getData() {
+    try {
+        const [testsResponse, profilesResponse] = await Promise.all([
+            fetch('/public/tests.json'),
+            fetch('/public/profiles.json')
+        ]);
+        if (!testsResponse.ok) throw new Error(`Tests fetch failed: ${testsResponse.status}`);
+        if (!profilesResponse.ok) throw new Error(`Profiles fetch failed: ${profilesResponse.status}`);
+        const tests = await testsResponse.json();
+        const profiles = await profilesResponse.json();
+        return { tests, profiles };
+    } catch (error) {
+        console.error('Data fetch error:', error);
+        document.querySelectorAll('.result-box').forEach(box => {
+            box.innerHTML = '<p class="error">❌ Failed to load data. Please try again.</p>';
+        });
+        return { tests: [], profiles: [] };
     }
+}
 
-    // Hardcoded maximum data
-    const symptomMap = {
-        'fever': ['CBC', 'Fever Profile', 'Malaria Test', 'Typhoid Test'],
-        'cough': ['CBC', 'RT-PCR', 'Chest X-Ray', 'Sputum Culture'],
-        'fatigue': ['Iron Profile', 'Vitamin D', 'Thyroid Profile', 'CBC'],
-        'chest pain': ['ECG', 'Lipid Profile', 'Cardiac Risk Markers', 'Troponin I'],
-        'shortness of breath': ['PFT', 'Chest X-Ray', 'D-Dimer', 'Oxygen Saturation'],
-        'high blood pressure': ['Lipid Profile', 'Kidney Function Test', 'Electrolytes', 'Urine Routine'],
-        'diabetes': ['HbA1c', 'Diabetes Care', 'Glucose Fasting', 'Glucose PP'],
-        'weight loss': ['Thyroid Profile', 'Liver Function Test', 'CBC', 'Tumor Markers'],
-        'joint pain': ['Rheumatoid Factor', 'CRP', 'Arthritis Profile', 'ANA Test'],
-        'headache': ['Vitamin B12', 'MRI Brain', 'Electrolytes', 'CT Scan'],
-        'nausea': ['Liver Function Test', 'Kidney Function Test', 'H pylori Test'],
-        'skin rash': ['Allergy Test', 'IgE Test', 'Skin Prick Test'],
-        'abdominal pain': ['Ultrasound Abdomen', 'Liver Function Test', 'Amylase'],
-        'swelling': ['Kidney Function Test', 'CRP', 'Urine Routine'],
-        'dizziness': ['Vitamin B12', 'Electrolytes', 'Blood Pressure Monitor']
-    };
-
-    const profileMap = {
-        'Fever Profile': ['CBC', 'Malaria Test', 'Typhoid Test', 'Widal Test'],
-        'Diabetes Care': ['HbA1c', 'Glucose Fasting', 'Glucose PP', 'Insulin'],
-        'Cardiac Risk Markers': ['Lipid Profile', 'Homocysteine', 'hs-CRP', 'Apolipoprotein'],
-        'Thyroid Profile': ['TSH', 'T3', 'T4', 'Anti-TPO'],
-        'Arthritis Profile': ['Rheumatoid Factor', 'CRP', 'ANA Test', 'Anti-CCP'],
-        'Kidney Function Test': ['Creatinine', 'BUN', 'Uric Acid', 'Electrolytes'],
-        'Liver Function Test': ['SGOT', 'SGPT', 'ALP', 'Bilirubin'],
-        'Iron Profile': ['Serum Iron', 'TIBC', 'Ferritin', 'Transferrin']
-    };
-
-    const questionMap = {
-        'test prices': 'Prices: CBC ₹480, Lipid Profile ₹800, Diabetes Care ₹1200, Thyroid Profile ₹900, Kidney Function Test ₹700. Visit /booking.html.',
-        'what is high cholesterol': 'High cholesterol can clog arteries, raising heart attack risk. Test with Lipid Profile and consult a doctor.',
-        'how long for results': 'Results typically take 24-48 hours. Check via app or email report@healthifylab.com.',
-        'home collection': 'Yes, available in Mumbai, Navi Mumbai, Thane. Book at /booking.html.',
-        'report status': 'Check via app or email report@healthifylab.com with your booking ID.',
-        'what is diabetes': 'Diabetes is high blood sugar. Test with HbA1c or Glucose Fasting and consult a doctor.',
-        'thyroid symptoms': 'Symptoms include fatigue, weight gain. Test with Thyroid Profile and consult a doctor.',
-        'kidney health': 'Check with Kidney Function Test if you have swelling or high BP. Consult a doctor.',
-        'arthritis test': 'Use Arthritis Profile for joint pain. Consult a doctor.',
-        'liver test': 'Liver Function Test checks liver health. Consult a doctor.'
-    };
-
-    const healthPredictionMap = {
-        'diabetes': 'Consider Diabetes Care if over 40 or with family history.',
-        'hypertension': 'Monitor with Lipid Profile and Kidney Function Test.',
-        'thyroid': 'Test Thyroid Profile if fatigued or weight changes.',
-        'heart': 'Get Cardiac Risk Markers if chest pain or high BP.'
-    };
-
+document.addEventListener('DOMContentLoaded', () => {
     // Symptom Checker
     document.getElementById('checkSymptoms').addEventListener('click', async () => {
         const symptoms = document.getElementById('symptomInput').value.trim().toLowerCase();
+        const result = document.getElementById('symptomResult');
         if (!symptoms) {
-            document.getElementById('symptomResult').innerHTML = '<p class="error">❌ Please enter symptoms.</p>';
+            result.innerHTML = '<p class="error">❌ Please enter symptoms.</p>';
             return;
         }
-        document.getElementById('symptomResult').innerHTML = '<p>🤖 Analyzing...</p>';
+        result.innerHTML = '<p>🤖 Analyzing...</p>';
         const { tests, profiles } = await getData();
-        const allTests = [...tests, ...profiles.map(p => ({ Test_Name: p.Profile_Name, ...p })) || []];
-        console.log('Input symptoms:', symptoms, 'Available tests:', allTests);
-        const matchedSymptoms = Object.keys(symptomMap).filter(s => symptoms.includes(s));
-        const recommendedTests = matchedSymptoms.length
-            ? matchedSymptoms.flatMap(s => symptomMap[s]).filter(test => allTests.some(t => t.Test_Name === test))
-            : [];
+        const allTests = [...tests, ...profiles.map(p => ({ Test_Name: p.Profile_Name, ...p }))];
+        const keywords = symptoms.split(/[,;\s]+/);
+        const recommended = allTests.filter(item =>
+            keywords.some(k => item.Test_Name.toLowerCase().includes(k) || item.Description.toLowerCase().includes(k))
+        ).slice(0, 5);
         setTimeout(() => {
-            document.getElementById('symptomResult').innerHTML = recommendedTests.length
-                ? `<p class="success">✅ Suggested tests: ${recommendedTests.join(', ')}. Consult a doctor.</p>`
-                : `<p class="info">ℹ️ No specific tests matched. Consult a doctor or try more details (e.g., "fever" or "cough").</p>`;
+            result.innerHTML = recommended.length
+                ? `<p class="success">✅ Suggested tests: ${recommended.map(r => r.Test_Name).join(', ')}. Book at <a href="/booking.html">booking page</a>.</p>`
+                : `<p class="info">ℹ️ No tests matched. Try specific symptoms (e.g., fever, diabetes) or contact support.</p>`;
         }, 1500);
     });
 
     // Health Prediction & Risk Assessment
     document.getElementById('predictHealth').addEventListener('click', async () => {
-        const age = document.getElementById('age').value;
+        const age = parseInt(document.getElementById('age').value);
         const gender = document.getElementById('gender').value;
         const history = document.getElementById('medicalHistory').value.toLowerCase();
+        const result = document.getElementById('healthPrediction');
         if (!age || !gender) {
-            document.getElementById('healthPrediction').innerHTML = '<p class="error">❌ Please enter age and gender.</p>';
+            result.innerHTML = '<p class="error">❌ Please enter age and gender.</p>';
             return;
         }
-        document.getElementById('healthPrediction').innerHTML = '<p>🤖 Assessing...</p>';
+        result.innerHTML = '<p>🤖 Assessing...</p>';
         const { tests, profiles } = await getData();
-        const allTests = [...tests, ...profiles.map(p => ({ Test_Name: p.Profile_Name, ...p })) || []];
-        let prediction = `For a ${age}-year-old ${gender}, general health looks good.`;
-        const matchedHistory = Object.keys(healthPredictionMap).find(h => history.includes(h));
-        if (matchedHistory) {
-            const recommendedTests = profileMap[healthPredictionMap[matchedHistory].split(' ')[1]] || [];
-            prediction += ` ${healthPredictionMap[matchedHistory]} Tests: ${recommendedTests.filter(t => allTests.some(at => at.Test_Name === t)).join(', ')}.`;
-        }
-        if (age > 50) prediction += ' Consider Senior Health Checkup.';
+        const allTests = [...tests, ...profiles.map(p => ({ Test_Name: p.Profile_Name, ...p }))];
+        let prediction = `For a ${age}-year-old ${gender}, consider regular checkups.`;
+        if (history.includes('diabetes')) prediction += ' Recommended: Diabetes Care, HbA1c.';
+        if (history.includes('heart') || history.includes('chest pain')) prediction += ' Recommended: Cardiac Risk Markers, Lipid Profile.';
+        if (history.includes('thyroid')) prediction += ' Recommended: Thyroid Profile.';
+        if (age > 50) prediction += ' Include Senior Health Checkup.';
+        const recommended = allTests.filter(t => prediction.includes(t.Test_Name)).map(t => t.Test_Name);
         setTimeout(() => {
-            document.getElementById('healthPrediction').innerHTML = `<p class="success">✅ ${prediction} Consult a doctor.</p>`;
+            result.innerHTML = `<p class="success">✅ ${prediction} Book at <a href="/booking.html">booking page</a>.</p>`;
         }, 1500);
     });
 
     // Result Upload & Analysis
     document.getElementById('analyzeResults').addEventListener('click', async () => {
         const fileInput = document.getElementById('resultUpload');
+        const result = document.getElementById('resultAnalysis');
         if (fileInput.files.length === 0) {
-            document.getElementById('resultAnalysis').innerHTML = '<p class="error">❌ Please upload a file.</p>';
+            result.innerHTML = '<p class="error">❌ Please upload a file.</p>';
             return;
         }
-        document.getElementById('resultAnalysis').innerHTML = '<p>🤖 Analyzing...</p>';
+        result.innerHTML = '<p>🤖 Analyzing...</p>';
         const file = fileInput.files[0];
         const reader = new FileReader();
         reader.onload = async () => {
             const text = reader.result.toLowerCase();
             const { tests, profiles } = await getData();
-            const allTests = [...tests, ...profiles.map(p => ({ Test_Name: p.Profile_Name, ...p })) || []];
-            let response = 'ℹ️ No specific issues detected. ';
-            if (text.includes('cholesterol') && allTests.some(t => t.Test_Name === 'Lipid Profile')) response = '✅ High cholesterol detected. Suggest Lipid Profile. ';
-            else if (text.includes('glucose') && allTests.some(t => t.Test_Name === 'Diabetes Care')) response = '✅ High glucose detected. Suggest Diabetes Care. ';
-            else if (text.includes('thyroid') && allTests.some(t => t.Test_Name === 'Thyroid Profile')) response = '✅ Thyroid issue detected. Suggest Thyroid Profile. ';
+            const allTests = [...tests, ...profiles.map(p => ({ Test_Name: p.Profile_Name, ...p }))];
+            let response = 'ℹ️ No specific issues detected. Consult a doctor.';
+            if (text.includes('cholesterol')) response = '✅ High cholesterol detected. Suggest Lipid Profile. Book at <a href="/booking.html">booking page</a>.';
+            if (text.includes('glucose')) response = '✅ High glucose detected. Suggest Diabetes Care. Book at <a href="/booking.html">booking page</a>.';
+            if (text.includes('thyroid')) response = '✅ Thyroid issue detected. Suggest Thyroid Profile. Book at <a href="/booking.html">booking page</a>.';
             setTimeout(() => {
-                document.getElementById('resultAnalysis').innerHTML = `<p>${response} Consult a doctor.</p>`;
+                result.innerHTML = `<p class="success">${response}</p>`;
             }, 1500);
         };
         reader.readAsText(file);
@@ -140,37 +110,47 @@ document.addEventListener('DOMContentLoaded', () => {
     // App Recommendation with Location
     document.getElementById('refreshRecommendation').addEventListener('click', async () => {
         const location = document.getElementById('locationInput').value.toLowerCase();
-        document.getElementById('aiAppRecommendation').innerHTML = '<p>🤖 Fetching...</p>';
+        const result = document.getElementById('aiAppRecommendation');
+        result.innerHTML = '<p>🤖 Fetching...</p>';
         const { tests, profiles } = await getData();
-        const allTests = [...tests, ...profiles.map(p => ({ Test_Name: p.Profile_Name, ...p })) || []];
-        let recommendations = ['Vital Check', 'Diabetes Care'];
-        if (location.includes('mumbai') || location.includes('navi mumbai') || location.includes('thane')) {
-            recommendations = recommendations.concat(['Heart Guard', 'Thyroid Balance']);
+        const allTests = [...tests, ...profiles.map(p => ({ Test_Name: p.Profile_Name, ...p }))];
+        let recommendations = allTests.slice(0, 3).map(t => t.Test_Name);
+        if (location.includes('mumbai') || location.includes('thane') || location.includes('pune')) {
+            recommendations = allTests.filter(t => ['Diabetes Care', 'Heart Guard', 'Thyroid Balance'].includes(t.Test_Name)).map(t => t.Test_Name);
         }
-        const availableRecs = recommendations.filter(r => allTests.some(t => t.Test_Name === r));
         setTimeout(() => {
-            document.getElementById('aiAppRecommendation').innerHTML = availableRecs.length
-                ? `<p class="success">✅ Recommended tests for ${location || 'your area'}: ${availableRecs.join(', ')}. Download app!</p>`
-                : `<p class="info">ℹ️ No specific recommendations. Try a city or consult a doctor.</p>`;
+            result.innerHTML = recommendations.length
+                ? `<p class="success">✅ Recommended tests for ${location || 'your area'}: ${recommendations.join(', ')}. Download app at <a href="/app.html">app page</a>.</p>`
+                : `<p class="info">ℹ️ No specific recommendations. Try a city or contact support.</p>`;
         }, 1500);
     });
 
-    // Chat Support with Voice
-    document.getElementById('sendChat').addEventListener('click', () => {
+    // Chat Support
+    document.getElementById('sendChat').addEventListener('click', async () => {
         const question = document.getElementById('chatInput').value.trim().toLowerCase();
+        const result = document.getElementById('chatResponse');
         if (!question) {
-            document.getElementById('chatResponse').innerHTML = '<p class="error">❌ Please enter a question.</p>';
+            result.innerHTML = '<p class="error">❌ Please enter a question.</p>';
             return;
         }
-        document.getElementById('chatResponse').innerHTML = '<p>🤖 Thinking...</p>';
-        const response = questionMap[question] || `ℹ️ No answer for "${question}". Try: test prices, cholesterol, etc. Consult a doctor.`;
+        result.innerHTML = '<p>🤖 Thinking...</p>';
+        const { tests, profiles } = await getData();
+        const allTests = [...tests, ...profiles.map(p => ({ Test_Name: p.Profile_Name, ...p }))];
+        let response = 'ℹ️ No specific answer found. Contact support at report@healthifylab.com.';
+        if (question.includes('test prices')) {
+            response = `Prices: ${allTests.slice(0, 3).map(t => `${t.Test_Name} ₹${t.Healthify_Offer_Price}`).join(', ')}. Book at <a href="/booking.html">booking page</a>.`;
+        } else if (question.includes('cholesterol')) {
+            response = 'High cholesterol can clog arteries. Test with Lipid Profile. Book at <a href="/booking.html">booking page</a>.';
+        } else if (question.includes('diabetes')) {
+            response = 'Diabetes involves high blood sugar. Test with HbA1c or Diabetes Care. Book at <a href="/booking.html">booking page</a>.';
+        }
         setTimeout(() => {
-            document.getElementById('chatResponse').innerHTML = `<p class="success">✅ ${response}</p>`;
+            result.innerHTML = `<p class="success">✅ ${response}</p>`;
             document.getElementById('chatInput').value = '';
         }, 1500);
     });
 
     document.getElementById('voiceChat').addEventListener('click', () => {
-        document.getElementById('chatResponse').innerHTML = '<p class="info">🎙️ Voice in beta. Use text for now.</p>';
+        document.getElementById('chatResponse').innerHTML = '<p class="info">🎙️ Voice in beta. Use text for now or try our live chat.</p>';
     });
-  });
+});
