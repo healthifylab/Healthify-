@@ -15,19 +15,23 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 async function sendReminders() {
-    const bookings = await getDocs(collection(db, "leads"));
-    bookings.forEach(doc => {
-        const { appointmentDate, appointmentTime, phone, name } = doc.data();
-        const appointment = new Date(`${appointmentDate}T${appointmentTime}`);
-        const now = new Date();
-        const timeDiff = (appointment - now) / (1000 * 60 * 60); // Hours
-        if (timeDiff > 23 && timeDiff < 25) {
-            emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
-                to_name: name,
-                to_email: 'report@healthifylab.com',
-                message: `Reminder: ${name}, your Healthify Lab test is on ${appointmentDate} at ${appointmentTime}. Fast for 8 hours if required.`
-            }).then(() => console.log('Reminder sent to', phone));
-        }
-    });
+    try {
+        const bookings = await getDocs(collection(db, "leads"));
+        bookings.forEach(doc => {
+            const { appointmentDate, appointmentTime, phone, name } = doc.data();
+            const appointment = new Date(`${appointmentDate}T${appointmentTime}`);
+            const now = new Date();
+            const timeDiff = (appointment - now) / (1000 * 60 * 60); // Hours
+            if (timeDiff > 23 && timeDiff < 25) {
+                emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
+                    to_name: name,
+                    to_email: 'report@healthifylab.com',
+                    message: `Reminder: ${name}, your Healthify Lab test is on ${appointmentDate} at ${appointmentTime}. Fast for 8 hours if required.`
+                }).then(() => console.log('Reminder sent to', phone));
+            }
+        });
+    } catch (error) {
+        console.error('Error sending reminders:', error);
+    }
 }
 setInterval(sendReminders, 3600000); // Check hourly
