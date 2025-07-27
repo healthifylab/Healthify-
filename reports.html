@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Reports - Healthify Lab</title>
+    <meta name="description" content="Download your test reports securely with Healthify Lab in Mumbai, Navi Mumbai, Thane, Pune, PCMC">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="/public/logo.png" alt="Healthify Lab Logo" class="logo-img">
+            <nav>
+                <div class="menu-toggle">
+                    <span></span><span></span><span></span>
+                </div>
+                <a href="/index.html">Home</a>
+                <a href="/booking.html">Book Test</a>
+                <a href="/contact.html">Contact</a>
+                <a href="/blog.html">Blog</a>
+            </nav>
+        </div>
+        <main>
+            <h1>Download Your Reports <i class="fas fa-file-medical"></i></h1>
+            <form id="reportForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="otp">OTP</label>
+                    <input type="text" id="otp" placeholder="Enter OTP" required>
+                </div>
+                <button type="submit" class="btn">Download Report</button>
+            </form>
+            <div id="reportResult" class="result-box"></div>
+        </main>
+        <footer class="footer">
+            <div class="footer-content">
+                <p>Contact: +91 9503832889 / +91 99676 40104 <br>
+                   <a href="https://wa.me/919503832889">WhatsApp: 9503832889</a> <br>
+                   Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a></p>
+                <p>All rights reserved @healthify 2025</p>
+            </div>
+        </footer>
+    </div>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+        import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+        import { getStorage, ref, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
+            authDomain: "healthify-lab.firebaseapp.com",
+            projectId: "healthify-lab",
+            storageBucket: "healthify-lab.firebasestorage.app",
+            messagingSenderId: "297003315332",
+            appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1"
+        };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const storage = getStorage(app);
+
+        document.getElementById('reportForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const otp = document.getElementById('otp').value; // Replace with actual OTP logic
+            const result = document.getElementById('reportResult');
+            result.textContent = 'Verifying...';
+            try {
+                // Placeholder: Replace with actual OTP verification
+                await signInWithEmailAndPassword(auth, email, otp);
+                const reportRef = ref(storage, `reports/${email}/latest.pdf`);
+                const url = await getDownloadURL(reportRef);
+                result.innerHTML = `<a href="${url}" class="btn" download>Download Report</a>`;
+            } catch (error) {
+                result.className = 'error';
+                result.textContent = `❌ Failed to access report: ${error.message}`;
+            }
+        });
+    </script>
+    <script defer src="/scripts/drawer.js"></script>
+</body>
+</html>
