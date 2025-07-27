@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Prepare for a Home Blood Test in Mumbai - Healthify Lab</title>
+    <meta name="description" content="Learn how to prepare for a home blood test in Mumbai with Healthify Lab for accurate results.">
+    <meta name="keywords" content="home blood test Mumbai, health checkup Mumbai, Healthify Lab, blood test preparation">
+    <meta property="og:title" content="How to Prepare for a Home Blood Test in Mumbai - Healthify Lab">
+    <meta property="og:description" content="Discover tips to prepare for a home blood test in Mumbai with Healthify Lab for fast and accurate results.">
+    <meta property="og:image" content="/public/blog-blood-test.jpg">
+    <meta property="og:url" content="https://healthifylab.com/blog/blood-test-mumbai.html">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R0R3RYERZW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-R0R3RYERZW');
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="/public/logo.png" alt="Healthify Lab Logo" class="logo-img">
+            <nav>
+                <div class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </div>
+                <a href="/index.html">Home</a>
+                <a href="/booking.html">Book Test</a>
+                <a href="/contact.html">Contact</a>
+                <a href="/blog.html">Blog</a>
+                <a href="/ai.html" class="btn" style="position: absolute; top: 10px; right: 10px; padding: 5px 10px; font-size: 0.9rem;">AI Assistant <i class="fas fa-robot"></i></a>
+            </nav>
+        </div>
+        <div id="drawer" class="drawer">
+            <div class="drawer-header">
+                <h3>Menu</h3>
+                <button id="closeDrawer" class="close-drawer" aria-label="Close Menu">×</button>
+            </div>
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/booking.html">Book Test</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+                <li><a href="/call-back.html">Call Me Back</a></li>
+                <li><a href="/cart.html">My Cart</a></li>
+                <li><a href="/blog.html">Blog</a></li>
+            </ul>
+        </div>
+        <main>
+            <h1>How to Prepare for a Home Blood Test in Mumbai <i class="fas fa-vial"></i></h1>
+            <img src="/public/blog-blood-test.jpg" alt="Home Blood Test Mumbai" class="blog-post-img" onerror="this.src='/public/test-placeholder.jpg'">
+            <p>Preparing for a home blood test in Mumbai ensures accurate results with Healthify Lab’s convenient services. Follow these steps:</p>
+            <ul>
+                <li><strong>Fasting Requirements</strong>: Fast for 8-12 hours for tests like glucose or lipid profiles.</li>
+                <li><strong>Hydration</strong>: Stay hydrated but avoid excessive water intake before the test.</li>
+                <li><strong>Medications</strong>: Inform our technician about any medications or supplements.</li>
+                <li><strong>Timing</strong>: Schedule your test early in the morning for convenience.</li>
+                <li><strong>Relax</strong>: Stay calm to avoid stress impacting results.</li>
+            </ul>
+            <p>Healthify Lab offers safe and reliable home blood testing in Mumbai, Navi Mumbai, and Thane. Book your test today!</p>
+            <a href="/booking.html?profile=healthify-vital-check" class="btn">Book Now</a>
+            <section class="recommended-tests">
+                <h2>Recommended Tests</h2>
+                <div class="test-list"></div>
+            </section>
+        </main>
+        <div class="social-links">
+            <a href="https://x.com/healthify_lab"><i class="fab fa-x-twitter"></i></a>
+            <a href="https://instagram.com/healthifylab"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/share/1Axkp5jB81/?mibextid=qi2Omg"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://threads.net/healthifylab" aria-label="Threads"><i class="fab fa-threads"></i></a>
+        </div>
+        <footer class="footer">
+            <div class="footer-content">
+                <p>Contact: +91 9503832889 / +91 99676 40104 <br>
+                   <a href="https://wa.me/919503832889">WhatsApp: 9503832889</a> <br>
+                   Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a></p>
+                <p>All rights reserved @healthify 2025</p>
+            </div>
+        </footer>
+    </div>
+    <script defer src="/scripts/drawer.js"></script>
+    <script>
+        async function loadTests() {
+            const response = await fetch('/public/profiles.json');
+            const profiles = await response.json();
+            const testList = document.querySelector('.test-list');
+            testList.innerHTML = profiles.slice(0, 3).map(profile => `
+                <div class="promo-card">
+                    <img src="/public/${profile.Profile_Name.replace(/ /g, '-').toLowerCase()}.jpg" alt="${profile.Profile_Name}" onerror="this.src='/public/test-placeholder.jpg'">
+                    <h3>${profile.Profile_Name}</h3>
+                    <p>₹${profile.Healthify_Offer_Price}</p>
+                    <a href="/booking.html?profile=${profile.Profile_Name.replace(/ /g, '-').toLowerCase()}" class="btn">Book Now</a>
+                </div>
+            `).join('');
+        }
+        loadTests();
+    </script>
+    <script>
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/YOUR_PROPERTY_ID/default';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+</body>
+</html>
