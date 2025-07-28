@@ -8,7 +8,7 @@
     <meta name="keywords" content="home blood test Mumbai, health checkup Mumbai, Healthify Lab, blood test preparation">
     <meta property="og:title" content="How to Prepare for a Home Blood Test in Mumbai - Healthify Lab">
     <meta property="og:description" content="Discover tips to prepare for a home blood test in Mumbai with Healthify Lab for fast and accurate results.">
-    <meta property="og:image" content="/public/blog-blood-test.jpg">
+    <meta property="og:image" content="/public/BLOG_IMAGE_MUMBAI">
     <meta property="og:url" content="https://healthifylab.com/blog/blood-test-mumbai.html">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/style.css">
@@ -33,7 +33,7 @@
                 <a href="/booking.html">Book Test</a>
                 <a href="/contact.html">Contact</a>
                 <a href="/blog.html">Blog</a>
-                <a href="/ai.html" class="btn" style="position: absolute; top: 10px; right: 10px; padding: 5px 10px; font-size: 0.9rem;">AI Assistant <i class="fas fa-robot"></i></a>
+                <a href="/ai.html" class="btn">AI Assistant <i class="fas fa-robot"></i></a>
             </nav>
         </div>
         <div id="drawer" class="drawer">
@@ -52,7 +52,7 @@
         </div>
         <main>
             <h1>How to Prepare for a Home Blood Test in Mumbai <i class="fas fa-vial"></i></h1>
-            <img src="/public/blog-blood-test.jpg" alt="Home Blood Test Mumbai" class="blog-post-img" onerror="this.src='/public/test-placeholder.jpg'">
+            <img src="/public/BLOG_IMAGE_MUMBAI" alt="Home Blood Test Mumbai" class="blog-post-img" onerror="this.src='/public/test-placeholder.jpg'">
             <p>Preparing for a home blood test in Mumbai ensures accurate results with Healthify Lab’s convenient services. Follow these steps:</p>
             <ul>
                 <li><strong>Fasting Requirements</strong>: Fast for 8-12 hours for tests like glucose or lipid profiles.</li>
@@ -79,37 +79,4 @@
                 <p>Contact: +91 9503832889 / +91 99676 40104 <br>
                    <a href="https://wa.me/919503832889">WhatsApp: 9503832889</a> <br>
                    Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a></p>
-                <p>All rights reserved @healthify 2025</p>
-            </div>
-        </footer>
-    </div>
-    <script defer src="/scripts/drawer.js"></script>
-    <script>
-        async function loadTests() {
-            const response = await fetch('/public/profiles.json');
-            const profiles = await response.json();
-            const testList = document.querySelector('.test-list');
-            testList.innerHTML = profiles.slice(0, 3).map(profile => `
-                <div class="promo-card">
-                    <img src="/public/${profile.Profile_Name.replace(/ /g, '-').toLowerCase()}.jpg" alt="${profile.Profile_Name}" onerror="this.src='/public/test-placeholder.jpg'">
-                    <h3>${profile.Profile_Name}</h3>
-                    <p>₹${profile.Healthify_Offer_Price}</p>
-                    <a href="/booking.html?profile=${profile.Profile_Name.replace(/ /g, '-').toLowerCase()}" class="btn">Book Now</a>
-                </div>
-            `).join('');
-        }
-        loadTests();
-    </script>
-    <script>
-        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-        (function(){
-            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-            s1.async=true;
-            s1.src='https://embed.tawk.to/YOUR_PROPERTY_ID/default';
-            s1.charset='UTF-8';
-            s1.setAttribute('crossorigin','*');
-            s0.parentNode.insertBefore(s1,s0);
-        })();
-    </script>
-</body>
-</html>
+                <p>All rights reserved @healthify 202
