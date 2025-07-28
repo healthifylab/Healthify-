@@ -26,19 +26,23 @@ body {
 }
 
 .logo-img {
-    height: 40px; /* Reduced for compact homepage */
+    height: 40px;
 }
 
 nav {
     display: flex;
-    gap: 15px; /* Reduced gap for better spacing */
+    gap: 15px;
 }
 
 nav a {
     text-decoration: none;
     color: #333;
     font-weight: 600;
-    font-size: 0.9rem; /* Smaller font for nav */
+    font-size: 0.9rem;
+}
+
+nav a:hover {
+    color: #007bff;
 }
 
 nav a.btn {
@@ -59,7 +63,7 @@ nav a.btn:hover {
     cursor: pointer;
     position: absolute;
     top: 10px;
-    left: 10px; /* Moved to top left corner */
+    left: 10px;
     z-index: 1002;
 }
 
@@ -72,17 +76,17 @@ nav a.btn:hover {
 .drawer {
     position: fixed;
     top: 0;
-    left: -300px; /* Changed to slide from left */
+    left: -300px;
     width: 300px;
     height: 100%;
     background: #fff;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.2); /* Adjusted shadow for left slide */
-    transition: left 0.3s ease; /* Changed to left */
+    box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+    transition: left 0.3s ease;
     z-index: 1001;
 }
 
 .drawer.open {
-    left: 0; /* Slide in from left */
+    left: 0;
 }
 
 .drawer-header {
@@ -128,20 +132,20 @@ nav a.btn:hover {
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 15px 0; /* Reduced padding */
+    padding: 15px 0;
     background-color: #d2f6f4;
 }
 
 .hero-img {
     width: 100%;
     height: auto;
-    max-height: 30vh; /* Reduced for compact view */
+    max-height: 30vh;
     object-fit: cover;
     display: block;
 }
 
 .hero h1 {
-    font-size: 1.3rem; /* Smaller font */
+    font-size: 1.3rem;
     margin: 8px 0;
 }
 
@@ -149,7 +153,7 @@ nav a.btn:hover {
     background: #28a745;
     color: #fff;
     border: none;
-    padding: 8px 16px; /* Smaller button */
+    padding: 8px 16px;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -161,9 +165,12 @@ nav a.btn:hover {
 .btn {
     background: #007bff;
     color: #fff;
-    padding: 6px 12px; /* Smaller button */
+    padding: 6px 12px;
     border-radius: 5px;
     text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
 }
 
 .btn:hover {
@@ -171,7 +178,7 @@ nav a.btn:hover {
 }
 
 .safety-text {
-    font-size: 0.8rem; /* Smaller font */
+    font-size: 0.8rem;
     color: #666;
     margin-top: 8px;
 }
@@ -189,7 +196,7 @@ nav a.btn:hover {
     z-index: 1002;
     text-align: center;
     max-width: 85%;
-    width: 350px; /* Slightly smaller popup */
+    width: 350px;
 }
 
 .promo-popup h3 {
@@ -230,13 +237,13 @@ nav a.btn:hover {
 }
 
 .custom-package {
-    padding: 15px 0; /* Reduced padding */
+    padding: 15px 0;
     text-align: center;
     background: #e9ecef;
 }
 
 .custom-package h2 {
-    font-size: 1.3rem; /* Smaller heading */
+    font-size: 1.3rem;
     margin-bottom: 8px;
 }
 
@@ -267,7 +274,7 @@ nav a.btn:hover {
 
 .search-input {
     width: 100%;
-    max-width: 450px; /* Slightly smaller input */
+    max-width: 450px;
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -302,7 +309,7 @@ nav a.btn:hover {
 
 .gallery img {
     width: 100%;
-    max-width: 280px; /* Slightly smaller images */
+    max-width: 280px;
     height: auto;
     border-radius: 10px;
     object-fit: cover;
@@ -319,7 +326,7 @@ nav a.btn:hover {
 .cards-section h2 {
     text-align: center;
     margin: 15px 0;
-    font-size: 1.3rem; /* Smaller heading */
+    font-size: 1.3rem;
 }
 
 .swiper-container {
@@ -333,13 +340,13 @@ nav a.btn:hover {
     border-radius: 10px;
     text-align: center;
     padding: 12px;
-    max-width: 350px; /* Larger cards */
+    max-width: 350px;
     margin: 0 auto;
 }
 
 .promo-card img {
     width: 100%;
-    height: 200px; /* Larger images */
+    height: 200px;
     object-fit: cover;
     border-radius: 5px;
 }
@@ -410,6 +417,10 @@ nav a.btn:hover {
 .footer-content a {
     color: #28a745;
     text-decoration: none;
+}
+
+.footer-content a:hover {
+    text-decoration: underline;
 }
 
 .blog-section {
@@ -504,7 +515,7 @@ nav a.btn:hover {
 .whatsapp-float {
     position: fixed;
     bottom: 20px;
-    left: 20px; /* Bottom left corner */
+    left: 20px;
     background: #25D366;
     color: #fff;
     width: 50px;
@@ -525,7 +536,7 @@ nav a.btn:hover {
 /* Chatbot Styles */
 .chatbot {
     position: fixed;
-    bottom: 80px; /* Above WhatsApp button */
+    bottom: 80px;
     right: 20px;
     width: 300px;
     background: #fff;
@@ -628,6 +639,162 @@ nav a.btn:hover {
     background: #0056b3;
 }
 
+/* Booking Form Styles */
+.booking-form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 15px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.booking-form h1 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.booking-form p {
+    font-size: 0.9rem;
+    color: #666;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+.form-group textarea {
+    height: 80px;
+    resize: vertical;
+}
+
+#summaryCard {
+    display: none;
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 10px;
+    background: #007bff;
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.summary-item {
+    margin: 10px 0;
+    font-size: 1rem;
+}
+
+.summary-item .total-amount {
+    font-weight: bold;
+}
+
+.summary-item .discounted-amount {
+    color: #ff8d62;
+    font-weight: bold;
+}
+
+.summary-item .saved-amount {
+    font-weight: bold;
+}
+
+.selected-items {
+    margin-top: 10px;
+    padding: 10px;
+    background: #e9ecef;
+    border-radius: 5px;
+}
+
+.selected-tag {
+    display: inline-block;
+    background: #d2f6f4;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+}
+
+.selected-tag button {
+    margin-left: 5px;
+    background: none;
+    border: none;
+    color: #dc3545;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.item-details, .profile-details {
+    margin-left: 20px;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.item-details p {
+    background: #d2f6f4;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.profile-details .included-tests {
+    background: #e9ecef;
+    padding: 5px;
+    border-radius: 3px;
+    list-style-type: disc;
+    margin-top: 5px;
+}
+
+.search-results {
+    max-height: 200px;
+    overflow-y: auto;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 5px;
+    display: none;
+}
+
+.search-result {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.search-result:hover {
+    background: #f0f0f0;
+}
+
+.search-result button {
+    background: #28a745;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-result button:hover {
+    background: #218838;
+}
+
 @media (max-width: 768px) {
     .header {
         flex-direction: row;
@@ -637,26 +804,34 @@ nav a.btn:hover {
         display: none;
     }
     .menu-toggle {
-        display: flex; /* Always visible in top left */
+        display: flex;
     }
     .hero-img {
-        max-height: 25vh; /* Even smaller for mobile */
+        max-height: 25vh;
     }
     .hero h1 {
         font-size: 1.1rem;
     }
     .promo-card {
-        max-width: 100%; /* Full width on mobile */
+        max-width: 100%;
     }
     .custom-package .form-group {
         flex-direction: column;
         align-items: center;
     }
-    .blog-section {
-        display: block;
+    .booking-form {
+        padding: 10px;
     }
-    .blog-post {
-        margin-bottom: 15px;
+    .booking-form h1 {
+        font-size: 1.2rem;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 0.8rem;
+    }
+    .summary-item {
+        font-size: 0.9rem;
     }
     .promo-popup {
         width: 90%;
@@ -668,10 +843,10 @@ nav a.btn:hover {
         display: flex !important;
     }
     .menu-toggle {
-        display: flex; /* Still visible for consistency */
+        display: flex;
     }
     .drawer {
-        display: block; /* Ensure drawer is available */
+        display: block;
     }
     .blog-section {
         display: grid;
