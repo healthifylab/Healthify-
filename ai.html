@@ -3,79 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HealthiBot - AI Assistant</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <title>HealthiBot - AI Assistant | Healthify Lab</title>
+    <meta name="description" content="Use Healthify Lab's AI Assistant to check symptoms, predict health risks, and analyze test results in Mumbai, Thane, Pune.">
+    <meta name="keywords" content="AI health assistant, symptom checker Mumbai, health risk prediction, Healthify Lab">
+    <meta property="og:title" content="HealthiBot - AI Assistant by Healthify Lab">
+    <meta property="og:description" content="Check symptoms, predict risks, and analyze test results with Healthify Lab's AI in Mumbai, Thane, Pune.">
+    <meta property="og:image" content="/public/hero-banner.jpg">
+    <meta property="og:url" content="https://healthifylab.com/ai.html">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R0R3RYERZW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-R0R3RYERZW');
+    </script>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <img src="/public/logo.png" alt="Healthifylive Lab Logo" class="logo-img">
+            <img src="/public/logo.png" alt="Healthify Lab Logo" class="logo-img">
             <nav>
+                <div class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </div>
                 <a href="/index.html">Home</a>
                 <a href="/booking.html">Book Test</a>
+                <a href="/contact.html">Contact</a>
+                <a href="/blog.html">Blog</a>
+                <a href="/ai.html" class="btn">AI Assistant <i class="fas fa-robot"></i></a>
             </nav>
+        </div>
+        <div id="drawer" class="drawer">
+            <div class="drawer-header">
+                <h3>Menu</h3>
+                <button id="closeDrawer" class="close-drawer" aria-label="Close Menu">×</button>
+            </div>
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/booking.html">Book Test</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+                <li><a href="/call-back.html">Call Me Back</a></li>
+                <li><a href="/cart.html">My Cart</a></li>
+                <li><a href="/blog.html">Blog</a></li>
+            </ul>
         </div>
         <main>
             <h1>HealthiBot - AI Assistant <i class="fas fa-robot"></i></h1>
-            <p>Get advanced health insights with our powerful AI tools!</p>
-
-            <!-- Symptom Checker -->
-            <div class="form-group">
-                <label for="symptomInput">Enter Symptoms <i class="fas fa-notes-medical"></i></label>
-                <textarea id="symptomInput" placeholder="e.g., fever, cough, fatigue, chest pain (include details)" rows="3" aria-required="true"></textarea>
-                <button id="checkSymptoms" class="btn" style="margin-top: 10px;">Analyze Symptoms</button>
+            <section class="ai-section">
+                <h2>Symptom Checker</h2>
+                <div class="form-group">
+                    <input type="text" id="symptomInput" placeholder="Enter symptoms (e.g., fever, fatigue)">
+                    <button id="checkSymptoms" class="btn">Check Symptoms</button>
+                </div>
                 <div id="symptomResult" class="result-box"></div>
-            </div>
-
-            <!-- Health Prediction & Risk Assessment -->
-            <div class="form-group">
-                <label>Health Prediction & Risk Assessment <i class="fas fa-chart-line"></i></label>
-                <input type="number" id="age" placeholder="Age (1-120)" min="1" max="120" aria-required="true" style="margin-top: 10px;">
-                <select id="gender" aria-required="true" style="margin-top: 10px;">
-                    <option value="" disabled selected>Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                </select>
-                <input type="text" id="medicalHistory" placeholder="Medical history (e.g., diabetes)" style="margin-top: 10px;">
-                <button id="predictHealth" class="btn" style="margin-top: 10px;">Get Prediction</button>
+            </section>
+            <section class="ai-section">
+                <h2>Health Prediction</h2>
+                <div class="form-group">
+                    <input type="number" id="age" placeholder="Enter your age">
+                    <select id="gender">
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                    <textarea id="medicalHistory" placeholder="Enter medical history (e.g., diabetes, heart disease)"></textarea>
+                    <button id="predictHealth" class="btn">Predict Risks</button>
+                </div>
                 <div id="healthPrediction" class="result-box"></div>
-            </div>
-
-            <!-- Result Upload & Analysis -->
-            <div class="form-group">
-                <label>Upload & Analyze Results <i class="fas fa-file-medical"></i></label>
-                <input type="file" id="resultUpload" accept=".pdf,.jpg,.png" style="margin-top: 10px;">
-                <button id="analyzeResults" class="btn" style="margin-top: 10px;">Analyze Results</button>
+            </section>
+            <section class="ai-section">
+                <h2>Result Analysis</h2>
+                <div class="form-group">
+                    <input type="file" id="resultUpload" accept=".txt,.pdf">
+                    <button id="analyzeResults" class="btn">Analyze Results</button>
+                </div>
                 <div id="resultAnalysis" class="result-box"></div>
-            </div>
-
-            <!-- App Recommendation with Location -->
-            <div class="form-group">
-                <label>App Recommendations <i class="fas fa-mobile-alt"></i></label>
-                <p>Personalized tests based on your city (e.g., Mumbai).</p>
-                <input type="text" id="locationInput" placeholder="Enter city" style="margin-top: 10px;">
-                <button id="refreshRecommendation" class="btn" style="margin-top: 10px;">Get Recommendations</button>
+            </section>
+            <section class="ai-section">
+                <h2>App Recommendation</h2>
+                <div class="form-group">
+                    <input type="text" id="locationInput" placeholder="Enter your city (e.g., Mumbai)">
+                    <button id="refreshRecommendation" class="btn">Get Recommendations</button>
+                </div>
                 <div id="aiAppRecommendation" class="result-box"></div>
-            </div>
-
-            <!-- Chat Support with Voice -->
-            <div class="form-group">
-                <label for="chatInput">Ask a Question <i class="fas fa-comments"></i></label>
-                <input type="text" id="chatInput" placeholder="e.g., test prices, what is high cholesterol?" aria-required="true">
-                <button id="sendChat" class="btn" style="margin-top: 10px;">Send</button>
-                <button id="voiceChat" class="btn" style="margin-top: 10px;">Speak (Beta)</button>
+            </section>
+            <section class="ai-section">
+                <h2>Chat Support</h2>
+                <div class="form-group">
+                    <input type="text" id="chatInput" placeholder="Ask a question (e.g., test prices)">
+                    <button id="sendChat" class="btn">Send</button>
+                    <button id="voiceChat" class="btn">Voice Chat (Beta)</button>
+                </div>
                 <div id="chatResponse" class="result-box"></div>
-            </div>
+            </section>
         </main>
+        <div class="social-links">
+            <a href="https://x.com/healthify_lab"><i class="fab fa-x-twitter"></i></a>
+            <a href="https://instagram.com/healthifylab"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/share/1Axkp5jB81/?mibextid=qi2Omg"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://threads.net/healthifylab" aria-label="Threads"><i class="fab fa-threads"></i></a>
+        </div>
         <footer class="footer">
             <div class="footer-content">
-                <p>Healthifylive © 2025 | <a href="/contact.html">Contact Us</a> | <a href="/privacy.html">Privacy Policy</a></p>
-                <p><small>Disclaimer: HealthiBot provides insights only. Consult a doctor.</small></p>
-            </footer>
+                <p>Contact: +91 9503832889 / +91 99676 40104 <br>
+                   <a href="https://wa.me/919503832889">WhatsApp: 9503832889</a> <br>
+                   Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a></p>
+                <p>All rights reserved @healthify 2025</p>
+            </div>
+        </footer>
     </div>
     <script type="module" src="/scripts/ai-features.js"></script>
+    <script defer src="/scripts/drawer.js"></script>
+    <script>
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/688613eb31748f192ccdee0e/1j15rrkd3';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
 </body>
 </html>
