@@ -23,18 +23,6 @@
     </script>
 </head>
 <body>
-    <!-- Tawk.to Script -->
-    <script type="text/javascript">
-        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-        (function(){
-            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-            s1.async=true;
-            s1.src='https://embed.tawk.to/688613eb31748f192ccdee0e/1j15rrkd3';
-            s1.charset='UTF-8';
-            s1.setAttribute('crossorigin','*');
-            s0.parentNode.insertBefore(s1,s0);
-        })();
-    </script>
     <div class="container">
         <div class="header">
             <img src="/public/logo.png" alt="Healthify Lab Logo" class="logo-img">
@@ -348,12 +336,32 @@
                 <p>All rights reserved @healthify 2025</p>
             </div>
         </footer>
+        <!-- Floating WhatsApp Button -->
+        <a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <!-- Chatbot Widget -->
+        <div id="chatbot" class="chatbot">
+            <div class="chatbot-header">
+                <h3>Healthify Chat</h3>
+                <button id="closeChatbot" class="chatbot-close" aria-label="Close Chat">×</button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages"></div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbotInput" placeholder="Ask about tests or bookings...">
+                <button id="sendChatbot" class="btn">Send</button>
+            </div>
+        </div>
+        <button id="chatbotToggle" class="chatbot-toggle" aria-label="Open Chat">
+            <i class="fas fa-comment"></i>
+        </button>
     </div>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script defer src="/scripts/drawer.js"></script>
     <script defer src="/scripts/search.js"></script>
     <script defer src="/scripts/lead-submission.js"></script>
     <script defer src="/scripts/custom-package.js"></script>
+    <script defer src="/scripts/chatbot.js"></script>
     <script type="module" src="/scripts/reminders.js"></script>
     <script>
         // Promo Popup
@@ -366,11 +374,12 @@
         window.onload = () => {
             setTimeout(openPopup, 3000);
         };
-        // Swiper Initialization
+        // Swiper Initialization with Autoplay
         new Swiper('.promo-swiper', {
             slidesPerView: 1,
             spaceBetween: 10,
             pagination: { el: '.swiper-pagination', clickable: true },
+            autoplay: { delay: 1000, disableOnInteraction: false },
             breakpoints: {
                 640: { slidesPerView: 2 },
                 1024: { slidesPerView: 3 }
@@ -380,6 +389,7 @@
             slidesPerView: 1,
             spaceBetween: 10,
             pagination: { el: '.swiper-pagination', clickable: true },
+            autoplay: { delay: 1000, disableOnInteraction: false },
             breakpoints: {
                 640: { slidesPerView: 2 },
                 1024: { slidesPerView: 3 }
