@@ -2,7 +2,7 @@
 async function fetchTests() {
     try {
         const response = await fetch('/public/tests.json');
-        if (!response.ok) throw new Error('Failed to fetch tests');
+        if (!response.ok) throw new Error(`Failed to fetch tests: ${response.status}`);
         return await response.json();
     } catch (error) {
         console.error('Error fetching tests:', error);
@@ -13,7 +13,7 @@ async function fetchTests() {
 async function fetchProfiles() {
     try {
         const response = await fetch('/public/profiles.json');
-        if (!response.ok) throw new Error('Failed to fetch profiles');
+        if (!response.ok) throw new Error(`Failed to fetch profiles: ${response.status}`);
         return await response.json();
     } catch (error) {
         console.error('Error fetching profiles:', error);
@@ -25,17 +25,24 @@ document.addEventListener('DOMContentLoaded', async () => {
     const input = document.getElementById('searchInput');
     const results = document.getElementById('searchResults');
     const bookNowBtn = document.getElementById('bookNowBtn');
-    if (!input || !results || !bookNowBtn) return;
+    if (!input || !results || !bookNowBtn) {
+        console.error('Search elements not found');
+        return;
+    }
 
     const allTests = await fetchTests();
     const allProfiles = await fetchProfiles();
 
     input.addEventListener('input', () => {
-        const query = input.value.toLowerCase();
+        const query = input.value.toLowerCase().trim();
         results.innerHTML = '';
 
-        if (!query || query.length < 2) return;
+        if (!query || query.length < 2) {
+            results.style.display = 'none';
+            return;
+        }
 
+        results.style.display = 'block';
         const filteredTests = allTests.filter(t =>
             t.Test_Name.toLowerCase().includes(query) ||
             t.Description.toLowerCase().includes(query)
@@ -45,6 +52,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             p.Test_Name.toLowerCase().includes(query) ||
             p.Description.toLowerCase().includes(query)
         ).slice(0, 10);
+
+        if (filteredTests.length === 0 && filteredProfiles.length === 0) {
+            results.innerHTML = '<div class="result-item">No results found</div>';
+            return;
+        }
 
         filteredTests.forEach(test => {
             const item = document.createElement('div');
