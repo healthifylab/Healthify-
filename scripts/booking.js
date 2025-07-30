@@ -27,10 +27,10 @@ function updateSummaryCard() {
         return;
     }
 
-    const totalMRP = Array.from(selectedTests).reduce((sum, test) => sum + (testDetails[test].mrp || testDetails[test].offerPrice * 1.5), 0) +
-                     Array.from(selectedProfiles).reduce((sum, profile) => sum + (profileDetails[profile].mrp || profileDetails[profile].offerPrice * 1.5), 0);
-    const totalOffer = Array.from(selectedTests).reduce((sum, test) => sum + (testDetails[test].offerPrice || 0), 0) +
-                       Array.from(selectedProfiles).reduce((sum, profile) => sum + (profileDetails[profile].offerPrice || 0), 0);
+    const totalMRP = Array.from(selectedTests).reduce((sum, test) => sum + (testDetails[test]?.mrp || testDetails[test]?.offerPrice * 1.5 || 0), 0) +
+                     Array.from(selectedProfiles).reduce((sum, profile) => sum + (profileDetails[profile]?.mrp || profileDetails[profile]?.offerPrice * 1.5 || 0), 0);
+    const totalOffer = Array.from(selectedTests).reduce((sum, test) => sum + (testDetails[test]?.offerPrice || 0), 0) +
+                       Array.from(selectedProfiles).reduce((sum, profile) => sum + (profileDetails[profile]?.offerPrice || 0), 0);
     const savings = totalMRP - totalOffer;
     const savingsPercentage = totalMRP > 0 ? ((savings / totalMRP) * 100).toFixed(2) : 0;
 
@@ -53,7 +53,7 @@ function updateSelectedItems(type) {
     const selectedSet = type === 'test' ? selectedTests : selectedProfiles;
     selectedDiv.innerHTML = '';
     selectedSet.forEach(item => {
-        if (type === 'test') {
+        if (type === 'test' && testDetails[item]) {
             const test = testDetails[item];
             selectedDiv.innerHTML += `
                 <span class="selected-tag">${test.name} (MRP: <s><span class="total-amount">₹${test.mrp || test.offerPrice * 1.5}</span></s>, Offer: <span class="discounted-amount">₹${test.offerPrice}</span>)
@@ -63,7 +63,7 @@ function updateSelectedItems(type) {
                     <p><strong>Description:</strong> ${test.description}</p>
                 </div>
             `;
-        } else {
+        } else if (type === 'profile' && profileDetails[item]) {
             const profile = profileDetails[item];
             selectedDiv.innerHTML += `
                 <span class="selected-tag">${profile.name} (MRP: <s><span class="total-amount">₹${profile.mrp || profile.offerPrice * 1.5}</span></s>, Offer: <span class="discounted-amount">₹${profile.offerPrice}</span>)
@@ -93,13 +93,14 @@ async function loadTests() {
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
         const tests = await response.json();
         const resultsDiv = document.getElementById('testResults');
+        resultsDiv.innerHTML = '';
         tests.forEach(test => {
             const value = test.Test_Name.toLowerCase().replace(/\s/g, '-');
             testDetails[value] = {
                 name: test.Test_Name,
                 mrp: test.MRP,
                 offerPrice: test.Healthify_Offer_Price,
-                description: test.Description
+                description: test.Description || 'No description available'
             };
             const item = document.createElement('div');
             item.className = 'search-result';
@@ -120,13 +121,14 @@ async function loadProfiles() {
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
         const profiles = await response.json();
         const resultsDiv = document.getElementById('profileResults');
+        resultsDiv.innerHTML = '';
         profiles.forEach(profile => {
             const value = profile.Test_Name.toLowerCase().replace(/\s/g, '-');
             profileDetails[value] = {
                 name: profile.Test_Name,
                 mrp: profile.MRP,
                 offerPrice: profile.Healthify_Offer_Price,
-                description: profile.Description,
+                description: profile.Description || 'No description available',
                 tests: profile.Tests_Included.split(', ')
             };
             const item = document.createElement('div');
@@ -145,13 +147,24 @@ async function loadProfiles() {
 function setupSearch(type, inputId, resultsId, items) {
     const input = document.getElementById(inputId);
     const resultsDiv = document.getElementById(resultsId);
+    if (!input || !resultsDiv) {
+        console.error(`Search elements not found: ${inputId}, ${resultsId}`);
+        return;
+    }
     input.addEventListener('input', () => {
-        const query = input.value.toLowerCase();
+        const query = input.value.toLowerCase().trim();
         resultsDiv.innerHTML = '';
         resultsDiv.style.display = query.length >= 2 ? 'block' : 'none';
         if (query.length < 2) return;
 
-        const filtered = items.filter(item => item.Test_Name.toLowerCase().includes(query) || item.Description.toLowerCase().includes(query));
+        const filtered = items.filter(item =>
+            item.Test_Name.toLowerCase().includes(query) ||
+            item.Description.toLowerCase().includes(query)
+        ).slice(0, 10);
+        if (filtered.length === 0) {
+            resultsDiv.innerHTML = '<div class="search-result">No results found</div>';
+            return;
+        }
         filtered.forEach(item => {
             const value = item.Test_Name.toLowerCase().replace(/\s/g, '-');
             const div = document.createElement('div');
@@ -166,8 +179,8 @@ function setupSearch(type, inputId, resultsId, items) {
 function handleQueryParams() {
     const params = new URLSearchParams(window.location.search);
     params.forEach((value, key) => {
-        if (key === 'test') selectedTests.add(value);
-        if (key === 'profile') selectedProfiles.add(value);
+        if (key === 'test' && testDetails[value]) selectedTests.add(value);
+        if (key === 'profile' && profileDetails[value]) selectedProfiles.add(value);
     });
     if (selectedTests.size > 0) updateSelectedItems('test');
     if (selectedProfiles.size > 0) updateSelectedItems('profile');
@@ -183,8 +196,8 @@ document.getElementById('bookingForm').addEventListener('submit', async (e) => {
         gender: document.getElementById('gender').value,
         address: document.getElementById('address').value,
         pincode: document.getElementById('pincode').value,
-        tests: Array.from(selectedTests).map(test => testDetails[test].name),
-        profiles: Array.from(selectedProfiles).map(profile => profileDetails[profile].name),
+        tests: Array.from(selectedTests).map(test => testDetails[test]?.name || test),
+        profiles: Array.from(selectedProfiles).map(profile => profileDetails[profile]?.name || profile),
         date: document.getElementById('date').value,
         time: document.getElementById('time').value,
         timestamp: new Date().toISOString()
