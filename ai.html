@@ -3,23 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HealthiBot - AI Assistant | Healthify Lab</title>
-    <meta name="description" content="Use Healthify Lab's AI Assistant to check symptoms, predict health risks, and analyze test results in Mumbai, Thane, Pune.">
-    <meta name="keywords" content="AI health assistant, symptom checker Mumbai, health risk prediction, Healthify Lab">
-    <meta property="og:title" content="HealthiBot - AI Assistant by Healthify Lab">
-    <meta property="og:description" content="Check symptoms, predict risks, and analyze test results with Healthify Lab's AI in Mumbai, Thane, Pune.">
+    <title>Healthify AI Assistant</title>
+    <meta name="description" content="Healthify AI Assistant - Get instant answers about medical tests and health packages in Mumbai, Thane, Pune.">
+    <meta name="keywords" content="Healthify AI, medical test assistant, health checkup Mumbai, diagnostic lab Pune">
+    <meta property="og:title" content="Healthify AI Assistant">
+    <meta property="og:description" content="Ask Healthify AI about tests, profiles, or health concerns in Mumbai, Thane, Pune.">
     <meta property="og:image" content="/public/hero-banner.jpg">
     <meta property="og:url" content="https://healthifylab.com/ai.html">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R0R3RYERZW"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-R0R3RYERZW');
-    </script>
+    <link rel="manifest" href="/public/manifest.json">
 </head>
 <body>
     <div class="container">
@@ -51,53 +45,17 @@
             </ul>
         </div>
         <main>
-            <h1>HealthiBot - AI Assistant <i class="fas fa-robot"></i></h1>
             <section class="ai-section">
-                <h2>Symptom Checker</h2>
+                <h1>Healthify AI Assistant <i class="fas fa-robot"></i></h1>
+                <p>Ask about medical tests, health packages, or get health advice.</p>
                 <div class="form-group">
-                    <input type="text" id="symptomInput" placeholder="Enter symptoms (e.g., fever, fatigue)">
-                    <button id="checkSymptoms" class="btn">Check Symptoms</button>
+                    <label for="aiQuery">Your Question</label>
+                    <textarea id="aiQuery" placeholder="E.g., What is a CBC test?" required></textarea>
                 </div>
-                <div id="symptomResult" class="result-box"></div>
-            </section>
-            <section class="ai-section">
-                <h2>Health Prediction</h2>
                 <div class="form-group">
-                    <input type="number" id="age" placeholder="Enter your age">
-                    <select id="gender">
-                        <option value="">Select Gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
-                    <textarea id="medicalHistory" placeholder="Enter medical history (e.g., diabetes, heart disease)"></textarea>
-                    <button id="predictHealth" class="btn">Predict Risks</button>
+                    <button class="btn" onclick="submitAIQuery()">Ask Healthify AI</button>
                 </div>
-                <div id="healthPrediction" class="result-box"></div>
-            </section>
-            <section class="ai-section">
-                <h2>Result Analysis</h2>
-                <div class="form-group">
-                    <input type="file" id="resultUpload" accept=".txt,.pdf">
-                    <button id="analyzeResults" class="btn">Analyze Results</button>
-                </div>
-                <div id="resultAnalysis" class="result-box"></div>
-            </section>
-            <section class="ai-section">
-                <h2>App Recommendation</h2>
-                <div class="form-group">
-                    <input type="text" id="locationInput" placeholder="Enter your city (e.g., Mumbai)">
-                    <button id="refreshRecommendation" class="btn">Get Recommendations</button>
-                </div>
-                <div id="aiAppRecommendation" class="result-box"></div>
-            </section>
-            <section class="ai-section">
-                <h2>Chat Support</h2>
-                <div class="form-group">
-                    <input type="text" id="chatInput" placeholder="Ask a question (e.g., test prices)">
-                    <button id="sendChat" class="btn">Send</button>
-                    <button id="voiceChat" class="btn">Voice Chat</button>
-                </div>
-                <div id="chatResponse" class="result-box"></div>
+                <div id="aiResponse" class="result-box"></div>
             </section>
         </main>
         <div class="social-links">
@@ -114,11 +72,9 @@
                 <p>All rights reserved @healthify 2025</p>
             </div>
         </footer>
-        <!-- Floating WhatsApp Button -->
         <a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
             <i class="fab fa-whatsapp"></i>
         </a>
-        <!-- Chatbot Widget -->
         <div id="chatbot" class="chatbot">
             <div class="chatbot-header">
                 <h3>Healthify Chat</h3>
@@ -134,8 +90,34 @@
             <i class="fas fa-comment"></i>
         </button>
     </div>
-    <script src="/scripts/ai-features.js"></script>
     <script defer src="/scripts/drawer.js"></script>
     <script defer src="/scripts/chatbot.js"></script>
+    <script>
+        async function submitAIQuery() {
+            const query = document.getElementById('aiQuery').value;
+            const responseDiv = document.getElementById('aiResponse');
+            if (!query) {
+                responseDiv.className = 'error';
+                responseDiv.textContent = '❌ Please enter a question.';
+                return;
+            }
+            responseDiv.textContent = 'Processing...';
+            try {
+                const response = await fetch('/api/ai', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query })
+                });
+                if (!response.ok) throw new Error('Failed to fetch AI response');
+                const data = await response.json();
+                responseDiv.className = 'success';
+                responseDiv.textContent = data.answer || 'Sorry, I couldn’t find an answer. Try rephrasing or contact support.';
+            } catch (error) {
+                console.error('AI Error:', error);
+                responseDiv.className = 'error';
+                responseDiv.textContent = '❌ Error fetching response. Please try again or contact support.';
+            }
+        }
+    </script>
 </body>
 </html>
