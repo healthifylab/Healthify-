@@ -215,3 +215,11 @@ nav ul li a:hover {
         margin: 10px 0;
     }
 }
+/* Update test-card styling for additional fields */
+.test-card p {
+    margin: 5px 0;
+}
+
+.test-card p strong {
+    color: #27ae60;
+}
