@@ -3,193 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#007bff">
-    <title>Healthify Lab - Home Blood Test in Mumbai, Thane, Pune</title>
-    <meta name="description" content="Book home blood tests in Mumbai, Navi Mumbai, Thane, Pune with Healthify Lab. Affordable, reliable diagnostics with fast results.">
-    <meta name="keywords" content="blood test Mumbai, health checkup Thane, diagnostic lab Pune, Healthify Lab">
-    <meta property="og:title" content="Healthify Lab - Home Blood Testing">
-    <meta property="og:description" content="Affordable and reliable home blood testing in Mumbai, Thane, Pune. Book now with Healthify Lab.">
-    <meta property="og:image" content="/public/hero-banner.jpg">
-    <meta property="og:url" content="https://healthifylab.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/styles/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    <link rel="manifest" href="/public/manifest.json">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R0R3RYERZW"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-R0R3RYERZW');
-    </script>
+    <title>HealthifyLab - Your Partner in Precise Diagnostics</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <img src="/public/logo.png" alt="Healthify Lab Logo" class="logo-img">
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <img src="logo.png" alt="HealthifyLab Logo" class="logo">
             <nav>
-                <div class="menu-toggle" aria-label="Open menu" aria-expanded="false">
-                    <span></span><span></span><span></span>
-                </div>
-                <a href="/index.html">Home</a>
-                <a href="/booking.html">Book Test</a>
-                <a href="/contact.html">Contact</a>
-                <a href="/blog.html">Blog</a>
-                <a href="/ai.html" class="btn">AI Assistant <i class="fas fa-robot"></i></a>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="booking.html">Book a Test</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#health-tips">Health Tips</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
             </nav>
         </div>
-        <div id="drawer" class="drawer">
-            <div class="drawer-header">
-                <h3>Menu</h3>
-                <button id="closeDrawer" class="close-drawer" aria-label="Close Menu">×</button>
-            </div>
-            <ul>
-                <li><a href="/index.html">Home</a></li>
-                <li><a href="/booking.html">Book Test</a></li>
-                <li><a href="/contact.html">Contact</a></li>
-                <li><a href="/call-back.html">Call Me Back</a></li>
-                <li><a href="/cart.html">My Cart</a></li>
-                <li><a href="/blog.html">Blog</a></li>
-            </ul>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Your Partner in Precise Diagnostics & Personalized Care</h1>
+            <p>Book health check-ups with free home sample collection in Mumbai, Navi Mumbai, Thane.</p>
+            <a href="booking.html" class="cta-button">Book Now</a>
         </div>
-        <main>
-            <section class="hero">
-                <img src="/public/hero-banner.jpg" alt="Healthify Lab Home Collection" class="hero-img">
-                <h1>Healthify Lab - Your Trusted Diagnostic Partner</h1>
-                <p>Book home blood tests in Mumbai, Navi Mumbai, Thane, Pune</p>
-                <button class="book-now-btn" onclick="window.location.href='/booking.html'">Book Now <i class="fas fa-syringe"></i></button>
-                <p class="safety-text"><i class="fas fa-shield-alt"></i> NABL Certified Labs | Safe Home Collection</p>
-            </section>
-            <section class="custom-package">
-                <h2>Custom Health Packages</h2>
-                <div class="form-group">
-                    <label><input type="checkbox" name="tests" value="cbc"> CBC</label>
-                    <label><input type="checkbox" name="tests" value="lipid-profile"> Lipid Profile</label>
-                    <label><input type="checkbox" name="tests" value="thyroid"> Thyroid</label>
-                    <label><input type="checkbox" name="tests" value="diabetes"> Diabetes</label>
-                    <button class="btn" onclick="window.location.href='/booking.html?' + new URLSearchParams(new FormData(document.querySelector('form'))).toString()">Create Package</button>
+    </section>
+
+    <!-- Featured Tests -->
+    <section class="featured-tests">
+        <div class="container">
+            <h2>Featured Tests</h2>
+            <div class="test-grid">
+                <div class="test-card">
+                    <h3>Healthify Vital Check</h3>
+                    <p>₹480</p>
+                    <p>Includes CBC, Lipid Profile, and more.</p>
+                    <a href="booking.html?profile=healthify-vital-check" class="test-button">Book Now</a>
                 </div>
-            </section>
-            <section class="search-section">
-                <h2>Find a Test or Package</h2>
-                <input type="text" id="searchInput" placeholder="Search tests or profiles..." class="search-input">
-                <div id="searchResults"></div>
-                <button id="bookNowBtn" class="btn">Book Selected Tests</button>
-            </section>
-            <section class="cards-section">
-                <h2>Featured Profiles</h2>
-                <div class="swiper-container featured-profiles">
-                    <div class="swiper-wrapper"></div>
+                <div class="test-card">
+                    <h3>Healthify Core Wellness</h3>
+                    <p>₹959.2</p>
+                    <p>Comprehensive full body check-up.</p>
+                    <a href="booking.html?profile=healthify-core-wellness" class="test-button">Book Now</a>
                 </div>
-                <h2>Promotional Offers</h2>
-                <div class="swiper-container promo-profiles">
-                    <div class="swiper-wrapper"></div>
+                <div class="test-card">
+                    <h3>Healthify Diabetes Care</h3>
+                    <p>₹800</p>
+                    <p>Monitor your diabetes with HbA1c, Glucose.</p>
+                    <a href="booking.html?profile=healthify-diabetes-care" class="test-button">Book Now</a>
                 </div>
-            </section>
-            <section class="about-section">
-                <h2>About Healthify Lab</h2>
-                <p>Healthify Lab offers reliable home blood testing across Mumbai, Thane, and Pune. Our NABL-certified labs ensure accurate results with safe, convenient home sample collection.</p>
-                <div class="gallery">
-                    <img src="/public/IMAGE_LAB" alt="Lab Facility">
-                    <img src="/public/IMAGE_STAFF" alt="Our Team">
-                    <img src="/public/IMAGE_HOME_COLLECTION" alt="Home Collection">
+                <div class="test-card">
+                    <h3>Healthify Heart Guard</h3>
+                    <p>₹1999</p>
+                    <p>ECG, Lipid Profile for heart health.</p>
+                    <a href="booking.html?profile=healthify-heart-guard" class="test-button">Book Now</a>
                 </div>
-            </section>
-            <section class="faq-section">
-                <h2>Frequently Asked Questions</h2>
-                <div class="faq-container">
-                    <div class="faq-item">
-                        <div class="faq-question">How do I book a test?</div>
-                        <div class="faq-answer">Select a test or package, enter your details, and choose a convenient time for home collection.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">What is the turnaround time for results?</div>
-                        <div class="faq-answer">Most results are delivered within 24-48 hours, depending on the test.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">Is home collection safe?</div>
-                        <div class="faq-answer">Yes, our trained professionals follow strict safety protocols.</div>
-                    </div>
-                </div>
-            </section>
-        </main>
-        <div class="social-links">
-            <a href="https://x.com/healthify_lab"><i class="fab fa-x-twitter"></i></a>
-            <a href="https://instagram.com/healthifylab"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.facebook.com/share/1Axkp5jB81/?mibextid=qi2Omg"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://threads.net/healthifylab" aria-label="Threads"><i class="fab fa-threads"></i></a>
-        </div>
-        <footer class="footer">
-            <div class="footer-content">
-                <p>Contact: +91 9503832889 / +91 99676 40104 <br>
-                   <a href="https://wa.me/919503832889">WhatsApp: 9503832889</a> <br>
-                   Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a></p>
-                <p>All rights reserved @healthify 2025</p>
-            </div>
-        </footer>
-        <a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-        <div id="chatbot" class="chatbot">
-            <div class="chatbot-header">
-                <h3>Healthify Chat</h3>
-                <button id="closeChatbot" class="chatbot-close" aria-label="Close Chat">×</button>
-            </div>
-            <div class="chatbot-messages" id="chatbotMessages"></div>
-            <div class="chatbot-input">
-                <input type="text" id="chatbotInput" placeholder="Ask about tests or bookings...">
-                <button id="sendChatbot" class="btn">Send</button>
             </div>
         </div>
-        <button id="chatbotToggle" class="chatbot-toggle" aria-label="Open Chat">
-            <i class="fas fa-comment"></i>
-        </button>
-    </div>
-    <script defer src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script defer src="/scripts/drawer.js"></script>
-    <script defer src="/scripts/chatbot.js"></script>
-    <script defer src="/scripts/search.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            const featuredContainer = document.querySelector('.featured-profiles .swiper-wrapper');
-            const promoContainer = document.querySelector('.promo-profiles .swiper-wrapper');
-            const profiles = await (await fetch('/public/profiles.json')).json();
+    </section>
 
-            profiles.slice(0, 5).forEach(profile => {
-                const card = `<div class="swiper-slide"><div class="promo-card"><img src="/public/${profile.Test_Name.toLowerCase().replace(/\s/g, '-')}.jpg" alt="${profile.Test_Name}"><h3>${profile.Test_Name}</h3><p>${profile.Description}</p><p><s>₹${profile.MRP}</s> <strong>₹${profile.Healthify_Offer_Price}</strong></p><button class="btn" onclick="window.location.href='/booking.html?profile=${profile.Test_Name.toLowerCase().replace(/\s/g, '-')}'">Book Now</button></div></div>`;
-                featuredContainer.innerHTML += card;
-            });
+    <!-- Services -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service-item">
+                    <i class="fas fa-home"></i>
+                    <h3>Free Home Collection</h3>
+                    <p>Super speedy sample collection at your doorstep in Mumbai, Navi Mumbai, Thane.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>Digital Reports</h3>
+                    <p>Get your test results online in 24-48 hours.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-user-md"></i>
+                    <h3>Free Doctor Consultation</h3>
+                    <p>Consult with our experts at no extra cost.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Trusted Quality</h3>
+                    <p>Adhering to international quality standards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            profiles.slice(5, 10).forEach(profile => {
-                const card = `<div class="swiper-slide"><div class="promo-card"><img src="/public/${profile.Test_Name.toLowerCase().replace(/\s/g, '-')}.jpg" alt="${profile.Test_Name}"><h3>${profile.Test_Name}</h3><p>${profile.Description}</p><p><s>₹${profile.MRP}</s> <strong>₹${profile.Healthify_Offer_Price}</strong></p><button class="btn" onclick="window.location.href='/booking.html?profile=${profile.Test_Name.toLowerCase().replace(/\s/g, '-')}'">Book Now</button></div></div>`;
-                promoContainer.innerHTML += card;
-            });
+    <!-- All Tests -->
+    <section class="all-tests">
+        <div class="container">
+            <h2>All Tests</h2>
+            <div class="test-grid" id="all-tests-grid">
+                <!-- Dynamically populated via JavaScript or Firebase -->
+                <div class="test-card">
+                    <h3>Healthify Thyroid Balance</h3>
+                    <p>₹1200</p>
+                    <p>Monitor thyroid with TSH, T3, T4.</p>
+                    <a href="booking.html?profile=healthify-thyroid-balance" class="test-button">Book Now</a>
+                </div>
+                <!-- Add more test profiles as needed -->
+            </div>
+            <a href="booking.html" class="view-all-button">View All Tests</a>
+        </div>
+    </section>
 
-            new Swiper('.featured-profiles', {
-                slidesPerView: 1,
-                spaceBetween: 10,
-                loop: true,
-                autoplay: { delay: 1000 },
-                pagination: { el: '.swiper-pagination', clickable: true },
-                breakpoints: {
-                    768: { slidesPerView: 2 },
-                    1024: { slidesPerView: 3 }
-                }
-            });
+    <!-- Health Tips -->
+    <section class="health-tips" id="health-tips">
+        <div class="container">
+            <h2>Health Tips</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h3>Why Regular Blood Tests Matter</h3>
+                    <p>Routine check-ups like CBC and Lipid Profile can detect issues early, ensuring timely treatment.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Manage Diabetes Effectively</h3>
+                    <p>Monitor HbA1c and glucose levels regularly to keep diabetes under control.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Heart Health Tips</h3>
+                    <p>Maintain a healthy heart with regular ECG and cholesterol checks.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Stay Hydrated for Better Results</h3>
+                    <p>Drink water before your blood test for accurate results.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            new Swiper('.promo-profiles', {
-                slidesPerView: 1,
-                spaceBetween: 10,
-                loop: true,
-                autoplay: { delay: 1000 },
-                pagination: { el: '.swiper-pagination', clickable: true },
-                breakpoints: {
-                    768: { slidesPerView: 2 },
-                    1024: { slidesPerView: 3 }
-                }
-            });
-        });
-    </script>
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2>What Our Patients Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p>"HealthifyLab's home collection was so convenient! Got my results in 24 hours."</p>
+                    <p>- Priya S.</p>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Affordable tests and great service. Highly recommend!"</p>
+                    <p>- Rahul M.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQs -->
+    <section class="faqs">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>Which areas do you serve?</h3>
+                <p>We offer home collection in Mumbai, Navi Mumbai, and Thane.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How soon will I get my results?</h3>
+                <p>Results are delivered online within 24-48 hours.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 HealthifyLab. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://x.com/healthify_lab"><i class="fab fa-x"></i></a>
+                <a href="https://instagram.com/healthifylab"><i class="fab fa-instagram"></i></a>
+                <a href="https://facebook.com/healthify"><i class="fab fa-facebook"></i></a>
+                <a href="https://wa.me/919503832889"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/919503832889" class="whatsapp-button" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="script.js"></script>
 </body>
-                        </html>
+</html>
