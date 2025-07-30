@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Healthify Lab - Home Blood Testing in Mumbai, Thane, Pune</title>
-    <meta name="description" content="Home blood tests in Mumbai, Navi Mumbai, Thane, Pune, PCMC with Healthify Lab. Book now for fast results.">
+    <meta name="theme-color" content="#007bff">
+    <title>Healthify Lab - Home Blood Test in Mumbai, Thane, Pune</title>
+    <meta name="description" content="Book home blood tests in Mumbai, Navi Mumbai, Thane, Pune with Healthify Lab. Affordable, reliable diagnostics with fast results.">
     <meta name="keywords" content="blood test Mumbai, health checkup Thane, diagnostic lab Pune, Healthify Lab">
-    <meta property="og:title" content="Healthify Lab - Trusted Home Blood Testing">
-    <meta property="og:description" content="Book safe and affordable home blood tests in Mumbai, Thane, Pune with Healthify Lab.">
+    <meta property="og:title" content="Healthify Lab - Home Blood Testing">
+    <meta property="og:description" content="Affordable and reliable home blood testing in Mumbai, Thane, Pune. Book now with Healthify Lab.">
     <meta property="og:image" content="/public/hero-banner.jpg">
     <meta property="og:url" content="https://healthifylab.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="manifest" href="/public/manifest.json">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-R0R3RYERZW"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -51,277 +53,67 @@
                 <li><a href="/blog.html">Blog</a></li>
             </ul>
         </div>
-        <div class="hero">
-            <img src="/public/hero-banner.jpg" alt="Healthify Lab Home Blood Testing" class="hero-img">
-            <h1>Welcome to Healthify <i class="fas fa-heartbeat"></i></h1>
-            <a href="/booking.html"><button class="book-now-btn">Book Now <i class="fas fa-check"></i></button></a>
-            <p><a href="/app.html" class="btn">Download App <i class="fas fa-download"></i></a></p>
-            <p class="safety-text">100% Safe, Scanned by VirusTotal <i class="fas fa-shield-alt"></i></p>
-        </div>
-        <div class="promo-popup" id="promoPopup">
-            <h3>Home blood sample collection in Mumbai, Navi Mumbai, and Thane <i class="fas fa-map-marker-alt"></i></h3>
-            <p id="promoText">📅 Book Online • Same-Day Collection • 📃 Digital Reports Delivered Fast!</p>
-            <button class="promo-btn close-btn" onclick="closePopup()">×</button>
-            <a href="/booking.html"><button class="promo-btn book-now-btn">Book Now <i class="fas fa-check"></i></button></a>
-        </div>
-        <section class="custom-package">
-            <h2>Customize Your Health Package <i class="fas fa-stethoscope"></i></h2>
-            <p>Build a plan tailored to your needs in Mumbai, Pune, or Thane!</p>
-            <form id="custom-package-form">
-                <div class="form-group"></div>
-                <p>Total: <span id="total-price">₹0</span></p>
-                <a href="/booking.html?custom=true" class="btn">Book Custom Package</a>
-            </form>
-        </section>
-        <section class="search-section">
-            <h2>Find Tests & Profiles <i class="fas fa-search"></i></h2>
-            <input type="text" id="searchInput" placeholder="Search tests or profiles..." class="search-input">
-            <div id="searchResults"></div>
-            <button id="bookNowBtn" class="btn">Book Now <i class="fas fa-arrow-right"></i></button>
-        </section>
-        <section class="about-section">
-            <h2>About Healthify Lab <i class="fas fa-hospital"></i></h2>
-            <div class="gallery">
-                <img src="/public/IMAGE_LAB" alt="Healthify Lab Equipment" onerror="this.src='/public/test-placeholder.jpg'">
-                <img src="/public/IMAGE_STAFF" alt="Healthify Lab Staff" onerror="this.src='/public/test-placeholder.jpg'">
-                <img src="/public/IMAGE_HOME_COLLECTION" alt="Home Blood Collection" onerror="this.src='/public/test-placeholder.jpg'">
-            </div>
-        </section>
-        <section class="cards-section">
-            <h2>Our Packages <i class="fas fa-gift"></i></h2>
-            <div class="cards-container">
-                <div class="swiper-container promo-swiper">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="promo-card">
-                                <img src="/public/healthify-vital-check.jpg" alt="Healthify Vital Check" onerror="this.src='/public/test-placeholder.jpg'">
-                                <h3>Healthify Vital Check <i class="fas fa-heartbeat"></i></h3>
-                                <p>Essential screening. Starting at ₹480!</p>
-                                <a href="/booking.html?profile=healthify-vital-check" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="promo-card">
-                                <img src="/public/healthify-core-wellness.jpg" alt="Healthify Core Wellness" onerror="this.src='/public/test-placeholder.jpg'">
-                                <h3>Healthify Core Wellness <i class="fas fa-user-md"></i></h3>
-                                <p>Comprehensive screening. Only ₹959.2!</p>
-                                <a href="/booking.html?profile=healthify-core-wellness" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="promo-card">
-                                <img src="/public/healthify-diabetes-care.jpg" alt="Healthify Diabetes Care" onerror="this.src='/public/test-placeholder.jpg'">
-                                <h3>Healthify Diabetes Care <i class="fas fa-shield-virus"></i></h3>
-                                <p>Diabetes management. Starting at ₹800!</p>
-                                <a href="/booking.html?profile=healthify-diabetes-care" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="promo-card">
-                                <img src="/public/healthify-heart-guard.jpg" alt="Healthify Heart Guard" onerror="this.src='/public/test-placeholder.jpg'">
-                                <h3>Healthify Heart Guard <i class="fas fa-heart"></i></h3>
-                                <p>Cardiovascular health. Only ₹1200!</p>
-                                <a href="/booking.html?profile=healthify-heart-guard" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="promo-card">
-                                <img src="/public/healthify-thyroid-balance.jpg" alt="Healthify Thyroid Balance" onerror="this.src='/public/test-placeholder.jpg'">
-                                <h3>Healthify Thyroid Balance <i class="fas fa-leaf"></i></h3>
-                                <p>Thyroid function. Starting at ₹640!</p>
-                                <a href="/booking.html?profile=healthify-thyroid-balance" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="promo-card">
-                                <img src="/public/healthify-comprehensive-wellness.jpg" alt="Healthify Comprehensive Wellness" onerror="this.src='/public/test-placeholder.jpg'">
-                                <h3>Healthify Comprehensive Wellness <i class="fas fa-stethoscope"></i></h3>
-                                <p>Holistic assessment. Only ₹2000!</p>
-                                <a href="/booking.html?profile=healthify-comprehensive-wellness" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="promo-card">
-                                <img src="/public/healthify-womens-wellness.jpg" alt="Healthify Women’s Wellness" onerror="this.src='/public/test-placeholder.jpg'">
-                                <h3>Healthify Women’s Wellness <i class="fas fa-female"></i></h3>
-                                <p>Women’s health. Starting at ₹1600!</p>
-                                <a href="/booking.html?profile=healthify-womens-wellness" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="promo-card">
-                                <img src="/public/healthify-senior-care.jpg" alt="Healthify Senior Care" onerror="this.src='/public/test-placeholder.jpg'">
-                                <h3>Healthify Senior Care <i class="fas fa-user-clock"></i></h3>
-                                <p>Senior health. Only ₹2400!</p>
-                                <a href="/booking.html?profile=healthify-senior-care" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="promo-card">
-                                <img src="/public/healthify-anemia-shield.jpg" alt="Healthify Anemia Shield" onerror="this.src='/public/test-placeholder.jpg'">
-                                <h3>Healthify Anemia Shield <i class="fas fa-tint"></i></h3>
-                                <p>Anemia screening. Starting at ₹1200!</p>
-                                <a href="/booking.html?profile=healthify-anemia-shield" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="promo-card">
-                                <img src="/public/healthify-arthritis-care.jpg" alt="Healthify Arthritis Care" onerror="this.src='/public/test-placeholder.jpg'">
-                                <h3>Healthify Arthritis Care <i class="fas fa-bone"></i></h3>
-                                <p>Arthritis screening. Only ₹1440!</p>
-                                <a href="/booking.html?profile=healthify-arthritis-care" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="promo-card">
-                                <img src="/public/healthify-pcod-harmony.jpg" alt="Healthify PCOD Harmony" onerror="this.src='/public/test-placeholder.jpg'">
-                                <h3>Healthify PCOD Harmony <i class="fas fa-female"></i></h3>
-                                <p>PCOD evaluation. Starting at ₹2000!</p>
-                                <a href="/booking.html?profile=healthify-pcod-harmony" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="promo-card">
-                                <img src="/public/healthify-vitamin-boost.jpg" alt="Healthify Vitamin Boost" onerror="this.src='/public/test-placeholder.jpg'">
-                                <h3>Healthify Vitamin Boost <i class="fas fa-vial"></i></h3>
-                                <p>Vitamin levels. Only ₹1600!</p>
-                                <a href="/booking.html?profile=healthify-vitamin-boost" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="promo-card">
-                                <img src="/public/healthify-basic-wellness.jpg" alt="Healthify Basic Wellness" onerror="this.src='/public/test-placeholder.jpg'">
-                                <h3>Healthify Basic Wellness <i class="fas fa-heart"></i></h3>
-                                <p>Basic health check. Starting at ₹799.2!</p>
-                                <a href="/booking.html?profile=healthify-basic-wellness" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
-                            </div>
-                        </div>
+        <main>
+            <section class="hero">
+                <img src="/public/hero-banner.jpg" alt="Healthify Lab Home Collection" class="hero-img">
+                <h1>Healthify Lab - Your Trusted Diagnostic Partner</h1>
+                <p>Book home blood tests in Mumbai, Navi Mumbai, Thane, Pune</p>
+                <button class="book-now-btn" onclick="window.location.href='/booking.html'">Book Now <i class="fas fa-syringe"></i></button>
+                <p class="safety-text"><i class="fas fa-shield-alt"></i> NABL Certified Labs | Safe Home Collection</p>
+            </section>
+            <section class="custom-package">
+                <h2>Custom Health Packages</h2>
+                <div class="form-group">
+                    <label><input type="checkbox" name="tests" value="cbc"> CBC</label>
+                    <label><input type="checkbox" name="tests" value="lipid-profile"> Lipid Profile</label>
+                    <label><input type="checkbox" name="tests" value="thyroid"> Thyroid</label>
+                    <label><input type="checkbox" name="tests" value="diabetes"> Diabetes</label>
+                    <button class="btn" onclick="window.location.href='/booking.html?' + new URLSearchParams(new FormData(document.querySelector('form'))).toString()">Create Package</button>
+                </div>
+            </section>
+            <section class="search-section">
+                <h2>Find a Test or Package</h2>
+                <input type="text" id="searchInput" placeholder="Search tests or profiles..." class="search-input">
+                <div id="searchResults"></div>
+                <button id="bookNowBtn" class="btn">Book Selected Tests</button>
+            </section>
+            <section class="cards-section">
+                <h2>Featured Profiles</h2>
+                <div class="swiper-container featured-profiles">
+                    <div class="swiper-wrapper"></div>
+                </div>
+                <h2>Promotional Offers</h2>
+                <div class="swiper-container promo-profiles">
+                    <div class="swiper-wrapper"></div>
+                </div>
+            </section>
+            <section class="about-section">
+                <h2>About Healthify Lab</h2>
+                <p>Healthify Lab offers reliable home blood testing across Mumbai, Thane, and Pune. Our NABL-certified labs ensure accurate results with safe, convenient home sample collection.</p>
+                <div class="gallery">
+                    <img src="/public/IMAGE_LAB" alt="Lab Facility">
+                    <img src="/public/IMAGE_STAFF" alt="Our Team">
+                    <img src="/public/IMAGE_HOME_COLLECTION" alt="Home Collection">
+                </div>
+            </section>
+            <section class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">How do I book a test?</div>
+                        <div class="faq-answer">Select a test or package, enter your details, and choose a convenient time for home collection.</div>
                     </div>
-                    <div class="swiper-pagination"></div>
-                </div>
-            </div>
-            <h2>Featured Packages <i class="fas fa-star"></i></h2>
-            <div class="cards-container">
-                <div class="swiper-container featured-swiper">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="promo-card">
-                                <img src="/public/healthify-active-lifestyle.jpg" alt="Healthify Active Lifestyle" onerror="this.src='/public/test-placeholder.jpg'">
-                                <h3>Healthify Active Lifestyle <i class="fas fa-running"></i></h3>
-                                <p>Fitness health check. Starting at ₹1440!</p>
-                                <a href="/booking.html?profile=healthify-active-lifestyle" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="promo-card">
-                                <img src="/public/healthify-prenatal-care.jpg" alt="Healthify Prenatal Care" onerror="this.src='/public/test-placeholder.jpg'">
-                                <h3>Healthify Prenatal Care <i class="fas fa-baby"></i></h3>
-                                <p>Pregnancy health. Only ₹8000!</p>
-                                <a href="/booking.html?profile=healthify-prenatal-care" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="promo-card">
-                                <img src="/public/healthify-cardiac-advance.jpg" alt="Healthify Cardiac Advance" onerror="this.src='/public/test-placeholder.jpg'">
-                                <h3>Healthify Cardiac Advance <i class="fas fa-heartbeat"></i></h3>
-                                <p>Advanced heart check. Starting at ₹2800!</p>
-                                <a href="/booking.html?profile=healthify-cardiac-advance" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="promo-card">
-                                <img src="/public/healthify-liver-health.jpg" alt="Healthify Liver Health" onerror="this.src='/public/test-placeholder.jpg'">
-                                <h3>Healthify Liver Health <i class="fas fa-lungs"></i></h3>
-                                <p>Liver health check. Only ₹1600!</p>
-                                <a href="/booking.html?profile=healthify-liver-health" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="promo-card">
-                                <img src="/public/healthify-kidney-care.jpg" alt="Healthify Kidney Care" onerror="this.src='/public/test-placeholder.jpg'">
-                                <h3>Healthify Kidney Care <i class="fas fa-kidneys"></i></h3>
-                                <p>Kidney health check. Starting at ₹1200!</p>
-                                <a href="/booking.html?profile=healthify-kidney-care" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="promo-card">
-                                <img src="/public/healthify-allergy-screen.jpg" alt="Healthify Allergy Screen" onerror="this.src='/public/test-placeholder.jpg'">
-                                <h3>Healthify Allergy Screen <i class="fas fa-allergies"></i></h3>
-                                <p>Allergy test. Only ₹1200!</p>
-                                <a href="/booking.html?profile=healthify-allergy-screen" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="promo-card">
-                                <img src="/public/healthify-cancer-screen.jpg" alt="Healthify Cancer Screen" onerror="this.src='/public/test-placeholder.jpg'">
-                                <h3>Healthify Cancer Screen <i class="fas fa-shield-alt"></i></h3>
-                                <p>Cancer screening. Starting at ₹3200!</p>
-                                <a href="/booking.html?profile=healthify-cancer-screen" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="promo-card">
-                                <img src="/public/healthify-metabolic-balance.jpg" alt="Healthify Metabolic Balance" onerror="this.src='/public/test-placeholder.jpg'">
-                                <h3>Healthify Metabolic Balance <i class="fas fa-weight"></i></h3>
-                                <p>Metabolic health. Only ₹1600!</p>
-                                <a href="/booking.html?profile=healthify-metabolic-balance" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="promo-card">
-                                <img src="/public/healthify-bone-health.jpg" alt="Healthify Bone Health" onerror="this.src='/public/test-placeholder.jpg'">
-                                <h3>Healthify Bone Health <i class="fas fa-bone"></i></h3>
-                                <p>Bone health check. Starting at ₹1440!</p>
-                                <a href="/booking.html?profile=healthify-bone-health" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="promo-card">
-                                <img src="/public/healthify-fertility-check.jpg" alt="Healthify Fertility Check" onerror="this.src='/public/test-placeholder.jpg'">
-                                <h3>Healthify Fertility Check <i class="fas fa-child"></i></h3>
-                                <p>Fertility evaluation. Only ₹2400!</p>
-                                <a href="/booking.html?profile=healthify-fertility-check" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="promo-card">
-                                <img src="/public/healthify-executive-wellness.jpg" alt="Healthify Executive Wellness" onerror="this.src='/public/test-placeholder.jpg'">
-                                <h3>Healthify Executive Wellness <i class="fas fa-briefcase"></i></h3>
-                                <p>Premium health check. Starting at ₹4000!</p>
-                                <a href="/booking.html?profile=healthify-executive-wellness" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
-                            </div>
-                        </div>
+                    <div class="faq-item">
+                        <div class="faq-question">What is the turnaround time for results?</div>
+                        <div class="faq-answer">Most results are delivered within 24-48 hours, depending on the test.</div>
                     </div>
-                    <div class="swiper-pagination"></div>
+                    <div class="faq-item">
+                        <div class="faq-question">Is home collection safe?</div>
+                        <div class="faq-answer">Yes, our trained professionals follow strict safety protocols.</div>
+                    </div>
                 </div>
-            </div>
-        </section>
-        <section class="faq-section">
-            <h2>Frequently Asked Questions <i class="fas fa-question-circle"></i></h2>
-            <div class="faq-container">
-                <div class="faq-item">
-                    <div class="faq-question">What tests are included in the Healthify Diabetes Care package?</div>
-                    <div class="faq-answer">Includes HbA1c, Glucose Fasting, Glucose PP, Insulin.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">How do I book a home collection in PCMC?</div>
-                    <div class="faq-answer">Visit our booking page, select your package, and choose PCMC as your location.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">How do I download my test results securely?</div>
-                    <div class="faq-answer">Access your reports via our secure portal with email and OTP verification.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">Are there extra fees for home collection in Bandra?</div>
-                    <div class="faq-answer">No extra fees; all costs are included in the package price.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">What safety protocols are followed during home collection?</div>
-                    <div class="faq-answer">Our technicians use PPE and sanitized equipment for safe collection.</div>
-                </div>
-            </div>
-        </section>
+            </section>
+        </main>
         <div class="social-links">
             <a href="https://x.com/healthify_lab"><i class="fab fa-x-twitter"></i></a>
             <a href="https://instagram.com/healthifylab"><i class="fab fa-instagram"></i></a>
@@ -336,11 +128,9 @@
                 <p>All rights reserved @healthify 2025</p>
             </div>
         </footer>
-        <!-- Floating WhatsApp Button -->
         <a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
             <i class="fab fa-whatsapp"></i>
         </a>
-        <!-- Chatbot Widget -->
         <div id="chatbot" class="chatbot">
             <div class="chatbot-header">
                 <h3>Healthify Chat</h3>
@@ -356,45 +146,50 @@
             <i class="fas fa-comment"></i>
         </button>
     </div>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script defer src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script defer src="/scripts/drawer.js"></script>
-    <script defer src="/scripts/search.js"></script>
-    <script defer src="/scripts/lead-submission.js"></script>
-    <script defer src="/scripts/custom-package.js"></script>
     <script defer src="/scripts/chatbot.js"></script>
-    <script type="module" src="/scripts/reminders.js"></script>
+    <script defer src="/scripts/search.js"></script>
     <script>
-        // Promo Popup
-        function openPopup() {
-            document.getElementById('promoPopup').style.display = 'block';
-        }
-        function closePopup() {
-            document.getElementById('promoPopup').style.display = 'none';
-        }
-        window.onload = () => {
-            setTimeout(openPopup, 3000);
-        };
-        // Swiper Initialization with Autoplay
-        new Swiper('.promo-swiper', {
-            slidesPerView: 1,
-            spaceBetween: 10,
-            pagination: { el: '.swiper-pagination', clickable: true },
-            autoplay: { delay: 1000, disableOnInteraction: false },
-            breakpoints: {
-                640: { slidesPerView: 2 },
-                1024: { slidesPerView: 3 }
-            }
-        });
-        new Swiper('.featured-swiper', {
-            slidesPerView: 1,
-            spaceBetween: 10,
-            pagination: { el: '.swiper-pagination', clickable: true },
-            autoplay: { delay: 1000, disableOnInteraction: false },
-            breakpoints: {
-                640: { slidesPerView: 2 },
-                1024: { slidesPerView: 3 }
-            }
+        document.addEventListener('DOMContentLoaded', async () => {
+            const featuredContainer = document.querySelector('.featured-profiles .swiper-wrapper');
+            const promoContainer = document.querySelector('.promo-profiles .swiper-wrapper');
+            const profiles = await (await fetch('/public/profiles.json')).json();
+
+            profiles.slice(0, 5).forEach(profile => {
+                const card = `<div class="swiper-slide"><div class="promo-card"><img src="/public/${profile.Test_Name.toLowerCase().replace(/\s/g, '-')}.jpg" alt="${profile.Test_Name}"><h3>${profile.Test_Name}</h3><p>${profile.Description}</p><p><s>₹${profile.MRP}</s> <strong>₹${profile.Healthify_Offer_Price}</strong></p><button class="btn" onclick="window.location.href='/booking.html?profile=${profile.Test_Name.toLowerCase().replace(/\s/g, '-')}'">Book Now</button></div></div>`;
+                featuredContainer.innerHTML += card;
+            });
+
+            profiles.slice(5, 10).forEach(profile => {
+                const card = `<div class="swiper-slide"><div class="promo-card"><img src="/public/${profile.Test_Name.toLowerCase().replace(/\s/g, '-')}.jpg" alt="${profile.Test_Name}"><h3>${profile.Test_Name}</h3><p>${profile.Description}</p><p><s>₹${profile.MRP}</s> <strong>₹${profile.Healthify_Offer_Price}</strong></p><button class="btn" onclick="window.location.href='/booking.html?profile=${profile.Test_Name.toLowerCase().replace(/\s/g, '-')}'">Book Now</button></div></div>`;
+                promoContainer.innerHTML += card;
+            });
+
+            new Swiper('.featured-profiles', {
+                slidesPerView: 1,
+                spaceBetween: 10,
+                loop: true,
+                autoplay: { delay: 1000 },
+                pagination: { el: '.swiper-pagination', clickable: true },
+                breakpoints: {
+                    768: { slidesPerView: 2 },
+                    1024: { slidesPerView: 3 }
+                }
+            });
+
+            new Swiper('.promo-profiles', {
+                slidesPerView: 1,
+                spaceBetween: 10,
+                loop: true,
+                autoplay: { delay: 1000 },
+                pagination: { el: '.swiper-pagination', clickable: true },
+                breakpoints: {
+                    768: { slidesPerView: 2 },
+                    1024: { slidesPerView: 3 }
+                }
+            });
         });
     </script>
 </body>
-</html>
+                        </html>
