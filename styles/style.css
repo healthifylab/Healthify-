@@ -607,3 +607,6 @@ nav a.btn:hover {
         display: flex;
     }
 }
+.swiper-pagination {
+    display: none !important;
+}
