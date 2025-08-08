@@ -1,60 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="manifest" href="/public/manifest.json">
+    <meta name="theme-color" content="#4CAF50">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#007bff">
-    <title>Book Test - Healthify Lab</title>
-    <meta name="description" content="Book home blood tests in Mumbai, Navi Mumbai, Thane, Pune with Healthify Lab.">
-    <meta name="keywords" content="book blood test Mumbai, health checkup Thane, diagnostic lab Pune, Healthify Lab">
-    <meta property="og:title" content="Book Test - Healthify Lab">
-    <meta property="og:description" content="Schedule your home blood test with Healthify Lab in Mumbai, Thane, Pune.">
-    <meta property="og:image" content="/public/hero-banner.jpg">
-    <meta property="og:url" content="https://healthifylab.com/booking.html">
+    <title>Book Test - Healthifylive Lab</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="manifest" href="/public/manifest.json">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R0R3RYERZW"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-R0R3RYERZW');
-    </script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #FFF;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            background-color: #40E0D0;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header .logo-img {
+            height: 50px;
+        }
+        nav a {
+            color: #333;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 600;
+        }
+        nav a:hover {
+            color: #FFF;
+        }
+        main {
+            background-color: #ffffff;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        p {
+            text-align: center;
+            color: #555;
+        }
+        .booking-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-group {
+            background-color: #40E0D0;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-group textarea {
+            height: 80px;
+            resize: vertical;
+        }
+        .btn {
+            background-color: #2962ff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: auto;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #19A99D;
+        }
+        #summaryCard {
+            display: none;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            font-family: Arial, sans-serif;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #20B2AA;
+        }
+        .summary-item {
+            margin: 10px 0;
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+        }
+        .summary-item .total-amount {
+            color: #FFFFFF;
+            font-weight: bold;
+        }
+        .summary-item .discounted-amount {
+            color: #FF8D62;
+            font-weight: bold;
+        }
+        .summary-item .saved-amount {
+            color: #FFFFFF;
+            font-weight: bold;
+        }
+        .selected-items {
+            margin-top: 10px;
+            background-color: #90EE90;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .selected-tag {
+            display: inline-block;
+            background-color: #e0e0e0;
+            padding: 5px 10px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+        .selected-tag button {
+            margin-left: 5px;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+        .item-details, .profile-details {
+            margin-left: 20px;
+            font-size: 0.9em;
+            color: #555;
+        }
+        .item-details p {
+            color: #4682B4;
+            background-color: #E0FFFF;
+            padding: 5px;
+            border-radius: 3px;
+        }
+        .profile-details .included-tests {
+            color: #6A5ACD;
+            background-color: #DDA0DD;
+            padding: 5px;
+            border-radius: 3px;
+        }
+        .included-tests {
+            list-style-type: disc;
+            margin-top: 5px;
+        }
+        .search-results {
+            max-height: 200px;
+            overflow-y: auto;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-top: 5px;
+            display: none;
+        }
+        .search-result {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+        .search-result:hover {
+            background-color: #f0f0f0;
+        }
+        footer {
+            background-color: #87CEFA;
+            padding: 10px 20px;
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+        footer a {
+            color: #0000ff;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        .social-media a {
+            margin: 0 10px;
+            color: #333;
+        }
+        .social-media a:hover {
+            color: #20B2AA;
+        }
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+        .whatsapp-float div {
+            display: inline-block;
+            padding: 8px;
+            background-color: #25D366;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 24px;
+            text-align: center;
+            width: 40px;
+            height: 40px;
+            margin-right: 20px;
+            line-height: 24px;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+            nav a {
+                margin: 5px 0;
+            }
+            .form-group {
+                padding: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/688613eb31748f192ccdee0e/1j15rrkd3';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
     <div class="container">
         <div class="header">
-            <img src="/public/logo.png" alt="Healthify Lab Logo" class="logo-img">
+            <img src="/public/logo.png" alt="Healthifylive Lab Logo" class="logo-img">
             <nav>
-                <div class="menu-toggle" aria-label="Open menu" aria-expanded="false">
-                    <span></span><span></span><span></span>
-                </div>
-                <a href="/index.html">Home</a>
-                <a href="/booking.html">Book Test</a>
-                <a href="/contact.html">Contact</a>
-                <a href="/blog.html">Blog</a>
-                <a href="/ai.html" class="btn">AI Assistant <i class="fas fa-robot"></i></a>
+                <a href="/index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="/contact.html"><i class="fas fa-envelope"></i> Get In Touch</a>
             </nav>
         </div>
-        <div id="drawer" class="drawer">
-            <div class="drawer-header">
-                <h3>Menu</h3>
-                <button id="closeDrawer" class="close-drawer" aria-label="Close Menu">×</button>
-            </div>
-            <ul>
-                <li><a href="/index.html">Home</a></li>
-                <li><a href="/booking.html">Book Test</a></li>
-                <li><a href="/contact.html">Contact</a></li>
-                <li><a href="/call-back.html">Call Me Back</a></li>
-                <li><a href="/cart.html">My Cart</a></li>
-                <li><a href="/blog.html">Blog</a></li>
-            </ul>
-        </div>
         <main>
-            <h1>📋 Book Your Test <i class="fas fa-syringe"></i></h1>
-            <p>Select a test or profile to book your appointment in Mumbai, Thane, or Pune.</p>
+            <h1>📋 Book Your Test 😊</h1>
+            <p>Select a test or profile to book your appointment. <i class="fas fa-syringe"></i></p>
             <div class="booking-form" role="form" aria-label="Booking Form">
                 <form id="bookingForm">
                     <div class="form-group">
@@ -87,69 +292,57 @@
                         <input type="text" id="pincode" placeholder="Enter your pincode (e.g., 400001)" pattern="[0-9]{6}" required>
                     </div>
                     <div class="form-group">
-                        <label for="testSearch" aria-required="true">Select Test(s) <i class="fas fa-vial"></i></label>
+                        <label for="location" aria-required="true">Location <i class="fas fa-map-marker-alt"></i></label>
+                        <select id="location" required>
+                            <option value="" disabled selected>Select location</option>
+                            <option value="mumbai">Mumbai</option>
+                            <option value="pune">Pune</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="test" aria-required="true">Select Test(s) <i class="fas fa-vial"></i></label>
                         <input type="text" id="testSearch" placeholder="Search tests..." class="search-input">
                         <div id="testResults" class="search-results"></div>
                         <div id="selectedTests" class="selected-items"></div>
                     </div>
                     <div class="form-group">
-                        <label for="profileSearch" aria-required="true">Select Profile(s) <i class="fas fa-file-alt"></i></label>
+                        <label for="profile" aria-required="true">Select Profile(s) <i class="fas fa-file-alt"></i></label>
                         <input type="text" id="profileSearch" placeholder="Search profiles..." class="search-input">
                         <div id="profileResults" class="search-results"></div>
                         <div id="selectedProfiles" class="selected-items"></div>
+                        <div id="profileDetails" class="profile-details"></div>
                     </div>
                     <div class="form-group">
                         <label for="date" aria-required="true">Appointment Date <i class="fas fa-calendar"></i></label>
-                        <input type="date" id="date" min="2025-07-29" required>
+                        <input type="date" id="date" min="2025-08-09" required>
                     </div>
                     <div class="form-group">
                         <label for="time" aria-required="true">Appointment Time <i class="fas fa-clock"></i></label>
                         <input type="time" id="time" required>
                     </div>
                     <div id="summaryCard"></div>
-                    <div class="form-group">
+                    <div class="form-group" style="display: flex; justify-content: center;">
                         <button type="submit" class="btn">Book Now <i class="fas fa-check"></i></button>
                     </div>
                 </form>
-                <p id="bookingMessage" class="result-box"></p>
+                <p id="bookingMessage"></p>
             </div>
+            <div id="testList"></div>
         </main>
-        <div class="social-links">
-            <a href="https://x.com/healthify_lab"><i class="fab fa-x-twitter"></i></a>
-            <a href="https://instagram.com/healthifylab"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.facebook.com/share/1Axkp5jB81/?mibextid=qi2Omg"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://threads.net/healthifylab" aria-label="Threads"><i class="fab fa-threads"></i></a>
-        </div>
-        <footer class="footer">
-            <div class="footer-content">
-                <p>Contact: +91 9503832889 / +91 99676 40104 <br>
-                   <a href="https://wa.me/919503832889">WhatsApp: 9503832889</a> <br>
-                   Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a></p>
-                <p>All rights reserved @healthify 2025</p>
+        <footer>
+            <p>Healthifylive © 2025 | Contact: +91 9503832889 <i class="fas fa-phone"></i> | Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a></p>
+            <div class="social-media">
+                <a href="https://x.com/healthify_lab" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://instagram.com/healthifylab" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://facebook.com/healthify" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://threads.net/healthifylab" target="_blank" aria-label="Threads"><i class="fab fa-threads"></i></a>
             </div>
         </footer>
-        <!-- Floating WhatsApp Button -->
-        <a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
-            <i class="fab fa-whatsapp"></i>
+        <a href="https://wa.me/919503832889" class="whatsapp-float">
+            <div><i class="fab fa-whatsapp"></i></div>
         </a>
-        <!-- Chatbot Widget -->
-        <div id="chatbot" class="chatbot">
-            <div class="chatbot-header">
-                <h3>Healthify Chat</h3>
-                <button id="closeChatbot" class="chatbot-close" aria-label="Close Chat">×</button>
-            </div>
-            <div class="chatbot-messages" id="chatbotMessages"></div>
-            <div class="chatbot-input">
-                <input type="text" id="chatbotInput" placeholder="Ask about tests or bookings...">
-                <button id="sendChatbot" class="btn">Send</button>
-            </div>
-        </div>
-        <button id="chatbotToggle" class="chatbot-toggle" aria-label="Open Chat">
-            <i class="fas fa-comment"></i>
-        </button>
     </div>
-    <script defer src="/scripts/drawer.js"></script>
-    <script defer src="/scripts/chatbot.js"></script>
-    <script type="module" src="/scripts/booking.js"></script>
+    <script type="module" src="/scripts/lead-submission.js"></script>
+    <script src="/scripts/drawer.js"></script>
 </body>
-</html>
+    </html>
