@@ -1,47 +1,32 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
     const drawer = document.getElementById('drawer');
-    const menuToggle = document.querySelector('.menu-toggle');
-    const closeDrawer = document.getElementById('closeDrawer');
+    const openBtn = document.querySelector('#openDrawer');
+    const closeDrawer = drawer.querySelector('#closeDrawer') || drawer.querySelector('.close-drawer');
 
-    if (!menuToggle || !drawer || !closeDrawer) {
-        console.error('Drawer elements missing:', { menuToggle, drawer, closeDrawer });
-        return;
+    if (!document.querySelector('style#drawerStyle')) {
+        const style = document.createElement('style');
+        style.id = 'drawerStyle';
+        style.textContent = `
+            .drawer { position: fixed; top: 0; left: -250px; width: 250px; height: 100%; background: #fff; transition: left 0.3s; z-index: 1000; box-shadow: 2px 0 5px rgba(0,0,0,0.2); }
+            .drawer.open { left: 0; }
+            .drawer-header { display: flex; justify-content: space-between; padding: 10px; background: #00a884; color: white; }
+            .drawer ul { list-style: none; padding: 0; }
+            .drawer ul li { padding: 10px; }
+            .drawer ul li a { text-decoration: none; color: #2E2E2E; font-size: 16px; }
+            #openDrawer { background: none; border: none; cursor: pointer; }
+        `;
+        document.head.appendChild(style);
     }
 
-    menuToggle.onclick = () => {
-        drawer.classList.toggle('open');
-        menuToggle.setAttribute('aria-expanded', drawer.classList.contains('open'));
-    };
+    openBtn.onclick = () => drawer.classList.add('open');
 
-    closeDrawer.onclick = () => {
-        drawer.classList.remove('open');
-        menuToggle.setAttribute('aria-expanded', 'false');
-    };
+    if (closeDrawer) {
+        closeDrawer.onclick = () => drawer.classList.remove('open');
+    }
 
     document.addEventListener('click', (event) => {
-        if (drawer.classList.contains('open') && !drawer.contains(event.target) && !menuToggle.contains(event.target)) {
+        if (drawer.classList.contains('open') && !drawer.contains(event.target) && event.target !== openBtn) {
             drawer.classList.remove('open');
-            menuToggle.setAttribute('aria-expanded', 'false');
-        }
-    });
-
-    menuToggle.setAttribute('aria-label', 'Open menu');
-    menuToggle.setAttribute('aria-expanded', 'false');
-    closeDrawer.setAttribute('aria-label', 'Close menu');
-
-    menuToggle.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            drawer.classList.toggle('open');
-            menuToggle.setAttribute('aria-expanded', drawer.classList.contains('open'));
-        }
-    });
-
-    closeDrawer.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            drawer.classList.remove('open');
-            menuToggle.setAttribute('aria-expanded', 'false');
         }
     });
 });
