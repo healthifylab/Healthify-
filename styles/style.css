@@ -1,4 +1,4 @@
-/* Reset */
+/* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -6,35 +6,706 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     line-height: 1.6;
     color: #333;
+    background-color: #f9f9f9;
+    overflow-x: hidden;
 }
 
-/* Container */
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 20px;
 }
 
-/* Header */
+/* Header Styles */
 .header {
-    background: #2ecc71;
-    color: white;
-    padding: 10px 0;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-}
-
-.header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px 0;
+    background-color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+.logo-img {
+    height: 70px;
+    width: auto;
+    margin-left: 30px;
+}
+
+nav a {
+    color: #333;
+    text-decoration: none;
+    margin-left: 15px;
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: #007bff;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+}
+
+.hero-img, .hero-video {
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
+}
+
+.hero-banner {
+    width: 100%;
+    height: 100%;
+    border-radius: 40px;
+    object-fit: contain;
+    display: block;
+}
+
+.hero-banner + a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: underline;
+}
+
+.hero h1 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.safety-text {
+    color: #17a2b8;
+    font-size: 1.1em;
+    margin-top: 15px;
+    margin-left: 30px;
+}
+
+/* Search Section */
+.search-section {
+    padding: 20px 0;
+    text-align: center;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+#searchResults {
+    margin-top: 10px;
+}
+
+/* Promo Popup */
+.promo-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    text-align: center;
+}
+
+.promo-popup.active {
+    display: block;
+}
+
+.promo-btn {
+    padding: 10px 20px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.close-btn {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.close-btn:hover {
+    background-color: #c82333;
+}
+
+.book-now-btn {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.book-now-btn:hover {
+    background-color: #218838;
+}
+
+/* Cards Section */
+.cards-section {
+    padding: 20px 0;
+}
+
+.section-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.cards-container {
+    overflow: hidden;
+}
+
+.swiper-container {
+    width: 100%;
+    padding: 10px 0;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+}
+
+.promo-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.promo-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.promo-card h3 {
+    font-size: 1.1rem;
+    margin: 10px 0;
+}
+
+.promo-card p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.package-details {
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 10px;
+    text-align: left;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+.swiper-pagination {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background-color: #007bff;
+    opacity: 0.5;
+}
+
+.swiper-pagination-bullet-active {
+    opacity: 1;
+}
+
+.seamless-process-section .seamless-process-img {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    border-radius: 10px;
+    display: block;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+    padding: 20px 0;
+    text-align: center;
+}
+
+.testimonials-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.testimonial-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+.testimonial-card img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.testimonial-card p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.testimonial-card h4 {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Why Choose Section */
+.why-choose {
+    padding: 20px 0;
+    text-align: center;
+    background-color: #e9ecef;
+}
+
+.why-choose h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.why-choose p {
+    font-size: 0.9rem;
+    margin: 5px 0;
+}
+
+/* FAQ Section */
+.faq-section {
+    padding: 20px 0;
+}
+
+.faq-container {
+    margin-top: 10px;
+}
+
+.faq-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.faq-question {
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.faq-answer {
+    display: none;
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* Social Links */
+.social-links {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.social-links a {
+    color: #333;
+    margin: 0 10px;
+    font-size: 1.2rem;
+}
+
+.social-links a:hover {
+    color: #007bff;
+}
+
+/* Floating Buttons */
+.whatsapp-float {
+    position: fixed;
+    bottom: 60px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.whatsapp-float a {
+    background-color: #25D366;
+    color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.whatsapp-float a:hover {
+    background-color: #1da851;
+}
+
+/* App Download Floating Button */
+.app-download-float {
+    position: fixed;
+    bottom: 30%;
+    left: 0;
+    z-index: 1000;
+    padding: 10px 20px;
+    background-color: #40E0D0;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 0 5px 5px 0;
+}
+
+.app-download-float:hover {
+    background-color: #19A99D;
+}
+
+#appPopup {
+    display: none;
+    position: fixed;
+    bottom: 25%;
+    left: 5%;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    text-align: center;
+    max-width: 300px;
+}
+
+#appPopup .close-btn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #dc3545;
+}
+
+#appPopup .close-btn:hover {
+    color: #c82333;
+}
+
+#appPopup img {
+    max-width: 100%;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+#appPopup a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 15px;
+    background-color: #2962ff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+#appPopup a:hover {
+    background-color: #19A99D;
+}
+
+#appPopup p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #a9efec;
+    color: #0000ff;
+}
+
+.footer-content a {
+    color: #00001c;
+    text-decoration: none;
+}
+
+.footer-content a:hover {
+    text-decoration: underline;
+}
+
+/* Booking Form Styles */
+.booking-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.form-group textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+#bookingMessage {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.success {
+    color: #28a745;
+}
+
+.error {
+    color: #dc3545;
+}
+
+.selected-items {
+    margin-top: 10px;
+}
+
+.selected-tag {
+    display: inline-block;
+    background-color: #e0e0e0;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.selected-tag button {
+    margin-left: 5px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.item-details, .profile-details {
+    margin-left: 20px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.included-tests {
+    list-style-type: disc;
+    margin-top: 5px;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    .container {
+        max-width: 750px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .promo-card {
+        width: 80%;
+    }
+
+    .testimonials-container {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .form-group {
+        display: flex;
+        align-items: center;
+    }
+
+    .form-group label {
+        flex: 0 0 150px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        flex: 1;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1200px;
+        padding: 20px 0;
+    }
+
+    .hero-video {
+        max-height: 60vh;
+        border-radius: 10px;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-image {
+        max-height: 400px;
+    }
+
+    .search-section {
+        padding: 30px 0;
+    }
+
+    .search-input {
+        max-width: 800px;
+        font-size: 1.2rem;
+    }
+
+    .searchResults {
+        max-width: 800px;
+    }
+
+    .section-title {
+        font-size: 2.2rem;
+    }
+
+    .swiper-container {
+        padding: 20px 0;
+    }
+
+    .swiper-slide {
+        width: 350px !important;
+    }
+
+    .promo-card {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .promo-card h3 {
+        font-size: 1.5rem;
+    }
+
+    .promo-card p {
+        font-size: 1rem;
+    }
+
+    .testimonials-container {
+        justify-content: space-around;
+    }
+
+    .testimonial-card {
+        width: 300px;
+    }
+
+    .testimonial-card p {
+        font-size: 1rem;
+    }
+
+    .testimonial-card h4 {
+        font-size: 0.9rem;
+    }
+
+    .why-choose h2 {
+        font-size: 1.5rem;
+    }
+
+    .why-choose p {
+        font-size: 1.1rem;
+    }
+
+    .faq-question {
+        font-size: 1.2rem;
+    }
+
+    .faq-answer {
+        font-size: 1rem;
+    }
+}
+
+/* Tool Card Layout for Mobile */
+.tool-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.tool-card {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 16px;
+    background: #fefefe;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+}
+
+.tool-card h2 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tool-output {
+    font-size: 1rem;
+    line-height: 1.5;
+}
 .logo {
     height: 50px;
 }
