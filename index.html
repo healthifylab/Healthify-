@@ -3,200 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HealthifyLab - Your Partner in Precise Diagnostics</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Healthify Lab - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R0R3RYERZW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-R0R3RYERZW');
+    </script>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <img src="logo.png" alt="HealthifyLab Logo" class="logo">
+    <nav style="background:#007BFF; padding: 10px; text-align:right;">
+        <a href="ai-tools.html" style="color:white; font-weight:bold; margin-right:20px;">🧠 AI Tools</a>
+    </nav>
+    <div class="container">
+        <div class="header">
+            <img src="/public/logo.png" alt="Healthifylive Lab Logo" class="logo-img">
             <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="booking.html">Book a Test</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#health-tips">Health Tips</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
+                <div class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </nav>
         </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>Your Partner in Precise Diagnostics & Personalized Care</h1>
-            <p>Book health check-ups with free home sample collection in Mumbai, Navi Mumbai, Thane.</p>
-            <a href="booking.html" class="cta-button">Book Now</a>
+        <div class="hero">
+            <video class="hero-video" controls>
+                <source src="/public/hero-video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <h1>Welcome to Healthify <i class="fas fa-heartbeat"></i></h1>
+            <a href="/booking.html"><button class="book-now-btn">Book Now <i class="fas fa-check"></i></button></a>
+            <a href="/app.html" class="btn">Download App <i class="fas fa-download"></i></a>
+            <p class="safety-text">100% Safe, Scanned by VirusTotal <i class="fas fa-shield-alt"></i></p>
         </div>
-    </section>
-
-    <!-- Featured Tests -->
-<section class="featured-tests">
-    <div class="container">
-        <h2>Featured Tests</h2>
-        <div class="test-grid">
-            <div class="test-card">
-                <h3>Healthify Heart Guard</h3>
-                <p><del>₹1500</del> ₹999</p>
-                <p>Comprehensive profile for heart health assessment.</p>
-                <p><strong>TAT:</strong> 48 Hours</p>
-                <p><strong>Includes:</strong> Lipid Profile, Troponin I, CK-MB, ECG</p>
-                <a href="booking.html?profile=healthify-heart-guard" class="test-button">Book Now</a>
-            </div>
-            <div class="test-card">
-                <h3>Wellness Check-Up (Basic)</h3>
-                <p><del>₹1200</del> ₹799</p>
-                <p>Basic health screening for general well-being.</p>
-                <p><strong>TAT:</strong> 24 Hours</p>
-                <p><strong>Includes:</strong> Complete Blood Count (CBC), Blood Glucose (Fasting), Liver Function Test (LFT)</p>
-                <a href="booking.html?profile=wellness-check-up-basic" class="test-button">Book Now</a>
-            </div>
-            <div class="test-card">
-                <h3>Diabetic Profile</h3>
-                <p><del>₹1000</del> ₹699</p>
-                <p>Detailed assessment for diabetes management.</p>
-                <p><strong>TAT:</strong> 24 Hours</p>
-                <p><strong>Includes:</strong> HbA1c, Blood Glucose (Fasting), Kidney Function Test (KFT)</p>
-                <a href="booking.html?profile=diabetic-profile" class="test-button">Book Now</a>
-            </div>
-            <div class="test-card">
-                <h3>Comprehensive Wellness</h3>
-                <p><del>₹2500</del> ₹1699</p>
-                <p>Full-body health check-up with multiple parameters.</p>
-                <p><strong>TAT:</strong> 48 Hours</p>
-                <p><strong>Includes:</strong> Complete Blood Count (CBC), Lipid Profile, Liver Function Test (LFT), Kidney Function Test (KFT), Thyroid Profile, Vitamin D (25-Hydroxy)</p>
-                <a href="booking.html?profile=comprehensive-wellness" class="test-button">Book Now</a>
-            </div>
+        <div class="search-section">
+            <h2>Find Tests & Profiles <i class="fas fa-search"></i></h2>
+            <input type="text" id="searchInput" placeholder="Search tests or profiles..." class="search-input">
+            <div id="searchResults"></div>
+            <button id="bookNowBtn">Book Now</button>
         </div>
-    </div>
-</section>
-    </section>
-
-    <!-- Services -->
-    <section class="services" id="services">
-        <div class="container">
-            <h2>Our Services</h2>
-            <div class="services-grid">
-                <div class="service-item">
-                    <i class="fas fa-home"></i>
-                    <h3>Free Home Collection</h3>
-                    <p>Super speedy sample collection at your doorstep in Mumbai, Navi Mumbai, Thane.</p>
-                </div>
-                <div class="service-item">
-                    <i class="fas fa-file-alt"></i>
-                    <h3>Digital Reports</h3>
-                    <p>Get your test results online in 24-48 hours.</p>
-                </div>
-                <div class="service-item">
-                    <i class="fas fa-user-md"></i>
-                    <h3>Free Doctor Consultation</h3>
-                    <p>Consult with our experts at no extra cost.</p>
-                </div>
-                <div class="service-item">
-                    <i class="fas fa-shield-alt"></i>
-                    <h3>Trusted Quality</h3>
-                    <p>Adhering to international quality standards.</p>
-                </div>
-            </div>
+        <div class="promo-popup" id="promoPopup">
+            <h3>Home blood sample collection in Mumbai, Navi Mumbai, and Thane <i class="fas fa-map-marker-alt"></i></h3>
+            <p id="promoText"> 📅 Book Online • Same-Day Collection
+📃 Digital Reports Delivered Fast !</p>
+            <button class="promo-btn close-btn" onclick="closePopup()" style="position: absolute; top: 10px; right: 10px; padding: 5px 10px; font-size: 0.8rem;">×</button>
+            <a href="/booking.html"><button class="promo-btn book-now-btn">Book Now <i class="fas fa-check"></i></button></a>
         </div>
-    </section>
-
-    <!-- All Tests -->
-    <section class="all-tests">
-        <div class="container">
-            <h2>All Tests</h2>
-            <div class="test-grid" id="all-tests-grid">
-                <!-- Dynamically populated via JavaScript or Firebase -->
-                <div class="test-card">
-                    <h3>Healthify Thyroid Balance</h3>
-                    <p>₹1200</p>
-                    <p>Monitor thyroid with TSH, T3, T4.</p>
-                    <a href="booking.html?profile=healthify-thyroid-balance" class="test-button">Book Now</a>
+        <section class="cards-section">
+            <div class="cards-container">
+                <h2 class="section-title"> <i class="fas fa-gift"></i></h2>
+                <div class="swiper-container promo-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/healthify-vital-check.jpg" alt="Healthify Vital Check" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Healthify Vital Check <i class="fas fa-heartbeat"></i></h3>
+                                <p>Essential screening. Starting at ₹480!</p>
+                                <button onclick="toggleDetails('vital-check')" class="btn">Details <i class="fas fa-info-circle"></i></button>
+                                <div id="vital-check" style="display:none;" class="package-details">
+                                    <p><strong>Tests Included:</strong> CBC, Blood Sugar Fasting, Lipid Profile</p>
+                                    <p><strong>Preparation:</strong> 8-hour fasting</p>
+                                    <p><strong>Turnaround:</strong> 24 hours</p>
+                                </div>
+                                <a href="/booking.html?profile=healthify-vital-check" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/healthify-core-wellness.jpg" alt="Healthify Core Wellness" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Healthify Core Wellness <i class="fas fa-user-md"></i></h3>
+                                <p>Comprehensive screening. Only ₹959.2!</p>
+                                <button onclick="toggleDetails('core-wellness')" class="btn">Details <i class="fas fa-info-circle"></i></button>
+                                <div id="core-wellness" style="display:none;" class="package-details">
+                                    <p><strong>Tests Included:</strong> CBC, Lipid Profile, Kidney Profile, Diabetes Screening, CBP</p>
+                                    <p><strong>Preparation:</strong> 8-hour fasting</p>
+                                    <p><strong>Turnaround:</strong> 24–48 hours</p>
+                                </div>
+                                <a href="/booking.html?profile=healthify-core-wellness" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/healthify-diabetes-care.jpg" alt="Healthify Diabetes Care" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Healthify Diabetes Care <i class="fas fa-shield-virus"></i></h3>
+                                <p>Diabetes management. Starting at ₹800!</p>
+                                <button onclick="toggleDetails('diabetes-care')" class="btn">Details <i class="fas fa-info-circle"></i></button>
+                                <div id="diabetes-care" style="display:none;" class="package-details">
+                                    <p><strong>Tests Included:</strong> HbA1c, Blood Sugar Fasting, Lipid Profile</p>
+                                    <p><strong>Preparation:</strong> 8-hour fasting</p>
+                                    <p><strong>Turnaround:</strong> 24 hours</p>
+                                </div>
+                                <a href="/booking.html?profile=healthify-diabetes-care" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/healthify-heart-guard.jpg" alt="Healthify Heart Guard" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Healthify Heart Guard <i class="fas fa-heart"></i></h3>
+                                <p>Cardiovascular health. Only ₹1200!</p>
+                                <button onclick="toggleDetails('heart-guard')" class="btn">Details <i class="fas fa-info-circle"></i></button>
+                                <div id="heart-guard" style="display:none;" class="package-details">
+                                    <p><strong>Tests Included:</strong> Lipid Profile, Troponin I, Homocysteine</p>
+                                    <p><strong>Preparation:</strong> 8-hour fasting</p>
+                                    <p><strong>Turnaround:</strong> 24–48 hours</p>
+                                </div>
+                                <a href="/booking.html?profile=healthify-heart-guard" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/healthify-thyroid-balance.jpg" alt="Healthify Thyroid Balance" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Healthify Thyroid Balance <i class="fas fa-leaf"></i></h3>
+                                <p>Thyroid function. Starting at ₹640!</p>
+                                <button onclick="toggleDetails('thyroid-balance')" class="btn">Details <i class="fas fa-info-circle"></i></button>
+                                <div id="thyroid-balance" style="display:none;" class="package-details">
+                                    <p><strong>Tests Included:</strong> Thyroid Function Test (TFT)</p>
+                                    <p><strong>Preparation:</strong> No fasting required</p>
+                                    <p><strong>Turnaround:</strong> 24 hours</p>
+                                </div>
+                                <a href="/booking.html?profile=healthify-thyroid-balance" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/healthify-comprehensive-wellness.jpg" alt="Healthify Comprehensive Wellness" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Healthify Comprehensive Wellness <i class="fas fa-stethoscope"></i></h3>
+                                <p>Holistic assessment. Only ₹2000!</p>
+                                <button onclick="toggleDetails('comprehensive-wellness')" class="btn">Details <i class="fas fa-info-circle"></i></button>
+                                <div id="comprehensive-wellness" style="display:none;" class="package-details">
+                                    <p><strong>Tests Included:</strong> CBC, Lipid Profile, Kidney Profile, Liver Profile, Thyroid Profile</p>
+                                    <p><strong>Preparation:</strong> 8-hour fasting</p>
+                                    <p><strong>Turnaround:</strong> 24–48 hours</p>
+                                </div>
+                                <a href="/booking.html?profile=healthify-comprehensive-wellness" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/healthify-womens-wellness.jpg" alt="Healthify Women’s Wellness" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Healthify Women’s Wellness <i class="fas fa-female"></i></h3>
+                                <p>Women’s health. Starting at ₹1600!</p>
+                                <button onclick="toggleDetails('womens-wellness')" class="btn">Details <i class="fas fa-info-circle"></i></button>
+                                <div id="womens-wellness" style="display:none;" class="package-details">
+                                    <p><strong>Tests Included:</strong> CBC, Thyroid Profile, CA-125, AMH</p>
+                                    <p><strong>Preparation:</strong> 8-hour fasting</p>
+                                    <p><strong>Turnaround:</strong> 24–48 hours</p>
+                                </div>
+                                <a href="/booking.html?profile=healthify-womens-wellness" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/healthify-senior-care.jpg" alt="Healthify Senior Care" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Healthify Senior Care <i class="fas fa-user-clock"></i></h3>
+                                <p>Senior health. Only ₹2400!</p>
+                                <button onclick="toggleDetails('senior-care')" class="btn">Details <i class="fas fa-info-circle"></i></button>
+                                <div id="senior-care" style="display:none;" class="package-details">
+                                    <p><strong>Tests Included:</strong> CBC, Lipid Profile, Kidney Profile, Blood Sugar Fasting, PSA (for men)</p>
+                                    <p><strong>Preparation:</strong> 8-hour fasting</p>
+                                    <p><strong>Turnaround:</strong> 24–48 hours</p>
+                                </div>
+                                <a href="/booking.html?profile=healthify-senior-care" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/healthify-anemia-shield.jpg" alt="Healthify Anemia Shield" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Healthify Anemia Shield <i class="fas fa-tint"></i></h3>
+                                <p>Anemia screening. Starting at ₹1200!</p>
+                                <button onclick="toggleDetails('anemia-shield')" class="btn">Details <i class="fas fa-info-circle"></i></button>
+                                <div id="anemia-shield" style="display:none;" class="package-details">
+                                    <p><strong>Tests Included:</strong> CBC, Iron Studies, Ferritin, Vitamin B12</p>
+                                    <p><strong>Preparation:</strong> No fasting required</p>
+                                    <p><strong>Turnaround:</strong> 24–48 hours</p>
+                                </div>
+                                <a href="/booking.html?profile=healthify-anemia-shield" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/healthify-arthritis-care.jpg" alt="Healthify Arthritis Care" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Healthify Arthritis Care <i class="fas fa-bone"></i></h3>
+                                <p>Arthritis screening. Only ₹1440!</p>
+                                <button onclick="toggleDetails('arthritis-care')" class="btn">Details <i class="fas fa-info-circle"></i></button>
+                                <div id="arthritis-care" style="display:none;" class="package-details">
+                                    <p><strong>Tests Included:</strong> Rheumatoid Factor, Anti-CCP, ESR</p>
+                                    <p><strong>Preparation:</strong> No fasting required</p>
+                                    <p><strong>Turnaround:</strong> 24–48 hours</p>
+                                </div>
+                                <a href="/booking.html?profile=healthify-arthritis-care" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/healthify-pcod-harmony.jpg" alt="Healthify PCOD Harmony" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Healthify PCOD Harmony <i class="fas fa-female"></i></h3>
+                                <p>PCOD evaluation. Starting at ₹2000!</p>
+                                <button onclick="toggleDetails('pcod-harmony')" class="btn">Details <i class="fas fa-info-circle"></i></button>
+                                <div id="pcod-harmony" style="display:none;" class="package-details">
+                                    <p><strong>Tests Included:</strong> FSH, LH, Prolactin, AMH</p>
+                                    <p><strong>Preparation:</strong> No fasting required</p>
+                                    <p><strong>Turnaround:</strong> 24–48 hours</p>
+                                </div>
+                                <a href="/booking.html?profile=healthify-pcod-harmony" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/healthify-vitamin-boost.jpg" alt="Healthify Vitamin Boost" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Healthify Vitamin Boost <i class="fas fa-vial"></i></h3>
+                                <p>Vitamin levels. Only ₹1600!</p>
+                                <button onclick="toggleDetails('vitamin-boost')" class="btn">Details <i class="fas fa-info-circle"></i></button>
+                                <div id="vitamin-boost" style="display:none;" class="package-details">
+                                    <p><strong>Tests Included:</strong> Vitamin D, Vitamin B12</p>
+                                    <p><strong>Preparation:</strong> No fasting required</p>
+                                    <p><strong>Turnaround:</strong> 48 hours</p>
+                                </div>
+                                <a href="/booking.html?profile=healthify-vitamin-boost" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/healthify-basic-wellness.jpg" alt="Healthify Basic Wellness" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Healthify Basic Wellness <i class="fas fa-heart"></i></h3>
+                                <p>Basic health check. Starting at ₹799.2!</p>
+                                <button onclick="toggleDetails('basic-wellness')" class="btn">Details <i class="fas fa-info-circle"></i></button>
+                                <div id="basic-wellness" style="display:none;" class="package-details">
+                                    <p><strong>Tests Included:</strong> CBC, Blood Sugar Fasting</p>
+                                    <p><strong>Preparation:</strong> 8-hour fasting</p>
+                                    <p><strong>Turnaround:</strong> 24 hours</p>
+                                </div>
+                                <a href="/booking.html?profile=healthify-basic-wellness" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
                 </div>
-                <!-- Add more test profiles as needed -->
             </div>
-            <a href="booking.html" class="view-all-button">View All Tests</a>
-        </div>
-    </section>
-
-    <!-- Health Tips -->
-    <section class="health-tips" id="health-tips">
-        <div class="container">
-            <h2>Health Tips</h2>
-            <div class="tips-grid">
-                <div class="tip-card">
-                    <h3>Why Regular Blood Tests Matter</h3>
-                    <p>Routine check-ups like CBC and Lipid Profile can detect issues early, ensuring timely treatment.</p>
-                </div>
-                <div class="tip-card">
-                    <h3>Manage Diabetes Effectively</h3>
-                    <p>Monitor HbA1c and glucose levels regularly to keep diabetes under control.</p>
-                </div>
-                <div class="tip-card">
-                    <h3>Heart Health Tips</h3>
-                    <p>Maintain a healthy heart with regular ECG and cholesterol checks.</p>
-                </div>
-                <div class="tip-card">
-                    <h3>Stay Hydrated for Better Results</h3>
-                    <p>Drink water before your blood test for accurate results.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="testimonials">
-        <div class="container">
-            <h2>What Our Patients Say</h2>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <p>"HealthifyLab's home collection was so convenient! Got my results in 24 hours."</p>
-                    <p>- Priya S.</p>
-                </div>
-                <div class="testimonial-card">
-                    <p>"Affordable tests and great service. Highly recommend!"</p>
-                    <p>- Rahul M.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQs -->
-    <section class="faqs">
-        <div class="container">
-            <h2>Frequently Asked Questions</h2>
-            <div class="faq-item">
-                <h3>Which areas do you serve?</h3>
-                <p>We offer home collection in Mumbai, Navi Mumbai, and Thane.</p>
-            </div>
-            <div class="faq-item">
-                <h3>How soon will I get my results?</h3>
-                <p>Results are delivered online within 24-48 hours.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 HealthifyLab. All rights reserved.</p>
-            <div class="social-links">
-                <a href="https://x.com/healthify_lab"><i class="fab fa-x"></i></a>
-                <a href="https://instagram.com/healthifylab"><i class="fab fa-instagram"></i></a>
-                <a href="https://facebook.com/healthify"><i class="fab fa-facebook"></i></a>
-                <a href="https://wa.me/919503832889"><i class="fab fa-whatsapp"></i></a>
-            </div>
-        </div>
-    </footer>
-
-    <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/919503832889" class="whatsapp-button" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <script src="script.js"></script>
-</body>
-</html>
+            <h2 class="section-title"> <i class="fas fa-star"></i></h2>
+            <div class="cards-container">
+                <div class="swiper-container featured-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/healthify-active-lifestyle.jpg" alt="Healthify Active Lifestyle" on
