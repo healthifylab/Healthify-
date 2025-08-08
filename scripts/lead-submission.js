@@ -135,23 +135,23 @@ async function loadProfiles() {
             };
         });
         setupSearch('profile', 'profileSearch', 'profileResults');
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const profile = urlParams.get('profile');
+        if (profile && profileDetails[profile]) {
+            selectedProfiles.add(profile);
+            updateSelectedItems('profile', 'selectedProfiles');
+            document.getElementById('profileDetails').innerHTML = `
+                <p><strong>Description:</strong> ${profileDetails[profile].description}</p>
+                <ul class="included-tests">
+                    <strong>Tests Included:</strong>
+                    ${profileDetails[profile].tests.map(test => `<li>${test}</li>`).join('')}
+                </ul>
+            `;
+        }
     } catch (error) {
         console.error('Error loading profiles:', error);
         document.getElementById('profileResults').innerHTML = '<div>Error loading profiles. Check console.</div>';
-    }
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const profile = urlParams.get('profile');
-    if (profile && profileDetails[profile]) {
-        selectedProfiles.add(profile);
-        updateSelectedItems('profile', 'selectedProfiles');
-        document.getElementById('profileDetails').innerHTML = `
-            <p><strong>Description:</strong> ${profileDetails[profile].description}</p>
-            <ul class="included-tests">
-                <strong>Tests Included:</strong>
-                ${profileDetails[profile].tests.map(test => `<li>${test}</li>`).join('')}
-            </ul>
-        `;
     }
 }
 
@@ -189,8 +189,8 @@ document.getElementById('bookingForm').addEventListener('submit', async (e) => {
         address: document.getElementById('address').value,
         pincode: document.getElementById('pincode').value,
         location: document.getElementById('location').value,
-        tests: Array.from(selectedTests),
-        profiles: Array.from(selectedProfiles),
+        tests: Array.from(selectedTests).map(test => testDetails[test].name),
+        profiles: Array.from(selectedProfiles).map(profile => profileDetails[profile].name),
         date: document.getElementById('date').value,
         time: document.getElementById('time').value
     };
@@ -207,27 +207,35 @@ document.getElementById('bookingForm').addEventListener('submit', async (e) => {
     }
 });
 
+async function loadProfileDetails() {
+    try {
+        const response = await fetch('/public/profiles.json');
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        const profiles = await response.json();
+        profiles.forEach(profile => {
+            const id = profile.Test_Name.toLowerCase().replace(/\s/g, '-');
+            const detailsDiv = document.getElementById(id);
+            if (detailsDiv) {
+                detailsDiv.innerHTML = `
+                    <p><strong>Description:</strong> ${profile.Description}</p>
+                    <p><strong>Tests Included:</strong> ${profile.Tests_Included}</p>
+                    <p><strong>Preparation:</strong> ${profile.Sample_Type.includes('Blood') ? '8-hour fasting' : 'No fasting required'}</p>
+                    <p><strong>Turnaround:</strong> ${profile.TAT}</p>
+                `;
+            }
+        });
+    } catch (error) {
+        console.error('Error loading profile details:', error);
+    }
+}
+
 window.onload = () => {
     loadTests();
     loadProfiles();
-};                await addDoc(collection(db, 'leads'), {
-                    name,
-                    mobile,
-                    email: email || 'Not provided',
-                    timestamp: new Date().toISOString(),
-                    status: 'New Enquiry'
-                });
-                submissionStatus.className = 'success';
-                submissionStatus.textContent = '✅ Request submitted! We’ll call you soon.';
-                callBackForm.reset();
-                setTimeout(() => window.close(), 2000);
-            } catch (error) {
-                console.error('Error submitting lead:', error);
-                submissionStatus.className = 'error';
-                submissionStatus.textContent = `❌ Failed to submit: ${error.message}. Try again or contact support.`;
-            }
-        });
-    }
+    loadProfileDetails();
+};
 
-    // Booking form handled in booking.js
-});
+function toggleDetails(id) {
+    const details = document.getElementById(id);
+    details.style.display = details.style.display === 'none' ? 'block' : 'none';
+}
