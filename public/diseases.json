@@ -1293,3 +1293,194 @@
     "prevention": ["Safe sexual practices", "Regular screening"],
     "diagnostics": ["Blood tests (VDRL, RPR)", "Microscopy"],
     "
+    [
+  {
+    "name": "Syphilis",
+    "symptoms": ["Sores", "Rash", "Fever", "Swollen lymph nodes"],
+    "causes": ["Treponema pallidum bacteria", "Sexual contact"],
+    "prevention": ["Safe sexual practices", "Regular screening"],
+    "diagnostics": ["Blood tests (VDRL, RPR)", "Microscopy"],
+    "treatments": ["Antibiotics (penicillin)", "Follow-up testing"],
+    "relatedTests": ["Healthify Comprehensive Wellness", "Healthify STD Screen"]
+  },
+  {
+    "name": "Testicular Cancer",
+    "symptoms": ["Lump in testicle", "Testicular pain", "Swelling", "Heaviness in scrotum"],
+    "causes": ["Genetic factors", "Undescended testicle", "Family history"],
+    "prevention": ["Regular self-exams", "Healthy lifestyle"],
+    "diagnostics": ["Ultrasound", "Blood tests (tumor markers)", "Biopsy"],
+    "treatments": ["Surgery", "Chemotherapy", "Radiation"],
+    "relatedTests": ["Healthify Cancer Screen", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Tetanus",
+    "symptoms": ["Muscle stiffness", "Spasms", "Fever", "Difficulty swallowing"],
+    "causes": ["Clostridium tetani bacteria", "Contaminated wounds"],
+    "prevention": ["Tetanus vaccination", "Wound care"],
+    "diagnostics": ["Clinical evaluation"],
+    "treatments": ["Antitoxin", "Antibiotics", "Supportive care"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Thrush",
+    "symptoms": ["White patches in mouth", "Sore throat", "Difficulty swallowing"],
+    "causes": ["Candida albicans", "Weak immune system", "Antibiotics"],
+    "prevention": ["Good oral hygiene", "Manage diabetes"],
+    "diagnostics": ["Oral swab", "Culture"],
+    "treatments": ["Antifungal medications", "Oral rinses"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Thyroid Cancer",
+    "symptoms": ["Neck lump", "Difficulty swallowing", "Hoarseness"],
+    "causes": ["Genetic mutations", "Radiation exposure"],
+    "prevention": ["Avoid radiation exposure", "Regular checkups"],
+    "diagnostics": ["Ultrasound", "Biopsy", "Blood tests"],
+    "treatments": ["Surgery", "Radioactive iodine", "Chemotherapy"],
+    "relatedTests": ["Healthify Cancer Screen", "Healthify Thyroid Check"]
+  },
+  {
+    "name": "Tinnitus",
+    "symptoms": ["Ringing in ears", "Hearing loss", "Dizziness"],
+    "causes": ["Noise exposure", "Ear infections", "Aging"],
+    "prevention": ["Protect ears from loud noise", "Manage stress"],
+    "diagnostics": ["Audiometry", "Imaging"],
+    "treatments": ["Hearing aids", "Therapy", "Sound therapy"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Tonsillitis",
+    "symptoms": ["Sore throat", "Swollen tonsils", "Fever", "Difficulty swallowing"],
+    "causes": ["Bacterial infection (strep)", "Viral infection"],
+    "prevention": ["Good hygiene", "Avoid contact with infected"],
+    "diagnostics": ["Throat swab", "Blood tests"],
+    "treatments": ["Antibiotics (bacterial)", "Pain relievers", "Surgery (tonsillectomy)"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Tuberculosis (TB)",
+    "symptoms": ["Chronic cough", "Weight loss", "Night sweats", "Fever"],
+    "causes": ["Mycobacterium tuberculosis", "Airborne transmission"],
+    "prevention": ["BCG vaccine", "Ventilation", "Early treatment"],
+    "diagnostics": ["Chest X-ray", "Sputum test", "Tuberculin skin test"],
+    "treatments": ["Antibiotics (rifampin, isoniazid)", "Long-term therapy"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Type 1 Diabetes",
+    "symptoms": ["Increased thirst", "Frequent urination", "Fatigue", "Weight loss"],
+    "causes": ["Autoimmune destruction of insulin-producing cells", "Genetic factors"],
+    "prevention": ["No known prevention", "Early diagnosis"],
+    "diagnostics": ["Blood glucose test", "HbA1c", "Autoantibody tests"],
+    "treatments": ["Insulin therapy", "Diet management", "Exercise"],
+    "relatedTests": ["Healthify Diabetes Care", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Type 2 Diabetes",
+    "symptoms": ["Increased thirst", "Frequent urination", "Fatigue", "Blurred vision"],
+    "causes": ["Insulin resistance", "Obesity", "Genetic factors"],
+    "prevention": ["Healthy diet", "Exercise", "Weight management"],
+    "diagnostics": ["Blood glucose test", "HbA1c"],
+    "treatments": ["Oral medications", "Insulin", "Lifestyle changes"],
+    "relatedTests": ["Healthify Diabetes Care", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Ulcerative Colitis",
+    "symptoms": ["Abdominal pain", "Bloody diarrhea", "Weight loss", "Fatigue"],
+    "causes": ["Autoimmune response", "Genetic factors", "Environmental triggers"],
+    "prevention": ["Healthy diet", "Stress management"],
+    "diagnostics": ["Colonoscopy", "Blood tests", "Stool tests"],
+    "treatments": ["Anti-inflammatory drugs", "Immunosuppressants", "Surgery"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Urinary Incontinence",
+    "symptoms": ["Involuntary urine leakage", "Urgency", "Frequent urination"],
+    "causes": ["Weak pelvic muscles", "Prostate issues", "Neurological disorders"],
+    "prevention": ["Pelvic floor exercises", "Healthy weight"],
+    "diagnostics": ["Urodynamic testing", "Bladder diary"],
+    "treatments": ["Medications", "Surgery", "Behavioral therapy"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Urinary Tract Infection (UTI)",
+    "symptoms": ["Burning during urination", "Frequent urination", "Cloudy urine"],
+    "causes": ["Bacterial infection", "Poor hygiene", "Dehydration"],
+    "prevention": ["Hydration", "Good hygiene", "Urinate after sex"],
+    "diagnostics": ["Urine culture", "Urinalysis"],
+    "treatments": ["Antibiotics", "Hydration"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Uterine Cancer",
+    "symptoms": ["Abnormal vaginal bleeding", "Pelvic pain", "Weight loss"],
+    "causes": ["Hormonal imbalances", "Obesity", "Genetic factors"],
+    "prevention": ["Healthy weight", "Regular checkups"],
+    "diagnostics": ["Ultrasound", "Biopsy", "Hysteroscopy"],
+    "treatments": ["Surgery", "Radiation", "Chemotherapy"],
+    "relatedTests": ["Healthify Cancer Screen", "Healthify Women’s Wellness"]
+  },
+  {
+    "name": "Varicose Veins",
+    "symptoms": ["Swollen veins", "Leg pain", "Itching", "Heaviness"],
+    "causes": ["Weak vein walls", "Prolonged standing", "Pregnancy"],
+    "prevention": ["Exercise", "Compression stockings", "Avoid prolonged standing"],
+    "diagnostics": ["Ultrasound", "Venogram"],
+    "treatments": ["Sclerotherapy", "Laser therapy", "Surgery"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Vertigo",
+    "symptoms": ["Dizziness", "Spinning sensation", "Nausea", "Balance issues"],
+    "causes": ["Inner ear problems", "Head injury", "Migraines"],
+    "prevention": ["Manage migraines", "Avoid sudden movements"],
+    "diagnostics": ["Hearing tests", "Imaging (MRI)"],
+    "treatments": ["Vestibular therapy", "Medications", "Canalith repositioning"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Vitamin D Deficiency",
+    "symptoms": ["Fatigue", "Bone pain", "Muscle weakness", "Depression"],
+    "causes": ["Limited sun exposure", "Poor diet", "Malabsorption"],
+    "prevention": ["Sun exposure", "Vitamin D supplements", "Dietary intake"],
+    "diagnostics": ["Blood test (25-hydroxyvitamin D)"],
+    "treatments": ["Vitamin D supplements", "Diet changes"],
+    "relatedTests": ["Healthify Vitamin Boost", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Vulval Cancer",
+    "symptoms": ["Itching", "Pain", "Lumps", "Bleeding"],
+    "causes": ["HPV infection", "Chronic skin conditions", "Smoking"],
+    "prevention": ["HPV vaccination", "Regular checkups"],
+    "diagnostics": ["Biopsy", "Colposcopy"],
+    "treatments": ["Surgery", "Radiation", "Chemotherapy"],
+    "relatedTests": ["Healthify Cancer Screen", "Healthify Women’s Wellness"]
+  },
+  {
+    "name": "Whooping Cough (Pertussis)",
+    "symptoms": ["Severe cough", "Whooping sound", "Vomiting", "Fatigue"],
+    "causes": ["Bordetella pertussis bacteria"],
+    "prevention": ["DTaP vaccine", "Good hygiene"],
+    "diagnostics": ["Nasopharyngeal swab", "Blood tests"],
+    "treatments": ["Antibiotics", "Supportive care"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Yellow Fever",
+    "symptoms": ["Fever", "Jaundice", "Muscle pain", "Nausea"],
+    "causes": ["Yellow fever virus", "Mosquito bites"],
+    "prevention": ["Yellow fever vaccine", "Mosquito control"],
+    "diagnostics": ["Blood tests", "PCR"],
+    "treatments": ["Supportive care"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Zika Virus",
+    "symptoms": ["Fever", "Rash", "Joint pain", "Red eyes"],
+    "causes": ["Zika virus", "Mosquito bites"],
+    "prevention": ["Mosquito repellents", "Avoid travel to affected areas"],
+    "diagnostics": ["Blood test", "PCR"],
+    "treatments": ["Supportive care", "Hydration"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  }
+]
