@@ -19,7 +19,7 @@
       <ul class="nav-menu">
         <li><a href="#home">Home</a></li>
         <li><a href="#symptom-checker">Symptom Checker</a></li>
-        <li><a href="#book-test">Book a Test</a></li>
+        <li><a href="booking.html">Book a Test</a></li>
       </ul>
       <div class="hamburger">☰</div>
     </nav>
@@ -46,19 +46,6 @@
     </div>
   </section>
 
-  <!-- Booking Section -->
-  <section id="book-test" class="booking-section">
-    <h2>Book a Test</h2>
-    <form id="booking-form">
-      <label for="profile-select">Select Test Profile:</label>
-      <select id="profile-select" aria-label="Select test profile">
-        <!-- Populated by booking.js -->
-      </select>
-      <input type="email" id="user-email" placeholder="Your Email" required aria-label="Your email">
-      <button type="submit" class="cta-button">Book Now</button>
-    </form>
-  </section>
-
   <!-- Footer -->
   <footer>
     <p>&copy; 2025 HealthifyLab. All rights reserved.</p>
@@ -68,13 +55,10 @@
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
-  <!-- EmailJS SDK -->
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <!-- Swiper.js -->
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-  <!-- Custom Scripts -->
+  <!-- Custom Script -->
   <script src="search.js"></script>
-  <script src="booking.js"></script>
   <script>
     // Initialize Firebase (replace with your config)
     const firebaseConfig = {
@@ -87,8 +71,10 @@
     };
     firebase.initializeApp(firebaseConfig);
 
-    // Initialize EmailJS (replace with your public key)
-    emailjs.init("YOUR_EMAILJS_PUBLIC_KEY");
+    // Hamburger menu toggle
+    document.querySelector('.hamburger').addEventListener('click', () => {
+      document.querySelector('.nav-menu').classList.toggle('active');
+    });
   </script>
 </body>
 </html>
