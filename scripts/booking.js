@@ -1,10 +1,11 @@
 // Populate test profiles
 async function loadProfiles() {
   const profileSelect = document.getElementById('profile-select');
-  if (!profileSelect) return; // Exit if no select element (e.g., on other pages)
+  if (!profileSelect) return; // Exit if no select element
 
   try {
     const response = await fetch('public/profiles.json');
+    if (!response.ok) throw new Error('Failed to load profiles data');
     const profiles = await response.json();
 
     // Clear existing options
@@ -18,7 +19,7 @@ async function loadProfiles() {
       profileSelect.appendChild(option);
     });
 
-    // Pre-select profile if URL parameter exists
+    // Pre-select profile if URL parameter exists (for booking.html)
     const urlParams = new URLSearchParams(window.location.search);
     const selectedProfile = urlParams.get('profile');
     if (selectedProfile) {
@@ -26,6 +27,7 @@ async function loadProfiles() {
     }
   } catch (error) {
     console.error('Error loading profiles:', error);
+    profileSelect.insertAdjacentHTML('afterend', '<p class="error-message">Unable to load test profiles. Please try again later.</p>');
   }
 }
 
@@ -44,6 +46,7 @@ if (bookingForm) {
 
     try {
       const response = await fetch('public/profiles.json');
+      if (!response.ok) throw new Error('Failed to load profiles data');
       const profiles = await response.json();
       const profile = profiles.find(p => p.name === profileName);
 
@@ -61,15 +64,10 @@ if (bookingForm) {
       bookingForm.reset();
     } catch (error) {
       console.error('Error sending booking:', error);
-      alert('Failed to send booking request.');
+      alert('Failed to send booking request. Please try again later.');
     }
   });
 }
 
-// Book test from disease card (redirects to booking.html)
-async function bookTest(profileName) {
-  window.location.href = `booking.html?profile=${encodeURIComponent(profileName)}`;
-}
-
-// Load profiles on page load if on booking page or index page
+// Load profiles on page load
 document.addEventListener('DOMContentLoaded', loadProfiles);
