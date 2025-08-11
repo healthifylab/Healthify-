@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthify Lab - Book Your Test</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/styles/style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R0R3RYERZW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-R0R3RYERZW');
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <img src="/public/logo.png" alt="Healthify Lab Logo" class="logo-img">
+            <nav>
+                <div class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="booking.html">Book Test</a></li>
+                    <li><a href="app.html">Download App</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="ai-tools.html">AI Tools</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="#" onclick="logout()">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Left Drawer -->
+    <div class="left-drawer" id="leftDrawer">
+        <div class="drawer-content">
+            <div class="drawer-header">
+                <h2>_Healthify</h2>
+                <span class="close-drawer">×</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/booking.html"><i class="fas fa-calendar-check"></i> Book Test</a></li>
+                <li><a href="/app.html"><i class="fas fa-mobile-alt"></i> Download App</a></li>
+                <li><a href="/contact.html"><i class="fas fa-envelope"></i> Get In Touch</a></li>
+                <li><a href="/dashboard.html"><i class="fas fa-user"></i> Dashboard</a></li>
+                <li><a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Booking Section -->
+    <section class="booking-section">
+        <div class="container">
+            <h2 class="section-title">Book Your Test <i class="fas fa-calendar-check"></i></h2>
+            <div class="booking-form">
+                <form id="bookingForm">
+                    <div class="form-group">
+                        <label for="testProfile">Select Test Profile</label>
+                        <select id="testProfile" required>
+                            <option value="">Choose a Test Profile</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="profileDetails">Profile Details</label>
+                        <div id="profileDetails" class="profile-details"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile">Mobile Number</label>
+                        <input type="text" id="mobile" placeholder="Enter your mobile (+91xxxxxxxxxx)" pattern="\+91[0-9]{10}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pincode">Pincode</label>
+                        <input type="text" id="pincode" placeholder="Enter your pincode" pattern="[0-9]{6}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address (for Home Collection)</label>
+                        <textarea id="address" placeholder="Enter your address in Mumbai, Navi Mumbai, or Thane" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="slot">Preferred Slot</label>
+                        <select id="slot" required>
+                            <option value="">Choose a Slot</option>
+                            <option value="Morning (8-10 AM)">Morning (8-10 AM)</option>
+                            <option value="Afternoon (12-2 PM)">Afternoon (12-2 PM)</option>
+                            <option value="Evening (4-6 PM)">Evening (4-6 PM)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="book-now-btn">Confirm Booking <i class="fas fa-check"></i></button>
+                </form>
+                <div class="submission-status" id="bookingStatus"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>Healthify Lab © 2025 | <a href="/contact.html">Contact Us</a> | <a href="/privacy.html">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js"></script>
+    <script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+    <script src="/scripts/booking.js"></script>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+        import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
+            authDomain: "healthify-lab.firebaseapp.com",
+            projectId: "healthify-lab",
+            storageBucket: "healthify-lab.firebasestorage.app",
+            messagingSenderId: "297003315332",
+            appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                window.location.href = '/index.html#login';
+            }
+        });
+
+        window.logout = function() {
+            signOut(auth).then(() => {
+                window.location.href = '/index.html';
+            }).catch((error) => {
+                console.error('Logout error:', error);
+            });
+        };
+
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.getElementById('leftDrawer').classList.toggle('active');
+        });
+
+        document.querySelector('.close-drawer').addEventListener('click', () => {
+            document.getElementById('leftDrawer').classList.remove('active');
+        });
+    </script>
+</body>
+</html>
