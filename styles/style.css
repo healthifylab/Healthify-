@@ -125,20 +125,6 @@ body {
   margin-bottom: 10px;
 }
 
-.cta-button {
-  background-color: #2ecc71;
-  color: #ffffff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.cta-button:hover {
-  background-color: #3b82f6;
-}
-
 /* Booking Section */
 .booking-section {
   padding: 50px 20px;
@@ -171,6 +157,28 @@ body {
   font-size: 16px;
   border: 2px solid #1e3a8a;
   border-radius: 5px;
+}
+
+/* CTA Button */
+.cta-button {
+  background-color: #2ecc71;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.cta-button:hover {
+  background-color: #3b82f6;
+}
+
+/* Error Message */
+.error-message {
+  color: #e74c3c;
+  font-size: 16px;
+  margin-top: 10px;
 }
 
 /* Footer */
