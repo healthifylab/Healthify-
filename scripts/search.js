@@ -1,99 +1,103 @@
-async function initSearch() {
-    try {
-        const responseTests = await fetch('/public/tests.json');
-        const tests = await responseTests.json();
-        const responseDiseases = await fetch('/public/diseases.json');
-        const diseases = await responseDiseases.json();
-        const responseProfiles = await fetch('/public/profiles.json');
-        const profiles = await responseProfiles.json();
-        const searchInput = document.getElementById('searchInput');
-        const searchResults = document.getElementById('searchResults');
+// Initialize Swiper
+const swiper = new Swiper('.swiper-container', {
+  slidesPerView: 3,
+  spaceBetween: 20,
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  breakpoints: {
+    768: {
+      slidesPerView: 2,
+    },
+    480: {
+      slidesPerView: 1,
+    },
+  },
+});
 
-        searchInput.addEventListener('input', () => {
-            const query = searchInput.value.toLowerCase().trim();
-            searchResults.innerHTML = '';
+// Fetch and display diseases
+async function loadDiseases() {
+  const diseaseCards = document.getElementById('disease-cards');
+  try {
+    const response = await fetch('public/diseases.json');
+    if (!response.ok) throw new Error('Failed to load diseases data');
+    const diseases = await response.json();
+    
+    diseaseCards.innerHTML = ''; // Clear any existing content
+    diseases.forEach(disease => {
+      const card = document.createElement('div');
+      card.classList.add('swiper-slide');
+      card.innerHTML = `
+        <div class="disease-card">
+          <h3>${disease.name}</h3>
+          <p>Symptoms: ${disease.symptoms.join(', ')}</p>
+          <button class="cta-button" onclick="bookTest('${disease.relatedTests[0]}')">Book Test</button>
+        </div>
+      `;
+      diseaseCards.appendChild(card);
+    });
 
-            if (query.length < 2) return;
-
-            // Search tests
-            const testMatches = tests.filter(test =>
-                test.name.toLowerCase().includes(query) ||
-                test.description.toLowerCase().includes(query)
-            );
-
-            // Search profiles
-            const profileMatches = profiles.filter(profile =>
-                profile.Test_Name.toLowerCase().includes(query) ||
-                profile.Description.toLowerCase().includes(query) ||
-                profile.Tests_Included.some(test => test.toLowerCase().includes(query))
-            );
-
-            // Search diseases
-            const diseaseMatches = diseases.filter(disease =>
-                disease.name.toLowerCase().includes(query) ||
-                disease.symptoms.some(symptom => symptom.toLowerCase().includes(query)) ||
-                disease.causes.some(cause => cause.toLowerCase().includes(query))
-            );
-
-            // Combine results
-            if (testMatches.length > 0 || profileMatches.length > 0 || diseaseMatches.length > 0) {
-                const resultBox = document.createElement('div');
-                resultBox.className = 'search-result';
-
-                if (testMatches.length > 0) {
-                    resultBox.innerHTML += `
-                        <h3>Test Matches</h3>
-                        <ul>
-                            ${testMatches.map(test => `
-                                <li>
-                                    <strong>${test.name}</strong>: ${test.description}
-                                    <br><a href="/booking.html?profile=${encodeURIComponent(test.name.toLowerCase().replace(/ /g, '-'))}">Book Now</a>
-                                </li>
-                            `).join('')}
-                        </ul>
-                    `;
-                }
-
-                if (profileMatches.length > 0) {
-                    resultBox.innerHTML += `
-                        <h3>Profile Matches</h3>
-                        <ul>
-                            ${profileMatches.map(profile => `
-                                <li>
-                                    <strong>${profile.Test_Name}</strong>: ${profile.Description}
-                                    <br><strong>MRP:</strong> ₹${profile.MRP} | <strong>Offer Price:</strong> ₹${profile.Healthify_Offer_Price}
-                                    <br><strong>TAT:</strong> ${profile.TAT || '24-48 hours'}
-                                    <br><strong>Includes:</strong> ${profile.Tests_Included.join(', ')}
-                                    <br><a href="/booking.html?profile=${encodeURIComponent(profile.Test_Name.toLowerCase().replace(/ /g, '-'))}">Book Now</a>
-                                </li>
-                            `).join('')}
-                        </ul>
-                    `;
-                }
-
-                if (diseaseMatches.length > 0) {
-                    resultBox.innerHTML += `
-                        <h3>Disease Matches</h3>
-                        <ul>
-                            ${diseaseMatches.map(disease => `
-                                <li>
-                                    <strong>${disease.name}</strong>: ${disease.symptoms.join(', ')}
-                                    <br>Recommended Tests: ${disease.relatedTests.length > 0 ? disease.relatedTests.map(test => `
-                                        <a href="/booking.html?profile=${encodeURIComponent(test.toLowerCase().replace(/ /g, '-'))}">${test}</a>
-                                    `).join(', ') : 'Contact us for recommendations'}
-                                </li>
-                            `).join('')}
-                        </ul>
-                    `;
-                }
-
-                searchResults.appendChild(resultBox);
-            }
-        });
-    } catch (error) {
-        console.error('Error initializing search:', error);
-        document.getElementById('searchResults').innerHTML = '<p>Error loading search data. Please try again later.</p>';
-    }
+    swiper.update();
+  } catch (error) {
+    console.error('Error loading diseases:', error);
+    diseaseCards.innerHTML = '<p class="error-message">Unable to load health conditions. Please try again later.</p>';
+  }
 }
 
-document.addEventListener('DOMContentLoaded', initSearch);
+// Symptom search functionality
+const searchInput = document.getElementById('symptom-search');
+const searchResults = document.getElementById('search-results');
+
+searchInput.addEventListener('input', async (e) => {
+  const query = e.target.value.toLowerCase();
+  searchResults.innerHTML = '';
+  
+  if (query.length < 2) return;
+
+  try {
+    const response = await fetch('public/diseases.json');
+    if (!response.ok) throw new Error('Failed to load diseases data');
+    const diseases = await response.json();
+    const results = diseases.filter(disease =>
+      disease.symptoms.some(symptom => symptom.toLowerCase().includes(query)) ||
+      disease.name.toLowerCase().includes(query)
+    );
+
+    if (results.length === 0) {
+      searchResults.innerHTML = '<p>No matching conditions found.</p>';
+      return;
+    }
+
+    results.forEach(disease => {
+      const result = document.createElement('div');
+      result.innerHTML = `
+        <h3>${disease.name}</h3>
+        <p>Symptoms: ${disease.symptoms.join(', ')}</p>
+        <button class="cta-button" onclick="bookTest('${disease.relatedTests[0]}')">Book Test</button>
+      `;
+      searchResults.appendChild(result);
+    });
+  } catch (error) {
+    console.error('Error searching diseases:', error);
+    searchResults.innerHTML = '<p class="error-message">Unable to search conditions. Please try again later.</p>';
+  }
+});
+
+// Book test by selecting profile in the form
+function bookTest(profileName) {
+  const profileSelect = document.getElementById('profile-select');
+  if (profileSelect) {
+    profileSelect.value = profileName;
+    document.getElementById('book-test').scrollIntoView({ behavior: 'smooth' });
+  } else {
+    console.error('Booking form not found on this page');
+  }
+}
+
+// Load diseases on page load
+document.addEventListener('DOMContentLoaded', loadDiseases);
