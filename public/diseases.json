@@ -1,38 +1,1295 @@
 [
-    {
-        "name": "Appendicitis",
-        "symptoms": ["Abdominal pain", "Nausea", "Fever"],
-        "causes": ["Blocked appendix", "Infection"],
-        "prevention": ["Healthy diet", "Regular checkups"],
-        "diagnostics": ["Ultrasound", "CT scan", "Blood tests"],
-        "treatments": ["Appendectomy", "Antibiotics"],
-        "relatedTests": ["Healthify Vital Check"]
-    },
-    {
-        "name": "Acne",
-        "symptoms": ["Pimples", "Blackheads", "Redness"],
-        "causes": ["Excess oil", "Bacteria", "Hormonal changes"],
-        "prevention": ["Clean skin", "Avoid oily products"],
-        "diagnostics": ["Dermatological exam"],
-        "treatments": ["Topical creams", "Antibiotics"],
-        "relatedTests": ["Healthify Vitamin Boost"]
-    },
-    {
-        "name": "Alzheimer's Disease",
-        "symptoms": ["Memory loss", "Confusion", "Difficulty speaking"],
-        "causes": ["Genetic factors", "Brain cell damage"],
-        "prevention": ["Mental exercises", "Healthy lifestyle"],
-        "diagnostics": ["MRI", "Cognitive tests"],
-        "treatments": ["Medications", "Therapy"],
-        "relatedTests": ["Healthify Senior Care"]
-    },
-    {
-        "name": "Diabetes",
-        "symptoms": ["Increased thirst", "Frequent urination", "Fatigue"],
-        "causes": ["Insulin resistance", "Genetic factors"],
-        "prevention": ["Healthy diet", "Regular exercise"],
-        "diagnostics": ["Blood sugar test", "HbA1c"],
-        "treatments": ["Insulin", "Medications", "Lifestyle changes"],
-        "relatedTests": ["Healthify Diabetes Care"]
-    }
-]
+  {
+    "name": "Abdominal Aortic Aneurysm",
+    "symptoms": ["Abdominal pain", "Pulsating sensation in abdomen", "Back pain"],
+    "causes": ["High blood pressure", "Smoking", "Atherosclerosis", "Genetic factors"],
+    "prevention": ["Quit smoking", "Control blood pressure", "Regular checkups"],
+    "diagnostics": ["Ultrasound", "CT scan", "MRI"],
+    "treatments": ["Surgery (stent or graft)", "Medications for blood pressure"],
+    "relatedTests": ["Healthify Heart Guard", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Acidity",
+    "symptoms": ["Heartburn", "Regurgitation", "Bloating", "Nausea"],
+    "causes": ["Spicy foods", "Stress", "Obesity", "Hiatal hernia"],
+    "prevention": ["Avoid trigger foods", "Eat smaller meals", "Manage stress"],
+    "diagnostics": ["Endoscopy", "pH monitoring"],
+    "treatments": ["Antacids", "Proton pump inhibitors", "Lifestyle changes"],
+    "relatedTests": ["Healthify Metabolic Balance", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Acne",
+    "symptoms": ["Pimples", "Blackheads", "Whiteheads", "Redness"],
+    "causes": ["Excess oil production", "Bacteria", "Hormonal changes", "Clogged pores"],
+    "prevention": ["Cleanse skin regularly", "Avoid oily cosmetics", "Healthy diet"],
+    "diagnostics": ["Skin examination", "Hormone tests"],
+    "treatments": ["Topical creams", "Antibiotics", "Hormonal therapy"],
+    "relatedTests": ["Healthify Hormone Check", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Acute Cholecystitis",
+    "symptoms": ["Severe abdominal pain", "Fever", "Nausea", "Vomiting"],
+    "causes": ["Gallstones", "Bile duct blockage", "Infection"],
+    "prevention": ["Healthy diet", "Weight management", "Avoid rapid weight loss"],
+    "diagnostics": ["Ultrasound", "CT scan", "HIDA scan"],
+    "treatments": ["Surgery (cholecystectomy)", "Antibiotics"],
+    "relatedTests": ["Healthify Liver Health", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Acute Lymphoblastic Leukaemia",
+    "symptoms": ["Fatigue", "Frequent infections", "Easy bruising", "Bone pain"],
+    "causes": ["Genetic mutations", "Radiation exposure", "Unknown factors"],
+    "prevention": ["Limit radiation exposure", "Healthy lifestyle"],
+    "diagnostics": ["Blood tests", "Bone marrow biopsy"],
+    "treatments": ["Chemotherapy", "Radiation therapy", "Stem cell transplant"],
+    "relatedTests": ["Healthify Cancer Screen", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Acute Pancreatitis",
+    "symptoms": ["Severe abdominal pain", "Nausea", "Vomiting", "Fever"],
+    "causes": ["Gallstones", "Alcohol abuse", "High triglycerides"],
+    "prevention": ["Limit alcohol", "Healthy diet", "Manage cholesterol"],
+    "diagnostics": ["Blood tests (amylase, lipase)", "CT scan"],
+    "treatments": ["Hospitalization", "IV fluids", "Pain management"],
+    "relatedTests": ["Healthify Liver Health", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Addison’s Disease",
+    "symptoms": ["Fatigue", "Weight loss", "Low blood pressure", "Darkening of skin"],
+    "causes": ["Autoimmune disorder", "Adrenal gland damage"],
+    "prevention": ["Regular medical checkups", "Manage autoimmune conditions"],
+    "diagnostics": ["ACTH stimulation test", "Blood cortisol levels"],
+    "treatments": ["Hormone replacement therapy", "Corticosteroids"],
+    "relatedTests": ["Healthify Hormone Check", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Alcohol-Related Liver Disease",
+    "symptoms": ["Jaundice", "Fatigue", "Abdominal pain", "Swelling"],
+    "causes": ["Excessive alcohol consumption", "Chronic liver damage"],
+    "prevention": ["Limit alcohol intake", "Healthy diet"],
+    "diagnostics": ["Liver function tests", "Ultrasound", "Biopsy"],
+    "treatments": ["Abstinence from alcohol", "Medications", "Liver transplant"],
+    "relatedTests": ["Healthify Liver Health", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Allergic Rhinitis",
+    "symptoms": ["Sneezing", "Runny nose", "Itchy eyes", "Nasal congestion"],
+    "causes": ["Pollen", "Dust mites", "Pet dander", "Mold"],
+    "prevention": ["Avoid allergens", "Use air purifiers", "Nasal rinses"],
+    "diagnostics": ["Allergy skin test", "Blood IgE levels"],
+    "treatments": ["Antihistamines", "Nasal corticosteroids", "Immunotherapy"],
+    "relatedTests": ["Healthify Allergy Screen", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Allergies",
+    "symptoms": ["Itching", "Hives", "Swelling", "Difficulty breathing"],
+    "causes": ["Food", "Pollen", "Medications", "Insect stings"],
+    "prevention": ["Avoid known allergens", "Carry epinephrine"],
+    "diagnostics": ["Allergy skin test", "Blood tests"],
+    "treatments": ["Antihistamines", "Epinephrine", "Immunotherapy"],
+    "relatedTests": ["Healthify Allergy Screen", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Alzheimer’s Disease",
+    "symptoms": ["Memory loss", "Confusion", "Difficulty with tasks", "Mood changes"],
+    "causes": ["Genetic factors", "Age", "Brain protein buildup"],
+    "prevention": ["Healthy diet", "Exercise", "Mental stimulation"],
+    "diagnostics": ["Cognitive testing", "Brain imaging"],
+    "treatments": ["Medications (cholinesterase inhibitors)", "Therapy"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Anal Cancer",
+    "symptoms": ["Anal pain", "Bleeding", "Lumps", "Itching"],
+    "causes": ["HPV infection", "Smoking", "Weakened immune system"],
+    "prevention": ["HPV vaccination", "Safe sexual practices"],
+    "diagnostics": ["Biopsy", "Anoscopy", "Imaging"],
+    "treatments": ["Chemotherapy", "Radiation", "Surgery"],
+    "relatedTests": ["Healthify Cancer Screen", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Anaphylaxis",
+    "symptoms": ["Difficulty breathing", "Swelling", "Hives", "Low blood pressure"],
+    "causes": ["Food allergies", "Insect stings", "Medications"],
+    "prevention": ["Avoid allergens", "Carry epinephrine auto-injector"],
+    "diagnostics": ["Clinical evaluation", "Allergy testing"],
+    "treatments": ["Epinephrine", "Antihistamines", "Corticosteroids"],
+    "relatedTests": ["Healthify Allergy Screen"]
+  },
+  {
+    "name": "Anemia",
+    "symptoms": ["Fatigue", "Pale skin", "Shortness of breath", "Dizziness"],
+    "causes": ["Iron deficiency", "Vitamin B12 deficiency", "Chronic diseases"],
+    "prevention": ["Iron-rich diet", "Vitamin supplements"],
+    "diagnostics": ["Complete blood count (CBC)", "Iron studies"],
+    "treatments": ["Iron supplements", "Vitamin B12 injections", "Treat underlying cause"],
+    "relatedTests": ["Healthify Anemia Shield", "Healthify Vitamin Boost"]
+  },
+  {
+    "name": "Angioedema",
+    "symptoms": ["Swelling of skin", "Pain", "Itching", "Redness"],
+    "causes": ["Allergies", "Medications", "Genetic factors"],
+    "prevention": ["Avoid allergens", "Monitor medications"],
+    "diagnostics": ["Allergy testing", "Blood tests"],
+    "treatments": ["Antihistamines", "Corticosteroids", "Epinephrine"],
+    "relatedTests": ["Healthify Allergy Screen"]
+  },
+  {
+    "name": "Ankylosing Spondylitis",
+    "symptoms": ["Back pain", "Stiffness", "Fatigue", "Joint inflammation"],
+    "causes": ["Genetic factors (HLA-B27)", "Autoimmune response"],
+    "prevention": ["Exercise", "Maintain posture", "Healthy diet"],
+    "diagnostics": ["X-ray", "MRI", "Blood tests (HLA-B27)"],
+    "treatments": ["Anti-inflammatory drugs", "Physical therapy", "Biologics"],
+    "relatedTests": ["Healthify Arthritis Care", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Anorexia Nervosa",
+    "symptoms": ["Extreme weight loss", "Fatigue", "Fear of gaining weight"],
+    "causes": ["Psychological factors", "Societal pressure", "Genetic predisposition"],
+    "prevention": ["Promote healthy body image", "Counseling"],
+    "diagnostics": ["Psychological evaluation", "Blood tests"],
+    "treatments": ["Therapy", "Nutritional counseling", "Medications"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Anthrax",
+    "symptoms": ["Fever", "Skin sores", "Respiratory distress", "Fatigue"],
+    "causes": ["Bacillus anthracis bacteria", "Contact with infected animals"],
+    "prevention": ["Vaccination (for high-risk groups)", "Avoid contact with infected animals"],
+    "diagnostics": ["Blood cultures", "Skin biopsy"],
+    "treatments": ["Antibiotics", "Antitoxin therapy"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Anxiety",
+    "symptoms": ["Excessive worry", "Restlessness", "Rapid heartbeat", "Sweating"],
+    "causes": ["Stress", "Genetic factors", "Trauma"],
+    "prevention": ["Stress management", "Healthy lifestyle", "Therapy"],
+    "diagnostics": ["Psychological evaluation"],
+    "treatments": ["Therapy (CBT)", "Medications (SSRIs)", "Lifestyle changes"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Anxiety Disorders in Children",
+    "symptoms": ["Fearfulness", "Irritability", "Sleep problems", "Physical complaints"],
+    "causes": ["Genetics", "Environmental stress", "Trauma"],
+    "prevention": ["Supportive environment", "Early intervention"],
+    "diagnostics": ["Psychological evaluation"],
+    "treatments": ["Therapy", "Family counseling", "Medications"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Arthritis",
+    "symptoms": ["Joint pain", "Stiffness", "Swelling", "Reduced mobility"],
+    "causes": ["Autoimmune response", "Wear and tear", "Infections"],
+    "prevention": ["Exercise", "Healthy weight", "Joint protection"],
+    "diagnostics": ["X-ray", "Blood tests (RF, ANA)", "MRI"],
+    "treatments": ["Anti-inflammatory drugs", "Physical therapy", "Surgery"],
+    "relatedTests": ["Healthify Arthritis Care", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Asbestosis",
+    "symptoms": ["Shortness of breath", "Persistent cough", "Chest tightness"],
+    "causes": ["Asbestos exposure", "Chronic lung irritation"],
+    "prevention": ["Avoid asbestos exposure", "Use protective equipment"],
+    "diagnostics": ["Chest X-ray", "CT scan", "Lung function tests"],
+    "treatments": ["Oxygen therapy", "Pulmonary rehabilitation"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Athlete’s Foot",
+    "symptoms": ["Itching", "Redness", "Cracked skin", "Burning sensation"],
+    "causes": ["Fungal infection", "Moist environments", "Poor hygiene"],
+    "prevention": ["Keep feet dry", "Wear breathable shoes", "Avoid sharing towels"],
+    "diagnostics": ["Skin scraping test"],
+    "treatments": ["Antifungal creams", "Oral antifungals"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Atopic Eczema",
+    "symptoms": ["Itchy skin", "Redness", "Dry patches", "Scaling"],
+    "causes": ["Genetics", "Allergens", "Environmental factors"],
+    "prevention": ["Moisturize skin", "Avoid triggers", "Use mild soaps"],
+    "diagnostics": ["Skin examination", "Allergy testing"],
+    "treatments": ["Topical steroids", "Moisturizers", "Antihistamines"],
+    "relatedTests": ["Healthify Allergy Screen", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Atrial Fibrillation",
+    "symptoms": ["Irregular heartbeat", "Palpitations", "Fatigue", "Dizziness"],
+    "causes": ["High blood pressure", "Heart disease", "Thyroid disorders"],
+    "prevention": ["Manage blood pressure", "Healthy diet", "Exercise"],
+    "diagnostics": ["ECG", "Holter monitor", "Echocardiogram"],
+    "treatments": ["Medications (beta-blockers)", "Cardioversion", "Ablation"],
+    "relatedTests": ["Healthify Heart Guard", "Healthify Cardiac Advance"]
+  },
+  {
+    "name": "Attention Deficit Hyperactivity Disorder (ADHD)",
+    "symptoms": ["Inattention", "Hyperactivity", "Impulsivity"],
+    "causes": ["Genetic factors", "Brain structure differences", "Environmental factors"],
+    "prevention": ["Structured environment", "Healthy diet"],
+    "diagnostics": ["Behavioral assessment", "Psychological evaluation"],
+    "treatments": ["Behavioral therapy", "Medications (stimulants)"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Autism",
+    "symptoms": ["Social difficulties", "Repetitive behaviors", "Communication challenges"],
+    "causes": ["Genetic factors", "Environmental influences"],
+    "prevention": ["Early intervention", "Supportive care"],
+    "diagnostics": ["Developmental screening", "Behavioral evaluation"],
+    "treatments": ["Behavioral therapy", "Speech therapy", "Support programs"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Avian Influenza (Bird Flu)",
+    "symptoms": ["Fever", "Cough", "Sore throat", "Muscle aches"],
+    "causes": ["Influenza A virus (H5N1)", "Contact with infected birds"],
+    "prevention": ["Avoid contact with infected birds", "Good hygiene"],
+    "diagnostics": ["RT-PCR test", "Viral culture"],
+    "treatments": ["Antiviral medications", "Supportive care"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Bacterial Infection",
+    "symptoms": ["Fever", "Pain", "Swelling", "Redness"],
+    "causes": ["Bacterial exposure", "Weakened immune system"],
+    "prevention": ["Good hygiene", "Vaccinations"],
+    "diagnostics": ["Blood culture", "Swab test"],
+    "treatments": ["Antibiotics", "Supportive care"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Bacterial Vaginosis",
+    "symptoms": ["Vaginal discharge", "Odor", "Itching", "Burning"],
+    "causes": ["Bacterial imbalance", "Douching", "Multiple sexual partners"],
+    "prevention": ["Avoid douching", "Safe sexual practices"],
+    "diagnostics": ["Vaginal swab", "pH test"],
+    "treatments": ["Antibiotics (metronidazole)", "Probiotics"],
+    "relatedTests": ["Healthify Women’s Wellness"]
+  },
+  {
+    "name": "Benign Prostate Enlargement",
+    "symptoms": ["Frequent urination", "Weak urine stream", "Difficulty starting urination"],
+    "causes": ["Aging", "Hormonal changes"],
+    "prevention": ["Healthy diet", "Regular exercise"],
+    "diagnostics": ["PSA test", "Ultrasound", "Uroflowmetry"],
+    "treatments": ["Medications (alpha-blockers)", "Surgery (TURP)"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Bile Duct Cancer (Cholangiocarcinoma)",
+    "symptoms": ["Jaundice", "Abdominal pain", "Weight loss", "Itching"],
+    "causes": ["Chronic bile duct inflammation", "Liver disease", "Genetic factors"],
+    "prevention": ["Manage liver health", "Avoid toxins"],
+    "diagnostics": ["CT scan", "MRI", "Biopsy"],
+    "treatments": ["Surgery", "Chemotherapy", "Radiation"],
+    "relatedTests": ["Healthify Cancer Screen", "Healthify Liver Health"]
+  },
+  {
+    "name": "Bipolar Disorder",
+    "symptoms": ["Mood swings", "Mania", "Depression", "Irritability"],
+    "causes": ["Genetic factors", "Stress", "Brain chemistry imbalance"],
+    "prevention": ["Stress management", "Regular sleep"],
+    "diagnostics": ["Psychiatric evaluation"],
+    "treatments": ["Mood stabilizers", "Therapy", "Lifestyle changes"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Bladder Cancer",
+    "symptoms": ["Blood in urine", "Frequent urination", "Pelvic pain"],
+    "causes": ["Smoking", "Chemical exposure", "Chronic bladder infections"],
+    "prevention": ["Quit smoking", "Avoid chemical exposure"],
+    "diagnostics": ["Cystoscopy", "Biopsy", "Urine cytology"],
+    "treatments": ["Surgery", "Chemotherapy", "Immunotherapy"],
+    "relatedTests": ["Healthify Cancer Screen", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Blood Poisoning (Sepsis)",
+    "symptoms": ["Fever", "Rapid heart rate", "Confusion", "Low blood pressure"],
+    "causes": ["Bacterial infection", "Fungal infection", "Injury"],
+    "prevention": ["Prompt treatment of infections", "Good hygiene"],
+    "diagnostics": ["Blood cultures", "Imaging", "Blood tests"],
+    "treatments": ["Antibiotics", "IV fluids", "Supportive care"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Bone Cancer",
+    "symptoms": ["Bone pain", "Swelling", "Fractures", "Fatigue"],
+    "causes": ["Genetic mutations", "Radiation exposure"],
+    "prevention": ["Regular checkups", "Healthy lifestyle"],
+    "diagnostics": ["X-ray", "MRI", "Biopsy"],
+    "treatments": ["Surgery", "Chemotherapy", "Radiation"],
+    "relatedTests": ["Healthify Cancer Screen", "Healthify Bone Health"]
+  },
+  {
+    "name": "Bowel Cancer",
+    "symptoms": ["Blood in stool", "Abdominal pain", "Weight loss", "Change in bowel habits"],
+    "causes": ["Genetic factors", "Diet", "Chronic inflammation"],
+    "prevention": ["High-fiber diet", "Regular screening", "Exercise"],
+    "diagnostics": ["Colonoscopy", "CT scan", "Biopsy"],
+    "treatments": ["Surgery", "Chemotherapy", "Radiation"],
+    "relatedTests": ["Healthify Cancer Screen", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Bowel Incontinence",
+    "symptoms": ["Involuntary bowel movements", "Leakage", "Urgency"],
+    "causes": ["Nerve damage", "Muscle weakness", "Chronic diarrhea"],
+    "prevention": ["Pelvic floor exercises", "Healthy diet"],
+    "diagnostics": ["Anorectal manometry", "Imaging"],
+    "treatments": ["Medications", "Surgery", "Biofeedback"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Bowel Polyps",
+    "symptoms": ["Blood in stool", "Abdominal pain", "Change in bowel habits"],
+    "causes": ["Genetic factors", "Chronic inflammation"],
+    "prevention": ["High-fiber diet", "Regular screening"],
+    "diagnostics": ["Colonoscopy", "Sigmoidoscopy"],
+    "treatments": ["Polypectomy", "Regular monitoring"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Brain Stem Death",
+    "symptoms": ["Loss of consciousness", "No breathing", "No reflexes"],
+    "causes": ["Severe brain injury", "Stroke", "Lack of oxygen"],
+    "prevention": ["Prevent head injuries", "Manage chronic conditions"],
+    "diagnostics": ["Neurological examination", "Apnea test"],
+    "treatments": ["Supportive care (if reversible)"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Brain Tumours",
+    "symptoms": ["Headaches", "Seizures", "Vision problems", "Cognitive changes"],
+    "causes": ["Genetic mutations", "Radiation exposure"],
+    "prevention": ["Limit radiation exposure", "Healthy lifestyle"],
+    "diagnostics": ["MRI", "CT scan", "Biopsy"],
+    "treatments": ["Surgery", "Radiation", "Chemotherapy"],
+    "relatedTests": ["Healthify Cancer Screen"]
+  },
+  {
+    "name": "Bronchial Asthma",
+    "symptoms": ["Wheezing", "Shortness of breath", "Chest tightness", "Coughing"],
+    "causes": ["Allergens", "Exercise", "Pollution", "Genetic factors"],
+    "prevention": ["Avoid triggers", "Use inhalers", "Healthy environment"],
+    "diagnostics": ["Spirometry", "Allergy testing"],
+    "treatments": ["Inhalers (bronchodilators)", "Corticosteroids"],
+    "relatedTests": ["Healthify Allergy Screen", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Bronchiectasis",
+    "symptoms": ["Chronic cough", "Mucus production", "Shortness of breath"],
+    "causes": ["Infections", "Cystic fibrosis", "Immune deficiency"],
+    "prevention": ["Vaccinations", "Treat infections promptly"],
+    "diagnostics": ["Chest CT", "Sputum culture"],
+    "treatments": ["Antibiotics", "Chest physiotherapy", "Bronchodilators"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Bronchitis",
+    "symptoms": ["Cough", "Mucus production", "Fatigue", "Chest discomfort"],
+    "causes": ["Viral infections", "Bacteria", "Smoking"],
+    "prevention": ["Avoid smoking", "Good hygiene", "Vaccinations"],
+    "diagnostics": ["Chest X-ray", "Sputum test"],
+    "treatments": ["Rest", "Hydration", "Bronchodilators"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Bullous Pemphigoid",
+    "symptoms": ["Blisters", "Itching", "Red rash"],
+    "causes": ["Autoimmune response", "Medications"],
+    "prevention": ["Monitor medications", "Manage autoimmune conditions"],
+    "diagnostics": ["Skin biopsy", "Blood tests"],
+    "treatments": ["Corticosteroids", "Immunosuppressants"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Burnout Syndrome",
+    "symptoms": ["Chronic fatigue", "Irritability", "Reduced performance"],
+    "causes": ["Chronic stress", "Work overload", "Lack of support"],
+    "prevention": ["Stress management", "Work-life balance"],
+    "diagnostics": ["Psychological evaluation"],
+    "treatments": ["Therapy", "Lifestyle changes", "Stress reduction"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Candidiasis (Yeast Infection)",
+    "symptoms": ["Itching", "Redness", "Discharge", "Soreness"],
+    "causes": ["Candida overgrowth", "Antibiotics", "Weak immune system"],
+    "prevention": ["Good hygiene", "Avoid tight clothing", "Healthy diet"],
+    "diagnostics": ["Swab test", "Culture"],
+    "treatments": ["Antifungal medications", "Probiotics"],
+    "relatedTests": ["Healthify Women’s Wellness", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Carcinoid Syndrome and Carcinoid Tumours",
+    "symptoms": ["Flushing", "Diarrhea", "Wheezing", "Heart palpitations"],
+    "causes": ["Neuroendocrine tumors", "Hormone overproduction"],
+    "prevention": ["Regular screenings", "Healthy lifestyle"],
+    "diagnostics": ["Blood tests (5-HIAA)", "Imaging", "Biopsy"],
+    "treatments": ["Surgery", "Medications (octreotide)", "Chemotherapy"],
+    "relatedTests": ["Healthify Cancer Screen"]
+  },
+  {
+    "name": "Cardiomyopathy",
+    "symptoms": ["Shortness of breath", "Fatigue", "Swelling", "Chest pain"],
+    "causes": ["Genetic factors", "Infections", "Alcohol abuse"],
+    "prevention": ["Healthy lifestyle", "Manage heart conditions"],
+    "diagnostics": ["Echocardiogram", "ECG", "MRI"],
+    "treatments": ["Medications", "Surgery", "Lifestyle changes"],
+    "relatedTests": ["Healthify Heart Guard", "Healthify Cardiac Advance"]
+  },
+  {
+    "name": "Cataracts",
+    "symptoms": ["Blurry vision", "Glare sensitivity", "Faded colors"],
+    "causes": ["Aging", "Diabetes", "UV exposure"],
+    "prevention": ["Wear sunglasses", "Control diabetes", "Healthy diet"],
+    "diagnostics": ["Eye exam", "Slit-lamp test"],
+    "treatments": ["Surgery (lens replacement)", "Glasses"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Celiac Disease",
+    "symptoms": ["Diarrhea", "Bloating", "Fatigue", "Weight loss"],
+    "causes": ["Gluten intolerance", "Genetic factors"],
+    "prevention": ["Gluten-free diet"],
+    "diagnostics": ["Blood tests (tTG-IgA)", "Intestinal biopsy"],
+    "treatments": ["Gluten-free diet", "Nutritional supplements"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Cellulitis",
+    "symptoms": ["Redness", "Swelling", "Pain", "Fever"],
+    "causes": ["Bacterial infection", "Skin breaks", "Weak immune system"],
+    "prevention": ["Good hygiene", "Treat skin injuries"],
+    "diagnostics": ["Clinical evaluation", "Blood culture"],
+    "treatments": ["Antibiotics", "Pain relief"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Cervical Cancer",
+    "symptoms": ["Abnormal vaginal bleeding", "Pelvic pain", "Discharge"],
+    "causes": ["HPV infection", "Smoking", "Weak immune system"],
+    "prevention": ["HPV vaccination", "Regular Pap smears"],
+    "diagnostics": ["Pap smear", "HPV test", "Biopsy"],
+    "treatments": ["Surgery", "Radiation", "Chemotherapy"],
+    "relatedTests": ["Healthify Women’s Wellness", "Healthify Cancer Screen"]
+  },
+  {
+    "name": "Chest Infection",
+    "symptoms": ["Cough", "Fever", "Chest pain", "Shortness of breath"],
+    "causes": ["Bacteria", "Viruses", "Fungi"],
+    "prevention": ["Vaccinations", "Good hygiene"],
+    "diagnostics": ["Chest X-ray", "Sputum culture"],
+    "treatments": ["Antibiotics", "Antivirals", "Supportive care"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Chest Pain",
+    "symptoms": ["Pressure in chest", "Shortness of breath", "Sweating"],
+    "causes": ["Heart disease", "Lung issues", "Acid reflux"],
+    "prevention": ["Healthy diet", "Exercise", "Stress management"],
+    "diagnostics": ["ECG", "Chest X-ray", "Blood tests"],
+    "treatments": ["Medications", "Lifestyle changes", "Surgery"],
+    "relatedTests": ["Healthify Heart Guard", "Healthify Cardiac Advance"]
+  },
+  {
+    "name": "Chickenpox (Varicella)",
+    "symptoms": ["Itchy rash", "Fever", "Fatigue", "Blisters"],
+    "causes": ["Varicella-zoster virus", "Direct contact"],
+    "prevention": ["Vaccination", "Avoid contact with infected"],
+    "diagnostics": ["Clinical evaluation", "Blood test"],
+    "treatments": ["Antiviral medications", "Symptom relief"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Chilblains",
+    "symptoms": ["Itchy red spots", "Swelling", "Burning sensation"],
+    "causes": ["Cold exposure", "Poor circulation"],
+    "prevention": ["Keep warm", "Avoid rapid temperature changes"],
+    "diagnostics": ["Clinical evaluation"],
+    "treatments": ["Topical creams", "Warm compresses"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Chlamydia",
+    "symptoms": ["Painful urination", "Discharge", "Pelvic pain"],
+    "causes": ["Chlamydia trachomatis bacteria", "Sexual contact"],
+    "prevention": ["Safe sexual practices", "Regular screening"],
+    "diagnostics": ["Urine test", "Swab test"],
+    "treatments": ["Antibiotics (azithromycin)"],
+    "relatedTests": ["Healthify Women’s Wellness"]
+  },
+  {
+    "name": "Cholera",
+    "symptoms": ["Severe diarrhea", "Dehydration", "Vomiting"],
+    "causes": ["Vibrio cholerae bacteria", "Contaminated water"],
+    "prevention": ["Clean water", "Vaccination", "Good hygiene"],
+    "diagnostics": ["Stool culture"],
+    "treatments": ["Oral rehydration", "Antibiotics"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Chronic Fatigue Syndrome",
+    "symptoms": ["Extreme fatigue", "Muscle pain", "Cognitive issues"],
+    "causes": ["Unknown", "Viral infections", "Stress"],
+    "prevention": ["Healthy lifestyle", "Stress management"],
+    "diagnostics": ["Clinical evaluation", "Rule out other causes"],
+    "treatments": ["Cognitive behavioral therapy", "Graded exercise"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Chronic Kidney Disease",
+    "symptoms": ["Fatigue", "Swelling", "High blood pressure", "Urine changes"],
+    "causes": ["Diabetes", "Hypertension", "Genetic factors"],
+    "prevention": ["Control blood sugar", "Manage blood pressure"],
+    "diagnostics": ["Blood tests (creatinine)", "Urine tests", "Ultrasound"],
+    "treatments": ["Medications", "Dialysis", "Kidney transplant"],
+    "relatedTests": ["Healthify Kidney Care Maximum", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Chronic Lymphocytic Leukaemia",
+    "symptoms": ["Fatigue", "Swollen lymph nodes", "Frequent infections"],
+    "causes": ["Genetic mutations", "Unknown factors"],
+    "prevention": ["Healthy lifestyle", "Regular checkups"],
+    "diagnostics": ["Blood tests", "Bone marrow biopsy"],
+    "treatments": ["Chemotherapy", "Immunotherapy", "Targeted therapy"],
+    "relatedTests": ["Healthify Cancer Screen"]
+  },
+  {
+    "name": "Chronic Myeloid Leukaemia",
+    "symptoms": ["Fatigue", "Weight loss", "Night sweats", "Bone pain"],
+    "causes": ["Genetic mutation (BCR-ABL)", "Unknown factors"],
+    "prevention": ["Regular screenings", "Healthy lifestyle"],
+    "diagnostics": ["Blood tests", "Bone marrow biopsy"],
+    "treatments": ["Targeted therapy (imatinib)", "Chemotherapy"],
+    "relatedTests": ["Healthify Cancer Screen"]
+  },
+  {
+    "name": "Chronic Obstructive Pulmonary Disease (COPD)",
+    "symptoms": ["Shortness of breath", "Chronic cough", "Wheezing"],
+    "causes": ["Smoking", "Air pollution", "Genetic factors"],
+    "prevention": ["Quit smoking", "Avoid pollutants"],
+    "diagnostics": ["Spirometry", "Chest X-ray"],
+    "treatments": ["Bronchodilators", "Oxygen therapy", "Pulmonary rehab"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Chronic Pain",
+    "symptoms": ["Persistent pain", "Fatigue", "Sleep issues"],
+    "causes": ["Injury", "Arthritis", "Nerve damage"],
+    "prevention": ["Exercise", "Healthy weight", "Stress management"],
+    "diagnostics": ["Imaging", "Nerve conduction studies"],
+    "treatments": ["Pain relievers", "Physical therapy", "Surgery"],
+    "relatedTests": ["Healthify Arthritis Care", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Chronic Pancreatitis",
+    "symptoms": ["Abdominal pain", "Nausea", "Weight loss", "Diarrhea"],
+    "causes": ["Alcohol abuse", "Genetic factors", "Gallstones"],
+    "prevention": ["Limit alcohol", "Healthy diet"],
+    "diagnostics": ["CT scan", "Blood tests (amylase, lipase)"],
+    "treatments": ["Pain management", "Enzyme supplements", "Surgery"],
+    "relatedTests": ["Healthify Liver Health", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Cirrhosis",
+    "symptoms": ["Fatigue", "Jaundice", "Swelling", "Confusion"],
+    "causes": ["Chronic alcohol use", "Hepatitis", "Fatty liver"],
+    "prevention": ["Limit alcohol", "Vaccinate for hepatitis"],
+    "diagnostics": ["Liver function tests", "Imaging", "Biopsy"],
+    "treatments": ["Medications", "Lifestyle changes", "Liver transplant"],
+    "relatedTests": ["Healthify Liver Health", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Coeliac Disease",
+    "symptoms": ["Diarrhea", "Bloating", "Fatigue", "Weight loss"],
+    "causes": ["Gluten intolerance", "Genetic factors"],
+    "prevention": ["Gluten-free diet"],
+    "diagnostics": ["Blood tests (tTG-IgA)", "Intestinal biopsy"],
+    "treatments": ["Gluten-free diet", "Nutritional supplements"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Congenital Heart Disease",
+    "symptoms": ["Shortness of breath", "Cyanosis", "Fatigue"],
+    "causes": ["Genetic factors", "Maternal infections", "Environmental factors"],
+    "prevention": ["Prenatal care", "Avoid teratogens"],
+    "diagnostics": ["Echocardiogram", "ECG", "Chest X-ray"],
+    "treatments": ["Surgery", "Medications", "Catheter procedures"],
+    "relatedTests": ["Healthify Heart Guard", "Healthify Cardiac Advance"]
+  },
+  {
+    "name": "Conjunctivitis",
+    "symptoms": ["Red eyes", "Itching", "Discharge", "Tearing"],
+    "causes": ["Viral infection", "Bacteria", "Allergens"],
+    "prevention": ["Good hygiene", "Avoid touching eyes"],
+    "diagnostics": ["Eye exam", "Swab test"],
+    "treatments": ["Antibiotics (bacterial)", "Antihistamines (allergic)"],
+    "relatedTests": ["Healthify Allergy Screen"]
+  },
+  {
+    "name": "Constipation",
+    "symptoms": ["Infrequent stools", "Hard stools", "Abdominal discomfort"],
+    "causes": ["Low-fiber diet", "Dehydration", "Medications"],
+    "prevention": ["High-fiber diet", "Hydration", "Exercise"],
+    "diagnostics": ["Clinical evaluation", "Colonoscopy"],
+    "treatments": ["Laxatives", "Dietary changes", "Hydration"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Coronavirus (COVID-19)",
+    "symptoms": ["Fever", "Cough", "Shortness of breath", "Loss of taste/smell"],
+    "causes": ["SARS-CoV-2 virus", "Respiratory droplets"],
+    "prevention": ["Vaccination", "Masks", "Social distancing"],
+    "diagnostics": ["RT-PCR test", "Antigen test"],
+    "treatments": ["Antivirals", "Supportive care", "Monoclonal antibodies"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Cough",
+    "symptoms": ["Persistent cough", "Sore throat", "Chest discomfort"],
+    "causes": ["Infections", "Allergies", "Asthma"],
+    "prevention": ["Good hygiene", "Avoid irritants"],
+    "diagnostics": ["Chest X-ray", "Spirometry"],
+    "treatments": ["Cough suppressants", "Treat underlying cause"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Crohn’s Disease",
+    "symptoms": ["Abdominal pain", "Diarrhea", "Weight loss", "Fatigue"],
+    "causes": ["Genetic factors", "Immune system dysfunction"],
+    "prevention": ["Healthy diet", "Stress management"],
+    "diagnostics": ["Colonoscopy", "Blood tests", "Imaging"],
+    "treatments": ["Anti-inflammatory drugs", "Immunosuppressants", "Surgery"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Croup",
+    "symptoms": ["Barking cough", "Hoarseness", "Difficulty breathing"],
+    "causes": ["Viral infection (parainfluenza)"],
+    "prevention": ["Vaccinations", "Good hygiene"],
+    "diagnostics": ["Clinical evaluation", "X-ray"],
+    "treatments": ["Corticosteroids", "Humidified air"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Cystic Fibrosis",
+    "symptoms": ["Chronic cough", "Lung infections", "Poor growth"],
+    "causes": ["Genetic mutation (CFTR gene)"],
+    "prevention": ["Genetic screening", "Early intervention"],
+    "diagnostics": ["Sweat test", "Genetic testing"],
+    "treatments": ["Chest physiotherapy", "Medications", "Lung transplant"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Deafblindness",
+    "symptoms": ["Hearing loss", "Vision loss", "Communication difficulties"],
+    "causes": ["Genetic conditions", "Infections", "Aging"],
+    "prevention": ["Early screening", "Manage infections"],
+    "diagnostics": ["Hearing tests", "Vision tests"],
+    "treatments": ["Assistive devices", "Therapy"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Deep Vein Thrombosis (DVT)",
+    "symptoms": ["Leg swelling", "Pain", "Redness", "Warmth"],
+    "causes": ["Immobility", "Blood clotting disorders", "Surgery"],
+    "prevention": ["Stay active", "Compression stockings"],
+    "diagnostics": ["Ultrasound", "D-dimer test"],
+    "treatments": ["Anticoagulants", "Thrombolytics"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Dehydration",
+    "symptoms": ["Thirst", "Dry mouth", "Fatigue", "Dizziness"],
+    "causes": ["Inadequate fluid intake", "Diarrhea", "Fever"],
+    "prevention": ["Adequate hydration", "Electrolyte balance"],
+    "diagnostics": ["Blood tests", "Urine tests"],
+    "treatments": ["Oral rehydration", "IV fluids"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Dementia",
+    "symptoms": ["Memory loss", "Confusion", "Difficulty communicating"],
+    "causes": ["Alzheimer’s disease", "Vascular issues", "Aging"],
+    "prevention": ["Healthy diet", "Exercise", "Mental stimulation"],
+    "diagnostics": ["Cognitive testing", "Brain imaging"],
+    "treatments": ["Medications", "Therapy", "Supportive care"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Dental Abscess",
+    "symptoms": ["Tooth pain", "Swelling", "Fever", "Bad breath"],
+    "causes": ["Bacterial infection", "Tooth decay", "Trauma"],
+    "prevention": ["Good oral hygiene", "Regular dental checkups"],
+    "diagnostics": ["Dental X-ray", "Clinical exam"],
+    "treatments": ["Antibiotics", "Drainage", "Root canal"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Dermatitis Herpetiformis",
+    "symptoms": ["Itchy rash", "Blisters", "Burning sensation"],
+    "causes": ["Gluten sensitivity", "Celiac disease"],
+    "prevention": ["Gluten-free diet"],
+    "diagnostics": ["Skin biopsy", "Blood tests"],
+    "treatments": ["Dapsone", "Gluten-free diet"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Diabetes",
+    "symptoms": ["Increased thirst", "Frequent urination", "Fatigue", "Blurred vision"],
+    "causes": ["Insulin resistance", "Genetic factors", "Obesity"],
+    "prevention": ["Healthy diet", "Exercise", "Weight management"],
+    "diagnostics": ["Blood glucose test", "HbA1c test"],
+    "treatments": ["Insulin", "Oral medications", "Lifestyle changes"],
+    "relatedTests": ["Healthify Diabetes Care", "Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Discoid Eczema",
+    "symptoms": ["Round patches", "Itching", "Dry skin"],
+    "causes": ["Allergens", "Stress", "Genetic factors"],
+    "prevention": ["Moisturize skin", "Avoid triggers"],
+    "diagnostics": ["Skin examination", "Patch testing"],
+    "treatments": ["Topical steroids", "Moisturizers"],
+    "relatedTests": ["Healthify Allergy Screen"]
+  },
+  {
+    "name": "Diverticulitis",
+    "symptoms": ["Abdominal pain", "Fever", "Nausea", "Constipation"],
+    "causes": ["Low-fiber diet", "Diverticula infection"],
+    "prevention": ["High-fiber diet", "Hydration"],
+    "diagnostics": ["CT scan", "Blood tests"],
+    "treatments": ["Antibiotics", "Diet changes", "Surgery"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Down Syndrome",
+    "symptoms": ["Developmental delays", "Distinct facial features", "Low muscle tone"],
+    "causes": ["Chromosomal abnormality (Trisomy 21)"],
+    "prevention": ["Genetic counseling"],
+    "diagnostics": ["Karyotyping", "Prenatal screening"],
+    "treatments": ["Therapy", "Educational support"],
+    "relatedTests": ["Healthify Prenatal Care"]
+  },
+  {
+    "name": "Dyspepsia (Indigestion)",
+    "symptoms": ["Bloating", "Nausea", "Heartburn", "Abdominal pain"],
+    "causes": ["Overeating", "Spicy foods", "Stress"],
+    "prevention": ["Smaller meals", "Avoid triggers"],
+    "diagnostics": ["Endoscopy", "Blood tests"],
+    "treatments": ["Antacids", "Proton pump inhibitors"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Dystonia",
+    "symptoms": ["Muscle spasms", "Tremors", "Involuntary movements"],
+    "causes": ["Genetic factors", "Brain injury", "Medications"],
+    "prevention": ["Manage stress", "Regular checkups"],
+    "diagnostics": ["Neurological exam", "MRI"],
+    "treatments": ["Medications", "Botox injections", "Surgery"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "E. Coli Infection",
+    "symptoms": ["Diarrhea", "Abdominal cramps", "Fever"],
+    "causes": ["Contaminated food/water", "E. coli bacteria"],
+    "prevention": ["Cook food thoroughly", "Good hygiene"],
+    "diagnostics": ["Stool culture"],
+    "treatments": ["Hydration", "Antibiotics (if severe)"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Ebola Fever",
+    "symptoms": ["Fever", "Bleeding", "Muscle pain", "Diarrhea"],
+    "causes": ["Ebola virus", "Contact with infected fluids"],
+    "prevention": ["Avoid contact with infected", "Good hygiene"],
+    "diagnostics": ["RT-PCR test", "Blood tests"],
+    "treatments": ["Supportive care", "Experimental treatments"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Ectopic Pregnancy",
+    "symptoms": ["Abdominal pain", "Vaginal bleeding", "Dizziness"],
+    "causes": ["Fallopian tube damage", "Hormonal imbalances"],
+    "prevention": ["Treat infections", "Safe sexual practices"],
+    "diagnostics": ["Ultrasound", "hCG blood test"],
+    "treatments": ["Surgery", "Methotrexate"],
+    "relatedTests": ["Healthify Prenatal Care"]
+  },
+  {
+    "name": "Eczema",
+    "symptoms": ["Itchy skin", "Redness", "Dry patches"],
+    "causes": ["Allergens", "Genetics", "Stress"],
+    "prevention": ["Moisturize skin", "Avoid triggers"],
+    "diagnostics": ["Skin exam", "Allergy testing"],
+    "treatments": ["Topical steroids", "Antihistamines"],
+    "relatedTests": ["Healthify Allergy Screen"]
+  },
+  {
+    "name": "Encephalitis",
+    "symptoms": ["Fever", "Headache", "Confusion", "Seizures"],
+    "causes": ["Viral infections", "Autoimmune conditions"],
+    "prevention": ["Vaccinations", "Mosquito control"],
+    "diagnostics": ["MRI", "Lumbar puncture"],
+    "treatments": ["Antivirals", "Corticosteroids", "Supportive care"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Endocarditis",
+    "symptoms": ["Fever", "Heart murmur", "Fatigue", "Night sweats"],
+    "causes": ["Bacterial infection", "Heart valve issues"],
+    "prevention": ["Good oral hygiene", "Antibiotic prophylaxis"],
+    "diagnostics": ["Echocardiogram", "Blood cultures"],
+    "treatments": ["Antibiotics", "Surgery"],
+    "relatedTests": ["Healthify Heart Guard"]
+  },
+  {
+    "name": "Endometriosis",
+    "symptoms": ["Pelvic pain", "Painful periods", "Infertility"],
+    "causes": ["Hormonal imbalances", "Genetic factors"],
+    "prevention": ["Early diagnosis", "Hormonal management"],
+    "diagnostics": ["Ultrasound", "Laparoscopy"],
+    "treatments": ["Hormonal therapy", "Surgery"],
+    "relatedTests": ["Healthify Women’s Wellness", "Healthify Fertility Check"]
+  },
+  {
+    "name": "Epilepsy",
+    "symptoms": ["Seizures", "Loss of consciousness", "Confusion"],
+    "causes": ["Brain injury", "Genetic factors", "Infections"],
+    "prevention": ["Avoid triggers", "Regular medication"],
+    "diagnostics": ["EEG", "MRI"],
+    "treatments": ["Antiepileptic drugs", "Surgery"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Erectile Dysfunction",
+    "symptoms": ["Difficulty achieving erection", "Reduced sexual desire"],
+    "causes": ["Diabetes", "Hypertension", "Stress"],
+    "prevention": ["Healthy lifestyle", "Manage chronic conditions"],
+    "diagnostics": ["Blood tests", "Ultrasound"],
+    "treatments": ["Medications (sildenafil)", "Therapy"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Escherichia Coli (E. Coli) O157",
+    "symptoms": ["Bloody diarrhea", "Abdominal cramps", "Fever"],
+    "causes": ["Contaminated food/water", "E. coli O157 strain"],
+    "prevention": ["Cook meat thoroughly", "Good hygiene"],
+    "diagnostics": ["Stool culture"],
+    "treatments": ["Hydration", "Supportive care"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Ewing Sarcoma",
+    "symptoms": ["Bone pain", "Swelling", "Fever", "Weight loss"],
+    "causes": ["Genetic mutations"],
+    "prevention": ["Regular screenings"],
+    "diagnostics": ["X-ray", "Biopsy", "MRI"],
+    "treatments": ["Chemotherapy", "Surgery", "Radiation"],
+    "relatedTests": ["Healthify Cancer Screen", "Healthify Bone Health"]
+  },
+  {
+    "name": "Fabry Disease",
+    "symptoms": ["Pain in extremities", "Skin rashes", "Kidney issues"],
+    "causes": ["Genetic mutation (GLA gene)"],
+    "prevention": ["Genetic counseling"],
+    "diagnostics": ["Enzyme assay", "Genetic testing"],
+    "treatments": ["Enzyme replacement therapy", "Symptom management"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Food Poisoning",
+    "symptoms": ["Nausea", "Vomiting", "Diarrhea", "Fever"],
+    "causes": ["Contaminated food", "Bacteria (Salmonella, E. coli)"],
+    "prevention": ["Proper food handling", "Cook food thoroughly"],
+    "diagnostics": ["Stool culture", "Blood tests"],
+    "treatments": ["Hydration", "Antibiotics (if bacterial)"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Gallstones",
+    "symptoms": ["Abdominal pain", "Nausea", "Jaundice"],
+    "causes": ["Cholesterol imbalance", "Obesity", "Rapid weight loss"],
+    "prevention": ["Healthy diet", "Maintain weight"],
+    "diagnostics": ["Ultrasound", "CT scan"],
+    "treatments": ["Surgery (cholecystectomy)", "Medications"],
+    "relatedTests": ["Healthify Liver Health"]
+  },
+  {
+    "name": "Gastroenteritis",
+    "symptoms": ["Diarrhea", "Vomiting", "Abdominal pain", "Fever"],
+    "causes": ["Viral infections", "Bacteria", "Contaminated food"],
+    "prevention": ["Good hygiene", "Safe food practices"],
+    "diagnostics": ["Stool test", "Blood tests"],
+    "treatments": ["Hydration", "Antidiarrheal medications"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Gout",
+    "symptoms": ["Sudden joint pain", "Swelling", "Redness"],
+    "causes": ["High uric acid levels", "Diet", "Genetic factors"],
+    "prevention": ["Low-purine diet", "Hydration"],
+    "diagnostics": ["Blood uric acid test", "Joint fluid analysis"],
+    "treatments": ["Anti-inflammatory drugs", "Uric acid-lowering medications"],
+    "relatedTests": ["Healthify Arthritis Care"]
+  },
+  {
+    "name": "Head and Neck Cancer",
+    "symptoms": ["Sore throat", "Lump in neck", "Difficulty swallowing"],
+    "causes": ["Smoking", "Alcohol", "HPV infection"],
+    "prevention": ["Quit smoking", "Limit alcohol", "HPV vaccination"],
+    "diagnostics": ["Biopsy", "Imaging", "Endoscopy"],
+    "treatments": ["Surgery", "Radiation", "Chemotherapy"],
+    "relatedTests": ["Healthify Cancer Screen"]
+  },
+  {
+    "name": "Hearing Loss",
+    "symptoms": ["Difficulty hearing", "Tinnitus", "Muffled sounds"],
+    "causes": ["Aging", "Noise exposure", "Infections"],
+    "prevention": ["Protect ears from loud noise", "Regular checkups"],
+    "diagnostics": ["Audiometry", "Hearing tests"],
+    "treatments": ["Hearing aids", "Cochlear implants"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Hepatitis",
+    "symptoms": ["Jaundice", "Fatigue", "Abdominal pain", "Nausea"],
+    "causes": ["Viral infections (A, B, C)", "Alcohol", "Toxins"],
+    "prevention": ["Vaccinations", "Safe practices"],
+    "diagnostics": ["Liver function tests", "Viral serology"],
+    "treatments": ["Antivirals", "Supportive care"],
+    "relatedTests": ["Healthify Liver Health"]
+  },
+  {
+    "name": "High Cholesterol",
+    "symptoms": ["No symptoms", "Risk of heart disease"],
+    "causes": ["Diet", "Genetics", "Sedentary lifestyle"],
+    "prevention": ["Healthy diet", "Exercise", "Regular screening"],
+    "diagnostics": ["Lipid profile test"],
+    "treatments": ["Statins", "Lifestyle changes"],
+    "relatedTests": ["Healthify Heart Guard", "Healthify Cardiac Advance"]
+  },
+  {
+    "name": "Hip Pain",
+    "symptoms": ["Pain in hip", "Stiffness", "Reduced mobility"],
+    "causes": ["Arthritis", "Injury", "Bursitis"],
+    "prevention": ["Exercise", "Maintain healthy weight"],
+    "diagnostics": ["X-ray", "MRI"],
+    "treatments": ["Physical therapy", "Pain relievers", "Surgery"],
+    "relatedTests": ["Healthify Arthritis Care", "Healthify Bone Health"]
+  },
+  {
+    "name": "HIV (Human Immunodeficiency Virus)",
+    "symptoms": ["Fever", "Fatigue", "Swollen lymph nodes", "Rash"],
+    "causes": ["HIV virus", "Blood or sexual transmission"],
+    "prevention": ["Safe sexual practices", "PrEP", "Needle exchange"],
+    "diagnostics": ["HIV antibody test", "PCR test"],
+    "treatments": ["Antiretroviral therapy"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Hodgkin’s Lymphoma",
+    "symptoms": ["Swollen lymph nodes", "Fever", "Night sweats", "Weight loss"],
+    "causes": ["Epstein-Barr virus", "Genetic factors"],
+    "prevention": ["Healthy lifestyle", "Regular checkups"],
+    "diagnostics": ["Biopsy", "Blood tests", "Imaging"],
+    "treatments": ["Chemotherapy", "Radiation", "Immunotherapy"],
+    "relatedTests": ["Healthify Cancer Screen"]
+  },
+  {
+    "name": "Hyperhidrosis",
+    "symptoms": ["Excessive sweating", "Wet hands/feet"],
+    "causes": ["Overactive sweat glands", "Genetics", "Stress"],
+    "prevention": ["Stress management", "Use antiperspirants"],
+    "diagnostics": ["Sweat test", "Clinical evaluation"],
+    "treatments": ["Antiperspirants", "Botox", "Surgery"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Indigestion",
+    "symptoms": ["Bloating", "Heartburn", "Nausea"],
+    "causes": ["Overeating", "Spicy foods", "Stress"],
+    "prevention": ["Smaller meals", "Avoid triggers"],
+    "diagnostics": ["Endoscopy", "Blood tests"],
+    "treatments": ["Antacids", "Proton pump inhibitors"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Influenza (Flu)",
+    "symptoms": ["Fever", "Cough", "Body aches", "Fatigue"],
+    "causes": ["Influenza virus"],
+    "prevention": ["Flu vaccination", "Good hygiene"],
+    "diagnostics": ["Rapid flu test", "PCR"],
+    "treatments": ["Antivirals", "Rest", "Hydration"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Insomnia",
+    "symptoms": ["Difficulty sleeping", "Daytime fatigue", "Irritability"],
+    "causes": ["Stress", "Medical conditions", "Caffeine"],
+    "prevention": ["Sleep hygiene", "Limit caffeine"],
+    "diagnostics": ["Sleep study", "Medical history"],
+    "treatments": ["Cognitive behavioral therapy", "Medications"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Irritable Bowel Syndrome (IBS)",
+    "symptoms": ["Abdominal pain", "Bloating", "Diarrhea", "Constipation"],
+    "causes": ["Gut sensitivity", "Stress", "Diet"],
+    "prevention": ["Healthy diet", "Stress management"],
+    "diagnostics": ["Colonoscopy", "Blood tests"],
+    "treatments": ["Dietary changes", "Medications", "Therapy"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Kidney Cancer",
+    "symptoms": ["Blood in urine", "Back pain", "Weight loss"],
+    "causes": ["Smoking", "Obesity", "Genetic factors"],
+    "prevention": ["Quit smoking", "Healthy weight"],
+    "diagnostics": ["CT scan", "Biopsy", "Ultrasound"],
+    "treatments": ["Surgery", "Targeted therapy", "Immunotherapy"],
+    "relatedTests": ["Healthify Cancer Screen", "Healthify Kidney Care Maximum"]
+  },
+  {
+    "name": "Kidney Stones",
+    "symptoms": ["Severe flank pain", "Blood in urine", "Nausea"],
+    "causes": ["Dehydration", "Diet high in oxalate", "Genetic factors"],
+    "prevention": ["Hydration", "Low-oxalate diet"],
+    "diagnostics": ["CT scan", "Ultrasound", "Urine analysis"],
+    "treatments": ["Pain management", "Lithotripsy", "Surgery"],
+    "relatedTests": ["Healthify Kidney Care Maximum"]
+  },
+  {
+    "name": "Lasik Surgery",
+    "symptoms": ["Blurry vision (pre-surgery)", "Glare sensitivity"],
+    "causes": ["Refractive errors (myopia, hyperopia)"],
+    "prevention": ["Not applicable (corrective procedure)"],
+    "diagnostics": ["Eye exam", "Corneal topography"],
+    "treatments": ["Laser eye surgery"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Leg Cramps",
+    "symptoms": ["Sudden muscle pain", "Tightness", "Involuntary contractions"],
+    "causes": ["Dehydration", "Electrolyte imbalance", "Overuse"],
+    "prevention": ["Hydration", "Stretching", "Balanced diet"],
+    "diagnostics": ["Blood tests", "Electrolyte panel"],
+    "treatments": ["Stretching", "Hydration", "Medications"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Leukemia",
+    "symptoms": ["Fatigue", "Frequent infections", "Easy bruising"],
+    "causes": ["Genetic mutations", "Radiation exposure"],
+    "prevention": ["Healthy lifestyle", "Avoid radiation"],
+    "diagnostics": ["Blood tests", "Bone marrow biopsy"],
+    "treatments": ["Chemotherapy", "Radiation", "Stem cell transplant"],
+    "relatedTests": ["Healthify Cancer Screen"]
+  },
+  {
+    "name": "Lung Cancer",
+    "symptoms": ["Persistent cough", "Chest pain", "Weight loss", "Shortness of breath"],
+    "causes": ["Smoking", "Radon exposure", "Air pollution"],
+    "prevention": ["Quit smoking", "Avoid carcinogens"],
+    "diagnostics": ["Chest X-ray", "CT scan", "Biopsy"],
+    "treatments": ["Surgery", "Chemotherapy", "Radiation"],
+    "relatedTests": ["Healthify Cancer Screen"]
+  },
+  {
+    "name": "Lyme Disease",
+    "symptoms": ["Rash (bull’s-eye)", "Fever", "Joint pain", "Fatigue"],
+    "causes": ["Borrelia bacteria", "Tick bites"],
+    "prevention": ["Tick repellents", "Protective clothing"],
+    "diagnostics": ["Blood tests (ELISA, Western blot)"],
+    "treatments": ["Antibiotics"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Malaria",
+    "symptoms": ["Fever", "Chills", "Headache", "Muscle pain"],
+    "causes": ["Plasmodium parasite", "Mosquito bites"],
+    "prevention": ["Mosquito nets", "Antimalarial drugs"],
+    "diagnostics": ["Blood smear", "Rapid diagnostic test"],
+    "treatments": ["Antimalarial medications"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Measles",
+    "symptoms": ["Fever", "Rash", "Cough", "Red eyes"],
+    "causes": ["Measles virus"],
+    "prevention": ["MMR vaccination"],
+    "diagnostics": ["Blood test", "Clinical evaluation"],
+    "treatments": ["Supportive care", "Vitamin A"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Meningitis",
+    "symptoms": ["Fever", "Stiff neck", "Headache", "Confusion"],
+    "causes": ["Bacterial or viral infection"],
+    "prevention": ["Vaccinations", "Good hygiene"],
+    "diagnostics": ["Lumbar puncture", "Blood tests"],
+    "treatments": ["Antibiotics (bacterial)", "Supportive care"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Menopause",
+    "symptoms": ["Hot flashes", "Night sweats", "Mood changes", "Irregular periods"],
+    "causes": ["Hormonal changes", "Aging"],
+    "prevention": ["Healthy lifestyle", "Regular checkups"],
+    "diagnostics": ["Hormone tests", "Medical history"],
+    "treatments": ["Hormone replacement therapy", "Lifestyle changes"],
+    "relatedTests": ["Healthify Women’s Wellness"]
+  },
+  {
+    "name": "Migraine",
+    "symptoms": ["Severe headache", "Nausea", "Light sensitivity"],
+    "causes": ["Stress", "Hormonal changes", "Certain foods"],
+    "prevention": ["Avoid triggers", "Stress management"],
+    "diagnostics": ["Clinical evaluation", "Imaging (if needed)"],
+    "treatments": ["Pain relievers", "Triptans", "Preventive medications"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Mumps",
+    "symptoms": ["Swollen salivary glands", "Fever", "Headache"],
+    "causes": ["Mumps virus"],
+    "prevention": ["MMR vaccination"],
+    "diagnostics": ["Blood test", "Saliva test"],
+    "treatments": ["Supportive care", "Pain relief"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Obesity",
+    "symptoms": ["Excess body weight", "Fatigue", "Joint pain"],
+    "causes": ["Poor diet", "Sedentary lifestyle", "Genetics"],
+    "prevention": ["Healthy diet", "Regular exercise"],
+    "diagnostics": ["BMI measurement", "Blood tests"],
+    "treatments": ["Diet changes", "Exercise", "Surgery (if severe)"],
+    "relatedTests": ["Healthify Metabolic Balance"]
+  },
+  {
+    "name": "Osteoarthritis",
+    "symptoms": ["Joint pain", "Stiffness", "Reduced mobility"],
+    "causes": ["Joint wear and tear", "Aging", "Obesity"],
+    "prevention": ["Maintain healthy weight", "Exercise"],
+    "diagnostics": ["X-ray", "MRI"],
+    "treatments": ["Pain relievers", "Physical therapy", "Joint replacement"],
+    "relatedTests": ["Healthify Arthritis Care", "Healthify Bone Health"]
+  },
+  {
+    "name": "Osteoporosis",
+    "symptoms": ["Bone fractures", "Back pain", "Height loss"],
+    "causes": ["Aging", "Hormonal changes", "Low calcium"],
+    "prevention": ["Calcium-rich diet", "Exercise", "Vitamin D"],
+    "diagnostics": ["Bone density test (DEXA)"],
+    "treatments": ["Bisphosphonates", "Calcium supplements", "Exercise"],
+    "relatedTests": ["Healthify Bone Health"]
+  },
+  {
+    "name": "Pancreatic Cancer",
+    "symptoms": ["Abdominal pain", "Jaundice", "Weight loss"],
+    "causes": ["Smoking", "Genetic factors", "Chronic pancreatitis"],
+    "prevention": ["Quit smoking", "Healthy diet"],
+    "diagnostics": ["CT scan", "Biopsy", "Blood tests (CA19-9)"],
+    "treatments": ["Surgery", "Chemotherapy", "Radiation"],
+    "relatedTests": ["Healthify Cancer Screen"]
+  },
+  {
+    "name": "Pneumonia",
+    "symptoms": ["Cough", "Fever", "Shortness of breath", "Chest pain"],
+    "causes": ["Bacteria", "Viruses", "Fungi"],
+    "prevention": ["Vaccinations", "Good hygiene"],
+    "diagnostics": ["Chest X-ray", "Blood tests", "Sputum culture"],
+    "treatments": ["Antibiotics", "Antivirals", "Supportive care"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Prostate Cancer",
+    "symptoms": ["Difficulty urinating", "Blood in urine", "Pelvic pain"],
+    "causes": ["Aging", "Genetic factors", "Hormonal changes"],
+    "prevention": ["Regular screening", "Healthy diet"],
+    "diagnostics": ["PSA test", "Biopsy", "MRI"],
+    "treatments": ["Surgery", "Radiation", "Hormone therapy"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Psoriasis",
+    "symptoms": ["Red scaly patches", "Itching", "Dry skin"],
+    "causes": ["Autoimmune response", "Genetics", "Stress"],
+    "prevention": ["Moisturize skin", "Avoid triggers"],
+    "diagnostics": ["Skin biopsy", "Clinical evaluation"],
+    "treatments": ["Topical treatments", "Phototherapy", "Biologics"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Rheumatoid Arthritis",
+    "symptoms": ["Joint pain", "Swelling", "Stiffness", "Fatigue"],
+    "causes": ["Autoimmune response", "Genetic factors"],
+    "prevention": ["Early treatment", "Healthy lifestyle"],
+    "diagnostics": ["Blood tests (RF, anti-CCP)", "X-ray"],
+    "treatments": ["DMARDs", "Biologics", "Physical therapy"],
+    "relatedTests": ["Healthify Arthritis Care"]
+  },
+  {
+    "name": "Scabies",
+    "symptoms": ["Intense itching", "Rash", "Burrows on skin"],
+    "causes": ["Sarcoptes scabiei mite"],
+    "prevention": ["Avoid close contact", "Good hygiene"],
+    "diagnostics": ["Skin scraping", "Clinical evaluation"],
+    "treatments": ["Permethrin cream", "Oral ivermectin"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Schizophrenia",
+    "symptoms": ["Hallucinations", "Delusions", "Disorganized thinking"],
+    "causes": ["Genetic factors", "Brain chemistry", "Environmental stress"],
+    "prevention": ["Early intervention", "Stress management"],
+    "diagnostics": ["Psychiatric evaluation"],
+    "treatments": ["Antipsychotics", "Therapy"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Sinusitis",
+    "symptoms": ["Facial pain", "Nasal congestion", "Headache", "Fever"],
+    "causes": ["Infections", "Allergies", "Nasal polyps"],
+    "prevention": ["Good hygiene", "Manage allergies"],
+    "diagnostics": ["Nasal endoscopy", "CT scan"],
+    "treatments": ["Nasal sprays", "Antibiotics", "Surgery"],
+    "relatedTests": ["Healthify Allergy Screen"]
+  },
+  {
+    "name": "Sjogren’s Syndrome",
+    "symptoms": ["Dry eyes", "Dry mouth", "Joint pain"],
+    "causes": ["Autoimmune response", "Genetic factors"],
+    "prevention": ["Manage autoimmune conditions"],
+    "diagnostics": ["Blood tests (ANA, SSA)", "Salivary gland biopsy"],
+    "treatments": ["Artificial tears", "Immunosuppressants"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Sore Throat",
+    "symptoms": ["Painful swallowing", "Hoarseness", "Dry throat"],
+    "causes": ["Viral infections", "Bacteria (strep)", "Allergies"],
+    "prevention": ["Good hygiene", "Avoid irritants"],
+    "diagnostics": ["Throat swab", "Blood tests"],
+    "treatments": ["Antibiotics (bacterial)", "Pain relievers"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Stress, Anxiety and Low Mood",
+    "symptoms": ["Irritability", "Sadness", "Fatigue", "Anxiety"],
+    "causes": ["Life events", "Chronic stress", "Genetics"],
+    "prevention": ["Stress management", "Healthy lifestyle"],
+    "diagnostics": ["Psychological evaluation"],
+    "treatments": ["Therapy", "Medications", "Lifestyle changes"],
+    "relatedTests": ["Healthify Comprehensive Wellness"]
+  },
+  {
+    "name": "Syphilis",
+    "symptoms": ["Sores", "Rash", "Fever", "Swollen lymph nodes"],
+    "causes": ["Treponema pallidum bacteria", "Sexual contact"],
+    "prevention": ["Safe sexual practices", "Regular screening"],
+    "diagnostics": ["Blood tests (VDRL, RPR)", "Microscopy"],
+    "
