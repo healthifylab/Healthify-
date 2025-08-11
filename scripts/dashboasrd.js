@@ -1,83 +1,123 @@
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
-import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
-import { getFirestore, collection, getDocs, query, where } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthify Lab - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/styles/style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R0R3RYERZW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-R0R3RYERZW');
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <img src="/public/logo.png" alt="Healthify Lab Logo" class="logo-img">
+            <nav>
+                <div class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="booking.html">Book Test</a></li>
+                    <li><a href="app.html">Download App</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="ai-tools.html">AI Tools</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="#" onclick="logout()">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-const firebaseConfig = {
-    apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
-    authDomain: "healthify-lab.firebaseapp.com",
-    projectId: "healthify-lab",
-    storageBucket: "healthify-lab.firebasestorage.app",
-    messagingSenderId: "297003315332",
-    appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1"
-};
+    <!-- Left Drawer -->
+    <div class="left-drawer" id="leftDrawer">
+        <div class="drawer-content">
+            <div class="drawer-header">
+                <h2>_Healthify</h2>
+                <span class="close-drawer">×</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/booking.html"><i class="fas fa-calendar-check"></i> Book Test</a></li>
+                <li><a href="/app.html"><i class="fas fa-mobile-alt"></i> Download App</a></li>
+                <li><a href="/contact.html"><i class="fas fa-envelope"></i> Get In Touch</a></li>
+                <li><a href="/dashboard.html"><i class="fas fa-user"></i> Dashboard</a></li>
+                <li><a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+    </div>
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+    <!-- Dashboard Section -->
+    <section class="dashboard-section">
+        <div class="container">
+            <h2 class="section-title">Your Dashboard <i class="fas fa-user"></i></h2>
+            <div id="userInfo"></div>
+            <div class="dashboard-content">
+                <h3>Your Bookings</h3>
+                <div id="bookingList"></div>
+                <h3>Your Reports</h3>
+                <div id="reportList"></div>
+                <h3>Recommended Tests</h3>
+                <div id="recommendedTests"></div>
+            </div>
+        </div>
+    </section>
 
-async function loadDashboard() {
-    try {
-        const userInfo = document.getElementById('userInfo');
-        const bookingList = document.getElementById('bookingList');
-        const reportList = document.getElementById('reportList');
-        const recommendedTests = document.getElementById('recommendedTests');
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>Healthify Lab © 2025 | <a href="/contact.html">Contact Us</a> | <a href="/privacy.html">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
 
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                userInfo.innerHTML = `<p>Welcome, ${user.email || user.phoneNumber}</p>`;
+    <!-- Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js"></script>
+    <script src="/scripts/dashboard.js"></script>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+        import { getAuth, signOut } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
 
-                // Fetch bookings
-                const bookingsQuery = query(collection(db, 'bookings'), where('userId', '==', user.uid));
-                const bookingsSnapshot = await getDocs(bookingsQuery);
-                bookingList.innerHTML = bookingsSnapshot.empty ? '<p>No bookings found.</p>' : '';
-                bookingsSnapshot.forEach(doc => {
-                    const booking = doc.data();
-                    const card = document.createElement('div');
-                    card.className = 'dashboard-card';
-                    card.innerHTML = `
-                        <h4>Booking: ${booking.profile}</h4>
-                        <p><strong>Date:</strong> ${new Date(booking.timestamp).toLocaleDateString()}</p>
-                        <p><strong>Status:</strong> ${booking.status}</p>
-                    `;
-                    bookingList.appendChild(card);
-                });
+        const firebaseConfig = {
+            apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
+            authDomain: "healthify-lab.firebaseapp.com",
+            projectId: "healthify-lab",
+            storageBucket: "healthify-lab.firebasestorage.app",
+            messagingSenderId: "297003315332",
+            appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1"
+        };
 
-                // Fetch reports (placeholder; assumes reports are stored in Firebase Storage or Firestore)
-                reportList.innerHTML = '<p>Reports feature coming soon. Contact support for access.</p>';
+        const app = initializeApp(firebaseConfig);
+        const auth = g6etAuth(app);
 
-                // Recommend tests based on history
-                const responseProfiles = await fetch('/public/profiles.json');
-                if (!responseProfiles.ok) throw new Error(`HTTP error! Status: ${responseProfiles.status}`);
-                const profiles = await responseProfiles.json();
-                const responseDiseases = await fetch('/public/diseases.json');
-                if (!responseDiseases.ok) throw new Error(`HTTP error! Status: ${responseDiseases.status}`);
-                const diseases = await responseDiseases.json();
+        window.logout = function() {
+            signOut(auth).then(() => {
+                window.location.href = '/index.html';
+            }).catch((error) => {
+                console.error('Logout error:', error);
+            });
+        };
 
-                const userTests = bookingsSnapshot.docs.map(doc => doc.data().profile);
-                const recommended = diseases
-                    .filter(disease => disease.relatedTests.some(test => !userTests.includes(test)))
-                    .map(disease => disease.relatedTests)
-                    .flat()
-                    .slice(0, 3); // Limit to 3 recommendations
-
-                recommendedTests.innerHTML = recommended.length > 0 ? `
-                    <ul>
-                        ${recommended.map(test => `
-                            <li>
-                                <strong>${test}</strong>
-                                <br><a href="/booking.html?profile=${encodeURIComponent(test.toLowerCase().replace(/ /g, '-'))}">Book Now</a>
-                            </li>
-                        `).join('')}
-                    </ul>
-                ` : '<p>No new test recommendations.</p>';
-            } else {
-                window.location.href = '/index.html#login';
-            }
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.getElementById('leftDrawer').classList.toggle('active');
         });
-    } catch (error) {
-        console.error('Error loading dashboard:', error);
-        document.getElementById('bookingList').innerHTML = '<p>Error loading dashboard. Please try again later.</p>';
-    }
-}
 
-document.addEventListener('DOMContentLoaded', loadDashboard);
+        document.querySelector('.close-drawer').addEventListener('click', () => {
+            document.getElementById('leftDrawer').classList.remove('active');
+        });
+    </script>
+</body>
+</html>
