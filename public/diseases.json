@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Appendicitis",
+        "symptoms": ["Abdominal pain", "Nausea", "Fever"],
+        "causes": ["Blocked appendix", "Infection"],
+        "prevention": ["Healthy diet", "Regular checkups"],
+        "diagnostics": ["Ultrasound", "CT scan", "Blood tests"],
+        "treatments": ["Appendectomy", "Antibiotics"],
+        "relatedTests": ["Healthify Vital Check"]
+    },
+    {
+        "name": "Acne",
+        "symptoms": ["Pimples", "Blackheads", "Redness"],
+        "causes": ["Excess oil", "Bacteria", "Hormonal changes"],
+        "prevention": ["Clean skin", "Avoid oily products"],
+        "diagnostics": ["Dermatological exam"],
+        "treatments": ["Topical creams", "Antibiotics"],
+        "relatedTests": ["Healthify Vitamin Boost"]
+    },
+    {
+        "name": "Alzheimer's Disease",
+        "symptoms": ["Memory loss", "Confusion", "Difficulty speaking"],
+        "causes": ["Genetic factors", "Brain cell damage"],
+        "prevention": ["Mental exercises", "Healthy lifestyle"],
+        "diagnostics": ["MRI", "Cognitive tests"],
+        "treatments": ["Medications", "Therapy"],
+        "relatedTests": ["Healthify Senior Care"]
+    },
+    {
+        "name": "Diabetes",
+        "symptoms": ["Increased thirst", "Frequent urination", "Fatigue"],
+        "causes": ["Insulin resistance", "Genetic factors"],
+        "prevention": ["Healthy diet", "Regular exercise"],
+        "diagnostics": ["Blood sugar test", "HbA1c"],
+        "treatments": ["Insulin", "Medications", "Lifestyle changes"],
+        "relatedTests": ["Healthify Diabetes Care"]
+    }
+]
