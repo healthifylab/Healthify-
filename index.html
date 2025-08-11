@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthify Lab - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+    <link rel="manifest" href="/public/manifest.json">
+    <link rel="stylesheet" href="/styles/style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R0R3RYERZW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-R0R3RYERZW');
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <img src="/public/logo.png" alt="Healthify Lab Logo" class="logo-img">
+            <nav>
+                <div class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="booking.html">Book Test</a></li>
+                    <li><a href="app.html">Download App</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="ai-tools.html">AI Tools</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="#" onclick="showLoginForm()">Admin Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Left Drawer -->
+    <div class="left-drawer" id="leftDrawer">
+        <div class="drawer-content">
+            <div class="drawer-header">
+                <h2>_Healthify</h2>
+                <span class="close-drawer">×</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/booking.html"><i class="fas fa-calendar-check"></i> Book Test</a></li>
+                <li><a href="/app.html"><i class="fas fa-mobile-alt"></i> Download App</a></li>
+                <li><a href="/contact.html"><i class="fas fa-envelope"></i> Get In Touch</a></li>
+                <li><a href="/dashboard.html"><i class="fas fa-user"></i> Dashboard</a></li>
+                <li><a href="#" onclick="showLoginForm()"><i class="fas fa-user-lock"></i> Admin Login</a></li>
+            </ul>
+            <div id="loginForm" style="display: none; padding: 20px;">
+                <h3>Login</h3>
+                <input type="text" id="loginInput" placeholder="Email or Phone">
+                <input type="password" id="password" placeholder="Password (for email)" disabled>
+                <button onclick="loginWithEmail()">Login with Email</button>
+                <button onclick="loginWithPhone()">Login with Phone</button>
+                <p id="loginMessage"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <img src="/public/hero-banner.jpg" class="hero-img" alt="Healthify hero banner">
+            <h1>Welcome to HealthifyLab <i class="fas fa-heartbeat"></i></h1>
+            <p>Your trusted partner for comprehensive health checkups with free home collection in Mumbai, Navi Mumbai, and Thane.</p>
+            <a href="/booking.html" class="book-now-btn">Book Now <i class="fas fa-check"></i></a>
+            <a href="/app.html" class="btn">Download App <i class="fas fa-download"></i></a>
+            <p class="safety-text">100% Safe, Scanned by VirusTotal <i class="fas fa-shield-alt"></i></p>
+        </div>
+    </section>
+
+    <!-- Symptom Checker Section -->
+    <section class="symptom-checker">
+        <div class="container">
+            <h2 class="section-title">Check Your Symptoms <i class="fas fa-diagnoses"></i></h2>
+            <input type="text" id="symptomInput" placeholder="Enter symptoms (e.g., fever, fatigue)..." class="search-input">
+            <button onclick="checkSymptoms()" class="btn">Check Now</button>
+            <div id="symptomResults"></div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <h2>Find Tests, Profiles, or Diseases <i class="fas fa-search"></i></h2>
+            <input type="text" id="searchInput" placeholder="Search tests, profiles, or diseases..." class="search-input">
+            <div id="searchResults"></div>
+            <button id="bookNowBtn" class="book-now-btn">Book Now <i class="fas fa-check"></i></button>
+        </div>
+    </section>
+
+    <!-- Diseases A to Z Section -->
+    <section class="diseases-section">
+        <div class="container">
+            <h2 class="section-title">Diseases A to Z <i class="fas fa-book-medical"></i></h2>
+            <div class="alphabet-filter">
+                <button class="alphabet-btn active" data-letter="all">All</button>
+                <button class="alphabet-btn" data-letter="A">A</button>
+                <button class="alphabet-btn" data-letter="B">B</button>
+                <button class="alphabet-btn" data-letter="C">C</button>
+                <button class="alphabet-btn" data-letter="D">D</button>
+                <button class="alphabet-btn" data-letter="E">E</button>
+                <button class="alphabet-btn" data-letter="F">F</button>
+                <button class="alphabet-btn" data-letter="G">G</button>
+                <button class="alphabet-btn" data-letter="H">H</button>
+                <button class="alphabet-btn" data-letter="I">I</button>
+                <button class="alphabet-btn" data-letter="J">J</button>
+                <button class="alphabet-btn" data-letter="K">K</button>
+                <button class="alphabet-btn" data-letter="L">L</button>
+                <button class="alphabet-btn" data-letter="M">M</button>
+                <button class="alphabet-btn" data-letter="N">N</button>
+                <button class="alphabet-btn" data-letter="O">O</button>
+                <button class="alphabet-btn" data-letter="P">P</button>
+                <button class="alphabet-btn" data-letter="Q">Q</button>
+                <button class="alphabet-btn" data-letter="R">R</button>
+                <button class="alphabet-btn" data-letter="S">S</button>
+                <button class="alphabet-btn" data-letter="T">T</button>
+                <button class="alphabet-btn" data-letter="U">U</button>
+                <button class="alphabet-btn" data-letter="V">V</button>
+                <button class="alphabet-btn" data-letter="W">W</button>
+                <button class="alphabet-btn" data-letter="X">X</button>
+                <button class="alphabet-btn" data-letter="Y">Y</button>
+                <button class="alphabet-btn" data-letter="Z">Z</button>
+            </div>
+            <div id="diseaseList" class="disease-list"></div>
+        </div>
+    </section>
+
+    <!-- Swipeable Cards Section -->
+    <section class="cards-section">
+        <div class="container">
+            <h2 class="section-title">Our Test Profiles <i class="fas fa-gift"></i></h2>
+            <div class="swiper promo-swiper">
+                <div class="swiper-wrapper" id="promoSwiperWrapper"></div>
+            </div>
+            <h2 class="section-title">Featured Profiles <i class="fas fa-star"></i></h2>
+            <div class="swiper featured-swiper">
+                <div class="swiper-wrapper" id="featuredSwiperWrapper"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seamless Process Section -->
+    <section class="seamless-process-section">
+        <div class="container">
+            <h2 class="section-title">Our Seamless Process <i class="fas fa-cogs"></i></h2>
+            <img src="/public/process.jpg" class="seamless-process-img" alt="Seamless process illustration">
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">What Our Patients Say <i class="fas fa-quote-left"></i></h2>
+            <div class="testimonials-container">
+                <div class="testimonial-card">
+                    <img src="/public/testimonial1.jpg" alt="Patient Testimonial" onerror="this.src='/public/test-placeholder.jpg'">
+                    <p>"Healthify Lab made my health checkup so convenient at home. Highly satisfied!" <i class="fas fa-star"></i></p>
+                    <h4>– Ramesh, 60, Mumbai</h4>
+                </div>
+                <div class="testimonial-card">
+                    <img src="/public/testimonial2.jpg" alt="Patient Testimonial" onerror="this.src='/public/test-placeholder.jpg'">
+                    <p>"The team was professional, and the results were delivered quickly in Navi Mumbai!" <i class="fas fa-star"></i></p>
+                    <h4>– Priya, 35, Navi Mumbai</h4>
+                </div>
+                <div class="testimonial-card">
+                    <img src="/public/testimonial3.jpg" alt="Patient Testimonial" onerror="this.src='/public/test-placeholder.jpg'">
+                    <p>"Great service in Thane. Made managing my health so much easier!" <i class="fas fa-star"></i></p>
+                    <h4>– Anil, 45, Thane</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Section -->
+    <section class="why-choose">
+        <div class="container">
+            <h2 class="section-title">Why Choose Healthify? <i class="fas fa-award"></i></h2>
+            <p>🔬 Healthify <i class="fas fa-flask"></i></p>
+            <p>Your trusted partner in preventive healthcare.</p>
+            <p>💉 Hassle-free sample collection at home <i class="fas fa-home"></i></p>
+            <p>🧪 Advanced diagnostics & accurate reports <i class="fas fa-microscope"></i></p>
+            <p>🚚 Fast turnaround <i class="fas fa-shipping-fast"></i></p>
+            <p>✅ Happy Customers <i class="fas fa-smile"></i></p>
+            <p>📞 Book your test today — because your health deserves the best. <i class="fas fa-phone"></i></p>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions <i class="fas fa-question-circle"></i></h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <h3 class="faq-question">What areas do you serve? <i class="fas fa-chevron-down"></i></h3>
+                    <p class="faq-answer">We serve Mumbai, Navi Mumbai, and Thane for home sample collection.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">How long does it take to get results? <i class="fas fa-chevron-down"></i></h3>
+                    <p class="faq-answer">Results are typically delivered within 24-48 hours.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Do I need to fast before a test? <i class="fas fa-chevron-down"></i></h3>
+                    <p class="faq-answer">It depends on the test; instructions will be provided during booking.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Contact Us <i class="fas fa-envelope"></i></h2>
+            <div class="contact-form">
+                <form id="callBackForm">
+                    <input type="text" id="name" placeholder="Enter your name" required>
+                    <input type="text" id="mobile" placeholder="Enter your mobile (+91xxxxxxxxxx)" pattern="\+91[0-9]{10}" required>
+                    <input type="email" id="email" placeholder="Enter your email (optional)" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                    <button type="submit">Request a Callback <i class="fas fa-phone"></i></button>
+                </form>
+                <div class="submission-status" id="submissionStatus"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Links -->
+    <div class="social-links">
+        <a href="https://x.com/healthify_lab"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://instagram.com/healthifylab"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/share/1Axkp5jB81/?mibextid=qi2Omg"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://threads.net/healthifylab" target="_blank" aria-label="Threads"><i class="fab fa-threads"></i></a>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/919503832889" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>Healthify Lab © 2025 | <a href="/contact.html">Contact Us</a> | <a href="/privacy.html">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js"></script>
+    <script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.5/dist/tesseract.min.js"></script>
+    <script src="https://unpkg.com/mammoth/mammoth.browser.min.js"></script>
+    <script src="/scripts/drawer.js"></script>
+    <script src="/scripts/search.js"></script>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+        import { getAuth, signInWithEmailAndPassword, signInWithPhoneNumber, RecaptchaVerifier } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+        import { getFirestore, collection, addDoc, getDocs, query, where } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
+            authDomain: "healthify-lab.firebaseapp.com",
+            projectId: "healthify-lab",
+            storageBucket: "healthify-lab.firebasestorage.app",
+            messagingSenderId: "297003315332",
+            appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Initialize EmailJS
+        emailjs.init('dJE_JHAoNTxxzTxiT');
+
+        // Firebase Authentication
+        window.recaptchaVerifier = new RecaptchaVerifier('loginMessage', { size: 'invisible' }, auth);
+
+        function loginWithEmail() {
+            const email = document.getElementById('loginInput').value;
+            const password = document.getElementById('password').value;
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    document.getElementById('loginMessage').textContent = 'Logged in as ' + userCredential.user.email;
+                    closeDrawer();
+                })
+                .catch((error) => {
+                    document.getElementById('loginMessage').textContent = 'Error: ' + error.message;
+                });
+        }
+
+        function loginWithPhone() {
+            const phone = document.getElementById('loginInput').value;
+            signInWithPhoneNumber(auth, phone, window.recaptchaVerifier)
+                .then((confirmationResult) => {
+                    const code = prompt('Enter the OTP sent to ' + phone);
+                    return confirmationResult.confirm(code);
+                })
+                .then((userCredential) => {
+                    document.getElementById('loginMessage').textContent = 'Logged in with ' + phone;
+                    closeDrawer();
+                })
+                .catch((error) => {
+                    document.getElementById('loginMessage').textContent = 'Error: ' + error.message;
+                });
+        }
+
+        auth.onAuthStateChanged((user) => {
+            if (!user) window.location.href = '/index.html#login';
+        });
+
+        function showLoginForm() {
+            document.getElementById('loginForm').style.display = 'block';
+        }
+
+        function closeDrawer() {
+            document.getElementById('leftDrawer').classList.remove('active');
+        }
+
+        // Contact Form Submission
+        const callBackForm = document.getElementById("callBackForm");
+        const submissionStatus = document.getElementById("submissionStatus");
+
+        if (callBackForm && submissionStatus) {
+            callBackForm.addEventListener("submit", async (event) => {
+                event.preventDefault();
+                const name = document.getElementById("name").value;
+                const mobile = document.getElementById("mobile").value;
+                const email = document.getElementById("email").value;
+
+                if (!name || !mobile.match(/^\+91[0-9]{10}$/)) {
+                    submissionStatus.className = "error";
+                    submissionStatus.textContent = "❌ Please enter a valid name and mobile number (+91 followed by 10 digits).";
+                    return;
+                }
+
+                submissionStatus.textContent = "📞 Submitting your request...";
+                try {
+                    await addDoc(collection(db, "leads"), {
+                        name: name,
+                        mobile: mobile,
+                        email: email || "Not provided",
+                        timestamp: new Date().toISOString(),
+                        status: "New Enquiry"
+                    });
+
+                    emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
+                        user_name: name,
+                        user_mobile: mobile,
+                        user_email: email || 'Not provided'
+                    }).then(() => {
+                        console.log('Email notification sent for lead submission');
+                        submissionStatus.className = "success";
+                        submissionStatus.textContent = "✅ Request submitted! We’ll call you soon.";
+                        callBackForm.reset();
+                        setTimeout(() => {
+                            submissionStatus.textContent = "";
+                        }, 5000);
+                    }).catch((error) => {
+                        console.error('Error sending email:', error);
+                        submissionStatus.className = "error";
+                        submissionStatus.textContent = "❌ Error sending notification. Please try again.";
+                    });
+                } catch (error) {
+                    console.error("Error submitting lead:", error);
+                    submissionStatus.className = "error";
+                    submissionStatus.textContent = `❌ Failed to submit: ${error.message}. Try again or contact support.`;
+                }
+            });
+        }
+
+        // Promo Popup
+        window.onload = function() {
+            document.getElementById('promoPopup').classList.add('active');
+            loadSwiperCards();
+            loadDiseases();
+        };
+
+        function closePopup() {
+            document.getElementById('promoPopup').classList.remove('active');
+        }
+
+        // Image Mapping for Profiles
+        const imageMap = {
+            "Healthify Vital Check": "healthify-vital-check.jpg",
+            "Healthify Core Wellness": "healthify-core-wellness.jpg",
+            "Healthify Diabetes Care": "healthify-diabetes-care.jpg",
+            "Healthify Heart Guard": "healthify-heart-guard.jpg",
+            "Healthify Thyroid Balance": "healthify-thyroid-balance.jpg",
+            "Healthify Comprehensive Wellness": "healthify-comprehensive-wellness.jpg",
+            "Healthify Women’s Wellness": "healthify-womens-wellness.jpg",
+            "Healthify Senior Care": "healthify-senior-care.jpg",
+            "Healthify Anemia Shield": "healthify-anemia-shield.jpg",
+            "Healthify Arthritis Care": "healthify-arthritis-care.jpg",
+            "Healthify PCOD Harmony": "healthify-pcod-harmony.jpg",
+            "Healthify Vitamin Boost": "healthify-vitamin-boost.jpg",
+            "Healthify Basic Wellness": "healthify-basic-wellness.jpg",
+            "Healthify Active Lifestyle": "healthify-active-lifestyle.jpg",
+            "Healthify Prenatal Care": "healthify-prenatal-care.jpg",
+            "Healthify Cardiac Advance": "healthify-cardiac-advance.jpg",
+            "Healthify Cardiac Adance": "healthify-cardiac-advance.jpg",
+            "Healthify Liver Health": "healthify-liver-health.jpg",
+            "Healthify Kidney Care Maximum": "healthify-kidney-care.jpg",
+            "Healthify Allergy Screen": "healthify-allergy-screen.jpg",
+            "Healthify Cancer Screen": "test-placeholder.jpg",
+            "Healthify Metabolic Balance": "test-placeholder.jpg",
+            "Healthify Bone Health": "test-placeholder.jpg",
+            "Healthify Fertility Check": "test-placeholder.jpg",
+            "Healthify Executive Wellness": "test-placeholder.jpg",
+            "Healthify Immunity Boost": "test-placeholder.jpg"
+        };
+
+        // Icon Mapping for Profiles
+        const iconMap = {
+            "Healthify Vital Check": "fa-heartbeat",
+            "Healthify Core Wellness": "fa-user-md",
+            "Healthify Diabetes Care": "fa-shield-virus",
+            "Healthify Heart Guard": "fa-heart",
+            "Healthify Thyroid Balance": "fa-leaf",
+            "Healthify Comprehensive Wellness": "fa-stethoscope",
+            "Healthify Women’s Wellness": "fa-female",
+            "Healthify Senior Care": "fa-user-clock",
+            "Healthify Anemia Shield": "fa-tint",
+            "Healthify Arthritis Care": "fa-bone",
+            "Healthify PCOD Harmony": "fa-female",
+            "Healthify Vitamin Boost": "fa-vial",
+            "Healthify Basic Wellness": "fa-heart",
+            "Healthify Active Lifestyle": "fa-running",
+            "Healthify Prenatal Care": "fa-baby",
+            "Healthify Cardiac Advance": "fa-heartbeat",
+            "Healthify Cardiac Adance": "fa-heartbeat",
+            "Healthify Liver Health": "fa-lungs",
+            "Healthify Kidney Care Maximum": "fa-kidneys",
+            "Healthify Allergy Screen": "fa-allergies",
+            "Healthify Cancer Screen": "fa-shield-alt",
+            "Healthify Metabolic Balance": "fa-weight",
+            "Healthify Bone Health": "fa-bone",
+            "Healthify Fertility Check": "fa-child",
+            "Healthify Executive Wellness": "fa-briefcase",
+            "Healthify Immunity Boost": "fa-shield-virus"
+        };
+
+        // Load Swiper Cards from profiles.json with Cost Transparency
+        async function loadSwiperCards() {
+            try {
+                console.log('Fetching /public/profiles.json...');
+                const response = await fetch('/public/profiles.json');
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                const profiles = await response.json();
+                console.log('Profiles loaded:', profiles.length, 'profiles');
+
+                const promoWrapper = document.getElementById('promoSwiperWrapper');
+                const featuredWrapper = document.getElementById('featuredSwiperWrapper');
+
+                const midPoint = Math.ceil(profiles.length / 2);
+                const promoProfiles = profiles.slice(0, midPoint);
+                const featuredProfiles = profiles.slice(midPoint);
+
+                console.log('Promo profiles:', promoProfiles.length);
+                console.log('Featured profiles:', featuredProfiles.length);
+
+                promoProfiles.forEach(profile => {
+                    const slide = document.createElement('div');
+                    slide.className = 'swiper-slide';
+                    const imgSrc = `/public/${imageMap[profile.Test_Name] || 'test-placeholder.jpg'}`;
+                    slide.innerHTML = `
+                        <div class="promo-card">
+                            <img src="${imgSrc}" alt="${profile.Test_Name}" onerror="this.src='/public/test-placeholder.jpg'; console.error('Image failed to load: ${imgSrc}');">
+                            <h3>${profile.Test_Name} <i class="fas ${iconMap[profile.Test_Name] || 'fa-heartbeat'}"></i></h3>
+                            <p>${profile.Description}</p>
+                            <p><strong>MRP:</strong> ₹${profile.MRP} | <strong>Offer Price:</strong> ₹${profile.Healthify_Offer_Price}</p>
+                            <p><strong>TAT:</strong> ${profile.TAT || '24-48 hours'}</p>
+                            <p><strong>Includes:</strong> ${profile.Tests_Included.join(', ')}</p>
+                            <a href="/booking.html?profile=${encodeURIComponent(profile.Test_Name.toLowerCase().replace(/ /g, '-'))}" class="btn">Book Now <i class="fas fa-check"></i></a>
+                        </div>
+                    `;
+                    promoWrapper.appendChild(slide);
+                });
+
+                featuredProfiles.forEach(profile => {
+                    const slide = document.createElement('div');
+                    slide.className = 'swiper-slide';
+                    const imgSrc = `/public/${imageMap[profile.Test_Name] || 'test-placeholder.jpg'}`;
+                    slide.innerHTML = `
+                        <div class="promo-card">
+                            <img src="${imgSrc}" alt="${profile.Test_Name}" onerror="this.src='/public/test-placeholder.jpg'; console.error('Image failed to load: ${imgSrc}');">
+                            <h3>${profile.Test_Name} <i class="fas ${iconMap[profile.Test_Name] || 'fa-heartbeat'}"></i></h3>
+                            <p>${profile.Description}</p>
+                            <p><strong>MRP:</strong> ₹${profile.MRP} | <strong>Offer Price:</strong> ₹${profile.Healthify_Offer_Price}</p>
+                            <p><strong>TAT:</strong> ${profile.TAT || '24-48 hours'}</p>
+                            <p><strong>Includes:</strong> ${profile.Tests_Included.join(', ')}</p>
+                            <a href="/booking.html?profile=${encodeURIComponent(profile.Test_Name.toLowerCase().replace(/ /g, '-'))}" class="btn">Book Now <i class="fas fa-check"></i></a>
+                        </div>
+                    `;
+                    featuredWrapper.appendChild(slide);
+                });
+
+                console.log('Initializing Swiper...');
+                const promoSwiper = new Swiper('.promo-swiper', {
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                    centeredSlides: true,
+                    loop: true,
+                    autoplay: { delay: 1000, disableOnInteraction: false },
+                    effect: 'slide',
+                    observer: true,
+                    observeParents: true,
+                    on: {
+                        init: () => console.log('Promo Swiper initialized'),
+                        slideChange: () => console.log('Promo Swiper slide changed'),
+                    }
+                });
+
+                const featuredSwiper = new Swiper('.featured-swiper', {
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                    centeredSlides: true,
+                    loop: true,
+                    autoplay: { delay: 1000, disableOnInteraction: false },
+                    effect: 'slide',
+                    observer: true,
+                    observeParents: true,
+                    on: {
+                        init: () => console.log('Featured Swiper initialized'),
+                        slideChange: () => console.log('Featured Swiper slide changed'),
+                    }
+                });
+            } catch (error) {
+                console.error('Error loading profiles:', error);
+                document.getElementById('promoSwiperWrapper').innerHTML = '<div class="swiper-slide"><p>Error loading profiles. Please try again later.</p></div>';
+                document.getElementById('featuredSwiperWrapper').innerHTML = '<div class="swiper-slide"><p>Error loading profiles. Please try again later.</p></div>';
+            }
+        }
+
+        // Load Diseases
+        async function loadDiseases() {
+            try {
+                console.log('Fetching /public/diseases.json...');
+                const response = await fetch('/public/diseases.json');
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                const diseases = await response.json();
+                console.log('Diseases loaded:', diseases.length, 'diseases');
+
+                const diseaseList = document.getElementById('diseaseList');
+                const alphabetButtons = document.querySelectorAll('.alphabet-btn');
+
+                function displayDiseases(filter = 'all') {
+                    diseaseList.innerHTML = '';
+                    const filteredDiseases = filter === 'all'
+                        ? diseases
+                        : diseases.filter(disease => disease.name.toLowerCase().startsWith(filter.toLowerCase()));
+
+                    if (filteredDiseases.length === 0) {
+                        diseaseList.innerHTML = '<p>No diseases found for this letter.</p>';
+                        return;
+                    }
+
+                    filteredDiseases.forEach(disease => {
+                        const card = document.createElement('div');
+                        card.className = 'disease-card';
+                        card.innerHTML = `
+                            <h3>${disease.name} <i class="fas fa-book-medical"></i></h3>
+                            <p><strong>Symptoms:</strong> ${disease.symptoms.join(', ')}</p>
+                            <p><strong>Causes:</strong> ${disease.causes.join(', ')}</p>
+                            <p><strong>Prevention:</strong> ${disease.prevention.join(', ')}</p>
+                            <p><strong>Diagnostics:</strong> ${disease.diagnostics.join(', ')}</p>
+                            <p><strong>Treatments:</strong> ${disease.treatments.join(', ')}</p>
+                            ${disease.relatedTests.length > 0 ? `
+                                <p><strong>Recommended Tests:</strong> ${disease.relatedTests.map(test => `
+                                    <a href="/booking.html?profile=${encodeURIComponent(test.toLowerCase().replace(/ /g, '-'))}">${test}</a>
+                                `).join(', ')}</p>
+                            ` : ''}
+                        `;
+                        diseaseList.appendChild(card);
+                    });
+                }
+
+                displayDiseases();
+
+                alphabetButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        alphabetButtons.forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+                        displayDiseases(button.dataset.letter);
+                    });
+                });
+            } catch (error) {
+                console.error('Error loading diseases:', error);
+                document.getElementById('diseaseList').innerHTML = '<p>Error loading diseases. Please try again later.</p>';
+            }
+        }
+
+        // Symptom Checker
+        async function checkSymptoms() {
+            const symptomInput = document.getElementById('symptomInput').value.toLowerCase().trim();
+            const symptomResults = document.getElementById('symptomResults');
+
+            if (symptomInput.length < 2) {
+                symptomResults.innerHTML = '<p class="error">Please enter a valid symptom.</p>';
+                return;
+            }
+
+            try {
+                const responseDiseases = await fetch('/public/diseases.json');
+                if (!responseDiseases.ok) throw new Error(`HTTP error! Status: ${responseDiseases.status}`);
+                const diseases = await responseDiseases.json();
+
+                const matches = diseases.filter(disease =>
+                    disease.symptoms.some(symptom => symptom.toLowerCase().includes(symptomInput))
+                );
+
+                symptomResults.innerHTML = '';
+                if (matches.length > 0) {
+                    const resultBox = document.createElement('div');
+                    resultBox.className = 'search-result';
+                    resultBox.innerHTML = `
+                        <h3>Possible Conditions</h3>
+                        <ul>
+                            ${matches.map(disease => `
+                                <li>
+                                    <strong>${disease.name}</strong>: ${disease.symptoms.join(', ')}
+                                    <br>Recommended Tests: ${disease.relatedTests.length > 0 ? disease.relatedTests.map(test => `
+                                        <a href="/booking.html?profile=${encodeURIComponent(test.toLowerCase().replace(/ /g, '-'))}">${test}</a>
+                                    `).join(', ') : 'Contact us for recommendations'}
+                                </li>
+                            `).join('')}
+                        </ul>
+                    `;
+                    symptomResults.appendChild(resultBox);
+                } else {
+                    symptomResults.innerHTML = '<p>No conditions found for this symptom. Try another or contact us.</p>';
+                }
+            } catch (error) {
+                console.error('Error checking symptoms:', error);
+                symptomResults.innerHTML = '<p>Error loading symptom data. Please try again later.</p>';
+            }
+        }
+
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const answer = item.nextElementSibling;
+                const icon = item.querySelector('i');
+                answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+                icon.classList.toggle('fa-chevron-down');
+                icon.classList.toggle('fa-chevron-up');
+            });
+        });
+
+        // PWA Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/public/sw.js').catch(error => {
+                console.error('Service Worker registration failed:', error);
+            });
+        }
+
+        // Drawer Toggle
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.getElementById('leftDrawer').classList.toggle('active');
+        });
+
+        document.querySelector('.close-drawer').addEventListener('click', () => {
+            document.getElementById('leftDrawer').classList.remove('active');
+        });
+    </script>
+</body>
+</html>
